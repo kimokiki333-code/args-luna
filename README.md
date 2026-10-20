@@ -5,6 +5,16 @@
    Full-Stack Glassmorphism Web Platform · Interactive Three.js 3D Cyber Cosmos · 151 Reconnaissance Modules · Hybrid Ollama Local & Cloud AI Analyst
 </p>
 
+## 📦 Instant ZIP Downloads (On This Branch)
+
+- 🌐 **[Download `ARAGOS-VERCEL-WEB.zip` (199 KB — For Vercel / Netlify / Web Upload)](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/ARAGOS-VERCEL-WEB.zip)**
+  *(Contains only `index.html`, `vercel.json`, and `static/` in the root folder so Vercel deploys it as a pure website in 2 seconds with zero Python build errors!)*
+- 🖥️ **[Download `ARAGOS-FULL-SERVER.zip` (749 KB — Full Python Server + Ollama + 151 Modules)](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/ARAGOS-FULL-SERVER.zip)**
+  *(Contains `index.html`, `server.py`, `start-aragos.bat`, `start-aragos.sh`, and all 147 Python modules for running locally with your Ollama.)*
+- 📦 **[Download `aragos-v3.0-deploy-ready.zip`](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/aragos-v3.0-deploy-ready.zip)**
+
+---
+
 ![screenshot](https://i.imgur.com/HIQWPPO.gif)
 ---
 
