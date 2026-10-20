@@ -1,11 +1,17 @@
 import os
 import sys
 
-_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if _ROOT not in __path__:
-    __path__.insert(0, _ROOT)
-if _ROOT not in sys.path:
-    sys.path.insert(0, _ROOT)
+_CANDIDATES = [
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    os.getcwd(),
+    "/var/task",
+]
+for _p in _CANDIDATES:
+    if _p and os.path.isdir(_p):
+        if _p not in __path__:
+            __path__.insert(0, _p)
+        if _p not in sys.path:
+            sys.path.insert(0, _p)
 
 import argus
 sys.modules.setdefault("argus", argus)
