@@ -23,7 +23,7 @@ from argus.core.catalog_cache import (
 Base = Cmd
 
 class _BareCLI(Base):
-    prompt = "argus> "
+    prompt = "aragos> "
     intro = ""
 
     def __init__(self):

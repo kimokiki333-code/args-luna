@@ -7,20 +7,20 @@ console = Console()
 
 def logo(version: str, modules: int, author: str) -> None:
     art = """
-     █████╗ ██████╗  ██████╗ ██╗   ██╗███████╗
-    ██╔══██╗██╔══██╗██╔════╝ ██║   ██║██╔════╝
-    ███████║██████╔╝██║  ███╗██║   ██║███████╗
-    ██╔══██║██╔══██╗██║   ██║██║   ██║╚════██║
-    ██║  ██║██║  ██║╚██████╔╝╚██████╔╝███████║
-    ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝
+     █████╗ ██████╗  █████╗  ██████╗  ██████╗ ███████╗
+    ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔═══██╗██╔════╝
+    ███████║██████╔╝███████║██║  ███╗██║   ██║███████╗
+    ██╔══██║██╔══██╗██╔══██║██║   ██║██║   ██║╚════██║
+    ██║  ██║██║  ██║██║  ██║╚██████╔╝╚██████╔╝███████║
+    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝
     """.strip(
         "\n"
     )
     colored = "\n".join(f"[bold {TEAL}]{line}[/bold {TEAL}]" for line in art.splitlines())
     desc = f"""
-[bold {TEAL}]The Ultimate Information Gathering Tool[/bold {TEAL}]
+[bold {TEAL}]ARAGOS — AI-Powered Reconnaissance, Analysis & OSINT Platform[/bold {TEAL}]
 
-Version: [bold green]{version}[/bold green]    Modules: [bold yellow]{modules}[/bold yellow]    Coded by: [bold magenta]{author}[/bold magenta]
+Version: [bold green]{version}[/bold green]    Modules: [bold yellow]{modules}[/bold yellow]    Engine: [bold magenta]{author}[/bold magenta]
 """.strip()
     console.print(Panel(f"{colored}\n{desc}", border_style=TEAL, padding=(1, 4)), justify="center")
     console.print(f"[bold {TEAL}]Type 'help' to see available commands.[/bold {TEAL}]")

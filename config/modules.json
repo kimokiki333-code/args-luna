@@ -399,11 +399,92 @@
       "primary_input": "Domain/IP/CIDR",
       "options": [],
       "script": "udp_service_sampler.py"
+    },
+    {
+      "name": "DNS CAA Checker",
+      "description": "Inspect Certification Authority Authorization (CAA) DNS records.",
+      "primary_input": "Domain",
+      "options": [
+        "timeout"
+      ],
+      "script": "dns_caa_checker.py",
+      "id": "45"
+    },
+    {
+      "name": "Decoy DNS Beacon",
+      "description": "Deploy & monitor DNS canary queries to detect recursive resolution.",
+      "primary_input": "Domain",
+      "options": [
+        "timeout"
+      ],
+      "script": "decoy_dns_beacon.py",
+      "id": "46"
+    },
+    {
+      "name": "Geo IP Spoof Detection",
+      "description": "Cross-check geolocation claims across multiple GeoIP providers.",
+      "primary_input": "Domain/IP",
+      "options": [
+        "timeout"
+      ],
+      "script": "geo_ip_spoof_detection.py",
+      "id": "47"
+    },
+    {
+      "name": "Dual Stack Diff",
+      "description": "Compare IPv4 and IPv6 HTTP responses & headers for drift.",
+      "primary_input": "Domain/URL",
+      "options": [
+        "timeout"
+      ],
+      "script": "dual_stack_diff.py",
+      "id": "48"
+    },
+    {
+      "name": "IRR Routing Registry Analyzer",
+      "description": "Query Internet Routing Registry (IRR) route objects & origin ASNs.",
+      "primary_input": "Domain/IP",
+      "options": [
+        "timeout"
+      ],
+      "script": "irr_routing_registry_analyzer.py",
+      "id": "49"
+    },
+    {
+      "name": "NetBIOS Name Query",
+      "description": "Query NetBIOS Name Service (NBNS) for hostnames and workgroups.",
+      "primary_input": "IP/Domain",
+      "options": [
+        "timeout"
+      ],
+      "script": "netbios_name_query.py",
+      "id": "50"
+    },
+    {
+      "name": "SNMP Bulk Walk",
+      "description": "Perform SNMP bulk walk to enumerate system OIDs.",
+      "primary_input": "IP/Domain",
+      "options": [
+        "community",
+        "timeout"
+      ],
+      "script": "snmp_bulk_walk.py",
+      "id": "51"
+    },
+    {
+      "name": "TTL Analysis",
+      "description": "Analyze DNS and ICMP TTL values to infer OS & caching hops.",
+      "primary_input": "Domain/IP",
+      "options": [
+        "timeout"
+      ],
+      "script": "ttl_analysis.py",
+      "id": "52"
     }
   ],
   "web_application_analysis": [
     {
-      "id": "45",
+      "id": "53",
       "name": "Archive History",
       "description": "Retrieve historical site snapshots.",
       "primary_input": "Domain/URL",
@@ -416,7 +497,7 @@
       "script": "archive_history.py"
     },
     {
-      "id": "46",
+      "id": "54",
       "name": "Broken Links Detection",
       "description": "Crawl site & detect broken links.",
       "primary_input": "Domain/URL",
@@ -428,7 +509,7 @@
       "script": "broken_links.py"
     },
     {
-      "id": "47",
+      "id": "55",
       "name": "Carbon Footprint",
       "description": "Estimate environmental impact of page loads.",
       "primary_input": "Domain/URL",
@@ -436,7 +517,7 @@
       "script": "carbon_footprint.py"
     },
     {
-      "id": "48",
+      "id": "56",
       "name": "CMS Detection",
       "description": "Identify CMS platforms by signature.",
       "primary_input": "Domain/URL",
@@ -444,7 +525,7 @@
       "script": "cms_detection.py"
     },
     {
-      "id": "49",
+      "id": "57",
       "name": "Cookies Analyzer",
       "description": "Inspect cookies for security/privacy attributes.",
       "primary_input": "Domain/URL",
@@ -456,7 +537,7 @@
       "script": "cookies.py"
     },
     {
-      "id": "50",
+      "id": "58",
       "name": "Content Discovery",
       "description": "Discover hidden directories/files/endpoints.",
       "primary_input": "Domain/URL",
@@ -467,7 +548,7 @@
       "script": "content_discovery.py"
     },
     {
-      "id": "51",
+      "id": "59",
       "name": "Crawler",
       "description": "Crawl site & map structure.",
       "primary_input": "Domain/URL",
@@ -480,7 +561,7 @@
       "script": "crawler.py"
     },
     {
-      "id": "52",
+      "id": "60",
       "name": "Robots.txt Analyzer",
       "description": "Parse robots.txt for hidden/disallowed paths.",
       "primary_input": "Domain/URL",
@@ -490,7 +571,7 @@
       "script": "crawl_rules.py"
     },
     {
-      "id": "53",
+      "id": "61",
       "name": "Directory Finder",
       "description": "Scan for common unlisted directories.",
       "primary_input": "Domain/URL",
@@ -502,7 +583,7 @@
       "script": "directory_finder.py"
     },
     {
-      "id": "54",
+      "id": "62",
       "name": "Email Harvesting",
       "description": "Extract emails from site pages.",
       "primary_input": "Domain/URL",
@@ -510,7 +591,7 @@
       "script": "email_harvester.py"
     },
     {
-      "id": "55",
+      "id": "63",
       "name": "Performance Monitoring",
       "description": "Measure response time & load performance.",
       "primary_input": "Domain/URL",
@@ -523,7 +604,7 @@
       "script": "performance_monitoring.py"
     },
     {
-      "id": "56",
+      "id": "64",
       "name": "Quality Metrics",
       "description": "Assess site UX/content quality heuristics.",
       "primary_input": "Domain/URL",
@@ -531,7 +612,7 @@
       "script": "quality_metrics.py"
     },
     {
-      "id": "57",
+      "id": "65",
       "name": "Redirect Chain",
       "description": "Follow redirects; analyze safety & loops.",
       "primary_input": "URL",
@@ -539,7 +620,7 @@
       "script": "redirect_chain.py"
     },
     {
-      "id": "58",
+      "id": "66",
       "name": "Sitemap Parsing",
       "description": "Parse sitemap.xml; enumerate URLs.",
       "primary_input": "Domain/URL",
@@ -547,7 +628,7 @@
       "script": "sitemap.py"
     },
     {
-      "id": "59",
+      "id": "67",
       "name": "Social Media Presence Scan",
       "description": "Identify linked social media profiles.",
       "primary_input": "Domain/URL",
@@ -555,7 +636,7 @@
       "script": "social_media.py"
     },
     {
-      "id": "60",
+      "id": "68",
       "name": "Technology Stack Detection",
       "description": "Fingerprint technologies & frameworks in use.",
       "primary_input": "Domain/URL",
@@ -563,7 +644,7 @@
       "script": "technology_stack.py"
     },
     {
-      "id": "61",
+      "id": "69",
       "name": "Third-Party Integrations",
       "description": "Discover external services integrated into site.",
       "primary_input": "Domain/URL",
@@ -571,7 +652,7 @@
       "script": "third_party_integrations.py"
     },
     {
-      "id": "62",
+      "id": "70",
       "name": "JavaScript File Analyzer",
       "description": "Extract endpoints & secrets from JS files.",
       "primary_input": "Domain/URL",
@@ -581,7 +662,7 @@
       "script": "javascript_file_analyzer.py"
     },
     {
-      "id": "63",
+      "id": "71",
       "name": "CORS Misconfiguration Scanner",
       "description": "Detect overly permissive CORS settings.",
       "primary_input": "Domain/URL",
@@ -591,7 +672,7 @@
       "script": "cors_misconfiguration_scanner.py"
     },
     {
-      "id": "64",
+      "id": "72",
       "name": "Login Page Brute Identifier",
       "description": "Locate & fingerprint login/auth pages.",
       "primary_input": "Domain/URL",
@@ -604,7 +685,7 @@
       "script": "login_page_brute_identifier.py"
     },
     {
-      "id": "65",
+      "id": "73",
       "name": "Hidden Parameter Discovery",
       "description": "Fuzz hidden GET/POST parameters.",
       "primary_input": "Domain/URL",
@@ -618,7 +699,7 @@
       "script": "hidden_parameter_discovery.py"
     },
     {
-      "id": "66",
+      "id": "74",
       "name": "Clickjacking Test",
       "description": "Check anti-framing headers & behavior.",
       "primary_input": "Domain/URL",
@@ -630,7 +711,7 @@
       "script": "clickjacking_test.py"
     },
     {
-      "id": "67",
+      "id": "75",
       "name": "Form Grabber",
       "description": "Enumerate forms & field metadata.",
       "primary_input": "Domain/URL",
@@ -642,7 +723,7 @@
       "script": "form_grabber.py"
     },
     {
-      "id": "68",
+      "id": "76",
       "name": "Favicon Hashing",
       "description": "MD5 hash favicon to infer technologies.",
       "primary_input": "Domain/URL",
@@ -652,7 +733,7 @@
       "script": "favicon_hashing.py"
     },
     {
-      "id": "69",
+      "id": "77",
       "name": "HTML Comments Extractor",
       "description": "Parse HTML comments for hidden notes/secrets.",
       "primary_input": "Domain/URL",
@@ -660,7 +741,7 @@
       "script": "html_comments_extractor.py"
     },
     {
-      "id": "70",
+      "id": "78",
       "name": "CAPTCHA Presence Checker",
       "description": "Detect CAPTCHA widgets across pages.",
       "primary_input": "Domain/URL",
@@ -672,7 +753,7 @@
       "script": "captcha_presence_checker.py"
     },
     {
-      "id": "71",
+      "id": "79",
       "name": "JavaScript Obfuscation Detector",
       "description": "Highlight obfuscated or packed JS.",
       "primary_input": "Domain/URL",
@@ -686,7 +767,7 @@
       "script": "javascript_obfuscation_detector.py"
     },
     {
-      "id": "72",
+      "id": "80",
       "name": "Virtual Host Fuzzer",
       "description": "Host header brute to reveal hidden vhosts.",
       "primary_input": "Domain",
@@ -694,7 +775,7 @@
       "script": "virtual_host_fuzzer.py"
     },
     {
-      "id": "73",
+      "id": "81",
       "name": "Session Cookie Lifetime Checker",
       "description": "Measure session cookie longevity.",
       "primary_input": "Domain/URL",
@@ -702,7 +783,7 @@
       "script": "session_cookie_lifetime_checker.py"
     },
     {
-      "id": "74",
+      "id": "82",
       "name": "HTML5 Feature Abuse Detector",
       "description": "Spot risky HTML5 API usage.",
       "primary_input": "Domain/URL",
@@ -712,7 +793,7 @@
       "script": "html5_feature_abuse_detector.py"
     },
     {
-      "id": "75",
+      "id": "83",
       "name": "Autocomplete Vulnerability Checker",
       "description": "Detect sensitive fields with autocomplete enabled.",
       "primary_input": "Domain/URL",
@@ -723,7 +804,7 @@
       "script": "autocomplete_vulnerability_checker.py"
     },
     {
-      "id": "76",
+      "id": "84",
       "name": "Embedded Object Hunter",
       "description": "Find embedded PDFs/SWF/objects.",
       "primary_input": "Domain/URL",
@@ -731,7 +812,7 @@
       "script": "embedded_object_hunter.py"
     },
     {
-      "id": "77",
+      "id": "85",
       "name": "Multi-Language URL Tester",
       "description": "Probe language/locale path handling.",
       "primary_input": "Domain/URL",
@@ -741,7 +822,7 @@
       "script": "multi_language_url_tester.py"
     },
     {
-      "id": "78",
+      "id": "86",
       "name": "Pixel Tracker Finder",
       "description": "Detect tracking pixel beacons.",
       "primary_input": "Domain/URL",
@@ -749,7 +830,7 @@
       "script": "pixel_tracker_finder.py"
     },
     {
-      "id": "79",
+      "id": "87",
       "name": "SEO Abuse Detector",
       "description": "Spot hidden/abusive SEO content.",
       "primary_input": "Domain/URL",
@@ -757,7 +838,7 @@
       "script": "seo_abuse_detector.py"
     },
     {
-      "id": "80",
+      "id": "88",
       "name": "Dependency JS/CDN Scanner",
       "description": "Inventory external JS libs & versions.",
       "primary_input": "Domain/URL",
@@ -769,7 +850,7 @@
       "script": "dependency_js_cdn_scanner.py"
     },
     {
-      "id": "81",
+      "id": "89",
       "name": "WebSocket Endpoint Sniffer",
       "description": "Discover ws:// / wss:// endpoints.",
       "primary_input": "Domain/URL",
@@ -777,7 +858,7 @@
       "script": "websocket_endpoint_sniffer.py"
     },
     {
-      "id": "82",
+      "id": "90",
       "name": "API Schema Grabber",
       "description": "Attempt to fetch OpenAPI/Swagger schemas.",
       "primary_input": "Domain/URL",
@@ -790,7 +871,7 @@
       "script": "api_schema_grabber.py"
     },
     {
-      "id": "83",
+      "id": "91",
       "name": "Lazy-Load Resource Finder",
       "description": "Detect resources loaded dynamically (scroll/JS).",
       "primary_input": "Domain/URL",
@@ -800,7 +881,7 @@
       "script": "lazy_load_resource_finder.py"
     },
     {
-      "id": "84",
+      "id": "92",
       "name": "HTTP Method Enumerator",
       "description": "Crawl & test supported HTTP verbs per URL.",
       "primary_input": "Domain/URL",
@@ -808,7 +889,7 @@
       "script": "http_method_enumerator.py"
     },
     {
-      "id": "85",
+      "id": "93",
       "name": "GraphQL Introspection Probe",
       "description": "Discover GraphQL endpoints; attempt schema introspection.",
       "primary_input": "Domain/URL",
@@ -816,7 +897,7 @@
       "script": "graphql_introspection_probe.py"
     },
     {
-      "id": "86",
+      "id": "94",
       "name": "File Upload Surface Finder",
       "description": "Crawl & detect file upload forms/JS hints.",
       "primary_input": "Domain/URL",
@@ -828,7 +909,7 @@
       "script": "file_upload_surface_finder.py"
     },
     {
-      "id": "87",
+      "id": "95",
       "name": "DOM Sink Scanner",
       "description": "Scan HTML/JS for XSS sinks (eval, innerHTML, etc.).",
       "primary_input": "Domain/URL",
@@ -840,7 +921,7 @@
       "script": "dom_sink_scanner.py"
     },
     {
-      "id": "88",
+      "id": "96",
       "name": "Cache Behavior Analyzer",
       "description": "Compare caching behavior; detect poisoning risks.",
       "primary_input": "Domain/URL",
@@ -852,7 +933,7 @@
       "script": "cache_behavior_analyzer.py"
     },
     {
-      "id": "89",
+      "id": "97",
       "name": "Cookie Scope Diff Across Subdomains",
       "description": "Aggregate Set-Cookie across crawl; scope & flag analysis.",
       "primary_input": "Domain/URL",
@@ -863,7 +944,7 @@
       "script": "cookie_scope_diff.py"
     },
     {
-      "id": "90",
+      "id": "98",
       "name": "CSP Deep Analyzer",
       "description": "Collect & parse CSP headers; risk scoring.",
       "primary_input": "Domain/URL",
@@ -875,7 +956,7 @@
       "script": "csp_deep_analyzer.py"
     },
     {
-      "id": "91",
+      "id": "99",
       "name": "Third-Party Script Risk Profiler",
       "description": "Inventory external script hosts; categorize & score.",
       "primary_input": "Domain/URL",
@@ -883,17 +964,27 @@
       "script": "third_party_script_risk_profiler.py"
     },
     {
-      "id": "92",
+      "id": "100",
       "name": "Static Asset Fingerprinter",
       "description": "Hash JS/CSS; extract library versions; flag outdated.",
       "primary_input": "Domain/URL",
       "options": [],
       "script": "static_asset_fingerprinter.py"
+    },
+    {
+      "name": "Email Configuration Audit",
+      "description": "Comprehensive audit of MX, SPF, DKIM, DMARC, and STARTTLS.",
+      "primary_input": "Domain",
+      "options": [
+        "timeout"
+      ],
+      "script": "email_config.py",
+      "id": "101"
     }
   ],
   "security_threat_intelligence": [
     {
-      "id": "93",
+      "id": "102",
       "name": "Censys Reconnaissance",
       "description": "Enumerate exposed assets via Censys (API).",
       "primary_input": "Domain/IP",
@@ -903,7 +994,7 @@
       "script": "censys.py"
     },
     {
-      "id": "94",
+      "id": "103",
       "name": "Certificate Authority Recon",
       "description": "Examine CA issuance & trust relationships.",
       "primary_input": "Domain",
@@ -911,7 +1002,7 @@
       "script": "certificate_authority_recon.py"
     },
     {
-      "id": "95",
+      "id": "104",
       "name": "Data Leak Detection",
       "description": "Check for public data leaks & sensitive exposures.",
       "primary_input": "Domain",
@@ -919,7 +1010,7 @@
       "script": "data_leak.py"
     },
     {
-      "id": "96",
+      "id": "105",
       "name": "Exposed Environment Files Checker",
       "description": "Detect exposed .env/config files.",
       "primary_input": "Domain/URL",
@@ -927,7 +1018,7 @@
       "script": "exposed_env_files.py"
     },
     {
-      "id": "97",
+      "id": "106",
       "name": "Firewall Detection",
       "description": "Identify firewall/WAF presence heuristically.",
       "primary_input": "Domain/IP",
@@ -937,7 +1028,7 @@
       "script": "firewall_detection.py"
     },
     {
-      "id": "98",
+      "id": "107",
       "name": "Global Ranking",
       "description": "Retrieve global popularity ranking metrics.",
       "primary_input": "Domain",
@@ -947,7 +1038,7 @@
       "script": "global_ranking.py"
     },
     {
-      "id": "99",
+      "id": "108",
       "name": "HTTP Headers",
       "description": "Extract HTTP response headers.",
       "primary_input": "Domain/URL",
@@ -955,7 +1046,7 @@
       "script": "http_headers.py"
     },
     {
-      "id": "100",
+      "id": "109",
       "name": "HTTP Security Features",
       "description": "Evaluate security headers (HSTS, CSP, etc.).",
       "primary_input": "Domain/URL",
@@ -966,7 +1057,7 @@
       "script": "http_security.py"
     },
     {
-      "id": "101",
+      "id": "110",
       "name": "Malware & Phishing Check",
       "description": "Check blocklists for malware/phishing indicators.",
       "primary_input": "Domain/URL",
@@ -974,7 +1065,7 @@
       "script": "malware_phishing.py"
     },
     {
-      "id": "102",
+      "id": "111",
       "name": "Pastebin Monitoring",
       "description": "Search paste sites for leaked data mentions.",
       "primary_input": "Domain",
@@ -982,7 +1073,7 @@
       "script": "pastebin_monitoring.py"
     },
     {
-      "id": "103",
+      "id": "112",
       "name": "Privacy & GDPR Compliance",
       "description": "Basic privacy/GDPR checks (policies, consent).",
       "primary_input": "Domain/URL",
@@ -990,7 +1081,7 @@
       "script": "privacy_gdpr.py"
     },
     {
-      "id": "104",
+      "id": "113",
       "name": "Security.txt Check",
       "description": "Retrieve & parse security.txt disclosure info.",
       "primary_input": "Domain",
@@ -1001,7 +1092,7 @@
       "script": "security_txt.py"
     },
     {
-      "id": "105",
+      "id": "114",
       "name": "Shodan Reconnaissance",
       "description": "Query Shodan for exposed services & vulns.",
       "primary_input": "Domain/IP",
@@ -1009,7 +1100,7 @@
       "script": "shodan.py"
     },
     {
-      "id": "106",
+      "id": "115",
       "name": "SSL Labs Report",
       "description": "Pull detailed SSL Labs TLS assessment.",
       "primary_input": "Domain",
@@ -1017,7 +1108,7 @@
       "script": "ssl_labs_report.py"
     },
     {
-      "id": "107",
+      "id": "116",
       "name": "SSL Pinning Check",
       "description": "Check for SSL/TLS pinning indicators.",
       "primary_input": "Domain/URL",
@@ -1025,7 +1116,7 @@
       "script": "ssl_pinning_check.py"
     },
     {
-      "id": "108",
+      "id": "117",
       "name": "Subdomain Enumeration",
       "description": "Discover subdomains via multiple techniques.",
       "primary_input": "Domain",
@@ -1033,7 +1124,7 @@
       "script": "subdomain_enum.py"
     },
     {
-      "id": "109",
+      "id": "118",
       "name": "Subdomain Takeover",
       "description": "Test for dangling DNS entries vulnerable to takeover.",
       "primary_input": "Domain",
@@ -1041,7 +1132,7 @@
       "script": "subdomain_takeover.py"
     },
     {
-      "id": "110",
+      "id": "119",
       "name": "VirusTotal Scan",
       "description": "Lookup reputation & detections in VirusTotal.",
       "primary_input": "Domain/IP/URL",
@@ -1049,7 +1140,7 @@
       "script": "virustotal_scan.py"
     },
     {
-      "id": "111",
+      "id": "120",
       "name": "CT Log Query",
       "description": "Query certificate transparency logs for issued certs.",
       "primary_input": "Domain",
@@ -1060,7 +1151,7 @@
       "script": "ct_log_query.py"
     },
     {
-      "id": "112",
+      "id": "121",
       "name": "Breached Credentials Lookup",
       "description": "Check breach datasets for exposed credentials.",
       "primary_input": "Domain/Email",
@@ -1070,7 +1161,7 @@
       "script": "breached_credentials_lookup.py"
     },
     {
-      "id": "113",
+      "id": "122",
       "name": "Cloud Bucket Exposure",
       "description": "Detect open S3/Azure/GCP buckets tied to domain.",
       "primary_input": "Domain",
@@ -1080,7 +1171,7 @@
       "script": "cloud_bucket_exposure.py"
     },
     {
-      "id": "114",
+      "id": "123",
       "name": "JWT Token Analyzer",
       "description": "Decode and inspect JWT algorithms & claims.",
       "primary_input": "Token/String",
@@ -1088,7 +1179,7 @@
       "script": "jwt_token_analyzer.py"
     },
     {
-      "id": "115",
+      "id": "124",
       "name": "Exposed API Endpoints",
       "description": "Crawl and list publicly reachable API endpoints.",
       "primary_input": "Domain/URL",
@@ -1096,7 +1187,7 @@
       "script": "exposed_api_endpoints.py"
     },
     {
-      "id": "116",
+      "id": "125",
       "name": "Git Repository Exposure Check",
       "description": "Detect exposed .git directories and artifacts.",
       "primary_input": "Domain/URL",
@@ -1106,7 +1197,7 @@
       "script": "git_repo_exposure_check.py"
     },
     {
-      "id": "117",
+      "id": "126",
       "name": "Typosquat Domain Checker",
       "description": "Generate and check typo variants for malicious domains.",
       "primary_input": "Domain",
@@ -1114,7 +1205,7 @@
       "script": "typosquat_domain_checker.py"
     },
     {
-      "id": "118",
+      "id": "127",
       "name": "SPF / DKIM / DMARC Validator",
       "description": "Assess email auth posture and alignment.",
       "primary_input": "Domain/Email",
@@ -1122,7 +1213,7 @@
       "script": "spf_dkim_dmarc_validator.py"
     },
     {
-      "id": "119",
+      "id": "128",
       "name": "Open Redirect Finder",
       "description": "Probe redirect parameters for open redirect vulnerabilities.",
       "primary_input": "Domain/URL",
@@ -1132,7 +1223,7 @@
       "script": "open_redirect_finder.py"
     },
     {
-      "id": "120",
+      "id": "129",
       "name": "Rate-Limit & WAF Bypass Test",
       "description": "Probe throttling and WAF bypass behaviors.",
       "primary_input": "Domain/URL",
@@ -1143,7 +1234,7 @@
       "script": "rate_limit_waf_bypass_test.py"
     },
     {
-      "id": "121",
+      "id": "130",
       "name": "Security Changelog Diff",
       "description": "Compare security header/config changes over time.",
       "primary_input": "Domain/URL",
@@ -1151,7 +1242,7 @@
       "script": "security_changelog_diff.py"
     },
     {
-      "id": "122",
+      "id": "131",
       "name": "Session Hijacking (Passive)",
       "description": "Analyze cookie/session flags for hijacking risk.",
       "primary_input": "Domain/URL",
@@ -1163,7 +1254,7 @@
       "script": "session_hijacking_passive.py"
     },
     {
-      "id": "123",
+      "id": "132",
       "name": "Rogue Certificate Check",
       "description": "Detect suspicious or duplicate certificates.",
       "primary_input": "Domain",
@@ -1171,7 +1262,7 @@
       "script": "rogue_certificate_check.py"
     },
     {
-      "id": "124",
+      "id": "133",
       "name": "JS Malware Scanner",
       "description": "Heuristic scan of JavaScript for malware indicators.",
       "primary_input": "Domain/URL",
@@ -1181,7 +1272,7 @@
       "script": "js_malware_scanner.py"
     },
     {
-      "id": "125",
+      "id": "134",
       "name": "Cloud Service Enumeration",
       "description": "Detect exposed cloud/devops services (Jira, Jenkins, etc.).",
       "primary_input": "Domain",
@@ -1189,7 +1280,7 @@
       "script": "cloud_service_enumeration.py"
     },
     {
-      "id": "126",
+      "id": "135",
       "name": "Rogue Subdomain Resolver",
       "description": "Monitor for newly resolving previously dead subdomains.",
       "primary_input": "Domain",
@@ -1197,7 +1288,7 @@
       "script": "rogue_subdomain_resolver.py"
     },
     {
-      "id": "127",
+      "id": "136",
       "name": "Bug Bounty Program Finder",
       "description": "Identify bug bounty/disclosure program links.",
       "primary_input": "Domain",
@@ -1208,7 +1299,7 @@
       "script": "bug_bounty_program_finder.py"
     },
     {
-      "id": "128",
+      "id": "137",
       "name": "Custom Wordlist Generator",
       "description": "Build tailored recon wordlists (paths, usernames, emails).",
       "primary_input": "Domain",
@@ -1216,7 +1307,7 @@
       "script": "custom_wordlist_generator.py"
     },
     {
-      "id": "129",
+      "id": "138",
       "name": "Threat Feed Correlator",
       "description": "Aggregate multi-feed reputation & threat intelligence.",
       "primary_input": "Domain/IP",
@@ -1224,7 +1315,7 @@
       "script": "threat_feed_correlator.py"
     },
     {
-      "id": "130",
+      "id": "139",
       "name": "Attack Surface Delta",
       "description": "Diff two Argus reports; highlight adds/removals.",
       "primary_input": "Target Label",
@@ -1235,7 +1326,7 @@
       "script": "attack_surface_delta.py"
     },
     {
-      "id": "131",
+      "id": "140",
       "name": "Passive CVE Mapper",
       "description": "Map discovered product/version hints to NVD CVEs.",
       "primary_input": "Domain/URL",
@@ -1243,7 +1334,7 @@
       "script": "passive_cve_mapper.py"
     },
     {
-      "id": "132",
+      "id": "141",
       "name": "Security Contact Gap Finder",
       "description": "Collect security contacts from security.txt, WHOIS, site.",
       "primary_input": "Domain",
@@ -1251,7 +1342,7 @@
       "script": "security_contact_gap_finder.py"
     },
     {
-      "id": "133",
+      "id": "142",
       "name": "Domain Shadowing Detector",
       "description": "CT + passive DNS to spot high-entropy subdomain bursts.",
       "primary_input": "Domain",
@@ -1262,7 +1353,7 @@
       "script": "domain_shadowing_detector.py"
     },
     {
-      "id": "134",
+      "id": "143",
       "name": "IP Reputation Trending",
       "description": "Compare AbuseIPDB & VT metrics across time windows.",
       "primary_input": "Domain/IP/CIDR",
@@ -1271,11 +1362,51 @@
         "short_window"
       ],
       "script": "ip_reputation_trending.py"
+    },
+    {
+      "name": "Dark Web & Paste Monitoring",
+      "description": "Search breach databases and paste sites for leaked domain credentials.",
+      "primary_input": "Domain",
+      "options": [
+        "workers"
+      ],
+      "script": "dark_web_monitoring.py",
+      "id": "144"
+    },
+    {
+      "name": "IP Reputation Check",
+      "description": "Evaluate IP reputation across blocklists and threat feeds.",
+      "primary_input": "IP/Domain",
+      "options": [
+        "timeout"
+      ],
+      "script": "ip_reputation_check.py",
+      "id": "145"
+    },
+    {
+      "name": "Passive DNS History",
+      "description": "Retrieve historical DNS resolution records for a domain or IP.",
+      "primary_input": "Domain/IP",
+      "options": [
+        "timeout"
+      ],
+      "script": "passive_dns_history.py",
+      "id": "146"
+    },
+    {
+      "name": "TLS Security Configuration",
+      "description": "Audit TLS protocol versions, cipher strength, and certificate parameters.",
+      "primary_input": "Domain",
+      "options": [
+        "timeout"
+      ],
+      "script": "tls_security_config.py",
+      "id": "147"
     }
   ],
   "run_all": [
     {
-      "id": "135",
+      "id": "148",
       "name": "Run All Infrastructure Tools",
       "description": "Execute every module in Network & Infrastructure.",
       "primary_input": "Domain",
@@ -1283,7 +1414,7 @@
       "script": ""
     },
     {
-      "id": "136",
+      "id": "149",
       "name": "Run All Web Intelligence Tools",
       "description": "Execute every module in Web Application Analysis.",
       "primary_input": "Domain/URL",
@@ -1291,7 +1422,7 @@
       "script": ""
     },
     {
-      "id": "137",
+      "id": "150",
       "name": "Run All Security Tools",
       "description": "Execute every module in Security & Threat Intelligence.",
       "primary_input": "Domain",
@@ -1301,7 +1432,7 @@
   ],
   "special": [
     {
-      "id": "138",
+      "id": "151",
       "name": "BEAST MODE",
       "description": "Execute nearly all modules in one mega run.",
       "primary_input": "Domain",
