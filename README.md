@@ -1,22 +1,43 @@
 <h1 align="center">
-  <a href="">
-    <picture>
-      <source height="220" media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/nGEReZh.png">
-      <img height="200" alt="Argus" src="https://i.imgur.com/FL0dmHd.png">
-    </picture>
-  </a>
-  <br>
+  ARAGOS v3.0 — Neural Cyber Reconnaissance & OSINT Platform
 </h1>
 <p align="center">
-   A Python-based toolkit for Information Gathering & Reconnaissance
+   Full-Stack Glassmorphism Web Platform · Interactive Three.js 3D Cyber Cosmos · 151 Reconnaissance Modules · Hybrid Ollama Local & Cloud AI Analyst
 </p>
+
+## 📦 Instant ZIP Downloads (On This Branch)
+
+- 🌐 **[Download `ARAGOS-VERCEL-WEB.zip` (199 KB — For Vercel / Netlify / Web Upload)](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/ARAGOS-VERCEL-WEB.zip)**
+  *(Contains only `index.html`, `vercel.json`, and `static/` in the root folder so Vercel deploys it as a pure website in 2 seconds with zero Python build errors!)*
+- 🖥️ **[Download `ARAGOS-FULL-SERVER.zip` (749 KB — Full Python Server + Ollama + 151 Modules)](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/ARAGOS-FULL-SERVER.zip)**
+  *(Contains `index.html`, `server.py`, `start-aragos.bat`, `start-aragos.sh`, and all 147 Python modules for running locally with your Ollama.)*
+- 📦 **[Download `aragos-v3.0-deploy-ready.zip`](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/aragos-v3.0-deploy-ready.zip)**
+
+---
 
 ![screenshot](https://i.imgur.com/HIQWPPO.gif)
 ---
 
-## About The Project
+## About ARAGOS
 
-Argus is an all-in-one, Python-powered toolkit designed to streamline the process of information gathering and reconnaissance. It brings together a clean, intuitive interface and a wide range of reliable modules, allowing analysts to efficiently assess networks, web applications, and security environments with consistency and precision.
+**ARAGOS** (formerly Argus) is an all-in-one, Python-powered reconnaissance, OSINT, and threat analysis platform featuring a **Glassmorphism Web Interface**, an interactive **Three.js 3D WebGL Background**, **151 specialized reconnaissance modules**, and native integration with **Ollama Local & Cloud AI models**.
+
+### Key Highlights in v3.0
+- **Glassmorphism Web Command Center & Three.js 3D Engine**: Multi-layered frosted glass workspace over a real-time, state-reactive 3D WebGL scene (*Orbital Recon Core*, *Neural Mesh Matrix*, *Quantum Torus*).
+- **Hybrid Ollama Local & Cloud AI Integration**:
+  - **Local Ollama Daemon (`http://127.0.0.1:11434`)**: Run local models (`llama3.3:latest`, `qwen2.5-coder:14b`, `deepseek-r1:14b`, `mistral-nemo`, `gemma3:12b`, `phi4`).
+  - **Ollama Cloud Models (`-cloud` tags & `https://ollama.com`)**: Run frontier cloud models (`deepseek-v3.1:671b-cloud`, `qwen3-coder:480b-cloud`, `gpt-oss:120b-cloud`, `kimi-k2:1t-cloud`).
+  - **OpenAI-Compatible Cloud Endpoints & Built-in Aragos Neural Threat Core**: Zero-downtime threat synthesis, risk scoring (0–100), and remediation playbooks.
+- **151 Reconnaissance Modules**: All 147 individual scripts + 4 batch/Beast Mode suites across Network & Infrastructure, Web Application Analysis, and Security & Threat Intelligence.
+- **Interactive Web CLI Shell (`aragos>`) & Multi-Format Export**: Run CLI commands directly in the browser and export reports in `Markdown`, `JSON`, `CSV`, and `TXT`.
+
+### Launching the ARAGOS Web Server
+
+```bash
+pip install -r requirements.txt
+python3 server.py
+# Open http://localhost:8000
+```
 
 ## ⚠️ WARNING: LEGAL DISCLAIMER
 

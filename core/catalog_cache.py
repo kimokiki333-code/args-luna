@@ -84,5 +84,5 @@ number_of_modules = len(
     [t for t in tools if t["script"] and t["section"] not in ("Run All Scripts", "Special Mode")]
 )
 
-AUTHOR = "Jason13"
-VERSION = "2.0"
+AUTHOR = "ARAGOS Core"
+VERSION = "3.0"

@@ -26,8 +26,17 @@ SEVERITY_PATTERNS: List[Tuple[re.Pattern, str]] = [
     (re.compile(r"\bok\b|\bsecure\b|\bvalid\b", re.I), "OK"),
 ]
 
+def resolve_script_path(script_name: str) -> str:
+    candidate_mod = os.path.join(MODULES_DIR, script_name)
+    if os.path.isfile(candidate_mod):
+        return candidate_mod
+    candidate_root = os.path.join(BASE_DIR, script_name)
+    if os.path.isfile(candidate_root):
+        return candidate_root
+    return candidate_mod
+
 def execute_script(script_name: str, target: str, threads: int = 1, module_opts: Dict | None = None, show_status: bool = True, quiet: bool = False) -> str:
-    script_path = os.path.join(MODULES_DIR, script_name)
+    script_path = resolve_script_path(script_name)
     out = ""
     if not os.path.isfile(script_path):
         console.print(f"[bold red]Missing script {script_name}[/bold red]")
@@ -38,7 +47,10 @@ def execute_script(script_name: str, target: str, threads: int = 1, module_opts:
         cmd = [sys.executable, "-m", f"argus.modules.{mod}", clean_domain_input(target), str(threads)]
         if module_opts:
             cmd.append(json.dumps(module_opts))
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        env = os.environ.copy()
+        existing_py = env.get("PYTHONPATH", "")
+        env["PYTHONPATH"] = f"{BASE_DIR}:{existing_py}" if existing_py else BASE_DIR
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd=BASE_DIR, env=env)
         first = True
         for line in iter(proc.stdout.readline, ""):
             if not line:

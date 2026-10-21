@@ -1,6 +1,5 @@
-import os, json
+import os, sys, json
 from typing import Dict
-from rich.prompt import Prompt
 
 CATALOG_FILENAME = "modules.json"
 ENV = "ARGUS_CATALOG_PATH"
@@ -10,14 +9,16 @@ def candidate_paths():
     env = os.environ.get(ENV)
     if env:
         yield env
+    yield os.path.join(BASE_DIR, "config", CATALOG_FILENAME)
     project_root = os.path.dirname(BASE_DIR)
     yield os.path.join(project_root, "config", CATALOG_FILENAME)
-    yield os.path.join(BASE_DIR, "config", CATALOG_FILENAME)
+    yield os.path.join(os.getcwd(), "config", CATALOG_FILENAME)
     yield os.path.join(BASE_DIR, CATALOG_FILENAME)
     yield os.path.join(os.getcwd(), CATALOG_FILENAME)
     p = BASE_DIR
     for _ in range(3):
         p = os.path.dirname(p)
+        yield os.path.join(p, "config", CATALOG_FILENAME)
         yield os.path.join(p, CATALOG_FILENAME)
 
 def minimal_fallback() -> Dict:
@@ -40,11 +41,16 @@ def load() -> Dict:
             data = _load_json(p)
             if data is not None:
                 return data
-    path = Prompt.ask(f"Path to {CATALOG_FILENAME}", default="").strip()
-    if path and os.path.isfile(path):
-        data = _load_json(path)
-        if data is not None:
-            return data
+    if sys.stdin and sys.stdin.isatty() and not os.getenv("VERCEL"):
+        try:
+            from rich.prompt import Prompt
+            path = Prompt.ask(f"Path to {CATALOG_FILENAME}", default="").strip()
+            if path and os.path.isfile(path):
+                data = _load_json(path)
+                if data is not None:
+                    return data
+        except Exception:
+            pass
     return minimal_fallback()
 
 __all__ = ["load", "minimal_fallback"]

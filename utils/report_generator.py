@@ -15,11 +15,16 @@ def safe_filename(s, max_length=255):
     s = re.sub(r'[^a-zA-Z0-9_\-\.]', '_', s)
     return s[:max_length]
 
-# Ensure the results directory exists (with domain subdirectory)
+# Ensure the results directory exists (with domain subdirectory), using /tmp on read-only serverless filesystems
 def ensure_results_directory(domain):
-    results_dir = os.path.join(os.getcwd(), settings.RESULTS_DIR, domain)
-    if not os.path.exists(results_dir):
-        os.makedirs(results_dir)
+    base_root = "/tmp" if (os.getenv("VERCEL") or not os.access(os.getcwd(), os.W_OK)) else os.getcwd()
+    results_dir = os.path.join(base_root, settings.RESULTS_DIR, domain)
+    try:
+        if not os.path.exists(results_dir):
+            os.makedirs(results_dir, exist_ok=True)
+    except OSError:
+        results_dir = os.path.join("/tmp", settings.RESULTS_DIR, domain)
+        os.makedirs(results_dir, exist_ok=True)
     return results_dir
 
 # Function to generate base filename with modules used, with sanitized domain

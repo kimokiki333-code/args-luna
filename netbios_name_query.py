@@ -14,8 +14,7 @@ from rich.table import Table
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 from rich.panel import Panel
 
-from templates.argus.modules.tls_cipher_suites import clean_domain_input
-from argus.utils.util import resolve_to_ip, ensure_directory_exists, write_to_file
+from argus.utils.util import clean_domain_input, resolve_to_ip, ensure_directory_exists, write_to_file
 from argus.config.settings import DEFAULT_TIMEOUT, RESULTS_DIR, EXPORT_SETTINGS
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)

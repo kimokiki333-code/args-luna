@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARAGOS — Neural Cyber Reconnaissance & OSINT Platform</title>
+  <link rel="stylesheet" href="static/css/aragos.css" />
+</head>
+<body>
+  <!-- Interactive Three.js 3D WebGL Background -->
+  <canvas id="aragos-webgl-canvas"></canvas>
+  <div class="ambient-aurora"></div>
+
+  <!-- Main Glassmorphism Application Shell -->
+  <div class="app-shell">
+    <!-- Left Glass Navigation Sidebar -->
+    <aside class="sidebar glass-panel">
+      <div>
+        <div class="brand-header">
+          <div class="brand-orb">A</div>
+          <div>
+            <div class="brand-title">ARAGOS</div>
+            <div class="brand-subtitle">Neural Recon Suite v3.0</div>
+          </div>
+        </div>
+
+        <div class="nav-section-label">Operations</div>
+        <ul class="nav-list">
+          <li>
+            <button class="nav-btn active" data-view="dashboard">
+              <span class="nav-btn-left">
+                <span>⚡</span>
+                <span>Command Center</span>
+              </span>
+              <span class="nav-badge" id="nav-badge-scans">1</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-view="modules">
+              <span class="nav-btn-left">
+                <span>🛰️</span>
+                <span>Module Arsenal</span>
+              </span>
+              <span class="nav-badge" id="nav-badge-modules">151</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-view="ai">
+              <span class="nav-btn-left">
+                <span>🧠</span>
+                <span>Ollama AI Copilot</span>
+              </span>
+              <span class="nav-badge" id="nav-badge-ai">Local+Cloud</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-view="cli">
+              <span class="nav-btn-left">
+                <span>💻</span>
+                <span>Web CLI Terminal</span>
+              </span>
+              <span class="nav-badge">aragos&gt;</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-view="reports">
+              <span class="nav-btn-left">
+                <span>📊</span>
+                <span>Scan Vault &amp; Export</span>
+              </span>
+              <span class="nav-badge" id="nav-badge-reports">TXT/JSON</span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="nav-section-label">Configuration</div>
+        <ul class="nav-list">
+          <li>
+            <button class="nav-btn" data-view="settings">
+              <span class="nav-btn-left">
+                <span>⚙️</span>
+                <span>Ollama &amp; API Keys</span>
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bottom Ollama & 3D Engine Status Widget -->
+      <div class="sidebar-ai-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:0.74rem;font-weight:700;letter-spacing:0.6px;color:#c4b5fd;text-transform:uppercase;">
+            Ollama Engine
+          </span>
+          <span class="status-dot" id="sidebar-ollama-dot"></span>
+        </div>
+        <div id="sidebar-active-model" style="font-family:var(--font-mono);font-size:0.76rem;color:#fff;word-break:break-all;margin-bottom:6px;">
+          deepseek-v3.1:671b-cloud
+        </div>
+        <div id="sidebar-ollama-mode" style="font-size:0.72rem;color:var(--text-secondary);">
+          Local (11434) + Cloud Ready
+        </div>
+      </div>
+    </aside>
+
+    <!-- Top Glass HUD Bar -->
+    <header class="top-hud glass-panel">
+      <div class="target-bar-group">
+        <div class="target-input-wrapper">
+          <span class="target-prefix">TARGET //</span>
+          <input
+            type="text"
+            id="global-target-input"
+            class="target-input"
+            value="github.com"
+            placeholder="Enter domain, URL, IP, or CIDR (e.g. github.com)"
+          />
+        </div>
+        <div class="quick-target-chips">
+          <button class="chip-btn" data-target="github.com">github.com</button>
+          <button class="chip-btn" data-target="example.com">example.com</button>
+          <button class="chip-btn" data-target="cloudflare.com">cloudflare.com</button>
+        </div>
+      </div>
+
+      <div class="hud-controls">
+        <select id="hud-profile-select" class="glass-select" title="Scan Profile">
+          <option value="speed">⚡ Profile: SPEED</option>
+          <option value="deep">🔍 Profile: DEEP</option>
+          <option value="safe">🛡️ Profile: SAFE</option>
+        </select>
+
+        <select id="hud-model-select" class="glass-select" title="Active Ollama Local/Cloud Model (4GB RAM Optimized)">
+          <option value="deepseek-v3.1:671b-cloud">☁️ deepseek-v3.1:671b-cloud (0 MB Disk/RAM)</option>
+          <option value="qwen3-coder:480b-cloud">☁️ qwen3-coder:480b-cloud (0 MB Disk/RAM)</option>
+          <option value="gpt-oss:20b-cloud">☁️ gpt-oss:20b-cloud (0 MB Disk/RAM)</option>
+          <option value="qwen2.5-coder:1.5b">💻 qwen2.5-coder:1.5b (986 MB Disk · ~1.5GB RAM)</option>
+          <option value="llama3.2:1b">💻 llama3.2:1b (1.3 GB Disk · ~1.7GB RAM)</option>
+          <option value="gemma3:1b">💻 gemma3:1b (815 MB Disk · ~1.3GB RAM)</option>
+          <option value="qwen2.5:0.5b">💻 qwen2.5:0.5b (398 MB Disk · ~0.8GB RAM)</option>
+        </select>
+
+        <select id="hud-scene-select" class="glass-select" title="Three.js 3D Scene Mode">
+          <option value="globe">🌐 3D: Orbital Core</option>
+          <option value="neural">🕸️ 3D: Neural Matrix</option>
+          <option value="torus">🌀 3D: Quantum Torus</option>
+        </select>
+
+        <button class="btn-primary-glow" id="btn-quick-scan">
+          <span>▶</span>
+          <span>Run Recon</span>
+        </button>
+
+        <button class="btn-beast" id="btn-beast-mode" title="Execute Multi-Layer Infrastructure, Web & Security Sweep">
+          <span>🔥</span>
+          <span>BEAST MODE</span>
+        </button>
+
+        <a
+          href="/api/deploy/download-zip"
+          class="btn-secondary-glass"
+          style="text-decoration:none;height:40px;border-color:rgba(16,185,129,0.5);color:#34d399;"
+          title="Download Complete Deployable ARAGOS v3.0 ZIP Package"
+        >
+          <span>📦</span>
+          <span>Download ZIP</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Workspace Area -->
+    <main class="workspace-main">
+      <!-- ==================== VIEW 1: COMMAND CENTER ==================== -->
+      <section class="view-pane active" id="view-dashboard">
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <div class="glass-panel kpi-card">
+            <div class="kpi-label">Reconnaissance Arsenal</div>
+            <div class="kpi-value">
+              <span id="kpi-total-modules">151</span>
+              <span class="sev-badge sev-OK">ONLINE</span>
+            </div>
+            <div class="kpi-sub">
+              <span>58 Infra · 47 Web · 42 Sec · 4 Suites</span>
+            </div>
+          </div>
+
+          <div class="glass-panel kpi-card">
+            <div class="kpi-label">Active Target &amp; Risk Posture</div>
+            <div class="kpi-value">
+              <span id="kpi-risk-score">28/100</span>
+              <span class="sev-badge sev-INFO" id="kpi-risk-level">LOW</span>
+            </div>
+            <div class="kpi-sub">
+              <span>Target: <strong id="kpi-active-target" style="color:var(--cyan);">github.com</strong></span>
+            </div>
+          </div>
+
+          <div class="glass-panel kpi-card">
+            <div class="kpi-label">Telemetry Severity Matrix</div>
+            <div class="kpi-value" style="font-size:1.35rem;gap:8px;">
+              <span class="sev-badge sev-OK" id="kpi-sev-ok">OK: 2</span>
+              <span class="sev-badge sev-WARN" id="kpi-sev-warn">WARN: 1</span>
+              <span class="sev-badge sev-ALERT" id="kpi-sev-alert">ALERT: 0</span>
+            </div>
+            <div class="kpi-sub" id="kpi-scan-meta">
+              <span>Last scan duration: 0.85s</span>
+            </div>
+          </div>
+
+          <div class="glass-panel kpi-card">
+            <div class="kpi-label">Ollama Local &amp; Cloud Engine</div>
+            <div class="kpi-value" style="font-size:1.15rem;">
+              <span id="kpi-ai-model" style="color:#c4b5fd;">deepseek-v3.1:671b-cloud</span>
+            </div>
+            <div class="kpi-sub">
+              <span class="status-dot" id="kpi-ai-dot"></span>
+              <span id="kpi-ai-provider">Ollama Hybrid Bridge Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Split Command Center -->
+        <div class="command-split">
+          <!-- Left: Rapid Module Launcher -->
+          <div class="glass-panel" style="display:flex;flex-direction:column;">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>🛰️</span>
+                <span>Rapid Module Launcher</span>
+              </div>
+              <button class="btn-secondary-glass" id="btn-run-selected-batch">
+                <span>⚡ Run Selected (<span id="selected-mod-count">3</span>)</span>
+              </button>
+            </div>
+
+            <div class="sweep-bar">
+              <button class="sweep-btn" data-sweep="infra">🌐 Infra Sweep</button>
+              <button class="sweep-btn" data-sweep="web">🕸️ Web Intel</button>
+              <button class="sweep-btn" data-sweep="sec">🛡️ Sec Audit</button>
+              <button class="sweep-btn" data-sweep="fav">⭐ Favorites</button>
+            </div>
+
+            <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+              <input
+                type="text"
+                id="dashboard-mod-search"
+                class="target-input"
+                style="width:100%;padding:8px 12px;background:rgba(4,8,20,0.65);border:1px solid rgba(255,255,255,0.12);border-radius:9px;"
+                placeholder="Filter 151 modules (e.g. dns, ssl, headers, cors, cve)..."
+              />
+            </div>
+
+            <div class="compact-module-list" id="dashboard-module-list">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+
+          <!-- Right: Live Telemetry Console & AI Threat Analyst -->
+          <div class="glass-panel" style="display:flex;flex-direction:column;">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>📡</span>
+                <span id="output-panel-title">Live Reconnaissance Telemetry</span>
+              </div>
+              <div class="output-tabs">
+                <button class="tab-pill active" data-outtab="console">Terminal Output</button>
+                <button class="tab-pill" data-outtab="ai">🧠 AI Threat Analysis</button>
+                <button class="tab-pill" data-outtab="findings">Findings &amp; Runtimes</button>
+              </div>
+            </div>
+
+            <!-- Sub-toolbar for active scan -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid rgba(255,255,255,0.07);flex-wrap:wrap;gap:8px;">
+              <div id="module-output-pills" style="display:flex;gap:6px;flex-wrap:wrap;">
+                <!-- Module filter pills for current scan -->
+              </div>
+              <div style="display:flex;gap:8px;">
+                <button class="btn-secondary-glass" id="btn-trigger-ai-analyze">
+                  <span>🧠</span>
+                  <span>Re-Analyze with Ollama</span>
+                </button>
+                <button class="btn-secondary-glass" id="btn-export-current-md">
+                  <span>⬇ Export MD</span>
+                </button>
+                <button class="btn-secondary-glass" id="btn-export-current-json">
+                  <span>⬇ JSON</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Tab 1: Terminal Output -->
+            <div id="outtab-console" style="flex:1;display:flex;flex-direction:column;">
+              <pre class="terminal-window" id="main-terminal-output">Initializing ARAGOS v3.0 Telemetry Stream...</pre>
+            </div>
+
+            <!-- Tab 2: AI Threat Analysis -->
+            <div id="outtab-ai" style="display:none;padding:18px;overflow-y:auto;max-height:480px;">
+              <div id="dashboard-ai-analysis" class="ai-markdown">
+                Select a scan or click "Re-Analyze with Ollama" to generate neural threat intelligence.
+              </div>
+            </div>
+
+            <!-- Tab 3: Structured Findings & Runtimes -->
+            <div id="outtab-findings" style="display:none;padding:18px;overflow-y:auto;max-height:480px;">
+              <div id="dashboard-findings-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 2: MODULE ARSENAL (ALL 151) ==================== -->
+      <section class="view-pane" id="view-modules">
+        <div class="glass-panel arsenal-toolbar">
+          <div class="filter-pills" id="arsenal-section-pills">
+            <button class="filter-pill active" data-sec="all">All Modules (151)</button>
+            <button class="filter-pill" data-sec="Network & Infrastructure">🌐 Network &amp; Infra</button>
+            <button class="filter-pill" data-sec="Web Application Analysis">🕸️ Web Application</button>
+            <button class="filter-pill" data-sec="Security & Threat Intelligence">🛡️ Security &amp; Threat Intel</button>
+            <button class="filter-pill" data-sec="fav">⭐ Favorites</button>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center;">
+            <select id="arsenal-tag-select" class="glass-select">
+              <option value="all">Tag: All Tags</option>
+              <option value="dns">#dns</option>
+              <option value="tls">#tls</option>
+              <option value="web">#web</option>
+              <option value="cloud">#cloud</option>
+              <option value="email">#email</option>
+              <option value="recon">#recon</option>
+              <option value="fast">#fast</option>
+              <option value="heavy">#heavy</option>
+            </select>
+            <input
+              type="text"
+              id="arsenal-search-input"
+              class="target-input"
+              style="width:260px;height:40px;padding:0 12px;background:rgba(5,10,24,0.75);border:1px solid rgba(255,255,255,0.16);border-radius:10px;"
+              placeholder="Search module name, ID, script..."
+            />
+          </div>
+        </div>
+
+        <div class="modules-grid" id="arsenal-modules-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 3: OLLAMA AI COPILOT & MODEL HUB ==================== -->
+      <section class="view-pane" id="view-ai">
+        <div class="ai-hub-grid">
+          <!-- Left: Ollama Local & Cloud Model Manager -->
+          <div class="glass-panel" style="display:flex;flex-direction:column;">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>🦙</span>
+                <span>4GB-RAM Safe Models (0 Auto-Downloads)</span>
+              </div>
+              <div style="display:flex;gap:6px;">
+                <button class="btn-secondary-glass" id="btn-free-ollama-ram" title="Unload active local models from RAM">🧹 Free RAM</button>
+                <button class="btn-secondary-glass" id="btn-refresh-ollama">↻ Probe</button>
+              </div>
+            </div>
+
+            <div style="padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;">
+                <span style="color:var(--text-secondary);">Ollama Bridge (<code style="color:var(--cyan);" id="ai-hub-local-url">Hybrid Local + Cloud</code>)</span>
+                <span class="sev-badge sev-OK" id="ai-hub-daemon-badge">Ready</span>
+              </div>
+
+              <label style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--text-secondary);cursor:pointer;">
+                <input type="checkbox" id="chk-browser-direct-ollama" checked />
+                <span>Auto-Synthesize with Aragos Neural Core when Daemon Offline</span>
+              </label>
+
+              <div style="display:flex;gap:8px;">
+                <input
+                  type="text"
+                  id="input-custom-ollama-model"
+                  class="target-input"
+                  style="flex:1;height:36px;padding:0 10px;background:rgba(4,8,20,0.7);border:1px solid rgba(255,255,255,0.14);border-radius:8px;font-size:0.78rem;"
+                  placeholder="Model tag (e.g. llama3.3 or glm-4.6:cloud)"
+                />
+                <button class="btn-secondary-glass" id="btn-pull-ollama-model" style="height:36px;">
+                  Use / Pull
+                </button>
+              </div>
+            </div>
+
+            <div style="padding:12px 14px;overflow-y:auto;max-height:430px;display:flex;flex-direction:column;gap:8px;" id="ollama-models-list">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+
+          <!-- Right: Interactive AI Security Analyst Chat -->
+          <div class="glass-panel" style="display:flex;flex-direction:column;">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>🧠</span>
+                <span>ARAGOS Neural Security Analyst</span>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button class="chip-btn ai-prompt-chip" data-prompt="Analyze the latest scan telemetry and list the top 3 security risks and fixes.">
+                  🔍 Analyze Latest Scan
+                </button>
+                <button class="chip-btn ai-prompt-chip" data-prompt="Generate hardened HTTP security headers (CSP, HSTS, Permissions-Policy) for the current target.">
+                  🛡️ Hardening Config
+                </button>
+                <button class="chip-btn ai-prompt-chip" data-prompt="How do I run both local and cloud models with Ollama in ARAGOS?">
+                  🦙 Ollama Cloud Guide
+                </button>
+              </div>
+            </div>
+
+            <div class="chat-messages" id="ai-chat-messages">
+              <div class="chat-bubble assistant ai-markdown">
+                <h4>⚡ ARAGOS Neural Recon Copilot Online</h4>
+                <p>Connected to your hybrid <strong>Ollama Local + Cloud</strong> architecture and all <strong>151 ARAGOS reconnaissance modules</strong>.</p>
+                <p>Select any local model (e.g. <code>llama3.3:latest</code>, <code>qwen2.5-coder:14b</code>) or Ollama Cloud model (e.g. <code>deepseek-v3.1:671b-cloud</code>, <code>qwen3-coder:480b-cloud</code>, <code>gpt-oss:120b-cloud</code>) on the left, or ask me to analyze your active target scan!</p>
+              </div>
+            </div>
+
+            <div class="chat-input-row">
+              <input
+                type="text"
+                id="ai-chat-input"
+                class="target-input"
+                style="flex:1;height:42px;padding:0 14px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.16);border-radius:10px;"
+                placeholder="Ask your Ollama model about scan findings, CVEs, remediation, or recon strategy..."
+              />
+              <button class="btn-primary-glow" id="btn-send-ai-chat">
+                <span>Send ➔</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 4: INTERACTIVE WEB CLI SHELL ==================== -->
+      <section class="view-pane" id="view-cli">
+        <div class="glass-panel" style="display:flex;flex-direction:column;flex:1;">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>💻</span>
+              <span>ARAGOS Interactive Web Shell (<code>aragos&gt;</code>)</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="chip-btn cli-quick-btn" data-cmd="help">help</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="banner">banner</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="modules">modules</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="opts">opts</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="show api_status">show api_status</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="run">run</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="viewout">viewout</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="clear">clear</button>
+            </div>
+          </div>
+
+          <pre class="terminal-window" id="cli-terminal-screen" style="max-height:460px;flex:1;">     █████╗ ██████╗  █████╗  ██████╗  ██████╗ ███████╗
+    ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔═══██╗██╔════╝
+    ███████║██████╔╝███████║██║  ███╗██║   ██║███████╗
+    ██╔══██║██╔══██╗██╔══██║██║   ██║██║   ██║╚════██║
+    ██║  ██║██║  ██║██║  ██║╚██████╔╝╚██████╔╝███████╗
+    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝
+  ARAGOS v3.0 — Interactive Web CLI Shell Ready. Type 'help' for commands.
+</pre>
+
+          <div class="chat-input-row">
+            <span style="font-family:var(--font-mono);color:var(--cyan);align-self:center;font-weight:700;">aragos&gt;</span>
+            <input
+              type="text"
+              id="cli-command-input"
+              class="target-input"
+              style="flex:1;height:42px;padding:0 14px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.16);border-radius:10px;"
+              placeholder="Type command (e.g. search ssl, use 12, set target github.com, run, ai summarize findings)..."
+            />
+            <button class="btn-primary-glow" id="btn-exec-cli">Execute</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 5: SCAN VAULT & REPORTS ==================== -->
+      <section class="view-pane" id="view-reports">
+        <div class="glass-panel" style="padding:20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <div>
+              <h2 style="font-family:var(--font-display);font-size:1.2rem;">Scan History &amp; Report Vault</h2>
+              <p style="font-size:0.82rem;color:var(--text-secondary);">
+                Inspect completed reconnaissance sweeps and export reports in JSON, Markdown, CSV, or TXT.
+              </p>
+            </div>
+            <button class="btn-secondary-glass" id="btn-refresh-scans">↻ Refresh Vault</button>
+          </div>
+
+          <div id="reports-vault-list" style="display:flex;flex-direction:column;gap:12px;">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 6: SETTINGS, OLLAMA & API KEYS ==================== -->
+      <section class="view-pane" id="view-settings">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;">
+          <!-- Ollama Local & Cloud Configuration -->
+          <div class="glass-panel" style="padding:22px;display:flex;flex-direction:column;gap:14px;">
+            <h3 style="font-family:var(--font-display);font-size:1.08rem;color:var(--cyan);">
+              🦙 Ollama Local &amp; Cloud Engine Configuration
+            </h3>
+            <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5;">
+              Configure your local Ollama daemon URL (for local models &amp; signed-in <code>-cloud</code> models) and optional direct Cloud API credentials.
+            </p>
+
+            <div>
+              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Execution Mode</label>
+              <select id="cfg-ai-mode" class="glass-select" style="width:100%;">
+                <option value="auto">Auto Hybrid (Local Daemon ➔ Cloud API ➔ Aragos Neural Core)</option>
+                <option value="ollama-local">Ollama Local Daemon Only</option>
+                <option value="ollama-cloud">Ollama Cloud Models</option>
+                <option value="openai-cloud">OpenAI-Compatible Cloud Endpoint</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Ollama Local Daemon URL</label>
+              <input type="text" id="cfg-ollama-local-url" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" value="http://127.0.0.1:11434" />
+            </div>
+
+            <div>
+              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Ollama Cloud URL</label>
+              <input type="text" id="cfg-ollama-cloud-url" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" value="https://ollama.com" />
+            </div>
+
+            <div>
+              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Ollama Cloud API Key (Optional for direct https://ollama.com/api)</label>
+              <input type="password" id="cfg-ollama-api-key" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" placeholder="Enter OLLAMA_API_KEY..." />
+            </div>
+
+            <div>
+              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">OpenAI-Compatible Cloud Base URL (OpenRouter / Groq / OpenAI)</label>
+              <input type="text" id="cfg-openai-base-url" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" value="https://api.openai.com/v1" />
+            </div>
+
+            <div>
+              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">OpenAI-Compatible Cloud API Key</label>
+              <input type="password" id="cfg-openai-api-key" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" placeholder="sk-..." />
+            </div>
+
+            <button class="btn-primary-glow" id="btn-save-ai-config" style="align-self:flex-start;">
+              💾 Save Ollama &amp; AI Settings
+            </button>
+          </div>
+
+          <!-- OSINT & Recon API Keys -->
+          <div class="glass-panel" style="padding:22px;display:flex;flex-direction:column;gap:12px;">
+            <h3 style="font-family:var(--font-display);font-size:1.08rem;color:var(--cyan);">
+              🔑 OSINT &amp; Threat Intelligence API Keys
+            </h3>
+            <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5;">
+              Configure external provider keys to unlock live VirusTotal, Shodan, Censys, SSL Labs, and HaveIBeenPwned enrichment.
+            </p>
+
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">VIRUSTOTAL_API_KEY</label>
+              <input type="password" id="key-vt" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="VirusTotal API Key" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">SHODAN_API_KEY</label>
+              <input type="password" id="key-shodan" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="Shodan API Key" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">CENSYS_API_ID</label>
+              <input type="text" id="key-censys-id" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="Censys API ID" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">CENSYS_API_SECRET</label>
+              <input type="password" id="key-censys-secret" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="Censys API Secret" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">HIBP_API_KEY (Have I Been Pwned)</label>
+              <input type="password" id="key-hibp" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="HIBP API Key" />
+            </div>
+
+            <button class="btn-primary-glow" id="btn-save-osint-keys" style="align-self:flex-start;margin-top:4px;">
+              💾 Save OSINT API Keys
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="aragos-toast" style="position:fixed;bottom:22px;right:22px;z-index:100;display:none;" class="glass-panel-elevated"></div>
+
+  <!-- Scripts: Bundled Three.js + 3D Scene + Application Logic -->
+  <script src="static/vendor/three.min.js"></script>
+  <script src="static/js/three-scene.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>
