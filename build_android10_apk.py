@@ -1047,12 +1047,15 @@ def build_apk():
         dex_ba[12:32] = hashlib.sha1(bytes(dex_ba[32:])).digest()
         dex_ba[8:12] = struct.pack("<I", zlib.adler32(bytes(dex_ba[12:])) & 0xFFFFFFFF)
 
+        arsenal_bytes = arsenal_html_path.read_bytes()
         arsenal_entries = [
             ("AndroidManifest.xml", m_arsenal, zipfile.ZIP_DEFLATED),
             ("resources.arsc", r_arsenal, zipfile.ZIP_STORED),
             ("classes.dex", bytes(dex_ba), zipfile.ZIP_DEFLATED),
             ("res/drawable/icon.png", icon_png, zipfile.ZIP_STORED),
-            ("assets/www/index.html", arsenal_html_path.read_bytes(), zipfile.ZIP_DEFLATED),
+            ("assets/www/index.html", arsenal_bytes, zipfile.ZIP_DEFLATED),
+            ("assets/www/video-studio/index.html", arsenal_bytes, zipfile.ZIP_DEFLATED),
+            ("assets/www/arabic-subtitles/index.html", arsenal_bytes, zipfile.ZIP_DEFLATED),
         ]
         if veyron_html_path.exists():
             arsenal_entries.append(
