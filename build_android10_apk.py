@@ -1023,6 +1023,87 @@ def build_apk():
     verify_built_apk(APK_PRIMARY, priv_key, cert_der)
     print(f"[+] Built & Verified OPPO F9 APK: {APK_PRIMARY} ({len(signed_apk_bytes):,} bytes)")
 
+    # Also build standalone BaDR-AI-Media-Arsenal.apk (package="io.badr.media.badr", label="BaDR Media Arsenal")
+    arsenal_html_path = BASE_DIR / "badr-ai-media-arsenal.html"
+    veyron_html_path = BASE_DIR / "veyron-chat.html"
+    if arsenal_html_path.exists():
+        APK_ARSENAL = BASE_DIR / "BaDR-AI-Media-Arsenal.apk"
+        # Patch package ("io.badr.argus.badr" -> "io.badr.media.badr", same 18 chars)
+        # and app label ("BaDR ArGuS scanner" -> "BaDR Media Arsenal", same 18 chars)
+        m_arsenal = manifest_axml.replace(
+            "io.badr.argus.badr".encode("utf-16le"),
+            "io.badr.media.badr".encode("utf-16le"),
+        )
+        r_arsenal = resources_arsc.replace(
+            "io.badr.argus.badr".encode("utf-16le"),
+            "io.badr.media.badr".encode("utf-16le"),
+        ).replace(
+            b"BaDR ArGuS scanner",
+            b"BaDR Media Arsenal",
+        )
+        dex_ba = bytearray(
+            classes_dex.replace(b"io/badr/argus/badr", b"io/badr/media/badr")
+        )
+        dex_ba[12:32] = hashlib.sha1(bytes(dex_ba[32:])).digest()
+        dex_ba[8:12] = struct.pack("<I", zlib.adler32(bytes(dex_ba[12:])) & 0xFFFFFFFF)
+
+        arsenal_entries = [
+            ("AndroidManifest.xml", m_arsenal, zipfile.ZIP_DEFLATED),
+            ("resources.arsc", r_arsenal, zipfile.ZIP_STORED),
+            ("classes.dex", bytes(dex_ba), zipfile.ZIP_DEFLATED),
+            ("res/drawable/icon.png", icon_png, zipfile.ZIP_STORED),
+            ("assets/www/index.html", arsenal_html_path.read_bytes(), zipfile.ZIP_DEFLATED),
+        ]
+        if veyron_html_path.exists():
+            arsenal_entries.append(
+                ("assets/www/veyron-chat.html", veyron_html_path.read_bytes(), zipfile.ZIP_DEFLATED)
+            )
+
+        mf_main_sec = (
+            "Manifest-Version: 1.0\r\n"
+            "Created-By: BaDR AI Media Arsenal Packager 5.1\r\n"
+            "\r\n"
+        )
+        mf_entries_a = []
+        sf_entries_a = []
+        for name, data, _ in arsenal_entries:
+            b64_d = base64.b64encode(hashlib.sha256(data).digest()).decode("ascii")
+            e_sec = f"Name: {name}\r\nSHA-256-Digest: {b64_d}\r\n\r\n"
+            mf_entries_a.append(e_sec)
+            sf_d = base64.b64encode(hashlib.sha256(e_sec.encode("utf-8")).digest()).decode("ascii")
+            sf_entries_a.append(f"Name: {name}\r\nSHA-256-Digest: {sf_d}\r\n\r\n")
+
+        mf_bytes_a = (mf_main_sec + "".join(mf_entries_a)).encode("utf-8")
+        mf_digest_a = base64.b64encode(hashlib.sha256(mf_bytes_a).digest()).decode("ascii")
+        sf_main_sec = (
+            "Signature-Version: 1.0\r\n"
+            "Created-By: BaDR ArGuS Signer\r\n"
+            f"SHA-256-Digest-Manifest: {mf_digest_a}\r\n"
+            "X-Android-APK-Signed: 2\r\n"
+            "\r\n"
+        )
+        sf_bytes_a = (sf_main_sec + "".join(sf_entries_a)).encode("utf-8")
+        rsa_bytes_a = build_pkcs7_cert_rsa(priv_key, cert_der, sf_bytes_a)
+
+        all_arsenal_entries = arsenal_entries + [
+            ("META-INF/MANIFEST.MF", mf_bytes_a, zipfile.ZIP_DEFLATED),
+            ("META-INF/CERT.SF", sf_bytes_a, zipfile.ZIP_DEFLATED),
+            ("META-INF/CERT.RSA", rsa_bytes_a, zipfile.ZIP_DEFLATED),
+        ]
+        tmp_a = BASE_DIR / "_tmp_arsenal_unsigned.apk"
+        write_zipaligned_apk(tmp_a, all_arsenal_entries)
+        raw_a = tmp_a.read_bytes()
+        tmp_a.unlink(missing_ok=True)
+        signed_arsenal_bytes = inject_apk_v2_signing_block(raw_a, priv_key, cert_der)
+        APK_ARSENAL.write_bytes(signed_arsenal_bytes)
+        verify_built_apk(APK_ARSENAL, priv_key, cert_der)
+        print(f"[+] Built & Verified Standalone BaDR AI Media Arsenal APK: {APK_ARSENAL} ({len(signed_arsenal_bytes):,} bytes)")
+
+        for target_dir in [BASE_DIR / "static", BASE_DIR / "web" / "static"]:
+            if target_dir.exists():
+                shutil.copyfile(APK_PRIMARY, target_dir / "BaDR-ArGuS-Scanner.apk")
+                shutil.copyfile(APK_ARSENAL, target_dir / "BaDR-AI-Media-Arsenal.apk")
+
 
 if __name__ == "__main__":
     build_apk()

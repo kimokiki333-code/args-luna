@@ -1,17 +1,48 @@
-# 🛡️ aragos Android BaDR version (`BaDR ArGuS scanner`)
+# 🛡️ BaDR Open-Source Android & Web Suite (`v5.1` — Free Forever · Zero Watermarks)
 
-> **Standalone 151-Scanner Android 10 APK & Cloud OSINT Security Tutor**  
-> Built for **Android 10+ (including 4 GB RAM / 64 GB phones like the OPPO F9)** and modern web browsers — **Zero Local Phone RAM AI Overhead**.
+> **100% Free Forever · Zero Watermarks · No Sign-Ups · Pre-Loaded Free Cloud AI Keys · Built for Android 10+ (including 4 GB RAM / 64 GB phones like the OPPO F9) & Desktop/Web**  
+> Created for everyone to use freely, help one another, and grow with new open-source & free community tools.
 
 ---
 
-## 📲 Direct Download — Standalone Android 10 APK (`v4.9`)
+## 📲 Direct 1-Click Android 10 APK Downloads (`v5.1`)
 
-Tap any link below on your **OPPO F9 (Android 10)** to download **`BaDR-ArGuS-Scanner.apk`** directly:
+Both apps are signed with **AOSP v1 + v2 Merkle signatures**, use **distinct Android package IDs** so they install **side-by-side** on your phone without overwriting each other, include **Pre-Loaded Free Cloud API Keys** out-of-the-box, and feature **Live In-App OTA Updates** from GitHub `main`:
 
-- 👉 **[📥 Direct 1-Click APK Download (`BaDR-ArGuS-Scanner.apk` — Latest v4.9 Release)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/arena/8db63a8e-args-luna/BaDR-ArGuS-Scanner.apk)**
-- 👉 **[📥 Direct APK Download via GitHub Main Branch (`BaDR-ArGuS-Scanner.apk`)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/main/BaDR-ArGuS-Scanner.apk)**
-- 👉 **[📂 Open APK File Page on GitHub (Tap `Download raw file`)](https://github.com/kimokiki333-code/args-luna/blob/arena/8db63a8e-args-luna/BaDR-ArGuS-Scanner.apk)**
+### 🎬 1. `BaDR-AI-Media-Arsenal.apk` (`BaDR Media Arsenal` — Package `io.badr.media.badr`)
+- 👉 **[📥 Direct 1-Click APK Download (`BaDR-AI-Media-Arsenal.apk` — Main Branch)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/main/BaDR-AI-Media-Arsenal.apk)**
+- 👉 **[📂 Open `BaDR-AI-Media-Arsenal.apk` on GitHub (Tap `Download raw file`)](https://github.com/kimokiki333-code/args-luna/blob/main/BaDR-AI-Media-Arsenal.apk)**
+- **What's Inside (`100% Inline · Zero External Website Redirects`):**
+  - **Video & Audio Grabber:** Multi-platform downloader powered inline by Cobalt & BaDR backends.
+  - **Free Text-to-Image Studio:** Multi-style AI image generation with instant download.
+  - **Veyron 500+ Model AI Chat + Bottom-Left Quick AI & Voice Note Assistant:** Pre-loaded with free API keys (Groq, Mistral 7-Pool, DeepSeek Harness `@deepseek-ai/dsh`, OpenRouter `:free`, Gemini, NVIDIA NIM, Ollama Cloud, HuggingFace, Pollinations) + **English & Arabic Voice Notes** (`whisper-large-v3-turbo` / `whisper-large-v3` STT & `playai-tts` / `playai-tts-arabic` TTS).
+  - **🧅 100% Inline Tor / Proxy / VPN, Free Web Proxy Reader, Domain DNS/WHOIS/SSL & Breach Scanner:** Every check runs in the background against public free JSON backends (`ipwho.is`, `ipinfo.io`, `dns.google`, `rdap.org`, `api.xposedornot.com`, `r.jina.ai`, `allorigins`, `freeapi.pro`) and renders **100% inline inside BaDR AI Arsenal's own glassmorphism UI** — never redirecting you out to external websites.
+  - **AHM7 Free Tools Hub:** 21 keyless cloud utilities (`freeapi.pro`) rendered inline.
+
+---
+
+### 🛡️ 2. `BaDR-ArGuS-Scanner.apk` (`BaDR ArGuS scanner` — Package `io.badr.argus.badr`)
+- 👉 **[📥 Direct 1-Click APK Download (`BaDR-ArGuS-Scanner.apk` — Main Branch)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/main/BaDR-ArGuS-Scanner.apk)**
+- 👉 **[📂 Open `BaDR-ArGuS-Scanner.apk` on GitHub (Tap `Download raw file`)](https://github.com/kimokiki333-code/args-luna/blob/main/BaDR-ArGuS-Scanner.apk)**
+- **What's Inside:**
+  - **All 151 Cybersecurity, Network, Web & Threat Intelligence Scanners** embedded inside the APK.
+  - **Startup Live Self-IP, WHOIS, DNS, Geo Coordinates & Tor/Proxy/VPN Pop-Up Report.**
+  - **3-Tier (🟢 Green / 🟡 Yellow / 🔴 Red) Beginner-Friendly "How To Fix" Guides.**
+  - **Pre-Loaded Free Cloud AI Keys + English & Arabic Voice Notes** in both the **AI Security Tutor** and the **Floating Quick AI Assistant**.
+
+---
+
+## 🌐 Live Desktop & Web Usage + Automatic OTA Sync
+
+- **BaDR ArGuS Scanner Web UI:** `/` (`index.html`)
+- **BaDR AI Media Arsenal Web UI:** `/arsenal` (`badr-ai-media-arsenal.html`)
+- **Live OTA Sync:** Whenever `index.html` or `badr-ai-media-arsenal.html` is updated on GitHub `main` with new tools, both installed Android APKs can pull the latest tools directly via the in-app **OTA Update** button.
+
+---
+
+## 🤝 Open for Community Visions, Ideas & Free Open-Source Tools
+
+This project is **100% free forever, with zero watermarks, zero paywalls, and no sign-ups required**. We built it to help each other — if you have ideas, visions, or favorite free/open-source APIs and tools that can run inline inside the Arsenal or Scanner, open an Issue or Pull Request on GitHub and we will integrate them for everyone!
 
 ---
 

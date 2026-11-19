@@ -1737,6 +1737,42 @@ def api_download_android_apk():
     raise HTTPException(status_code=404, detail="Android APK package not found")
 
 
+@app.get("/api/deploy/download-arsenal-apk")
+@app.get("/BaDR-AI-Media-Arsenal.apk")
+def api_download_arsenal_apk():
+    apk_path = os.path.join(BASE_DIR, "BaDR-AI-Media-Arsenal.apk")
+    if os.path.isfile(apk_path):
+        return FileResponse(
+            apk_path,
+            media_type="application/vnd.android.package-archive",
+            filename="BaDR-AI-Media-Arsenal.apk",
+        )
+    raise HTTPException(status_code=404, detail="BaDR AI Media Arsenal APK not found")
+
+
+@app.get("/arsenal", response_class=HTMLResponse)
+@app.get("/badr-ai-media-arsenal.html", response_class=HTMLResponse)
+def serve_arsenal_html():
+    for candidate in (
+        os.path.join(BASE_DIR, "badr-ai-media-arsenal.html"),
+        os.path.join(WEB_DIR, "badr-ai-media-arsenal.html"),
+    ):
+        if os.path.isfile(candidate):
+            return FileResponse(candidate)
+    raise HTTPException(status_code=404, detail="BaDR AI Media Arsenal HTML not found")
+
+
+@app.get("/veyron-chat.html", response_class=HTMLResponse)
+def serve_veyron_chat_html():
+    for candidate in (
+        os.path.join(BASE_DIR, "veyron-chat.html"),
+        os.path.join(WEB_DIR, "veyron-chat.html"),
+    ):
+        if os.path.isfile(candidate):
+            return FileResponse(candidate)
+    raise HTTPException(status_code=404, detail="Veyron Chat HTML not found")
+
+
 @app.get("/api/deploy/download-zip")
 def api_download_deploy_zip():
     zip_path = os.path.join(BASE_DIR, "aragos-v3.0-deploy-ready.zip")
