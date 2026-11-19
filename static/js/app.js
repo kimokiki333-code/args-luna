@@ -1313,99 +1313,92 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
   // 8. DIRECT CLOUD + KEYLESS AI CALLER (WITH ROUND-ROBIN & MODEL POOL ROTATION)
   // ============================================================================
   async function callDirectCloudFromVault(messages, overrideProvider = null, overrideModel = null, customSysPrompt = null) {
-    const pid = overrideProvider || state.vault.active_provider || "ollama";
-    const pMeta = PROVIDER_VAULT_CATALOG.find((x) => x.id === pid) || PROVIDER_VAULT_CATALOG[0];
-
-    // Gather all keys for this provider for round-robin rotation
-    const matchingKeys = (state.vault.saved_keys || [])
-      .filter((k) => k.provider === pid && k.api_key && k.api_key !== "KEYLESS_FREE_POOL")
-      .map((k) => k.api_key);
-    if (!matchingKeys.length && state.vault.keys[pid] && state.vault.keys[pid] !== "KEYLESS_FREE_POOL") {
-      matchingKeys.push(state.vault.keys[pid]);
-    }
-
-    const activeKey = matchingKeys.length
-      ? matchingKeys[(state.vault.round_robin_idx++) % matchingKeys.length]
-      : "";
-
-    const primaryModel = overrideModel || state.activeModel || state.vault.models[pid] || pMeta.default_free_model;
-    const modelPool = [primaryModel, ...pMeta.models.filter((m) => m !== primaryModel)];
-
-    const sysMessage = customSysPrompt || "You are the BaDR ArGuS AI Assistant & Cybersecurity Tutor (aragos Android BaDR version). Answer any general LLM question (coding, networking, Android, Linux, daily tasks, or general knowledge) clearly and thoroughly, and when asked about scan reports, explain findings in plain English and provide step-by-step fix instructions.";
+    const requestedPid = overrideProvider || state.vault.active_provider || "groq";
+    const sysMessage =
+      customSysPrompt ||
+      "You are a helpful, direct AI assistant. Answer the user's exact question or comment naturally and concisely. Do NOT repeat canned descriptions of the app or traffic-light colors unless the user specifically asks.";
     const fullMsgs = [{ role: "system", content: sysMessage }, ...messages];
 
-    // Try with user's saved key across model pool (prevents 429 on Mistral & Groq!)
-    if (activeKey && pid !== "keyless_free") {
-      for (const tryModel of modelPool.slice(0, 3)) {
-        try {
-          if (pid === "google") {
-            const gm = tryModel.startsWith("gemini") ? tryModel : "gemini-2.0-flash";
-            const url = `${pMeta.base_url}/models/${gm}:generateContent?key=${encodeURIComponent(activeKey)}`;
-            const text = fullMsgs.map((m) => `[${m.role.toUpperCase()}]: ${m.content}`).join("\n\n");
-            const r = await fetch(url, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ contents: [{ parts: [{ text }] }] })
-            });
-            if (r.ok) {
-              const d = await r.json();
-              const reply = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts[0].text;
-              if (reply) return { reply, model: gm, provider: pMeta.name, latency_ms: 280 };
-            }
-          } else {
-            const endpoint = pid === "ollama" ? `${pMeta.base_url}/v1/chat/completions` : `${pMeta.base_url}/chat/completions`;
-            const hdrs = {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${activeKey}`
-            };
-            if (pid === "deepseek") {
-              hdrs["x-dsh-auth-token"] = activeKey;
-              hdrs["x-api-key"] = activeKey;
-            }
-            let chatCompletionModel = tryModel;
-            if (/^whisper-|^playai-tts/i.test(tryModel)) {
-              chatCompletionModel = "llama-3.1-8b-instant";
-            } else if (tryModel === "mistral-ocr-latest") {
-              chatCompletionModel = "pixtral-large-2411";
-            } else if (tryModel === "voxtral-mini-latest") {
-              chatCompletionModel = "mistral-medium-2508";
-            }
-            const r = await fetch(endpoint, {
-              method: "POST",
-              headers: hdrs,
-              body: JSON.stringify({ model: chatCompletionModel, messages: fullMsgs, temperature: 0.3 })
-            });
-            if (r.ok) {
-              const d = await r.json();
-              const reply = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
-              if (reply) {
-                const labelMod = chatCompletionModel !== tryModel ? `${tryModel} (${chatCompletionModel})` : tryModel;
-                return { reply, model: labelMod, provider: pMeta.name, latency_ms: 260 };
+    // Build ordered candidate list: requested provider first, then all pre-loaded free providers (Groq -> Mistral -> OpenRouter -> Gemini -> NVIDIA)
+    const providerOrder = [
+      requestedPid,
+      ...["groq", "mistral", "openrouter", "google", "nvidia"].filter((p) => p !== requestedPid)
+    ];
+
+    for (const pid of providerOrder) {
+      if (pid === "keyless_free") continue;
+      const pMeta = PROVIDER_VAULT_CATALOG.find((x) => x.id === pid);
+      if (!pMeta) continue;
+
+      const matchingKeys = (state.vault.saved_keys || [])
+        .filter((k) => k.provider === pid && k.api_key && k.api_key !== "KEYLESS_FREE_POOL")
+        .map((k) => k.api_key);
+      if (!matchingKeys.length && state.vault.keys[pid] && state.vault.keys[pid] !== "KEYLESS_FREE_POOL") {
+        matchingKeys.push(state.vault.keys[pid]);
+      }
+      if (!matchingKeys.length) continue;
+
+      const primaryModel =
+        pid === requestedPid && overrideModel
+          ? overrideModel
+          : state.vault.models[pid] || pMeta.default_free_model;
+      const modelPool = [primaryModel, ...pMeta.models.filter((m) => m !== primaryModel)];
+
+      for (const activeKey of matchingKeys) {
+        for (const tryModel of modelPool.slice(0, 2)) {
+          try {
+            if (pid === "google") {
+              const gm = tryModel.startsWith("gemini") ? tryModel : "gemini-2.0-flash";
+              const url = `${pMeta.base_url}/models/${gm}:generateContent?key=${encodeURIComponent(activeKey)}`;
+              const text = fullMsgs
+                .map((m) => `[${m.role.toUpperCase()}]: ${typeof m.content === "string" ? m.content : JSON.stringify(m.content)}`)
+                .join("\n\n");
+              const r = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ contents: [{ parts: [{ text }] }] })
+              });
+              if (r.ok) {
+                const d = await r.json();
+                const reply = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts[0].text;
+                if (reply) return { reply, model: gm, provider: pMeta.name, latency_ms: 240 };
+              }
+            } else {
+              const endpoint = pid === "ollama" ? `${pMeta.base_url}/v1/chat/completions` : `${pMeta.base_url}/chat/completions`;
+              const hdrs = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${activeKey}`
+              };
+              if (pid === "deepseek") {
+                hdrs["x-dsh-auth-token"] = activeKey;
+                hdrs["x-api-key"] = activeKey;
+              }
+              let chatCompletionModel = tryModel;
+              if (/^whisper-|^playai-tts/i.test(tryModel)) {
+                chatCompletionModel = "llama-3.1-8b-instant";
+              } else if (tryModel === "mistral-ocr-latest") {
+                chatCompletionModel = "pixtral-large-2411";
+              } else if (tryModel === "voxtral-mini-latest") {
+                chatCompletionModel = "mistral-medium-2508";
+              }
+              const r = await fetch(endpoint, {
+                method: "POST",
+                headers: hdrs,
+                body: JSON.stringify({ model: chatCompletionModel, messages: fullMsgs, temperature: 0.4 })
+              });
+              if (r.ok) {
+                const d = await r.json();
+                const reply = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
+                if (reply) {
+                  const labelMod = chatCompletionModel !== tryModel ? `${tryModel} (${chatCompletionModel})` : tryModel;
+                  return { reply, model: labelMod, provider: pMeta.name, latency_ms: 220 };
+                }
               }
             }
-          }
-        } catch (_) {}
+          } catch (_) {}
+        }
       }
     }
-
-    // Automatic Keyless Free Cloud AI Pool (No API Key Required!)
-    const keylessModel = pid === "keyless_free" && overrideModel ? overrideModel : "openai";
-    try {
-      const rKeyless = await fetch("https://text.pollinations.ai/openai", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: keylessModel,
-          messages: fullMsgs,
-          temperature: 0.35
-        })
-      });
-      if (rKeyless.ok) {
-        const d = await rKeyless.json();
-        const reply = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
-        if (reply) return { reply, model: `${keylessModel} (Keyless Free Cloud)`, provider: "Keyless Free Cloud AI", latency_ms: 310 };
-      }
-    } catch (_) {}
 
     return null;
   }
@@ -1812,10 +1805,26 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
         </div>`;
     }
     if (attachedImg) {
-      userHtml += `<img src="${attachedImg.dataUrl}" style="max-width:180px;max-height:120px;border-radius:8px;display:block;margin-bottom:6px;border:1px solid #00f0ff;" />`;
+      userHtml += `<img src="${attachedImg.dataUrl}" style="max-width:180px;max-height:120px;border-radius:8px;display:block;margin-bottom:6px;border:1px solid #ffd700;" />`;
     }
     userHtml += `<div>${escapeHtml(promptTxt)}</div>`;
+    userHtml += `
+      <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end;">
+        <button type="button" class="swipe-arrow-btn btn-copy-user-msg" style="padding:2px 8px;font-size:0.68rem;">📋 Copy</button>
+        <button type="button" class="swipe-arrow-btn btn-resend-user-msg" style="padding:2px 8px;font-size:0.68rem;">🔄 Resend</button>
+      </div>`;
     userBubble.innerHTML = userHtml;
+    const copyUserBtn = userBubble.querySelector(".btn-copy-user-msg");
+    const resendUserBtn = userBubble.querySelector(".btn-resend-user-msg");
+    if (copyUserBtn) {
+      copyUserBtn.addEventListener("click", () => {
+        navigator.clipboard && navigator.clipboard.writeText(promptTxt);
+        showToast("Copied message!", "success");
+      });
+    }
+    if (resendUserBtn) {
+      resendUserBtn.addEventListener("click", () => sendAiChatMessage(promptTxt));
+    }
     chatBox.appendChild(userBubble);
 
     const thinkingBubble = document.createElement("div");
@@ -1834,16 +1843,14 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
           })),
           model: chosenMod,
           provider: chosenProv,
-          scan_id: state.activeScan ? state.activeScan.scan_id : null
+          scan_id: null
         });
       } catch (_) {
-        const tgt = state.activeScan ? state.activeScan.target : cleanTarget(document.getElementById("global-target-input").value);
-        const clientAi = buildClientAnalysis(tgt, (state.activeScan && state.activeScan.outputs) || {}, (state.activeScan && state.activeScan.severities) || {});
         res = {
-          reply: clientAi.analysis_markdown,
+          reply: "⚠️ Could not reach the cloud AI provider right now. Please check your internet connection or tap 🔄 Resend.",
           model: chosenMod,
-          provider: "BaDR ArGuS Beginner Security Tutor",
-          latency_ms: 15
+          provider: "Offline Notice",
+          latency_ms: 10
         };
       }
     }
@@ -1853,16 +1860,26 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     const ttsModelLabel = isArabicReply ? "playai-tts-arabic (AR)" : "playai-tts (EN)";
     thinkingBubble.innerHTML = `
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
-        <span style="font-size:0.72rem;color:#38bdf8;font-family:var(--font-mono);">
-          [${escapeHtml(res.provider)} · ${escapeHtml(res.model)} · ${res.latency_ms || 120}ms]
+        <span style="font-size:0.70rem;color:#ffd700;font-family:var(--font-mono);">
+          [${escapeHtml(res.provider)} · ${escapeHtml(res.model)}]
         </span>
-        <button class="swipe-arrow-btn btn-inline-voice-note" style="padding:2px 8px;font-size:0.70rem;border-color:rgba(16,185,129,0.5);color:#6ee7b7;">
-          🔊 Voice Note (${ttsModelLabel})
-        </button>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <button type="button" class="swipe-arrow-btn btn-copy-bot-msg" style="padding:2px 8px;font-size:0.68rem;">📋 Copy</button>
+          <button type="button" class="swipe-arrow-btn btn-inline-voice-note" style="padding:2px 8px;font-size:0.68rem;border-color:rgba(16,185,129,0.5);color:#6ee7b7;">
+            🔊 Voice Note (${ttsModelLabel})
+          </button>
+        </div>
       </div>
       <div class="ai-voice-note-slot"></div>
       ${renderMarkdown(res.reply)}
     `;
+    const copyBotBtn = thinkingBubble.querySelector(".btn-copy-bot-msg");
+    if (copyBotBtn) {
+      copyBotBtn.addEventListener("click", () => {
+        navigator.clipboard && navigator.clipboard.writeText(res.reply || "");
+        showToast("Copied AI reply!", "success");
+      });
+    }
     const inlineVoiceBtn = thinkingBubble.querySelector(".btn-inline-voice-note");
     const voiceSlot = thinkingBubble.querySelector(".ai-voice-note-slot");
     if (inlineVoiceBtn) {
