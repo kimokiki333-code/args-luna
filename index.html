@@ -2,54 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#06080e" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>BaDR ArGuS scanner — aragos Android BaDR version</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>BaDR ArGuS scanner — 151 Cybersecurity &amp; OSINT Suite</title>
+  <meta name="description" content="BaDR ArGuS scanner: 151 Recon, Network, Web &amp; Threat Intelligence Modules with Thinking AI Reasoning and Cloud API Vault." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/css/aragos.css" />
-  <style id="aragos-core-styles">
+  <style id="badr-embedded-v53-css">
+/* ==========================================================================
+   BaDR ArGuS scanner — OPPO F9 Edition (4GB RAM / 64GB ROM Optimized)
+   Kotlin Material 3 Dark Theme + Luxury Gold Title & Glassmorphism UI
+   Zero 3D/2D Map Overhead · 151 Standalone Scan Tools · Cloud API Key Vault
+   ========================================================================== */
+
 :root {
-  /* 1st Design Original Pure Obsidian Black & Shiny Metallic Gold Palette */
-  --bg-deep: #050608;
-  --bg-obsidian: #050608;
-  --glass-bg: rgba(10, 12, 18, 0.92);
-  --glass-bg-elevated: rgba(15, 18, 26, 0.96);
-  --glass-bg-hover: rgba(22, 26, 38, 0.98);
-  --glass-border: rgba(255, 215, 0, 0.26);
-  --glass-border-bright: rgba(255, 215, 0, 0.62);
-  --glass-highlight: inset 0 1px 0 0 rgba(255, 215, 0, 0.18);
-  --glass-shadow: 0 14px 36px rgba(0, 0, 0, 0.85);
+  /* Regular Obsidian Dark Theme Background Palette */
+  --bg-obsidian: #07090e;
+  --bg-surface: #0d111a;
+  --bg-card: rgba(16, 21, 32, 0.82);
+  --bg-card-elevated: rgba(22, 28, 42, 0.90);
+  --bg-input: rgba(9, 12, 20, 0.92);
 
-  --gold: #ffd700;
-  --gold-bright: #ffe55c;
-  --gold-soft: rgba(255, 215, 0, 0.14);
-  --amber: #f59e0b;
-  --amber-soft: rgba(245, 158, 11, 0.16);
-  --cyan: #ffd700;
-  --cyan-soft: rgba(255, 215, 0, 0.14);
-  --violet: #d97706;
-  --violet-soft: rgba(217, 119, 6, 0.16);
+  /* Luxury Gold Accent Palette (BaDR ArGuS scanner Signature) */
+  --gold-bright: #ffd700;
+  --gold-light: #ffe57f;
+  --gold-primary: #f59e0b;
+  --gold-deep: #d97706;
+  --gold-glow: rgba(255, 215, 0, 0.24);
+  --gold-border: rgba(255, 215, 0, 0.34);
+
+  /* Status & Secondary Accents */
+  --cyan: #f59e0b;
   --emerald: #10b981;
-  --emerald-soft: rgba(16, 185, 129, 0.16);
-  --rose: #ef4444;
-  --rose-soft: rgba(239, 68, 68, 0.18);
+  --amber: #fbbf24;
+  --rose: #f43f5e;
+  --violet: #a855f7;
 
+  /* Typography Colors */
   --text-primary: #f8fafc;
-  --text-secondary: #d4d8e2;
-  --text-muted: #94a3b8;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
 
-  /* Clean Standard Typography (No Comic Font) */
-  --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  /* Glassmorphism Borders & Shadows */
+  --glass-border: rgba(255, 215, 0, 0.16);
+  --glass-border-subtle: rgba(255, 255, 255, 0.08);
+  --shadow-glass: 0 12px 32px rgba(0, 0, 0, 0.65);
+
+  /* Fonts */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-*, *::before, *::after {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -58,606 +64,1194 @@
 
 html, body {
   width: 100%;
-  max-width: 100vw;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  background-color: #050608;
+  background-color: var(--bg-obsidian);
+  /* Regular Dark Theme Background with subtle radial gold ambient light (0 GPU/RAM map overhead) */
   background-image:
-    radial-gradient(circle at 18% 12%, rgba(255, 215, 0, 0.10), transparent 40%),
-    radial-gradient(circle at 82% 20%, rgba(245, 158, 11, 0.08), transparent 45%),
-    linear-gradient(180deg, #040507 0%, #090b10 55%, #040507 100%);
+    radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.10) 0%, transparent 55%),
+    radial-gradient(circle at 90% 90%, rgba(217, 119, 6, 0.06) 0%, transparent 45%),
+    linear-gradient(180deg, #07090e 0%, #0b0f19 50%, #07090e 100%);
   background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 14px;
-  line-height: 1.48;
+  line-height: 1.5;
   overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* Global Dark & Gold Reset for All Buttons, Inputs & Selects (Never White!) */
-button, input, select, textarea {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  background-color: #0b0e15;
-  border: 1px solid rgba(255, 215, 0, 0.32);
-  border-radius: 10px;
-  max-width: 100%;
+/* Hide any legacy map canvas completely */
+#aragos-webgl-canvas,
+.bg-vignette {
+  display: none !important;
 }
 
-button {
-  cursor: pointer;
-}
-
-h1, h2, h3, h4,
-.brand-title,
-.gold-app-title,
-.section-title,
-.sev-badge,
-.gold-subtitle-badge,
-.swipe-dot-pill,
-.swipe-arrow-btn,
-.report-subtab-btn,
-.btn-primary-glow,
-.btn-beast,
-.btn-omni-151,
-.btn-secondary-glass,
-.mobile-nav-item,
-.mobile-tab-btn {
-  font-family: var(--font-display);
-}
-
-/* Core Black & Shiny Gold Glass Panels */
-.glass-panel {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.glass-panel-elevated {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  background: var(--glass-bg-elevated);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 215, 0, 0.38);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
-  border-radius: 14px;
-}
-
-/* Shiny Metallic Gold Title */
+/* Gold Metallic Title Effect for "BaDR ArGuS scanner" */
 .gold-app-title {
   font-family: var(--font-display);
   font-weight: 800;
-  letter-spacing: 0.4px;
-  background: linear-gradient(95deg, #fff6b7 0%, #ffd700 45%, #f59e0b 80%, #fff1a8 100%);
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #fff3b0 0%, #ffd700 40%, #f59e0b 75%, #fde047 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.25));
-  word-break: break-word;
+  text-shadow: 0 2px 18px rgba(255, 215, 0, 0.22);
 }
 
 .gold-subtitle-badge {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 3px 10px;
+  gap: 6px;
+  padding: 2px 9px;
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(245, 158, 11, 0.12));
-  border: 1px solid rgba(255, 215, 0, 0.55);
-  color: #ffd700;
-  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
   font-weight: 700;
-  letter-spacing: 0.3px;
-  text-decoration: none;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.16);
+  color: #fde68a;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.35);
 }
 
-/* App Shell Layout — Desktop 2-col, Mobile 100% Full-Width Block (Zero Left Gap!) */
+/* App Shell Layout (OPPO F9 Mobile-First + Desktop Responsive) */
 .app-shell {
-  position: relative;
-  z-index: 2;
   display: grid;
-  grid-template-columns: 245px minmax(0, 1fr);
-  gap: 14px;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
+  grid-template-columns: 260px 1fr;
   min-height: 100vh;
-  padding: 12px 12px 92px;
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 16px;
+  padding: 14px;
 }
 
+/* Glassmorphism Containers */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: 18px;
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-panel-elevated {
+  background: var(--bg-card-elevated);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Sidebar (Desktop) */
 .sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 16px 12px;
-  height: calc(100vh - 24px);
+  padding: 18px 14px;
+  height: calc(100vh - 28px);
   position: sticky;
-  top: 12px;
-  overflow-y: auto;
+  top: 14px;
+  border-color: rgba(255, 215, 0, 0.22);
 }
 
 .brand-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 4px 6px 12px;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.18);
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.16);
 }
 
 .brand-orb {
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(15, 18, 26, 0.95));
-  border: 1.5px solid #ffd700;
-  box-shadow: 0 0 16px rgba(255, 215, 0, 0.25);
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: radial-gradient(circle at 30% 30%, #ffe57f, #f59e0b 55%, #78350f 100%);
+  border: 1px solid rgba(255, 215, 0, 0.65);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #07090e;
   flex-shrink: 0;
 }
 
 .nav-section-label {
-  font-size: 0.68rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
   text-transform: uppercase;
-  letter-spacing: 1.1px;
-  color: #ffd700;
-  margin: 12px 6px 6px;
+  letter-spacing: 0.1em;
+  color: #fbbf24;
+  margin: 14px 8px 6px;
 }
 
 .nav-list {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  list-style: none;
 }
 
 .nav-btn {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 11px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--text-secondary);
-  font-size: 0.84rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
   font-weight: 600;
-  text-align: left;
+  cursor: pointer;
   transition: all 0.18s ease;
+}
+
+.nav-btn:hover {
+  color: #fff;
+  background: rgba(255, 215, 0, 0.07);
+}
+
+.nav-btn.active {
+  color: #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.16), rgba(217, 119, 6, 0.08));
+  border-color: rgba(255, 215, 0, 0.38);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.12);
 }
 
 .nav-btn-left {
   display: flex;
   align-items: center;
-  gap: 9px;
-}
-
-.nav-btn:hover,
-.nav-btn.active {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.20), rgba(245, 158, 11, 0.08));
-  color: #ffd700;
-  border-color: rgba(255, 215, 0, 0.65);
-  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.14);
+  gap: 10px;
 }
 
 .nav-badge {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  font-weight: 700;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(255, 215, 0, 0.15);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(255, 215, 0, 0.16);
   color: #ffd700;
-  border: 1px solid rgba(255, 215, 0, 0.45);
+  border: 1px solid rgba(255, 215, 0, 0.32);
 }
 
-/* Main Workspace Container (Both class names supported) */
-.main-workspace,
-.workspace-main {
+/* Main Workspace */
+.main-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* Top Gold Header Banner & Target Bar */
+.top-hud-bar {
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 215, 0, 0.28);
+  background: linear-gradient(180deg, rgba(20, 25, 38, 0.94) 0%, rgba(12, 16, 26, 0.92) 100%);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  overflow-x: hidden;
 }
 
-.top-hud-bar {
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border-color: rgba(255, 215, 0, 0.42);
-}
-
-.top-repo-ribbon,
-.top-repo-banner {
+.badr-hero-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.10), rgba(10, 12, 18, 0.95));
-  border: 1px solid rgba(255, 215, 0, 0.38);
-  text-decoration: none;
-  color: var(--text-primary);
   flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.16);
 }
 
-/* Swipe Pager Bar */
-.swipe-pager-bar {
+.badr-hero-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badr-hero-title {
+  font-size: 1.48rem;
+  line-height: 1.15;
+}
+
+.apk-install-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
-  padding: 6px 8px;
-  border-radius: 12px;
-  background: rgba(5, 6, 8, 0.92);
-  border: 1px solid rgba(255, 215, 0, 0.24);
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(16, 185, 129, 0.10));
+  border: 1px solid rgba(255, 215, 0, 0.42);
 }
 
-.swipe-dots {
-  display: flex;
+.btn-gold-apk {
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
-  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 100%);
+  color: #07090e;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.84rem;
+  text-decoration: none;
+  border: 1px solid #fef08a;
+  box-shadow: 0 4px 18px rgba(255, 215, 0, 0.32);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-gold-apk:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(255, 215, 0, 0.46);
+}
+
+/* Search Mode Pills (Domain, IP, Username, Person Name, Email, Extel Date Search) */
+.osint-mode-bar {
+  display: flex;
+  gap: 6px;
   overflow-x: auto;
-  min-width: 0;
+  padding-bottom: 2px;
   scrollbar-width: none;
 }
-.swipe-dots::-webkit-scrollbar {
+.osint-mode-bar::-webkit-scrollbar {
   display: none;
 }
 
-.swipe-dot-pill {
+.osint-mode-btn {
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: rgba(10, 14, 24, 0.85);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+}
+
+.osint-mode-btn.active {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(245, 158, 11, 0.14));
+  color: #ffd700;
+  border-color: rgba(255, 215, 0, 0.55);
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.18);
+}
+
+/* Extel Date Row */
+.extel-date-row {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(10, 14, 24, 0.90);
+  border: 1px solid rgba(255, 215, 0, 0.32);
+}
+.extel-date-row.visible {
+  display: flex;
+}
+
+.extel-date-input {
+  background: rgba(5, 8, 15, 0.92);
+  color: #fff;
+  border: 1px solid rgba(255, 215, 0, 0.30);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+
+/* Target Input Bar */
+.target-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-input);
+  border: 1px solid rgba(255, 215, 0, 0.32);
+  border-radius: 14px;
+  padding: 6px 10px;
+  flex: 1;
+}
+
+.target-prefix {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #ffd700;
+  padding-left: 4px;
+  white-space: nowrap;
+}
+
+.target-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  min-width: 120px;
+}
+
+/* Buttons & Chips */
+.btn-primary-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 215, 0, 0.65);
+  background: linear-gradient(135deg, #ffd700 0%, #d97706 100%);
+  color: #07090e;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.28);
+  transition: all 0.16s ease;
+}
+
+.btn-primary-glow:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.42);
+}
+
+.btn-primary-glow:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.btn-secondary-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  background: rgba(15, 20, 32, 0.85);
+  color: #fde68a;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-secondary-glass:hover {
+  background: rgba(255, 215, 0, 0.14);
+  border-color: rgba(255, 215, 0, 0.48);
+}
+
+.chip-btn {
   padding: 5px 10px;
   border-radius: 999px;
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-  background: #0c0f16;
   border: 1px solid rgba(255, 215, 0, 0.22);
-  white-space: nowrap;
-  flex-shrink: 0;
+  background: rgba(12, 16, 26, 0.85);
+  color: #cbd5e1;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
 }
 
-.swipe-dot-pill.active {
-  background: linear-gradient(135deg, #ffd700, #f59e0b);
-  color: #050608;
-  border-color: #ffd700;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.45);
-}
-
-.swipe-arrow-btn {
-  padding: 5px 10px;
-  border-radius: 9px;
-  background: rgba(255, 215, 0, 0.12);
-  border: 1px solid rgba(255, 215, 0, 0.45);
+.chip-btn:hover {
   color: #ffd700;
-  font-size: 0.74rem;
-  font-weight: 700;
-  white-space: nowrap;
-  flex-shrink: 0;
+  border-color: #ffd700;
+}
+
+.glass-select {
+  background: rgba(10, 14, 24, 0.92);
+  color: #fde68a;
+  border: 1px solid rgba(255, 215, 0, 0.28);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  outline: none;
 }
 
 /* View Panes */
 .view-pane {
   display: none;
   flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
+  gap: 14px;
 }
-
 .view-pane.active {
   display: flex;
 }
 
-/* Buttons — Black & Shiny Gold */
-.btn-primary-glow {
-  height: 40px;
-  padding: 0 14px;
-  border-radius: 10px;
-  border: 1px solid #ffd700;
-  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 100%);
-  color: #050608;
-  font-weight: 800;
-  font-size: 0.84rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.30);
-}
-
-.btn-beast,
-.btn-omni-151 {
-  width: 100%;
-  min-height: 44px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 1.5px solid #ffd700;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22) 0%, rgba(245, 158, 11, 0.16) 50%, rgba(10, 12, 18, 0.96) 100%);
-  color: #ffd700;
-  font-weight: 800;
-  font-size: 0.85rem;
+/* Confidence & Non-Guarantee Disclaimer Banner */
+.confidence-disclaimer-banner {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.20);
-}
-
-.btn-secondary-glass {
-  height: 36px;
-  padding: 0 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 215, 0, 0.35);
-  background: #0d1018;
-  color: #f8fafc;
-  font-size: 0.78rem;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.btn-secondary-glass:hover,
-.btn-secondary-glass.active {
-  border-color: #ffd700;
-  background: rgba(255, 215, 0, 0.16);
-  color: #ffd700;
-}
-
-/* Search Mode Bar & Buttons (.osint-mode-bar / .osint-mode-btn) */
-.osint-mode-bar {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 6px;
-  width: 100%;
-}
-
-.osint-mode-btn {
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: #0b0e15;
-  border: 1px solid rgba(255, 215, 0, 0.28);
-  color: var(--text-secondary);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.osint-mode-btn.active {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.24), rgba(245, 158, 11, 0.14));
-  border-color: #ffd700;
-  color: #ffd700;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.22);
-}
-
-/* Extel Date Row (Hidden unless Keyword + Date mode is selected!) */
-.extel-date-row {
-  display: none;
-  align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 12px;
   flex-wrap: wrap;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: #090b10;
-  border: 1px solid rgba(255, 215, 0, 0.28);
+  padding: 10px 14px;
+  border-radius: 13px;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.14), rgba(16, 185, 129, 0.10));
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  font-size: 0.76rem;
+  color: #fef3c7;
 }
 
-.extel-date-row.visible {
-  display: flex;
-}
-
-.extel-date-input {
-  padding: 5px 8px;
-  border-radius: 8px;
-  background: #0f131d;
-  border: 1px solid rgba(255, 215, 0, 0.38);
-  color: #ffffff;
-  font-size: 0.78rem;
-}
-
-/* Target Input Group (.target-input-group & .target-input-wrapper) */
-.target-input-group,
-.target-input-wrapper {
-  flex: 1 1 210px;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  background: #080a0f;
-  border: 1.5px solid rgba(255, 215, 0, 0.50);
-  border-radius: 11px;
-  padding: 0 10px;
-  height: 42px;
-}
-
-.target-prefix {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #ffd700;
-  margin-right: 8px;
-  padding-right: 8px;
-  border-right: 1px solid rgba(255, 215, 0, 0.25);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.target-input {
-  flex: 1;
-  min-width: 0;
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #ffffff;
-  font-size: 0.90rem;
-  font-weight: 700;
-}
-
-/* Quick Sweep 4-Button Grid (.quick-sweep-grid / .sweep-btn) */
-.quick-sweep-grid {
+/* SVG Visual Telemetry Board */
+.svg-telemetry-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
 }
 
-.sweep-btn {
-  padding: 10px 8px;
-  border-radius: 11px;
-  background: linear-gradient(145deg, #0d1018, #080a10);
-  border: 1px solid rgba(255, 215, 0, 0.34);
-  color: #f8fafc;
+.svg-gauge-card {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(10, 14, 24, 0.86);
+  border: 1px solid rgba(255, 215, 0, 0.18);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  text-align: center;
-  min-width: 0;
+  position: relative;
 }
 
-.sweep-btn:hover {
-  border-color: #ffd700;
-  background: rgba(255, 215, 0, 0.14);
-}
-
-.glass-select {
-  height: 38px;
-  padding: 0 10px;
-  border-radius: 10px;
-  background: #0b0e15;
-  border: 1px solid rgba(255, 215, 0, 0.40);
-  color: #ffd700;
-  font-size: 0.80rem;
-  font-weight: 700;
-  outline: none;
-  max-width: 100%;
-}
-
-.chip-btn,
-.filter-pill {
-  padding: 5px 10px;
+.svg-gauge-title {
+  font-family: var(--font-display);
   font-size: 0.76rem;
   font-weight: 700;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 215, 0, 0.34);
-  background: rgba(255, 215, 0, 0.08);
-  color: #fef08a;
-  cursor: pointer;
+  color: #ffd700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  align-self: flex-start;
 }
 
-.chip-btn:hover,
-.filter-pill.active {
-  border-color: #ffd700;
-  background: #ffd700;
-  color: #050608;
-}
-
-/* 3-Tier Summary Grid (.three-tier-summary-grid & .threat-tier-grid) */
-.three-tier-summary-grid,
-.threat-tier-grid {
+/* Unabbreviated Scan Cards Grid (Full Titles & Full Descriptions) */
+.clear-scan-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 10px;
-  width: 100%;
+  max-height: 440px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
-.tier-box,
-.threat-tier-card {
-  padding: 12px;
-  border-radius: 14px;
+.clear-scan-card {
+  padding: 12px 14px;
+  border-radius: 13px;
+  background: rgba(10, 14, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-width: 0;
+  justify-content: space-between;
+  gap: 7px;
+  transition: border-color 0.16s ease, background 0.16s ease;
   cursor: pointer;
 }
 
-.tier-box.tier-clear,
-.threat-tier-card.tier-green {
-  background: linear-gradient(145deg, rgba(16, 185, 129, 0.16), rgba(8, 12, 16, 0.95));
-  border: 1.5px solid rgba(16, 185, 129, 0.55);
+.clear-scan-card:hover {
+  border-color: rgba(255, 215, 0, 0.35);
 }
 
-.tier-box.tier-medium,
-.threat-tier-card.tier-yellow {
-  background: linear-gradient(145deg, rgba(245, 158, 11, 0.18), rgba(16, 12, 8, 0.95));
-  border: 1.5px solid rgba(245, 158, 11, 0.58);
+.clear-scan-card.selected {
+  border-color: #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(14, 20, 34, 0.92));
 }
 
-.tier-box.tier-threat,
-.threat-tier-card.tier-red {
-  background: linear-gradient(145deg, rgba(239, 68, 68, 0.20), rgba(18, 8, 12, 0.95));
-  border: 1.5px solid rgba(239, 68, 68, 0.62);
-}
-
-.tier-count {
+.clear-scan-card-title {
   font-family: var(--font-display);
-  font-size: 1.55rem;
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: 0.90rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  white-space: normal;
 }
 
-.tier-label {
-  font-size: 0.78rem;
-  font-weight: 800;
+.clear-scan-card-desc {
+  font-size: 0.76rem;
+  color: #cbd5e1;
+  line-height: 1.42;
+  white-space: normal;
 }
 
-.tier-sub {
-  font-size: 0.72rem;
-  color: var(--text-secondary);
+.mod-num-pill {
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  font-weight: 700;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.14);
+  border: 1px solid rgba(255, 215, 0, 0.30);
 }
 
-/* Self-IP Strip & Startup Pop-Up Modal */
-.self-ip-hud-card {
-  padding: 11px 13px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(14, 17, 24, 0.96), rgba(8, 10, 15, 0.98));
-  border: 1px solid rgba(255, 215, 0, 0.42);
+/* Visual Finding Cards */
+.visual-telemetry-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 10px;
+}
+
+.visual-finding-card {
+  padding: 13px 15px;
+  border-radius: 13px;
+  background: rgba(10, 14, 24, 0.90);
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* Severity Badges */
+.sev-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+.sev-OK {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.38);
+}
+.sev-INFO {
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.36);
+}
+.sev-WARN {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.42);
+}
+.sev-ALERT {
+  background: rgba(244, 63, 94, 0.18);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.45);
+}
+
+/* Workspace Split & Tabs */
+.workspace-split {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 14px;
+}
+
+.panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.14);
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffd700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tab-pill, .filter-pill {
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: rgba(10, 14, 24, 0.85);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  cursor: pointer;
+}
+
+.tab-pill.active, .filter-pill.active {
+  color: #07090e;
+  background: linear-gradient(135deg, #ffd700, #f59e0b);
+  border-color: #fde047;
+  font-weight: 700;
+}
+
+.quick-sweep-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 12px 16px 4px;
+}
+
+.sweep-btn {
+  padding: 9px 10px;
+  border-radius: 11px;
+  background: rgba(10, 14, 24, 0.85);
+  border: 1px solid rgba(255, 215, 0, 0.22);
+  color: #fde68a;
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+}
+.sweep-btn:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: #ffd700;
+}
+
+/* Arsenal 151 Grid */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.module-card {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.16);
+}
+
+.module-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.module-card-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.module-card-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.module-tag {
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Multi-Provider Cloud API Key Vault Grid */
+.vault-provider-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  gap: 12px;
+}
+
+.vault-provider-card {
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(10, 14, 24, 0.90);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vault-provider-card.active-provider {
+  border-color: #ffd700;
+  box-shadow: 0 0 22px rgba(255, 215, 0, 0.15);
+}
+
+/* AI Chat & Models */
+.ai-hub-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 14px;
+}
+
+.model-card {
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: rgba(10, 14, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  cursor: pointer;
+}
+.model-card.active {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.10);
+}
+
+.chat-messages {
+  padding: 14px;
+  max-height: 430px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-bubble {
+  padding: 11px 14px;
+  border-radius: 13px;
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+.chat-bubble.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(217, 119, 6, 0.18));
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  color: #fff;
+  max-width: 85%;
+}
+.chat-bubble.assistant {
+  align-self: flex-start;
+  background: rgba(10, 14, 24, 0.90);
+  border: 1px solid rgba(255, 215, 0, 0.20);
+  color: #e2e8f0;
   width: 100%;
 }
 
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.terminal-output {
+  background: #05070c;
+  color: #fde68a;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.20);
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+/* OPPO F9 Bottom Thumb-Zone Navigation Bar */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(8, 11, 18, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 215, 0, 0.32);
+  z-index: 9999;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 6px env(safe-area-inset-bottom, 0px);
+}
+
+.mobile-nav-item {
+  flex: 1;
+  height: 52px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.mobile-nav-item .m-icon {
+  font-size: 1.15rem;
+}
+
+.mobile-nav-item.active {
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.13);
+}
+
+/* OPPO F9 (1080x2340 / 360dp width) & Mobile Responsive Rules */
+@media (max-width: 1024px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    padding: 8px 8px 82px;
+  }
+  .sidebar {
+    display: none !important;
+  }
+  .mobile-bottom-nav {
+    display: flex !important;
+  }
+  .workspace-split,
+  .ai-hub-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .badr-hero-title {
+    font-size: 1.25rem;
+  }
+}
+
+
+
+/* ============================================================================
+   BaDR ArGuS v5.3 UPGRADES ON TOP OF 1ST VERSION (14f09e5)
+   - High-Contrast Gold Scrollbars (Vertical & Horizontal)
+   - Numbered Section Indicator + Go Back Bar
+   - Dropdown Pickers (<select>) for Scan Modes, Report Views & 151 Tools
+   - Wrapped 2-Column Mode Grid (Zero Hidden Horizontal Swipe Strips)
+   - Mobile-Fitted Raw Report & Rich Multi-Vector Visual Cards
+   - Thinking Model Visible Reasoning Box (.ai-reasoning-box)
+   ============================================================================ */
+
+/* Visible High-Contrast Gold Scrollbars on All Report, Tool & Chat Containers */
+.terminal-output::-webkit-scrollbar,
+.clear-scan-list::-webkit-scrollbar,
+.chat-messages::-webkit-scrollbar,
+#dashboard-findings-list::-webkit-scrollbar,
+#dashboard-ai-analysis::-webkit-scrollbar,
+.self-ip-modal-card::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  display: block !important;
+}
+
+.terminal-output::-webkit-scrollbar-track,
+.clear-scan-list::-webkit-scrollbar-track,
+.chat-messages::-webkit-scrollbar-track,
+#dashboard-findings-list::-webkit-scrollbar-track,
+#dashboard-ai-analysis::-webkit-scrollbar-track,
+.self-ip-modal-card::-webkit-scrollbar-track {
+  background: rgba(7, 9, 14, 0.96);
+  border-left: 1px solid rgba(255, 215, 0, 0.30);
+  border-radius: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb,
+.clear-scan-list::-webkit-scrollbar-thumb,
+.chat-messages::-webkit-scrollbar-thumb,
+#dashboard-findings-list::-webkit-scrollbar-thumb,
+#dashboard-ai-analysis::-webkit-scrollbar-thumb,
+.self-ip-modal-card::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffd700 0%, #f59e0b 55%, #d97706 100%);
+  border-radius: 8px;
+  border: 2px solid #07090e;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.45);
+}
+
+.terminal-output {
+  scrollbar-width: auto !important;
+  scrollbar-color: #ffd700 #07090e !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  overflow-y: scroll !important;
+  overflow-x: auto !important;
+  max-height: 460px;
+  padding: 14px;
+  font-size: 0.78rem;
+  line-height: 1.58;
+  border: 1.5px solid rgba(255, 215, 0, 0.38);
+  border-radius: 12px;
+  background: rgba(5, 7, 12, 0.96);
+  color: #e2e8f0;
+  position: relative;
+}
+
+.terminal-output.expanded-full {
+  max-height: none !important;
+  overflow-y: visible !important;
+}
+
+/* Scroll Indicator Notice Bar above & below Raw Report */
+.scroll-notice-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.16), rgba(245, 158, 11, 0.08));
+  border: 1px solid rgba(255, 215, 0, 0.42);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #fde68a;
+}
+
+/* Top Section Number, Title, Go Back Button & Section Jump Dropdown Bar */
+.section-nav-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(16, 21, 32, 0.96), rgba(10, 14, 22, 0.98));
+  border: 1.5px solid rgba(255, 215, 0, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.btn-go-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: 10px;
+  background: rgba(255, 215, 0, 0.14);
+  border: 1.5px solid #ffd700;
+  color: #ffd700;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-go-back:hover {
+  background: #ffd700;
+  color: #07090e;
+}
+
+.section-number-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd700, #f59e0b);
+  color: #07090e;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* Dropdown Picker Row (Model-Style Select + Launch/OK Button) */
+.dropdown-picker-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 11px 13px;
+  border-radius: 12px;
+  background: rgba(9, 12, 20, 0.94);
+  border: 1.5px solid rgba(255, 215, 0, 0.40);
+}
+
+.dropdown-picker-label {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #ffd700;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.dropdown-picker-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gold-dropdown-select {
+  flex: 1 1 210px;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: #07090e;
+  border: 1.5px solid #ffd700;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.83rem;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+}
+
+.gold-dropdown-select:focus {
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.25);
+}
+
+/* Make .osint-mode-bar wrap into a clean visible 2-column or 3-column grid (NEVER hidden off-screen!) */
+.osint-mode-bar {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px !important;
+  padding: 8px 12px !important;
+  overflow-x: visible !important;
+  white-space: normal !important;
+}
+
+.osint-mode-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  white-space: normal !important;
+  line-height: 1.25;
+  padding: 8px 6px !important;
+  font-size: 0.75rem !important;
+}
+
+/* Rich Multi-Vector Visual Card (Replaces 10-word summary cards) */
+.visual-finding-card {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(11, 15, 25, 0.94);
+  border: 1.5px solid rgba(255, 215, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.visual-vector-table {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: rgba(5, 7, 12, 0.90);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+
+.visual-vector-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+}
+
+.visual-vector-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.visual-beginner-box {
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.28);
+  font-size: 0.78rem;
+  color: #fde68a;
+  line-height: 1.48;
+}
+
+.visual-fix-box {
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.10);
+  border: 1px dashed rgba(16, 185, 129, 0.45);
+  font-size: 0.78rem;
+  color: #d1fae5;
+  line-height: 1.48;
+}
+
+/* Thinking Model Visible Reasoning Box in Cloud AI */
+.ai-reasoning-box {
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.12), rgba(15, 23, 42, 0.95));
+  border: 1.5px solid rgba(255, 215, 0, 0.48);
+  overflow: hidden;
+}
+
+.ai-reasoning-box summary {
+  padding: 9px 12px;
+  font-family: var(--font-display);
+  font-size: 0.80rem;
+  font-weight: 800;
+  color: #ffd700;
+  cursor: pointer;
+  background: rgba(255, 215, 0, 0.10);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  user-select: none;
+}
+
+.ai-reasoning-content {
+  padding: 11px 13px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: #fef08a;
+  border-top: 1px solid rgba(255, 215, 0, 0.24);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.chat-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+}
+
+.chat-mini-btn {
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 215, 0, 0.32);
+  background: rgba(255, 215, 0, 0.10);
+  color: #ffd700;
+  font-size: 0.70rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.chat-mini-btn:hover {
+  background: #ffd700;
+  color: #07090e;
+}
+
+/* Startup Self-IP Modal (Fits 360px Screen Cleanly) */
 .self-ip-modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background: rgba(3, 4, 7, 0.86);
+  z-index: 10000;
+  background: rgba(4, 6, 11, 0.86);
   backdrop-filter: blur(10px);
   display: none;
   align-items: center;
@@ -671,19 +1265,19 @@ h1, h2, h3, h4,
 
 .self-ip-modal-card {
   width: 100%;
-  max-width: 600px;
+  max-width: 560px;
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 18px;
   padding: 16px;
-  background: linear-gradient(160deg, #0b0e15, #06080c);
+  background: linear-gradient(160deg, #0d111a, #07090e);
   border: 1.5px solid #ffd700;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.92), 0 0 28px rgba(255, 215, 0, 0.22);
 }
 
 .self-ip-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 10px;
 }
@@ -691,462 +1285,88 @@ h1, h2, h3, h4,
 .self-ip-cell {
   padding: 9px 10px;
   border-radius: 10px;
-  background: #080a0f;
-  border: 1px solid rgba(255, 215, 0, 0.22);
+  background: rgba(7, 9, 14, 0.92);
+  border: 1px solid rgba(255, 215, 0, 0.24);
   min-width: 0;
 }
 
 .self-ip-cell-label {
-  font-size: 0.68rem;
+  font-size: 0.67rem;
   color: #ffd700;
   text-transform: uppercase;
   font-weight: 700;
 }
 
 .self-ip-cell-val {
-  font-size: 0.84rem;
+  font-size: 0.80rem;
   color: #ffffff;
   font-weight: 700;
   margin-top: 2px;
   word-break: break-word;
 }
 
-/* Report Sub-Tabs Bar */
-.report-subtabs-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  overflow-x: auto;
-  padding: 6px;
-  border-radius: 12px;
-  background: #080a0f;
-  border: 1px solid rgba(255, 215, 0, 0.25);
-  width: 100%;
-}
-
-.report-subtab-btn {
-  padding: 7px 11px;
-  border-radius: 9px;
-  border: 1px solid rgba(255, 215, 0, 0.22);
-  background: #0d1018;
-  color: var(--text-secondary);
-  font-size: 0.76rem;
-  font-weight: 700;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.report-subtab-btn.active {
-  background: linear-gradient(135deg, #ffd700, #f59e0b);
-  color: #050608;
-  border-color: #ffd700;
-}
-
-/* Beginner Explanation & Fix Cards */
-.beginner-fix-card {
-  padding: 13px;
-  border-radius: 14px;
-  background: #090c12;
-  border: 1px solid rgba(255, 215, 0, 0.22);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  min-width: 0;
-  word-break: break-word;
-}
-
-.how-to-fix-box,
-.fix-steps-box {
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(16, 185, 129, 0.10);
-  border: 1px dashed rgba(16, 185, 129, 0.48);
-  color: #d1fae5;
-  font-size: 0.82rem;
-  word-break: break-word;
-}
-
-/* 151 Scanners List */
-.clear-scan-grid,
-.clear-scan-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 8px;
-  max-height: 62vh;
-  overflow-y: auto;
-  padding: 4px;
-}
-
-.clear-scan-card,
-.clear-scan-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: #0a0d14;
-  border: 1px solid rgba(255, 215, 0, 0.18);
-  cursor: pointer;
-  min-width: 0;
-}
-
-.clear-scan-card.selected,
-.clear-scan-item.selected {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.16), rgba(15, 18, 26, 0.96));
-  border-color: #ffd700;
-}
-
-.clear-scan-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #ffd700;
-  flex-wrap: wrap;
-}
-
-.clear-scan-desc {
-  font-size: 0.76rem;
-  color: var(--text-secondary);
-}
-
-/* Visual Telemetry & SVG Gauges */
-.svg-telemetry-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-  width: 100%;
-}
-
-.svg-gauge-card {
-  padding: 12px;
-  border-radius: 12px;
-  background: #090b10;
-  border: 1px solid rgba(255, 215, 0, 0.24);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.svg-gauge-title {
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #ffd700;
-  text-align: center;
-}
-
-.visual-telemetry-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 10px;
-  width: 100%;
-}
-
-.telemetry-finding-card {
-  padding: 12px;
-  border-radius: 12px;
-  background: #090c12;
-  border: 1px solid rgba(255, 215, 0, 0.22);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-  word-break: break-word;
-}
-
-/* Severity Badges */
-.sev-badge {
-  font-size: 0.68rem;
-  font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.sev-HIGH, .sev-CRITICAL, .sev-THREAT, .sev-ALERT {
-  background: rgba(239, 68, 68, 0.20);
-  color: #fca5a5;
-  border: 1px solid rgba(239, 68, 68, 0.55);
-}
-
-.sev-MEDIUM, .sev-WARN {
-  background: rgba(245, 158, 11, 0.20);
-  color: #fde68a;
-  border: 1px solid rgba(245, 158, 11, 0.55);
-}
-
-.sev-OK, .sev-LOW, .sev-INFO, .sev-CLEAR {
-  background: rgba(16, 185, 129, 0.20);
-  color: #6ee7b7;
-  border: 1px solid rgba(16, 185, 129, 0.55);
-}
-
-/* Terminal Output */
-.terminal-stream,
-.terminal-output {
-  padding: 12px;
-  border-radius: 12px;
-  background: #040507;
-  border: 1px solid rgba(255, 215, 0, 0.28);
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  line-height: 1.5;
-  color: #e2e8f0;
-  max-height: 460px;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  word-break: break-word;
-  width: 100%;
-}
-
-/* Multi-Key Vault */
-.add-key-builder-card {
-  padding: 14px;
-  border-radius: 14px;
-  background: linear-gradient(145deg, rgba(255, 215, 0, 0.10), rgba(10, 12, 18, 0.96));
-  border: 1.5px solid rgba(255, 215, 0, 0.45);
-}
-
-.saved-key-pill-card {
-  padding: 10px 12px;
-  border-radius: 11px;
-  background: #090c12;
-  border: 1px solid rgba(255, 215, 0, 0.28);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.vault-provider-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
-}
-
-.vault-provider-card {
-  padding: 13px;
-  border-radius: 14px;
-  background: #090c12;
-  border: 1px solid rgba(255, 215, 0, 0.22);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.vault-provider-card.active-provider {
-  border-color: #ffd700;
-  box-shadow: 0 0 18px rgba(255, 215, 0, 0.20);
-}
-
-/* AI Chat & Hub Grid (.ai-hub-grid / .chat-messages / .chat-bubble / .chat-input-row) */
-.ai-hub-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
-  width: 100%;
-}
-
-.ai-chat-stream,
-.chat-messages {
-  max-height: 420px;
-  overflow-y: auto;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: #06080c;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 215, 0, 0.26);
-  width: 100%;
-}
-
-.chat-msg,
-.chat-bubble {
-  padding: 10px 13px;
-  border-radius: 12px;
-  font-size: 0.86rem;
-  line-height: 1.5;
-  max-width: 95%;
-  word-break: break-word;
-}
-
-.chat-msg.user,
-.chat-bubble.user {
-  align-self: flex-end;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(245, 158, 11, 0.14));
-  border: 1px solid #ffd700;
-  color: #ffffff;
-}
-
-.chat-msg.assistant,
-.chat-bubble.assistant {
-  align-self: flex-start;
-  background: #0c0f17;
-  border: 1px solid rgba(255, 215, 0, 0.24);
-  color: var(--text-primary);
-}
-
-.chat-input-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.ai-markdown {
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
-
-/* ============================================================================
-   PURE BLACK & SHINY METALLIC GOLD FIXED BOTTOM NAVIGATION BAR
-   ============================================================================ */
-.mobile-bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100vw;
-  height: 64px;
-  background: linear-gradient(180deg, #0a0c12 0%, #040507 100%);
-  border-top: 1.5px solid #ffd700;
-  display: none;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 3px;
-  z-index: 9000;
-  padding: 4px 4px env(safe-area-inset-bottom, 4px);
-  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.92), 0 -1px 14px rgba(255, 215, 0, 0.22);
-}
-
-.mobile-nav-item,
-.mobile-tab-btn {
-  background: #080a0f !important;
-  border: 1px solid rgba(255, 215, 0, 0.20) !important;
-  border-radius: 10px;
-  color: #cbd5e1 !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  padding: 4px 2px;
-  font-size: 0.62rem;
-  font-weight: 700;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transition: all 0.18s ease;
-}
-
-.mobile-nav-item svg,
-.mobile-tab-btn svg,
-.cyber-svg-icon {
-  width: 20px !important;
-  height: 20px !important;
-  flex-shrink: 0;
-}
-
-.mobile-nav-item.active,
-.mobile-tab-btn.active {
-  background: linear-gradient(180deg, rgba(255, 215, 0, 0.26), rgba(245, 158, 11, 0.12)) !important;
-  border-color: #ffd700 !important;
-  color: #ffd700 !important;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-
-/* Overview Grids */
-.overview-pillars-grid,
-.pro-scanner-spotlight-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 10px;
-  width: 100%;
-}
-
-.overview-pillar-card,
-.pro-spotlight-item {
-  padding: 12px;
-  border-radius: 12px;
-  background: #090c12;
-  border: 1px solid rgba(255, 215, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  min-width: 0;
-}
-
-/* Responsive Breakpoints — Strict Full-Screen Fit on Mobile (360px OPPO F9) */
-@media (max-width: 1024px) {
-  .app-shell {
-    display: block;
+/* Mobile 360px Full-Width Fit (Like the Startup Popup — Zero Side Gaps or Overflows) */
+@media (max-width: 768px) {
+  html, body {
     width: 100%;
     max-width: 100vw;
-    padding: 8px 8px 76px;
-    margin: 0;
+    overflow-x: hidden;
   }
-  .sidebar {
-    display: none !important;
+  .app-shell {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 8px 8px 82px !important;
+    margin: 0 !important;
+    gap: 10px !important;
   }
-  .mobile-bottom-nav {
-    display: grid;
-  }
-  .three-tier-summary-grid,
-  .threat-tier-grid {
-    grid-template-columns: 1fr;
+  .main-workspace,
+  .view-pane,
+  .glass-panel,
+  .workspace-split {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
   .osint-mode-bar {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
-  .ai-hub-grid {
-    grid-template-columns: 1fr;
+  #dashboard-findings-list {
+    grid-template-columns: 1fr !important;
+  }
+  .self-ip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-</style>
+  </style>
 </head>
 <body>
-  <!-- ==================== STARTUP SELF-IP / WHOIS / GEO / THREAT POP-UP MODAL ==================== -->
+  <!-- ==================== STARTUP LIVE CONNECTION & SELF-IP WHOIS MODAL ==================== -->
   <div class="self-ip-modal-backdrop" id="self-ip-modal">
     <div class="self-ip-modal-card">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(255,215,0,0.28);padding-bottom:10px;">
         <div style="display:flex;align-items:center;gap:10px;">
-          <div class="brand-orb" style="width:40px;height:40px;">
-            <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-              <circle cx="16" cy="16" r="13" stroke="#ffd700" stroke-width="2" stroke-dasharray="5 3"/>
-              <circle cx="16" cy="16" r="7" stroke="#00f0ff" stroke-width="2"/>
-              <circle cx="16" cy="16" r="2.5" fill="#10b981"/>
-            </svg>
-          </div>
+          <div class="brand-orb" style="width:40px;height:40px;">🛡️</div>
           <div>
-            <div class="gold-app-title" style="font-size:1.15rem;">Live Connection &amp; Self-IP WHOIS Report</div>
-            <div style="font-size:0.76rem;color:#38bdf8;font-weight:700;">Auto-Detected by aragos Android BaDR version</div>
+            <div class="gold-app-title" style="font-size:1.08rem;">Live Connection &amp; Self-IP WHOIS Report</div>
+            <div style="font-size:0.74rem;color:#ffd700;font-weight:700;">BaDR ArGuS scanner · Startup Network Check</div>
           </div>
         </div>
-        <button class="swipe-arrow-btn" id="btn-close-self-ip-modal" title="Close Pop-up">✕ Close</button>
+        <button class="btn-secondary-glass" id="btn-close-self-ip-modal" style="height:32px;padding:0 10px;font-size:0.76rem;">✕ Close</button>
       </div>
 
-      <!-- Threat Tier Banner inside Popup -->
-      <div id="self-ip-modal-status-banner" style="margin-top:12px;padding:11px 14px;border-radius:13px;background:rgba(16,185,129,0.15);border:1.5px solid #10b981;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+      <div id="self-ip-modal-status-banner" style="margin-top:12px;padding:11px 14px;border-radius:12px;background:rgba(16,185,129,0.14);border:1.5px solid #10b981;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
         <div>
-          <div style="font-size:0.95rem;font-weight:800;color:#34d399;" id="modal-self-threat-title">🟢 CONNECTION STATUS: CLEAR / NORMAL</div>
-          <div style="font-size:0.80rem;color:#e2e8f0;margin-top:2px;" id="modal-self-threat-desc">
-            Detecting your live public IP address, DNS resolver, WHOIS network owner, and Tor/VPN/Proxy flags...
+          <div style="font-size:0.90rem;font-weight:800;color:#34d399;" id="modal-self-threat-title">🟢 CONNECTION STATUS: CLEAR / NORMAL</div>
+          <div style="font-size:0.76rem;color:#e2e8f0;margin-top:2px;" id="modal-self-threat-desc">
+            Detecting your live public IP address, DNS resolver, WHOIS network owner, and Tor/VPN/Proxy status...
           </div>
         </div>
         <span class="sev-badge sev-OK" id="modal-self-threat-badge">CLEAR</span>
       </div>
 
-      <!-- Telemetry Grid -->
       <div class="self-ip-grid">
         <div class="self-ip-cell">
           <div class="self-ip-cell-label">Detected IP Address</div>
@@ -1174,15 +1394,15 @@ h1, h2, h3, h4,
         </div>
       </div>
 
-      <div style="margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.28);font-size:0.80rem;color:#fde68a;" id="modal-self-beginner-note">
-        💡 <strong>Beginner Tip:</strong> Your public IP address is like the return address on an envelope that your internet provider assigns to your Wi-Fi or mobile connection so websites know where to send pages back.
+      <div style="margin-top:12px;padding:9px 12px;border-radius:10px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.28);font-size:0.76rem;color:#fde68a;" id="modal-self-beginner-note">
+        💡 <strong>Beginner Tip:</strong> Your public IP address is assigned by your internet provider so websites know where to send data back. Tap below to audit your own IP or continue to the scanner.
       </div>
 
       <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-        <button class="btn-secondary-glass" id="btn-scan-my-ip-now">
-          🔍 Scan My IP with All 151 Scanners
+        <button class="btn-secondary-glass" id="btn-scan-my-ip-now" style="height:38px;font-size:0.78rem;">
+          🔍 Scan My IP with All 151 Tools
         </button>
-        <button class="btn-primary-glow" id="btn-dismiss-self-ip-modal">
+        <button class="btn-primary-glow" id="btn-dismiss-self-ip-modal" style="height:38px;font-size:0.80rem;">
           ✓ Continue to Scanner
         </button>
       </div>
@@ -1193,959 +1413,786 @@ h1, h2, h3, h4,
     <!-- ==================== SIDEBAR NAVIGATION (DESKTOP) ==================== -->
     <aside class="glass-panel sidebar">
       <div>
-        <a href="https://github.com/kimokiki333-code/args-luna" target="_blank" rel="noopener" class="brand-header" style="text-decoration:none;">
-          <div class="brand-orb">
-            <svg viewBox="0 0 36 36" width="28" height="28" fill="none">
-              <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.12)"/>
-              <circle cx="18" cy="18" r="6" stroke="#00f0ff" stroke-width="2"/>
-              <circle cx="18" cy="18" r="2.5" fill="#ffd700"/>
-            </svg>
+        <div class="brand-header">
+          <div class="brand-orb">🛡️</div>
+          <div class="brand-title-group">
+            <h1 class="gold-app-title">BaDR ArGuS scanner</h1>
+            <p class="gold-subtitle-badge">151 RECON &amp; OSINT SUITE</p>
           </div>
-          <div>
-            <div class="gold-app-title" style="font-size:1.14rem;">BaDR ArGuS scanner</div>
-            <div class="gold-subtitle-badge" style="margin-top:3px;">aragos Android BaDR version ↗</div>
-          </div>
-        </a>
+        </div>
 
-        <div class="nav-section-label">Swipe or Tap Sections</div>
+        <div class="nav-section-label">5 Main Sections</div>
         <div class="nav-list">
           <button class="nav-btn active" data-view="dashboard">
-            <span class="nav-btn-left">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polygon points="12,2 22,7 22,17 12,22 2,17 2,7" stroke="#ffd700" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#00f0ff" stroke-width="1.8"/><circle cx="12" cy="12" r="1.5" fill="#ffd700"/></svg>
-              <span>Scanner Hub</span>
-            </span>
+            <span class="nav-btn-left"><span class="nav-icon">🛡️</span><span>1. Scanner &amp; Report</span></span>
             <span class="nav-badge" id="kpi-total-modules">151</span>
           </button>
           <button class="nav-btn" data-view="modules">
-            <span class="nav-btn-left">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#ffd700" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="2" stroke="#00f0ff" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="2" stroke="#00f0ff" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.8"/></svg>
-              <span>151 Scanners</span>
-            </span>
+            <span class="nav-btn-left"><span class="nav-icon">⚡</span><span>2. 151 Scan Tools</span></span>
             <span class="nav-badge" id="nav-badge-modules">151</span>
           </button>
-          <button class="nav-btn" data-view="reports">
-            <span class="nav-btn-left">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z" stroke="#ffd700" stroke-width="1.8"/><path d="M8 15l3-3 2 2 4-4" stroke="#10b981" stroke-width="2" stroke-linecap="round"/></svg>
-              <span>Reports &amp; Fixes</span>
-            </span>
-            <span class="nav-badge" id="nav-badge-scans">3-Tier</span>
-          </button>
           <button class="nav-btn" data-view="settings">
-            <span class="nav-btn-left">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="15" r="4" stroke="#ffd700" stroke-width="1.8"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2" stroke="#00f0ff" stroke-width="1.8" stroke-linecap="round"/></svg>
-              <span>Cloud Key Vault</span>
-            </span>
-            <span class="nav-badge">+KEY</span>
+            <span class="nav-btn-left"><span class="nav-icon">🔑</span><span>3. API Key Vault</span></span>
+            <span class="nav-badge">KEYS</span>
           </button>
           <button class="nav-btn" data-view="ai">
-            <span class="nav-btn-left">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#00f0ff" stroke-width="1.8" stroke-dasharray="4 2"/><path d="M8 12h8M12 8v8" stroke="#ffd700" stroke-width="1.8" stroke-linecap="round"/></svg>
-              <span>AI Fix Tutor &amp; Shell</span>
-            </span>
-            <span class="nav-badge">FREE</span>
+            <span class="nav-btn-left"><span class="nav-icon">🧠</span><span>4. Thinking AI</span></span>
+            <span class="nav-badge">REASON</span>
+          </button>
+          <button class="nav-btn" data-view="reports">
+            <span class="nav-btn-left"><span class="nav-icon">📊</span><span>5. Saved Reports</span></span>
+            <span class="nav-badge" id="nav-badge-scans">0</span>
           </button>
           <button class="nav-btn" data-view="about">
-            <span class="nav-btn-left">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.5 3.4 10.7 8 12 4.6-1.3 8-6.5 8-12V6l-8-4z" stroke="#ffd700" stroke-width="1.8"/><path d="M12 11v5m0-8h.01" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/></svg>
-              <span>About Aragos BaDR</span>
-            </span>
+            <span class="nav-btn-left"><span class="nav-icon">ℹ️</span><span>About BaDR ArGuS</span></span>
             <span class="nav-badge">INFO</span>
           </button>
         </div>
       </div>
 
-      <div class="glass-panel-elevated" style="padding:12px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <span style="font-size:0.78rem;font-weight:800;color:#ffd700;">Cloud AI Engine</span>
-          <span class="sev-badge sev-OK">0 MB RAM</span>
+      <div class="ollama-ram-card">
+        <div class="ram-header">
+          <span class="ram-badge">☁️ CLOUD AI VAULT</span>
+          <span class="status-dot" id="ollama-status-dot"></span>
         </div>
-        <div style="font-size:0.76rem;color:var(--text-secondary);margin-top:5px;">
-          Model: <strong style="color:#fff;font-family:var(--font-mono);" id="sidebar-active-model">deepseek-v3.1:671b-cloud</strong>
-        </div>
-        <div style="font-size:0.72rem;color:#34d399;margin-top:3px;" id="sidebar-ollama-mode">
-          Multi-Key Pool + Keyless Free AI Ready
+        <div class="ram-details">
+          <div>Active: <strong style="color:#fff" id="sidebar-active-model">deepseek-r1-distill-llama-70b</strong></div>
+          <div style="margin-top:3px">Mode: <span id="sidebar-ollama-mode" style="color:#34d399">Thinking Reasoning Ready (0 MB RAM)</span></div>
         </div>
       </div>
     </aside>
 
     <!-- ==================== MAIN WORKSPACE ==================== -->
-    <main class="main-workspace" id="main-swipe-container">
-      <!-- ==================== VERY TOP TITLE LINKING TO GITHUB REPO ==================== -->
-      <header class="glass-panel top-hud-bar">
-        <a
-          href="https://github.com/kimokiki333-code/args-luna"
-          target="_blank"
-          rel="noopener"
-          class="top-repo-ribbon"
-          id="top-github-repo-link"
-          title="Tap to open the official GitHub Repository: aragos Android BaDR version"
-        >
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div class="brand-orb" style="width:42px;height:42px;">
-              <svg viewBox="0 0 36 36" width="28" height="28" fill="none">
-                <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="#ffd700" stroke-width="2.2" fill="rgba(255,215,0,0.15)"/>
-                <circle cx="18" cy="18" r="7" stroke="#00f0ff" stroke-width="2"/>
-                <path d="M14 18l3 3 5-6" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <h1 class="gold-app-title" style="font-size:1.35rem;line-height:1.15;">BaDR ArGuS scanner</h1>
-              <div style="font-size:0.80rem;color:#38bdf8;font-weight:700;margin-top:2px;">
-                ★ <strong>aragos Android BaDR version</strong> · Tap Title to Open Official GitHub Repo ↗
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-            <span class="gold-subtitle-badge">GitHub Repo ↗</span>
-          </div>
-        </a>
+    <main class="main-workspace">
+      <!-- ==================== SECTION INDICATOR BAR: NUMBER, TITLE, GO BACK & SECTION DROPDOWN ==================== -->
+      <div class="section-nav-header-bar" id="active-section-banner">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="btn-go-back" id="btn-section-back" title="Go Back to Previous Section">
+            ◀ Go Back
+          </button>
+          <span class="section-number-badge" id="active-section-number">SECTION 1 OF 5</span>
+          <strong style="font-family:var(--font-display);font-size:0.92rem;color:#ffffff;" id="active-section-title">
+            🛡️ Scanner (Domain, IP, Username, Person, Email &amp; Live Report)
+          </strong>
+        </div>
 
-        <!-- LIVE IN-APP OVER-THE-AIR (OTA) UPDATER STRIP (Replaces old OPPO F9 top download banner!) -->
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 12px;border-radius:11px;background:rgba(16,185,129,0.10);border:1px solid rgba(16,185,129,0.35);flex-wrap:wrap;">
-          <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:#d1fae5;">
-            <span class="sev-badge sev-OK" id="ota-version-badge">v4.8 OTA READY</span>
-            <span id="ota-status-label"><strong>In-App Live Updater Active:</strong> Future UI &amp; scanner updates install automatically without reinstalling the APK!</span>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+          <label for="section-jump-select" style="font-size:0.74rem;color:#ffd700;font-weight:700;">Switch Section:</label>
+          <select id="section-jump-select" class="glass-select" style="height:34px;border-color:#ffd700;color:#ffd700;font-weight:700;">
+            <option value="dashboard">1. 🛡️ Scanner &amp; Live Report</option>
+            <option value="modules">2. ⚡ All 151 Scan Tools</option>
+            <option value="settings">3. 🔑 API Key Vault</option>
+            <option value="ai">4. 🧠 Thinking AI (With Reasoning)</option>
+            <option value="reports">5. 📊 Saved Reports &amp; Fixes</option>
+            <option value="about">6. ℹ️ About BaDR ArGuS</option>
+          </select>
+          <button type="button" class="btn-secondary-glass" id="btn-open-self-ip-modal" style="height:34px;padding:0 10px;font-size:0.74rem;border-color:rgba(255,215,0,0.45);color:#ffd700;">
+            🛰️ My IP: <span id="strip-self-ip">Detecting...</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ==================== TOP COMMAND & TARGET SEARCH BAR ==================== -->
+      <header class="glass-panel top-hud-bar" style="flex-direction:column;align-items:stretch;gap:10px;padding:14px;">
+        <!-- Brand Header Row -->
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,215,0,0.22);padding-bottom:10px;">
+          <a href="https://github.com/kimokiki333-code/args-luna" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+            <div class="brand-orb" style="width:38px;height:38px;font-size:1.15rem;">🛡️</div>
+            <div>
+              <div class="gold-app-title" style="font-size:1.18rem;">BaDR ArGuS scanner</div>
+              <div style="font-size:0.72rem;color:#ffd700;font-family:var(--font-mono);">151 Cybersecurity &amp; OSINT Suite · Black &amp; Gold Edition</div>
+            </div>
+          </a>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <select id="hud-model-select" class="glass-select" title="Active Cloud AI Model (0 MB Phone Storage)" style="height:36px;">
+              <option value="deepseek-r1-distill-llama-70b">🧠 DeepSeek R1 70B (Thinking + Reasoning)</option>
+              <option value="deepseek-v4-pro">🐋 DeepSeek-V4-Pro (1M · Reasoning)</option>
+              <option value="deepseek-flash">🐋 DeepSeek-V4.1-Flash (1M · Fast)</option>
+              <option value="magistral-medium-2509">🧠 Mistral Magistral 2509 (Reasoning)</option>
+              <option value="mistral-medium-2508">⚡ Mistral Medium 2508 (375K TPM)</option>
+              <option value="llama-3.3-70b-versatile">🚀 Groq Llama 3.3 70B</option>
+              <option value="llama-3.1-8b-instant">🚀 Groq Llama 3.1 8B Instant</option>
+              <option value="deepseek-v3.1:671b-cloud">☁️ Ollama: deepseek-v3.1:671b-cloud</option>
+              <option value="meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b:free</option>
+              <option value="gemini-2.5-flash">✨ Gemini 2.5 Flash</option>
+            </select>
           </div>
-          <button class="swipe-arrow-btn" id="btn-check-live-ota" style="height:28px;font-size:0.74rem;border-color:rgba(16,185,129,0.55);color:#6ee7b7;">
-            🔄 Check &amp; Apply Live Update
+        </div>
+
+        <!-- DROPDOWN PICKER #1: CHOOSE SCAN TYPE / SEARCH CATEGORY (No Hidden Swiping!) -->
+        <div class="dropdown-picker-box">
+          <div class="dropdown-picker-label">
+            <span>📂 1. CHOOSE SCAN TYPE / SEARCH CATEGORY (Dropdown Menu — All Options Visible):</span>
+            <span style="color:#34d399;font-family:var(--font-mono);font-size:0.72rem;">Pick Category + Press Launch</span>
+          </div>
+          <div class="dropdown-picker-controls">
+            <select id="osint-mode-select" class="gold-dropdown-select" aria-label="Choose Scan Category or Search Type">
+              <option value="domain">🌐 1. Domain / Website Scan (Run Selected Tools on Domain)</option>
+              <option value="full151">🚀 2. FULL 151 SCANNERS SWEEP (Run ALL 151 Tools on Target)</option>
+              <option value="ip">📍 3. IP Address &amp; Network Scan (Open Ports, WHOIS, Geo, ASN, Tor/VPN)</option>
+              <option value="username">👤 4. Username Search (Social Media, GitHub &amp; Developer Profiles)</option>
+              <option value="name">🪪 5. Person Name Search (Public Records, Directories &amp; Mentions)</option>
+              <option value="email">✉️ 6. Email Breach &amp; Mail Security Scan (MX, SPF, DMARC &amp; Leaks)</option>
+              <option value="extel">📅 7. Keyword / Word + Date Search (Filter Posts &amp; Archives by Date)</option>
+              <option value="suite_infra">🌐 8. Category Suite: Network, IP, Ports &amp; DNS (All 52 Tools)</option>
+              <option value="suite_web">🕸️ 9. Category Suite: Web App, SSL &amp; Headers (All 53 Tools)</option>
+              <option value="suite_sec">🛡️ 10. Category Suite: Security, Threat &amp; Breach (All 46 Tools)</option>
+            </select>
+            <button type="button" class="btn-primary-glow" id="btn-launch-dropdown-mode" style="height:40px;padding:0 16px;">
+              <span>▶</span><span>OK / Launch</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- All 6 Search Categories Visible in a Wrapped Grid (Zero Horizontal Scrolling Needed) -->
+        <div class="osint-mode-bar" id="osint-mode-bar">
+          <button type="button" class="osint-mode-btn active" data-osintmode="domain">🌐 Domain Scan</button>
+          <button type="button" class="osint-mode-btn" data-osintmode="ip">📍 IP Address Scan</button>
+          <button type="button" class="osint-mode-btn" data-osintmode="username">👤 Username Scan</button>
+          <button type="button" class="osint-mode-btn" data-osintmode="name">🪪 Person Scan</button>
+          <button type="button" class="osint-mode-btn" data-osintmode="email">✉️ Email Breach</button>
+          <button type="button" class="osint-mode-btn" data-osintmode="extel">📅 Word + Date</button>
+        </div>
+
+        <!-- Extel Date-Range Picker Row (Shown when Keyword + Date mode is active) -->
+        <div class="extel-date-row" id="extel-date-row">
+          <span style="font-size:0.74rem;color:var(--gold-bright);font-family:var(--font-mono);font-weight:700;">📅 DATE FILTER:</span>
+          <label style="font-size:0.72rem;color:var(--text-secondary);">From:</label>
+          <input type="date" id="extel-date-from" class="extel-date-input" value="2026-09-01" />
+          <label style="font-size:0.72rem;color:var(--text-secondary);">To:</label>
+          <input type="date" id="extel-date-to" class="extel-date-input" value="2026-10-20" />
+          <button type="button" class="btn-primary-glow" id="btn-run-extel-search" style="height:32px;padding:0 12px;font-size:0.75rem;">
+            🔍 Filter by Date
           </button>
         </div>
 
-        <!-- ANDROID LEFT / RIGHT SWIPE NAVIGATION BAR -->
-        <div class="swipe-pager-bar">
-          <button class="swipe-arrow-btn" id="btn-swipe-prev" title="Swipe Right / Previous Section">
-            ◀ Prev
-          </button>
-          <div class="swipe-dots" id="top-swipe-dots">
-            <button class="swipe-dot-pill active" data-view="dashboard">1. Overview &amp; Scanner</button>
-            <button class="swipe-dot-pill" data-view="modules">2. 151 Tools</button>
-            <button class="swipe-dot-pill" data-view="reports">3. Reports &amp; Fixes</button>
-            <button class="swipe-dot-pill" data-view="settings">4. Key Vault</button>
-            <button class="swipe-dot-pill" data-view="ai">5. AI Tutor</button>
-            <button class="swipe-dot-pill" data-view="about">6. About</button>
+        <!-- Target Input & Quick Scan Controls -->
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;width:100%;">
+          <div class="target-input-wrapper" style="flex:1 1 220px;">
+            <span class="target-prefix" id="target-input-prefix">TARGET //</span>
+            <input
+              type="text"
+              id="global-target-input"
+              class="target-input"
+              value="github.com"
+              placeholder="Enter domain, IP address, username, person, email, or keyword..."
+              autocomplete="off"
+            />
           </div>
-          <button class="swipe-arrow-btn" id="btn-swipe-next" title="Swipe Left / Next Section">
-            Next ▶
+
+          <button type="button" class="btn-primary-glow" id="btn-quick-scan">
+            <span>▶</span>
+            <span id="btn-quick-scan-label">Run ArGuS Scan</span>
+          </button>
+
+          <button type="button" class="btn-beast" id="btn-beast-mode" title="Run ALL 151 Scanners on Target">
+            <span>🚀</span>
+            <span>Full 151 Sweep</span>
           </button>
         </div>
       </header>
 
-      <!-- ==================== SECTION 1: PROJECT OVERVIEW & SCANNER HUB ==================== -->
+      <!-- ==================== SECTION 1: SCANNER & LIVE REPORT (EXACT 1ST-VERSION LAYOUT) ==================== -->
       <section class="view-pane active" id="view-dashboard">
-        <!-- 1ST PART: CONCISE PROJECT OVERVIEW, HOW IT RUNS, 3 CATEGORIES & ZERO-PAYWALL PRO SCANNERS -->
-        <div class="glass-panel" style="padding:16px;display:flex;flex-direction:column;gap:12px;border-color:rgba(0,240,255,0.38);">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-            <div>
-              <h2 class="gold-app-title" style="font-size:1.22rem;">
-                🛡️ What Is BaDR ArGuS (`aragos Android BaDR version`) &amp; How It Runs
-              </h2>
-              <div style="font-size:0.84rem;color:#7dd3fc;font-weight:700;margin-top:2px;">
-                151 Cybersecurity &amp; OSINT Scanners · 100% Unlocked Results · Zero Sign-Up Pop-Ups · 0 MB Local Phone RAM
-              </div>
-            </div>
-            <button class="btn-secondary-glass" id="btn-toggle-project-overview" style="height:32px;font-size:0.76rem;">
-              ▾ Hide / Show Overview
-            </button>
+        <!-- Quick Target Presets & Active Status Strip -->
+        <div class="glass-panel" style="padding:11px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+            <span style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);font-weight:700;">QUICK TARGETS:</span>
+            <button type="button" class="chip-btn" data-target="github.com">github.com</button>
+            <button type="button" class="chip-btn" data-target="cloudflare.com">cloudflare.com</button>
+            <button type="button" class="chip-btn" data-target="8.8.8.8">8.8.8.8 (IP)</button>
+            <button type="button" class="chip-btn" data-target="torvalds">torvalds (User)</button>
+            <button type="button" class="chip-btn" data-target="security@github.com">Email Test</button>
+            <button type="button" class="chip-btn" id="btn-use-my-ip-as-target">🎯 Use My IP</button>
           </div>
-
-          <div id="project-overview-body" style="display:flex;flex-direction:column;gap:12px;">
-            <!-- Why This Exists: No Sign-Up / Paywall Pop-Ups Hiding Your Scan Results -->
-            <div style="padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,rgba(0,240,255,0.12),rgba(139,92,246,0.14));border:1px solid rgba(0,240,255,0.38);font-size:0.88rem;color:#f8fafc;">
-              <strong style="color:#00f0ff;font-family:var(--font-display);">🚫 Why We Built This (Zero Paywall or Sign-Up Pop-Ups Hiding Results):</strong>
-              In many security websites and apps, you enter a domain or IP, wait for the scan to finish, and then <strong>a pop-up blocks or blurs your report demanding that you Sign Up, enter a credit card, or pay for a Pro subscription just to see the findings</strong>.
-              <br/>
-              <strong>BaDR ArGuS</strong> runs natively on your phone and web browser, executes all <strong>151 scanners</strong> concurrently, and gives you <strong>100% of the results, raw data, 3-Tier (Green / Yellow / Red) threat breakdown, and plain-English "How It Gets Fixed" steps immediately—with zero sign-up walls</strong>.
-            </div>
-
-            <!-- The 3 Main Categories (Concise Summary of the 151 Scanners) -->
-            <div class="overview-pillars-grid">
-              <div class="overview-pillar-card">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                  <strong style="color:#00f0ff;font-family:var(--font-display);font-size:0.92rem;">🌐 1. Network, IP &amp; DNS</strong>
-                  <span class="sev-badge sev-INFO">Modules #1–#52</span>
-                </div>
-                <p style="font-size:0.84rem;color:var(--text-secondary);">
-                  Scans live IPv4/IPv6 hosts, open TCP/UDP ports &amp; sockets, WHOIS/RDAP ownership, BGP/ASN routing, DNSSEC, Zone Transfer (`AXFR`), Reverse DNS, and SSH/SNMP banners.
-                </p>
-              </div>
-
-              <div class="overview-pillar-card" style="border-color:rgba(139,92,246,0.38);">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                  <strong style="color:#c4b5fd;font-family:var(--font-display);font-size:0.92rem;">🕸️ 2. Web, SSL/TLS &amp; APIs</strong>
-                  <span class="sev-badge sev-INFO">Modules #53–#101</span>
-                </div>
-                <p style="font-size:0.84rem;color:var(--text-secondary);">
-                  Audits SSL/TLS certificate chains &amp; cipher suites, hidden directories, CORS misconfigurations, GraphQL/Swagger API schemas, DOM XSS sinks, cookies, and CMS stacks.
-                </p>
-              </div>
-
-              <div class="overview-pillar-card" style="border-color:rgba(16,185,129,0.38);">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                  <strong style="color:#6ee7b7;font-family:var(--font-display);font-size:0.92rem;">🛡️ 3. Security &amp; Threat Intel</strong>
-                  <span class="sev-badge sev-OK">Modules #102–#151</span>
-                </div>
-                <p style="font-size:0.84rem;color:var(--text-secondary);">
-                  Detects Subdomain Takeovers, Breached Credentials &amp; Dark Web pastes, exposed <code>.env</code> / <code>.git</code> files, open S3/Cloud buckets, WAF rules, and Passive CVE vulnerabilities.
-                </p>
-              </div>
-            </div>
-
-            <!-- Spotlight on High-Value Scanners (Normally Locked Behind Subscriptions Elsewhere) -->
-            <div>
-              <div style="font-family:var(--font-display);font-size:0.84rem;font-weight:700;color:#fde047;margin-bottom:7px;">
-                💎 Key High-Value Scanners Included Free (Often Locked Behind Paid Subscriptions Elsewhere):
-              </div>
-              <div class="pro-scanner-spotlight-grid">
-                <div class="pro-spotlight-item">
-                  <strong style="color:#00f0ff;font-family:var(--font-display);font-size:0.84rem;">🔓 Open Ports, Sockets &amp; Banners (#9, #42, #44)</strong>
-                  <span style="font-size:0.80rem;color:var(--text-secondary);">Finds exposed router/server ports (21, 22, 80, 443, 3389, 8080) and explains how to close them.</span>
-                </div>
-                <div class="pro-spotlight-item">
-                  <strong style="color:#c4b5fd;font-family:var(--font-display);font-size:0.84rem;">🎯 Subdomain Takeover &amp; Shadowing (#117, #118, #142)</strong>
-                  <span style="font-size:0.80rem;color:var(--text-secondary);">Checks if forgotten subdomains point to unclaimed cloud hosts that attackers could hijack.</span>
-                </div>
-                <div class="pro-spotlight-item">
-                  <strong style="color:#fda4af;font-family:var(--font-display);font-size:0.84rem;">🕵️ Data Leaks, Breaches &amp; `.env`/`.git` (#104, #105, #121, #125)</strong>
-                  <span style="font-size:0.80rem;color:var(--text-secondary);">Checks for leaked credentials, dark web pastes, exposed <code>.env</code> secrets, and open S3/GCP buckets.</span>
-                </div>
-                <div class="pro-spotlight-item">
-                  <strong style="color:#6ee7b7;font-family:var(--font-display);font-size:0.84rem;">🛡️ Passive CVE Mapper, WAF &amp; SSL Labs (#106, #115, #140)</strong>
-                  <span style="font-size:0.80rem;color:var(--text-secondary);">Maps server versions to known CVEs, tests Firewall/WAF protection, and grades TLS security.</span>
-                </div>
-              </div>
-            </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:0.76rem;">
+            <span style="color:var(--text-secondary);">Active Target: <strong id="kpi-active-target" style="color:var(--gold-bright);font-family:var(--font-mono);">github.com</strong></span>
+            <span style="color:var(--text-secondary);">Cloud AI: <strong id="kpi-ai-model" style="color:#34d399;font-family:var(--font-mono);">deepseek-r1-distill-llama-70b</strong></span>
           </div>
         </div>
 
-        <!-- Live Detected Self-IP / WHOIS / DNS / Geo / Threat Strip -->
-        <div class="self-ip-hud-card" id="home-self-ip-strip">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span class="sev-badge sev-OK" id="strip-self-status-badge">🟢 CLEAR</span>
-            <div style="font-size:0.86rem;">
-              <strong>Detected Connection IP:</strong>
-              <code id="strip-self-ip" style="color:#ffd700;font-weight:800;margin:0 4px;">Detecting...</code>
-              · <span id="strip-self-geo" style="color:#38bdf8;font-weight:700;">Locating Geo &amp; WHOIS...</span>
-              · <span id="strip-self-anon" style="color:#a7f3d0;">Tor/VPN/Proxy: Checking...</span>
+        <!-- Split Workspace: Left/Top = 151 Scanners Selector, Right/Bottom = BaDR ArGuS Visual Telemetry & Dossier -->
+        <div class="workspace-split">
+          <!-- Left Panel: Clear 151 Scanners Selector + Dropdown Picker -->
+          <div class="glass-panel module-selector-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>⚡</span>
+                <span>Select Scanners (All 151 Tools)</span>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button type="button" class="chip-btn" id="btn-select-all-151" style="border-color:rgba(255,215,0,0.45);color:#ffd700;">
+                  ✓ All 151
+                </button>
+                <button type="button" class="chip-btn" id="btn-clear-selected-151">
+                  ✕ Clear
+                </button>
+                <button type="button" class="btn-primary-glow" id="btn-run-selected-batch" style="height:30px;padding:0 11px;font-size:0.75rem;">
+                  ▶ Run (<span id="selected-mod-count">3</span>)
+                </button>
+              </div>
             </div>
-          </div>
-          <div style="display:flex;gap:7px;flex-wrap:wrap;">
-            <button class="btn-secondary-glass" id="btn-open-self-ip-modal" style="height:32px;font-size:0.78rem;">
-              🛰️ View My IP &amp; WHOIS Popup
-            </button>
-            <button class="btn-secondary-glass" id="btn-use-my-ip-as-target" style="height:32px;font-size:0.78rem;">
-              🎯 Put My IP in Scanner
-            </button>
-          </div>
-        </div>
 
-        <!-- Target Search & Category Card -->
-        <div class="glass-panel" style="padding:15px;display:flex;flex-direction:column;gap:11px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-            <div style="font-size:1.0rem;font-weight:800;color:#ffd700;">
-              🎯 Target Search &amp; Multi-Category Recon
+            <!-- Dropdown Picker to Pick Any Single Tool (1 to 151) & Launch Immediately -->
+            <div style="padding:10px 12px;border-bottom:1px solid var(--border-glass);background:rgba(9,12,20,0.75);display:flex;flex-direction:column;gap:6px;">
+              <label for="dashboard-tool-dropdown" style="font-size:0.72rem;font-weight:700;color:#ffd700;">
+                🔽 Quick Tool Dropdown (Pick Any Scanner #1–#151 &amp; Press Run):
+              </label>
+              <div style="display:flex;gap:6px;">
+                <select id="dashboard-tool-dropdown" class="gold-dropdown-select" style="height:36px;font-size:0.78rem;"></select>
+                <button type="button" class="btn-primary-glow" id="btn-run-dropdown-tool" style="height:36px;padding:0 12px;font-size:0.76rem;">
+                  ▶ Run Tool
+                </button>
+              </div>
             </div>
-            <select id="hud-model-select" class="glass-select" title="Active Cloud AI Model (Auto-Selects Free Pool)">
-              <option value="deepseek-v3.1:671b-cloud">☁️ Ollama Free: deepseek-v3.1:671b-cloud</option>
-              <option value="deepseek-flash">🐋 DeepSeek-V4.1-Flash (1M · Text + Vision)</option>
-              <option value="deepseek-v4-pro">🐋 DeepSeek-V4-Pro (1M · Agentic Security)</option>
-              <option value="mistral-medium-2508">⚡ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
-              <option value="pixtral-large-2411">👁️ Mistral Vision: pixtral-large-2411 (124B)</option>
-              <option value="pixtral-12b-2409">👁️ Mistral Vision: pixtral-12b-2409 (Fast)</option>
-              <option value="mistral-ocr-latest">📄 Mistral OCR: mistral-ocr-latest</option>
-              <option value="voxtral-mini-latest">🎙️ Mistral Audio: voxtral-mini-latest</option>
-              <option value="devstral-2512">💻 Mistral Pool 7: devstral-2512 (1M TPM)</option>
-              <option value="mistral-large-2411">⚡ Mistral Pool 2: mistral-large-2411 (200B/mo)</option>
-              <option value="llama-3.1-8b-instant">🚀 Groq Free: llama-3.1-8b-instant (14.4K/day)</option>
-              <option value="meta-llama/llama-4-scout-17b-16e-instruct">👁️ Groq Vision: Llama-4 Scout 17B</option>
-              <option value="meta-llama/llama-4-maverick-17b-128e-instruct">👁️ Groq Vision: Llama-4 Maverick 17B</option>
-              <option value="whisper-large-v3-turbo">🎙️ Groq Voice Note STT: whisper-large-v3-turbo (EN/AR)</option>
-              <option value="whisper-large-v3">🎙️ Groq Voice Note STT: whisper-large-v3 (Max Accuracy EN/AR)</option>
-              <option value="playai-tts">🔊 Groq Voice Note TTS: playai-tts (English)</option>
-              <option value="playai-tts-arabic">🔊 Groq Voice Note TTS: playai-tts-arabic (Arabic)</option>
-              <option value="meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b:free</option>
-              <option value="gemini-2.0-flash">✨ Gemini Free: gemini-2.0-flash</option>
-              <option value="openai">🔓 Keyless Free AI (No Key Needed)</option>
-            </select>
-          </div>
 
-          <!-- 6 Search Modes -->
-          <div class="osint-mode-bar" id="osint-mode-bar">
-            <button class="osint-mode-btn active" data-osintmode="domain">🌐 Domain / Website</button>
-            <button class="osint-mode-btn" data-osintmode="ip">📍 IP, Ports &amp; DNS</button>
-            <button class="osint-mode-btn" data-osintmode="username">👤 Username</button>
-            <button class="osint-mode-btn" data-osintmode="name">🪪 Person Name</button>
-            <button class="osint-mode-btn" data-osintmode="email">✉️ Email Breach</button>
-            <button class="osint-mode-btn" data-osintmode="extel">📅 Keyword + Date</button>
-          </div>
+            <div class="quick-sweep-grid">
+              <button type="button" class="sweep-btn" data-sweep="full151">
+                <span class="sweep-btn-icon">🚀</span>
+                <div>
+                  <div class="sweep-btn-title" style="color:#ffd700;">All 151 Sweep</div>
+                  <div class="sweep-btn-sub">Every Tool (#1–#151)</div>
+                </div>
+              </button>
+              <button type="button" class="sweep-btn" data-sweep="infra">
+                <span class="sweep-btn-icon">🌐</span>
+                <div>
+                  <div class="sweep-btn-title">Network &amp; DNS</div>
+                  <div class="sweep-btn-sub">52 Infra Tools</div>
+                </div>
+              </button>
+              <button type="button" class="sweep-btn" data-sweep="web">
+                <span class="sweep-btn-icon">🕸️</span>
+                <div>
+                  <div class="sweep-btn-title">Web &amp; HTTP</div>
+                  <div class="sweep-btn-sub">53 Web Tools</div>
+                </div>
+              </button>
+              <button type="button" class="sweep-btn" data-sweep="sec">
+                <span class="sweep-btn-icon">🛡️</span>
+                <div>
+                  <div class="sweep-btn-title">Threat &amp; OSINT</div>
+                  <div class="sweep-btn-sub">46 Sec Tools</div>
+                </div>
+              </button>
+            </div>
 
-          <!-- Extel Date-Range Picker Row -->
-          <div class="extel-date-row" id="extel-date-row">
-            <span style="font-size:0.78rem;color:#ffd700;font-weight:800;">📅 DATE FILTER:</span>
-            <label style="font-size:0.76rem;color:var(--text-secondary);">From:</label>
-            <input type="date" id="extel-date-from" class="extel-date-input" value="2026-09-01" />
-            <label style="font-size:0.76rem;color:var(--text-secondary);">To:</label>
-            <input type="date" id="extel-date-to" class="extel-date-input" value="2026-10-20" />
-            <button class="btn-primary-glow" id="btn-run-extel-search" style="height:34px;padding:0 12px;font-size:0.78rem;">
-              🔍 Search Posts by Date
-            </button>
-          </div>
-
-          <!-- Main Target Input & Scan Button -->
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <div class="target-input-group">
-              <span class="target-prefix" id="target-input-prefix">TARGET //</span>
+            <div style="padding:10px 12px;border-bottom:1px solid var(--border-glass);">
               <input
                 type="text"
-                id="global-target-input"
+                id="dashboard-mod-search"
                 class="target-input"
-                value="github.com"
-                placeholder="Enter domain, IP address, email, username, or keyword..."
-                autocomplete="off"
+                placeholder="Filter 151 scanners by number, name, DNS, SSL, port..."
+                style="background:rgba(4,8,20,0.85);padding:8px 12px;border-radius:8px;border:1px solid var(--border-glass);width:100%;"
               />
             </div>
-            <button class="btn-primary-glow" id="btn-quick-scan">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polygon points="6,4 20,12 6,20" fill="#05070c"/></svg>
-              <span id="btn-quick-scan-label">Run Selected Scan</span>
-            </button>
+
+            <div class="clear-scan-list" id="dashboard-module-list"></div>
           </div>
 
-          <!-- HERO BUTTON: FULL 151 ALL-SCANNERS OMNI-SCAN -->
-          <button class="btn-omni-151" id="btn-beast-mode" title="Put this Domain, IP, or Email through ALL 151 Scanners at once!">
-            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-              <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke="#ffd700" stroke-width="2.2" fill="rgba(255,215,0,0.2)"/>
-              <path d="M15 7L9 15h5l-1 6 6-8h-5l1-6z" fill="#00f0ff"/>
-            </svg>
-            <span>🚀 FULL SCAN: Run ALL 151 Scanners Together (Domain / IP / Email / DNS)</span>
-          </button>
-
-          <!-- Expanded Multi-Scanner Category Suites (No longer limited to 3 or 6 scanners!) -->
-          <div class="quick-sweep-grid">
-            <button class="sweep-btn" data-sweep="full151">
-              <span>⚡</span>
-              <div>
-                <div style="color:#ffd700;font-weight:800;">Full 151 All-Scanners</div>
-                <div style="font-size:0.72rem;color:var(--text-secondary);">All 151 Tools Together</div>
+          <!-- Right Panel: BaDR ArGuS Visual Telemetry & Dossier (Exact 1st-Version Card + Dropdowns + Visible Gold Scrollbar) -->
+          <div class="glass-panel output-panel" id="telemetry-dossier-panel">
+            <!-- Confidence Scale & Probabilistic Disclaimer Banner -->
+            <div class="confidence-disclaimer-banner" id="confidence-disclaimer-banner">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                <span style="font-weight:700;color:var(--gold-bright);font-size:0.78rem;">
+                  ⚖️ ANALYTICAL CONFIDENCE (<span id="banner-confidence-pct">89%</span>) · 3-TIER STATUS:
+                  <span style="color:#34d399;margin-left:4px;">🟢 <span id="home-tier-green-count">1</span> OK</span> ·
+                  <span style="color:#fbbf24;">🟡 <span id="home-tier-yellow-count">2</span> WARN</span> ·
+                  <span style="color:#f87171;">🔴 <span id="home-tier-red-count">0</span> ALERT</span>
+                </span>
+                <span class="sev-badge sev-WARN">PROBABILISTIC INDICATOR</span>
               </div>
-            </button>
-            <button class="sweep-btn" data-sweep="infra">
-              <span>🌐</span>
-              <div>
-                <div style="color:#38bdf8;font-weight:800;">IP, Ports, Sockets &amp; DNS</div>
-                <div style="font-size:0.72rem;color:var(--text-secondary);">52 Network &amp; Infra Scanners</div>
-              </div>
-            </button>
-            <button class="sweep-btn" data-sweep="web">
-              <span>🕸️</span>
-              <div>
-                <div style="color:#34d399;font-weight:800;">Domain &amp; Web Deep Scan</div>
-                <div style="font-size:0.72rem;color:var(--text-secondary);">53 Web, SSL &amp; Header Scanners</div>
-              </div>
-            </button>
-            <button class="sweep-btn" data-sweep="sec">
-              <span>🛡️</span>
-              <div>
-                <div style="color:#f87171;font-weight:800;">Threat, CVE &amp; Breach Scan</div>
-                <div style="font-size:0.72rem;color:var(--text-secondary);">46 Security &amp; OSINT Scanners</div>
-              </div>
-            </button>
-          </div>
-
-          <!-- Quick Target Presets -->
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-              <span style="font-size:0.75rem;color:#fbbf24;font-weight:800;">QUICK TARGETS:</span>
-              <button class="chip-btn" data-target="github.com">github.com</button>
-              <button class="chip-btn" data-target="cloudflare.com">cloudflare.com</button>
-              <button class="chip-btn" data-target="8.8.8.8">8.8.8.8</button>
-              <button class="chip-btn" data-target="1.1.1.1">1.1.1.1</button>
-              <button class="chip-btn" data-target="example.com">example.com</button>
-            </div>
-            <div style="font-size:0.78rem;color:#fde68a;">
-              Target: <strong id="kpi-active-target" style="color:#ffd700;">github.com</strong> · AI: <strong id="kpi-ai-model" style="color:#34d399;">deepseek-v3.1:671b-cloud</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3-Tier Traffic-Light Overview Cards (Tap to Open Reports & How-To-Fix!) -->
-        <div class="glass-panel" style="padding:15px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-            <div>
-              <div style="font-size:1.0rem;font-weight:800;color:#ffd700;">🚦 3-Tier Scan Status Overview (Tap Any Box to View Report &amp; Fixes)</div>
-              <div style="font-size:0.78rem;color:var(--text-secondary);">
-                Green = Clear/Safe · Yellow = Medium Caution · Red = Under Threat (Open Ports, Sockets, or Missing Protections)
+              <div style="font-size:0.72rem;color:#cbd5e1;margin-top:3px;" id="banner-disclaimer-text">
+                All reconnaissance, OSINT, and security scan results are analytical confidence indicators. Nothing is 100% guaranteed.
               </div>
             </div>
-            <button class="btn-secondary-glass" id="btn-jump-to-reports" style="height:34px;font-size:0.80rem;">
-              📊 Open Full Reports &amp; Fixes ▶
-            </button>
-          </div>
 
-          <div class="three-tier-summary-grid">
-            <div class="tier-box tier-green" data-goto-report="beginner">
-              <div style="display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-weight:800;color:#34d399;">🟢 CLEAR / NO PROBLEM</span>
-                <span class="sev-badge sev-OK">SAFE</span>
-              </div>
-              <div class="tier-count" style="color:#34d399;" id="home-tier-green-count">2</div>
-              <div style="font-size:0.78rem;color:#d1fae5;">Healthy configs, valid TLS/DNS, no active exposure</div>
-            </div>
-
-            <div class="tier-box tier-yellow" data-goto-report="beginner">
-              <div style="display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-weight:800;color:#fbbf24;">🟡 MEDIUM CAUTION</span>
-                <span class="sev-badge sev-WARN">MEDIUM</span>
-              </div>
-              <div class="tier-count" style="color:#fbbf24;" id="home-tier-yellow-count">1</div>
-              <div style="font-size:0.78rem;color:#fef3c7;">Minor warnings, soft SPF/headers, or public WHOIS info</div>
-            </div>
-
-            <div class="tier-box tier-red" data-goto-report="beginner">
-              <div style="display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-weight:800;color:#f87171;">🔴 UNDER THREAT</span>
-                <span class="sev-badge sev-ALERT">FIX NEEDED</span>
-              </div>
-              <div class="tier-count" style="color:#f87171;" id="home-tier-red-count">0</div>
-              <div style="font-size:0.78rem;color:#fee2e2;">Open ports, sockets, errors, or exposed services</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SVG Visual Telemetry Board -->
-        <div class="svg-telemetry-grid" id="svg-telemetry-board">
-          <div class="svg-gauge-card">
-            <div class="svg-gauge-title">3-Tier Scan Breakdown</div>
-            <div id="svg-radial-fractions-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:132px;"></div>
-            <div id="svg-radial-legend" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:0.74rem;margin-top:4px;"></div>
-          </div>
-
-          <div class="svg-gauge-card">
-            <div class="svg-gauge-title">Confidence Scale (<span id="banner-confidence-pct">89%</span>)</div>
-            <div id="svg-confidence-gauge-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:124px;"></div>
-            <div style="font-size:0.73rem;color:#fde68a;text-align:center;margin-top:4px;" id="svg-confidence-caption">
-              Probabilistic Indicator · Nothing is 100% Guaranteed
-            </div>
-          </div>
-
-          <div class="svg-gauge-card">
-            <div class="svg-gauge-title">Live ArGuS Signal Pulse</div>
-            <div id="svg-pulse-wave-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:110px;"></div>
-            <div style="font-size:0.73rem;color:var(--text-secondary);text-align:center;margin-top:4px;" id="svg-pulse-caption">
-              Swipe Left ◀ or Right ▶ to Switch Sections
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SECTION 2: ALL 151 SCANNERS (DEDICATED SCROLL VIEW) ==================== -->
-      <section class="view-pane" id="view-modules">
-        <div class="glass-panel" style="padding:16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-            <div>
-              <h2 class="gold-app-title" style="font-size:1.3rem;">⚡ All 151 Scanners &amp; Multi-Selector</h2>
-              <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:2px;">
-                Scroll freely through all 151 scanners here without blocking other sections. Tap checkboxes to pick scanners or run all 151 at once!
-              </p>
-            </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn-secondary-glass" id="btn-select-all-151" style="height:36px;">
-                ✓ Select All 151
-              </button>
-              <button class="btn-secondary-glass" id="btn-clear-selected-151" style="height:36px;">
-                ✕ Clear Selection
-              </button>
-              <button class="btn-primary-glow" id="btn-run-selected-batch" style="height:36px;padding:0 14px;font-size:0.82rem;">
-                ▶ Run Selected (<span id="selected-mod-count">3</span>)
-              </button>
-            </div>
-          </div>
-
-          <!-- Section Filter Pills -->
-          <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;" id="arsenal-section-pills">
-            <button class="chip-btn filter-pill active" data-sec="all">All 151 Scanners</button>
-            <button class="chip-btn filter-pill" data-sec="Network & Infrastructure">🌐 IP, Ports &amp; Network (52)</button>
-            <button class="chip-btn filter-pill" data-sec="Web Application Analysis">🕸️ Domain &amp; Web App (53)</button>
-            <button class="chip-btn filter-pill" data-sec="Security & Threat Intelligence">🛡️ Security &amp; Threat (46)</button>
-            <button class="chip-btn filter-pill" data-sec="fav">⭐ Favorites</button>
-          </div>
-
-          <!-- Search & Tag Filter -->
-          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
-            <input
-              type="text"
-              id="dashboard-mod-search"
-              class="target-input"
-              placeholder="Search all 151 scanners by number (1–151), name, port, DNS, SSL, WHOIS..."
-              style="background:rgba(6,9,16,0.92);padding:9px 14px;border-radius:11px;border:1px solid rgba(255,215,0,0.32);flex:1;"
-            />
-            <select id="arsenal-tag-select" class="glass-select">
-              <option value="all">All Capabilities</option>
-              <option value="dns">DNS &amp; Domain</option>
-              <option value="ssl">SSL / TLS Crypto</option>
-              <option value="http">HTTP / Web</option>
-              <option value="osint">OSINT &amp; Identity</option>
-              <option value="vuln">Vulnerability Audit</option>
-              <option value="cloud">Cloud &amp; CDN</option>
-            </select>
-          </div>
-
-          <!-- Scrollable 151 Scanners Checklist -->
-          <div style="margin-top:12px;">
-            <div class="clear-scan-grid" id="dashboard-module-list"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SECTION 3: REPORTS & BEGINNER "HOW TO FIX" CENTER ==================== -->
-      <section class="view-pane" id="view-reports">
-        <div class="glass-panel" style="padding:16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-            <div>
-              <h2 class="gold-app-title" style="font-size:1.3rem;" id="output-panel-title">📊 Multi-View Scan Reports &amp; Beginner Fix Guide</h2>
-              <p style="font-size:0.82rem;color:var(--text-secondary);">
-                Tap any report mode below or <strong>swipe left/right</strong> inside the report box to switch between Beginner Fix Guide, Normal Report, Full Report, AI Report, and Raw Output!
-              </p>
-            </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-              <button class="btn-secondary-glass" id="btn-read-report-aloud" style="height:34px;font-size:0.78rem;" title="Read Report Aloud via AHM7 SpeechSter / Browser TTS">
-                🔊 Read Aloud
-              </button>
-              <button class="btn-secondary-glass" id="btn-trigger-ai-analyze" style="height:34px;font-size:0.78rem;">
-                🧠 AI Explain &amp; Fix
-              </button>
-              <button class="btn-secondary-glass" id="btn-export-current-md" style="height:34px;font-size:0.78rem;">
-                ⬇ MD
-              </button>
-              <button class="btn-secondary-glass" id="btn-export-current-json" style="height:34px;font-size:0.78rem;">
-                ⬇ JSON
-              </button>
-            </div>
-          </div>
-
-          <!-- 5 Report View Sub-Tabs (Buttons + Swipe Left/Right Support) -->
-          <div class="report-subtabs-bar" id="report-subtabs-bar">
-            <button class="report-subtab-btn active" data-outtab="beginner">
-              🛠️ 1. Beginner Summary &amp; How To Fix (3-Tier)
-            </button>
-            <button class="report-subtab-btn" data-outtab="findings">
-              📋 2. Normal Report (Visual Cards)
-            </button>
-            <button class="report-subtab-btn" data-outtab="full">
-              📚 3. Full Report &amp; History
-            </button>
-            <button class="report-subtab-btn" data-outtab="ai">
-              🧠 4. AI Deep Report
-            </button>
-            <button class="report-subtab-btn" data-outtab="console">
-              📟 5. Raw Report
-            </button>
-          </div>
-
-          <!-- Filter by Module Pill Strip -->
-          <div style="padding:10px 0;border-bottom:1px solid rgba(255,215,0,0.14);display:flex;gap:6px;flex-wrap:wrap;" id="module-output-pills"></div>
-
-          <!-- Swipeable Report Content Area -->
-          <div id="report-swipe-area" style="margin-top:12px;">
-            <!-- Sub-Tab 1: Beginner Plain-English Summary & Step-by-Step "How It Gets Fixed" (3-Tier Green/Yellow/Red) -->
-            <div id="outtab-beginner" style="display:flex;flex-direction:column;gap:12px;">
-              <div id="beginner-report-container"></div>
-            </div>
-
-            <!-- Sub-Tab 2: Normal Report (Visual Telemetry Cards) -->
-            <div id="outtab-findings" style="display:none;flex-direction:column;gap:12px;">
-              <div id="dashboard-findings-list" class="visual-telemetry-cards"></div>
-            </div>
-
-            <!-- Sub-Tab 3: Full Report & Saved Scan History -->
-            <div id="outtab-full" style="display:none;flex-direction:column;gap:12px;">
-              <div id="full-report-container" style="display:flex;flex-direction:column;gap:12px;"></div>
-              <div style="border-top:1px solid rgba(255,215,0,0.2);padding-top:12px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                  <strong style="color:#ffd700;">📁 Saved Scan Sessions Vault</strong>
-                  <button class="btn-secondary-glass" id="btn-refresh-scans" style="height:30px;font-size:0.75rem;">↻ Refresh</button>
+            <!-- Panel Header + 3 Iconic Buttons (Raw Log First, Visual Cards, Cloud AI Dossier) -->
+            <div class="panel-header" style="flex-direction:column;align-items:stretch;gap:10px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                <div class="panel-title">
+                  <span>📊</span>
+                  <span id="output-panel-title">BaDR ArGuS Visual Telemetry &amp; Dossier</span>
                 </div>
-                <div id="reports-vault-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <button type="button" class="chip-btn" id="btn-trigger-ai-analyze">🧠 Explain &amp; Fix</button>
+                  <button type="button" class="chip-btn" id="btn-export-current-md">⬇ MD</button>
+                  <button type="button" class="chip-btn" id="btn-export-current-json">⬇ JSON</button>
+                </div>
+              </div>
+
+              <!-- DROPDOWN PICKER #2: REPORT VIEW MODE & SCANNED MODULE SELECTOR (No Horizontal Swipe Needed!) -->
+              <div class="dropdown-picker-box" style="padding:9px 11px;">
+                <div class="dropdown-picker-label">
+                  <span>📋 REPORT VIEW MODE &amp; SCANNED TOOL FILTER (Dropdown Pickers):</span>
+                </div>
+                <div class="dropdown-picker-controls">
+                  <select id="report-view-select" class="gold-dropdown-select" aria-label="Select How to View the Scan Report">
+                    <option value="console" selected>📟 1. Raw Log / Full Report (Default — Complete Detailed Results)</option>
+                    <option value="findings">📊 2. Visual Cards (Every Scanner Card with Full Details &amp; Fix)</option>
+                    <option value="ai">🧠 3. Cloud AI Dossier (Plain-English Beginner Meaning &amp; Fix Guide)</option>
+                    <option value="json">{ } 4. Raw JSON Telemetry Data</option>
+                  </select>
+                  <select id="module-filter-select" class="gold-dropdown-select" aria-label="Filter by Scanned Module">
+                    <option value="ALL">All Executed Scanners — Show Everything</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- The 3 Iconic Switch Buttons from Screenshot 1 (With Raw Log First & Active by Default) -->
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button type="button" class="chip-btn active" data-outtab="console" style="flex:1;justify-content:center;padding:8px 10px;border-color:var(--gold-bright);color:var(--gold-bright);font-weight:700;">
+                  📟 Raw Log (Full Report)
+                </button>
+                <button type="button" class="chip-btn" data-outtab="findings" style="flex:1;justify-content:center;padding:8px 10px;font-weight:700;">
+                  📊 Visual Cards
+                </button>
+                <button type="button" class="chip-btn" data-outtab="ai" style="flex:1;justify-content:center;padding:8px 10px;font-weight:700;">
+                  🧠 Cloud AI Dossier &amp; Fix
+                </button>
               </div>
             </div>
 
-            <!-- Sub-Tab 4: AI Deep Report -->
-            <div id="outtab-ai" style="display:none;flex-direction:column;gap:12px;">
+            <!-- Module Output Filter Pills (Wrapped, Never Clipped) -->
+            <div style="padding:8px 14px;border-bottom:1px solid var(--border-glass);display:flex;gap:6px;flex-wrap:wrap;" id="module-output-pills"></div>
+
+            <!-- SVG Visual Telemetry Board (Compact 3-Card Row) -->
+            <div class="svg-telemetry-grid" id="svg-telemetry-board">
+              <div class="svg-gauge-card">
+                <div class="svg-gauge-title">Scan Result Fractions</div>
+                <div id="svg-radial-fractions-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:115px;"></div>
+                <div id="svg-radial-legend" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:0.71rem;margin-top:4px;"></div>
+              </div>
+
+              <div class="svg-gauge-card">
+                <div class="svg-gauge-title">Confidence Scale (0–100%)</div>
+                <div id="svg-confidence-gauge-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:115px;"></div>
+                <div style="font-size:0.70rem;color:var(--gold-light);text-align:center;margin-top:4px;" id="svg-confidence-caption">
+                  Probabilistic Indicator Only
+                </div>
+              </div>
+
+              <div class="svg-gauge-card">
+                <div class="svg-gauge-title">BaDR ArGuS Signal Pulse</div>
+                <div id="svg-pulse-wave-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:105px;"></div>
+                <div style="font-size:0.70rem;color:var(--text-secondary);text-align:center;margin-top:4px;" id="svg-pulse-caption">
+                  Multi-Vector Correlation Active
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 1 (DEFAULT ACTIVE FIRST!): RAW LOG / FULL MULTI-SCANNER REPORT WITH VISIBLE GOLD SCROLLBAR -->
+            <div id="outtab-console" style="padding:12px 14px;display:flex;flex-direction:column;gap:8px;">
+              <div class="scroll-notice-bar">
+                <span id="raw-scroll-status-text">📜 Full Raw Report: Scroll down using the Gold Scrollbar on the right to read all findings ⬇</span>
+                <div style="display:flex;gap:6px;">
+                  <button type="button" class="chip-btn" id="btn-toggle-raw-expand" style="border-color:#ffd700;color:#ffd700;">
+                    ↕️ Expand Full Height
+                  </button>
+                  <button type="button" class="chip-btn" id="btn-copy-raw-report">
+                    📋 Copy Full Report
+                  </button>
+                </div>
+              </div>
+              <div class="terminal-output" id="main-terminal-output"></div>
+              <div class="scroll-notice-bar" style="justify-content:center;">
+                <span>⬆️ End of Current View — Use the Gold Scrollbar or tap "↕️ Expand Full Height" to see every scanner line ⬆️</span>
+              </div>
+            </div>
+
+            <!-- TAB 2: VISUAL CARDS (DETAILED MULTI-VECTOR CARDS FOR EACH SCANNER, NEVER 10 WORDS) -->
+            <div id="outtab-findings" style="padding:12px 14px;display:none;flex-direction:column;gap:10px;">
+              <div class="scroll-notice-bar">
+                <span id="cards-count-notice">📊 Showing Detailed Visual Cards for All Executed Scanners (Full Vectors + Beginner Meaning + Fix)</span>
+                <button type="button" class="chip-btn" id="btn-show-all-151-cards" style="border-color:#ffd700;color:#ffd700;">
+                  📚 Show All Executed Cards
+                </button>
+              </div>
+              <div id="dashboard-findings-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:10px;max-height:620px;overflow-y:scroll;padding-right:4px;"></div>
+            </div>
+
+            <!-- TAB 3: CLOUD AI DOSSIER & BEGINNER HOW-TO-FIX GUIDE -->
+            <div id="outtab-ai" style="padding:14px;display:none;flex-direction:column;gap:12px;">
+              <div id="beginner-report-container" style="display:flex;flex-direction:column;gap:10px;"></div>
               <div class="ai-markdown" id="dashboard-ai-analysis"></div>
             </div>
 
-            <!-- Sub-Tab 5: Raw Console Output -->
-            <div id="outtab-console" style="display:none;flex-direction:column;gap:12px;">
-              <div class="terminal-output" id="main-terminal-output"></div>
+            <!-- TAB 4: RAW JSON TELEMETRY -->
+            <div id="outtab-json" style="padding:12px 14px;display:none;flex-direction:column;gap:8px;">
+              <div class="terminal-output" id="main-json-output"></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== SECTION 4: MULTI-KEY VAULT (+ ADD NEW KEY) & AHM7 21 FREE TOOLS ==================== -->
-      <section class="view-pane" id="view-settings">
+      <!-- ==================== SECTION 2: ALL 151 SCAN TOOLS (WITH DROPDOWN PICKERS) ==================== -->
+      <section class="view-pane" id="view-modules">
         <div class="glass-panel" style="padding:16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
             <div>
-              <h2 class="gold-app-title" style="font-size:1.3rem;">🔑 Multi-Key Cloud AI Vault &amp; Free Pool Router</h2>
-              <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:3px;">
-                Add as many free API keys as you want (e.g., 4 OpenRouter, 4 Ollama, Mistral, Groq, Gemini, OpenAI)! Choose a provider below—the frontend &amp; backend route loads automatically, and <strong>Model is 100% Optional</strong> (auto-selects the best free model if left blank!).
+              <h2 class="gold-app-title" style="font-size:1.25rem;">⚡ Section 2: All 151 Scan Tools Catalog</h2>
+              <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:4px;">
+                Pick any category or individual scanner from the dropdown menus below and press Launch, or browse all 151 cards.
               </p>
             </div>
-            <span class="sev-badge sev-OK" id="vault-active-summary">Multi-Key Pool Active</span>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+              <input
+                type="text"
+                id="arsenal-search-input"
+                class="target-input"
+                placeholder="Search 151 tools by number, name, tag..."
+                style="background:rgba(4,8,20,0.85);padding:8px 14px;border-radius:10px;border:1px solid var(--border-glass);width:220px;"
+              />
+              <select id="arsenal-tag-select" class="glass-select">
+                <option value="all">All Capabilities</option>
+                <option value="dns">DNS &amp; Domain</option>
+                <option value="tls">SSL / TLS Crypto</option>
+                <option value="http">HTTP / Web</option>
+                <option value="sec">Security Audit</option>
+                <option value="email">Email / SPF / DMARC</option>
+                <option value="fast">Fast Recon</option>
+              </select>
+            </div>
           </div>
 
-          <!-- "+ ADD A NEW FREE API KEY" INTERACTIVE BUILDER -->
-          <div class="add-key-builder-card">
-            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-              <div style="font-size:1.05rem;font-weight:800;color:#ffd700;">
-                ➕ Add a New Free API Key (Unlimited Keys per Provider)
-              </div>
-              <span class="sev-badge sev-INFO" id="builder-route-badge">Route Auto-Loaded</span>
+          <!-- Dropdown Picker for 151 Tools Section -->
+          <div class="dropdown-picker-box" style="margin-top:12px;">
+            <div class="dropdown-picker-label">
+              <span>🔽 PICK CATEGORY OR ANY OF THE 151 TOOLS (Dropdown Menu + Launch):</span>
             </div>
+            <div class="dropdown-picker-controls">
+              <select id="arsenal-sec-select" class="gold-dropdown-select">
+                <option value="all">All 151 Scanners (Show All Categories)</option>
+                <option value="Network & Infrastructure">🌐 Category 1: Network, IP, Ports &amp; DNS (52 Tools)</option>
+                <option value="Web Application Analysis">🕸️ Category 2: Web Application, SSL &amp; HTTP (53 Tools)</option>
+                <option value="Security & Threat Intelligence">🛡️ Category 3: Security, Threat &amp; Breach Intel (46 Tools)</option>
+                <option value="fav">⭐ Starred Favorites</option>
+              </select>
+              <select id="arsenal-quick-tool-select" class="gold-dropdown-select"></select>
+              <button type="button" class="btn-primary-glow" id="btn-arsenal-dropdown-launch" style="height:40px;padding:0 16px;">
+                ▶ Launch Tool
+              </button>
+            </div>
+          </div>
 
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;" id="arsenal-section-pills">
+            <button type="button" class="chip-btn filter-pill active" data-sec="all">All 151 Tools</button>
+            <button type="button" class="chip-btn filter-pill" data-sec="Network & Infrastructure">🌐 Network &amp; Infra (52)</button>
+            <button type="button" class="chip-btn filter-pill" data-sec="Web Application Analysis">🕸️ Web App Analysis (53)</button>
+            <button type="button" class="chip-btn filter-pill" data-sec="Security & Threat Intelligence">🛡️ Security &amp; Threat (46)</button>
+            <button type="button" class="chip-btn filter-pill" data-sec="fav">⭐ Favorites</button>
+          </div>
+        </div>
+
+        <div class="modules-grid" id="arsenal-modules-grid"></div>
+      </section>
+
+      <!-- ==================== SECTION 3: CLOUD API KEY VAULT ==================== -->
+      <section class="view-pane" id="view-settings">
+        <div class="glass-panel" style="padding:18px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+            <div>
+              <h2 class="gold-app-title" style="font-size:1.25rem;">🔑 Section 3: Cloud AI &amp; OSINT API Key Vault</h2>
+              <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:4px;">
+                Pre-wired free cloud keys are already active out-of-the-box (0 MB phone RAM). You can also add unlimited extra API keys for Ollama, Groq, DeepSeek, Mistral, OpenRouter, Gemini, or OpenAI below.
+              </p>
+            </div>
+            <span class="sev-badge sev-OK" id="vault-active-summary">Active: Cloud Pool Ready</span>
+          </div>
+
+          <!-- "+ ADD A NEW FREE API KEY" BUILDER -->
+          <div class="dropdown-picker-box" style="margin-bottom:16px;padding:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+              <strong style="color:#ffd700;font-family:var(--font-display);font-size:0.95rem;">
+                ➕ Add a New Free API Key to Pool (Model is Optional — Auto-Selects Default)
+              </strong>
+              <span class="sev-badge sev-INFO" id="builder-route-badge">Auto-Route Ready</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
               <div>
-                <label style="font-size:0.78rem;color:#ffd700;font-weight:800;">1. Choose Provider (Auto-Loads Route)</label>
-                <select id="new-key-provider" class="glass-select" style="width:100%;margin-top:4px;height:40px;">
-                  <option value="ollama">☁️ Ollama Cloud (Free API Keys)</option>
-                  <option value="deepseek">🐋 DeepSeek Harness (`@deepseek-ai/dsh` · 1M Context Pool)</option>
+                <label style="font-size:0.74rem;color:#ffd700;font-weight:700;">1. Provider (Dropdown)</label>
+                <select id="new-key-provider" class="gold-dropdown-select" style="width:100%;margin-top:4px;">
+                  <option value="groq">🚀 Groq Cloud (DeepSeek R1 70B &amp; Llama 3.3)</option>
+                  <option value="deepseek">🐋 DeepSeek Harness (V4-Pro / R1 Reasoner)</option>
+                  <option value="mistral">⚡ Mistral AI (7-Pool Free Tier &amp; Magistral)</option>
+                  <option value="ollama">☁️ Ollama Cloud (Free Cloud Models)</option>
                   <option value="openrouter">🌐 OpenRouter (Free `:free` Models)</option>
-                  <option value="mistral">⚡ Mistral AI (7-Pool Free Tier)</option>
-                  <option value="groq">🚀 Groq Cloud (Forever-Free 14.4K/Day)</option>
-                  <option value="nvidia">🟢 NVIDIA NIM Free Dev (`deepseek-ai/deepseek-r1`)</option>
-                  <option value="google">✨ Google Gemini (AI Studio Free)</option>
-                  <option value="openai">🤖 OpenAI / Custom Compatible</option>
-                  <option value="keyless_free">🔓 Keyless Free Cloud AI (No Key Needed)</option>
+                  <option value="nvidia">🟢 NVIDIA NIM (`deepseek-ai/deepseek-r1`)</option>
+                  <option value="google">✨ Google Gemini (AI Studio)</option>
+                  <option value="openai">🤖 OpenAI / Compatible</option>
                 </select>
               </div>
-
               <div>
-                <label style="font-size:0.78rem;color:#ffd700;font-weight:800;">2. Paste Your Free API Key</label>
-                <input
-                  type="password"
-                  id="new-key-value"
-                  class="target-input"
-                  placeholder="Paste API key here..."
-                  style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(6,9,16,0.92);border:1px solid rgba(255,215,0,0.38);border-radius:10px;"
-                />
+                <label style="font-size:0.74rem;color:#ffd700;font-weight:700;">2. Paste API Key</label>
+                <input type="password" id="new-key-value" class="target-input" placeholder="Paste API key..." style="width:100%;margin-top:4px;height:40px;padding:0 12px;background:#07090e;border:1.5px solid rgba(255,215,0,0.45);border-radius:10px;" />
               </div>
-
               <div>
-                <label style="font-size:0.78rem;color:#34d399;font-weight:800;">3. Model (OPTIONAL — Leave Blank for Auto!)</label>
-                <input
-                  type="text"
-                  id="new-key-model"
-                  class="target-input"
-                  placeholder="Optional: Auto-loads best free model..."
-                  list="provider-free-models-datalist"
-                  style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(6,9,16,0.92);border:1px solid rgba(16,185,129,0.45);border-radius:10px;"
-                />
+                <label style="font-size:0.74rem;color:#34d399;font-weight:700;">3. Model (Optional — Auto if Blank)</label>
+                <input type="text" id="new-key-model" class="target-input" list="provider-free-models-datalist" placeholder="Leave blank for best model..." style="width:100%;margin-top:4px;height:40px;padding:0 12px;background:#07090e;border:1.5px solid rgba(16,185,129,0.45);border-radius:10px;" />
                 <datalist id="provider-free-models-datalist"></datalist>
               </div>
-
               <div>
-                <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:700;">4. Key Nickname (Optional)</label>
-                <input
-                  type="text"
-                  id="new-key-label"
-                  class="target-input"
-                  placeholder="e.g. My Ollama Key #2"
-                  style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(6,9,16,0.92);border:1px solid rgba(255,215,0,0.24);border-radius:10px;"
-                />
+                <label style="font-size:0.74rem;color:var(--text-secondary);font-weight:700;">4. Nickname (Optional)</label>
+                <input type="text" id="new-key-label" class="target-input" placeholder="e.g. My Key #2" style="width:100%;margin-top:4px;height:40px;padding:0 12px;background:#07090e;border:1px solid var(--border-glass);border-radius:10px;" />
               </div>
             </div>
-
-            <!-- Auto-Loaded Frontend/Backend Route Preview Box -->
-            <div style="margin-top:10px;padding:9px 12px;border-radius:10px;background:rgba(6,9,16,0.88);border:1px solid rgba(0,240,255,0.28);font-size:0.78rem;color:#cbd5e1;" id="new-key-auto-route-info">
-              <strong>Auto-Wired Endpoint:</strong> <code>https://ollama.com/api/chat</code> · <strong>Auto Free Model:</strong> <code>deepseek-v3.1:671b-cloud</code> (Leave model blank if you don't know it!)
+            <div style="margin-top:8px;font-size:0.75rem;color:#cbd5e1;" id="new-key-auto-route-info">
+              <strong>Auto Endpoint:</strong> <code>https://api.groq.com/openai/v1</code> · <strong>Default Model:</strong> <code>deepseek-r1-distill-llama-70b</code>
             </div>
-
-            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-              <button class="btn-primary-glow" id="btn-add-new-vault-key">
-                ➕ Add Key to Active Pool
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="button" class="btn-primary-glow" id="btn-add-new-vault-key" style="height:38px;">
+                ➕ Save &amp; Add Key to Pool
               </button>
-              <a href="https://ollama.com/settings/keys" target="_blank" rel="noopener" id="new-key-get-link" class="btn-secondary-glass" style="text-decoration:none;">
-                🔗 Get Free Key for Selected Provider ↗
+              <a href="https://console.groq.com/keys" target="_blank" rel="noopener" id="new-key-get-link" class="btn-secondary-glass" style="height:38px;text-decoration:none;">
+                🔗 Get Free API Key ↗
               </a>
             </div>
           </div>
 
-          <!-- Saved Multi-Keys Pool List -->
           <div style="margin-bottom:14px;">
-            <div style="font-size:0.95rem;font-weight:800;color:#ffd700;margin-bottom:8px;">
-              🗂️ Your Active Multi-Key Pool (<span id="saved-keys-count-badge">1</span> Keys Ready — Auto Round-Robin Rotation)
+            <div style="font-size:0.86rem;font-weight:700;color:#ffd700;margin-bottom:8px;">
+              🗂️ Active Multi-Key Pool (<span id="saved-keys-count-badge">1</span> Keys Ready)
             </div>
-            <div id="saved-multi-keys-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px;"></div>
+            <div id="saved-multi-keys-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;"></div>
           </div>
 
-          <!-- Mistral 7-Pool & Groq 2026 Free Tier Intelligence Box -->
-          <div style="padding:14px;border-radius:14px;background:rgba(0,240,255,0.07);border:1px solid rgba(0,240,255,0.32);margin-bottom:14px;">
-            <div style="font-size:0.95rem;font-weight:800;color:#38bdf8;margin-bottom:6px;">
-              📊 Built-In Mistral 7-Pool &amp; Groq 2026 Free Quota Optimizer (No 429 Errors!)
-            </div>
-            <div style="font-size:0.80rem;color:#e2e8f0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;">
-              <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(255,215,0,0.2);">
-                <strong style="color:#ffd700;">⚡ Mistral Free Tier — 7 Separate Pools (r/MistralAI Analysis):</strong><br/>
-                Mistral shares rate limits by <em>pool</em>, not per model! Our router automatically cycles across isolated pools:<br/>
-                • <strong>Pool 3 (`mistral-medium-2508`):</strong> 375K tok/min, 25 RPM, NO monthly limit<br/>
-                • <strong>Pool 2 (`mistral-large-2411`):</strong> 600K tok/5-min, 60 RPM, 200B tok/month (isolated!)<br/>
-                • <strong>Pool 7 (`devstral-2512`):</strong> 1,000,000 tok/min, 50 RPM<br/>
-                • <strong>Pool 4 (`mistral-medium-2505`):</strong> 60K tok/min, 60 RPM<br/>
-                • <strong>Pool 1 (`open-mistral-nemo` / `mistral-small-2506`):</strong> 50K tok/min
-              </div>
-              <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(16,185,129,0.25);">
-                <strong style="color:#34d399;">🚀 Groq 2026 Forever-Free Tier &amp; Keyless AI:</strong><br/>
-                • <strong>Groq Free API (`console.groq.com/keys`):</strong> Still 100% free with no credit card! Gives <strong>14,400 req/day &amp; 30 RPM</strong> on `llama-3.1-8b-instant` &amp; `openai/gpt-oss-20b`, and <strong>1,000 req/day</strong> on `llama-3.3-70b-versatile`.<br/>
-                • <strong>Zero-Key Mode:</strong> Even with 0 keys, our built-in Keyless Cloud AI Pool works automatically!
-              </div>
-              <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(56,189,248,0.32);">
-                <strong style="color:#38bdf8;">🐋 DeepSeek Harness (`@deepseek-ai/dsh` — Everything is a Plugin):</strong><br/>
-                • Integrated from <a href="https://github.com/kimokiki333-code/deepseek-harness" target="_blank" rel="noopener" style="color:#ffd700;"><code>kimokiki333-code/deepseek-harness</code></a> (MIT Open Source)!<br/>
-                • Supports <strong>`deepseek-flash` (DeepSeek-V4.1-Flash · 1M Context)</strong> &amp; <strong>`deepseek-v4-pro` (1M Context)</strong> with both <code>DEEPSEEK_API_KEY</code> and DeepSeek Account Tokens (<code>x-dsh-auth-token</code>) + NVIDIA NIM Free Dev Routes!
-              </div>
-            </div>
-          </div>
-
-          <!-- Pre-Wired Provider Cards -->
           <div class="vault-provider-grid" id="vault-providers-container"></div>
         </div>
+
+        <div class="glass-panel" style="padding:18px;">
+          <h3 style="font-family:var(--font-display);font-size:1.05rem;color:var(--gold-bright);">🌐 Optional OSINT Enrichment API Keys</h3>
+          <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:4px;">
+            All 151 modules work immediately without keys. Add optional keys below for VirusTotal, Shodan, Censys, or HaveIBeenPwned enrichment.
+          </p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:12px;">
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);">VirusTotal API Key</label>
+              <input type="password" id="key-vt" class="target-input" placeholder="VT API Key..." style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(4,8,20,0.85);border:1px solid var(--border-glass);border-radius:8px;" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);">Shodan API Key</label>
+              <input type="password" id="key-shodan" class="target-input" placeholder="Shodan Key..." style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(4,8,20,0.85);border:1px solid var(--border-glass);border-radius:8px;" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);">Censys API ID</label>
+              <input type="password" id="key-censys-id" class="target-input" placeholder="Censys ID..." style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(4,8,20,0.85);border:1px solid var(--border-glass);border-radius:8px;" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);">Censys Secret</label>
+              <input type="password" id="key-censys-secret" class="target-input" placeholder="Censys Secret..." style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(4,8,20,0.85);border:1px solid var(--border-glass);border-radius:8px;" />
+            </div>
+            <div>
+              <label style="font-size:0.74rem;color:var(--text-secondary);">HaveIBeenPwned (HIBP) Key</label>
+              <input type="password" id="key-hibp" class="target-input" placeholder="HIBP API Key..." style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(4,8,20,0.85);border:1px solid var(--border-glass);border-radius:8px;" />
+            </div>
+          </div>
+          <div style="margin-top:12px;">
+            <button type="button" class="btn-primary-glow" id="btn-save-osint-keys">💾 Save OSINT Keys</button>
+          </div>
+        </div>
       </section>
 
-      <!-- ==================== SECTION 5: BEGINNER AI CYBERSECURITY TUTOR & SHELL ==================== -->
+      <!-- ==================== SECTION 4: THINKING AI WITH VISIBLE REASONING ==================== -->
       <section class="view-pane" id="view-ai">
         <div class="ai-hub-grid">
-          <div class="glass-panel" style="padding:15px;display:flex;flex-direction:column;gap:10px;">
+          <!-- Left Card: Model Catalog & Deep Think Controls -->
+          <div class="glass-panel" style="padding:16px;display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;align-items:center;justify-content:space-between;">
-              <h3 style="font-size:1.0rem;font-weight:800;color:#ffd700;">☁️ Active Cloud AI Pool</h3>
-              <button class="btn-secondary-glass" id="btn-refresh-ollama" style="height:30px;padding:0 10px;font-size:0.74rem;">↻ Sync</button>
+              <h3 style="font-family:var(--font-display);font-size:1.02rem;color:var(--gold-bright);">🧠 Thinking &amp; Cloud AI Models</h3>
+              <button type="button" class="chip-btn" id="btn-refresh-ollama">↻ Sync</button>
             </div>
-            <div style="padding:9px 11px;border-radius:10px;background:rgba(255,215,0,0.10);border:1px solid rgba(255,215,0,0.28);font-size:0.78rem;color:#fde68a;">
-              💡 <strong>Beginner Tutor Mode:</strong> Explains every scan finding in plain English and gives step-by-step fix instructions.
+            <div style="padding:10px;border-radius:10px;background:rgba(255,215,0,0.10);border:1px solid rgba(255,215,0,0.32);font-size:0.76rem;color:#fde68a;line-height:1.45;">
+              💡 <strong>Visible Reasoning Enabled:</strong> Select any <strong>DeepThink / Reasoning Model</strong> (such as <code>DeepSeek R1 70B</code>, <code>DeepSeek-V4-Pro</code>, or <code>Magistral 2509</code>) to see its full step-by-step <strong>💭 Thought Process / Reasoning</strong> box above every answer!
             </div>
-            <div id="ollama-models-list" style="display:flex;flex-direction:column;gap:8px;max-height:310px;overflow-y:auto;"></div>
-            <div style="margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,215,0,0.14);display:flex;gap:6px;">
-              <input type="text" id="input-custom-ollama-model" class="target-input" placeholder="Custom model (optional)..." style="background:rgba(6,9,16,0.9);padding:7px 10px;border-radius:8px;border:1px solid rgba(255,215,0,0.24);font-size:0.78rem;" />
-              <button class="btn-primary-glow" id="btn-pull-ollama-model" style="height:34px;padding:0 12px;font-size:0.76rem;">Set</button>
+            <div id="ollama-models-list" style="display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;"></div>
+            <div style="margin-top:auto;padding-top:10px;border-top:1px solid var(--border-glass);display:flex;gap:6px;">
+              <input type="text" id="input-custom-ollama-model" class="target-input" placeholder="Custom model tag..." style="background:rgba(4,8,20,0.85);padding:7px 10px;border-radius:8px;border:1px solid var(--border-glass);font-size:0.78rem;flex:1;" />
+              <button type="button" class="btn-primary-glow" id="btn-pull-ollama-model" style="height:34px;padding:0 12px;font-size:0.76rem;">Set</button>
             </div>
           </div>
 
-          <div class="glass-panel" style="display:flex;flex-direction:column;">
-            <div style="padding:12px 15px;border-bottom:1px solid rgba(255,215,0,0.16);display:flex;flex-direction:column;gap:8px;">
+          <!-- Right Card: Thinking AI Chat with Visible Reasoning Box -->
+          <div class="glass-panel ai-chat-box">
+            <div class="panel-header" style="flex-direction:column;align-items:stretch;gap:8px;">
               <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
                 <div>
-                  <div style="font-size:1.02rem;font-weight:800;color:#ffd700;">🧠 Multi-Use AI Arsenal Chat (Chat · Vision · OCR · EN/AR Voice Notes)</div>
-                  <div style="font-size:0.74rem;color:#7dd3fc;">Send &amp; Receive Voice Notes (`whisper-large-v3-turbo` / `whisper-large-v3` + `playai-tts` / `playai-tts-arabic`) · Pixtral / Llama-4 Vision · DeepSeek Harness</div>
+                  <div class="panel-title" style="color:#ffd700;">🧠 Section 4: DeepThink AI Analyst (With Visible Reasoning)</div>
+                  <div style="font-size:0.73rem;color:var(--text-secondary);margin-top:2px;">
+                    Shows step-by-step model reasoning (<code>💭 Thought Process</code>) + Beginner Cybersecurity Fixes + Voice Notes (EN/AR)
+                  </div>
                 </div>
                 <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                  <button class="chip-btn ai-prompt-chip" data-prompt="Explain my latest scan report in very simple words for someone new to cybersecurity, and tell me step by step how to fix any Red or Yellow warnings.">Explain &amp; Fix for Beginner</button>
-                  <button class="chip-btn ai-prompt-chip" data-prompt="I scanned my own IP address and saw 6-7 threats or open ports. What do they mean and how do I fix them on my router or phone?">Why Does My IP Show Threats?</button>
+                  <button type="button" class="chip-btn ai-prompt-chip" data-prompt="Think step-by-step and explain my latest scan report in simple beginner terms, showing your reasoning and how to fix every warning.">🧠 Deep-Think My Scan &amp; Fix</button>
+                  <button type="button" class="chip-btn ai-prompt-chip" data-prompt="Think step-by-step: if an IP scan shows open ports or warnings, what do they mean for a beginner and how do I secure them?">🛡️ Reason About Open Ports</button>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                <select id="ai-chat-model-select" class="glass-select" style="flex:1;min-width:220px;height:34px;font-size:0.76rem;padding:0 10px;">
-                  <optgroup label="🚀 Groq Multi-Use (Chat, Llama-4 Vision, Whisper EN/AR Voice Notes &amp; PlayAI TTS)">
-                    <option value="groq|llama-3.1-8b-instant">🚀 Groq Fast Chat: llama-3.1-8b-instant (14.4K/Day Free)</option>
-                    <option value="groq|meta-llama/llama-4-scout-17b-16e-instruct">👁️ Groq Vision: Llama-4 Scout 17B (Image &amp; Screenshot Reader)</option>
-                    <option value="groq|meta-llama/llama-4-maverick-17b-128e-instruct">👁️ Groq Vision: Llama-4 Maverick 17B (128E Multimodal)</option>
-                    <option value="groq|deepseek-r1-distill-llama-70b">🧠 Groq Reasoning: DeepSeek R1 Distill 70B</option>
-                    <option value="groq|whisper-large-v3-turbo">🎙️ Groq Voice Note STT: Whisper Large v3 Turbo (99-Lang EN + AR · 2,000/Day)</option>
-                    <option value="groq|whisper-large-v3">🎙️ Groq Voice Note STT: Whisper Large v3 Full (Max Accuracy EN + AR)</option>
-                    <option value="groq|playai-tts">🔊 Groq Voice Note TTS: PlayAI Spoken English Replies</option>
-                    <option value="groq|playai-tts-arabic">🔊 Groq Voice Note TTS: PlayAI Spoken Arabic Replies (العربية)</option>
-                  </optgroup>
-                  <optgroup label="⚡ Mistral Multi-Use (7-Pool Chat, Pixtral Vision, OCR &amp; Voxtral Audio)">
-                    <option value="mistral|mistral-medium-2508">⚡ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
-                    <option value="mistral|pixtral-large-2411">👁️ Mistral Vision: Pixtral Large 2411 (124B Screenshot/UI Reader)</option>
-                    <option value="mistral|pixtral-12b-2409">👁️ Mistral Vision: Pixtral 12B (Fast Image Analyzer)</option>
-                    <option value="mistral|mistral-ocr-latest">📄 Mistral OCR: Document, PDF &amp; Table Extractor</option>
-                    <option value="mistral|voxtral-mini-latest">🎙️ Mistral Voxtral: Native Voice &amp; Audio Understanding</option>
-                    <option value="mistral|devstral-2512">💻 Mistral Pool 7: Devstral 2512 (1M TPM Code &amp; Security)</option>
-                    <option value="mistral|mistral-large-2411">⚡ Mistral Pool 2: mistral-large-2411 (200B/mo)</option>
-                  </optgroup>
-                  <optgroup label="🐋 DeepSeek Harness (@deepseek-ai/dsh · 1M Context &amp; Vision)">
-                    <option value="deepseek|deepseek-flash">🐋 DeepSeek-V4.1-Flash (1M Context · Text + Image Vision)</option>
-                    <option value="deepseek|deepseek-v4-pro">🐋 DeepSeek-V4-Pro (1M Context · Agentic Coding &amp; Security)</option>
-                    <option value="deepseek|deepseek-chat">🐋 DeepSeek V3.2 Chat</option>
-                    <option value="deepseek|deepseek-reasoner">🐋 DeepSeek R1 Reasoner</option>
-                  </optgroup>
-                  <optgroup label="🔓 Keyless Free AI, Ollama Cloud, NVIDIA NIM, OpenRouter &amp; Gemini">
-                    <option value="keyless_free|openai">🔓 Keyless Free AI: GPT-4o-Mini Cloud (No Key Needed)</option>
-                    <option value="ollama|deepseek-v3.1:671b-cloud">☁️ Ollama Cloud: deepseek-v3.1:671b-cloud</option>
-                    <option value="nvidia|deepseek-ai/deepseek-r1">🟢 NVIDIA NIM: deepseek-ai/deepseek-r1</option>
-                    <option value="openrouter|meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b-instruct:free</option>
-                    <option value="google|gemini-2.0-flash">✨ Google Gemini: gemini-2.0-flash (Multimodal)</option>
-                  </optgroup>
-                </select>
-                <label style="display:inline-flex;align-items:center;gap:5px;font-size:0.75rem;color:#6ee7b7;white-space:nowrap;cursor:pointer;" title="Automatically reply with a playable spoken Voice Note (English via playai-tts, Arabic via playai-tts-arabic)">
-                  <input type="checkbox" id="ai-auto-voice-note-toggle" checked style="accent-color:#10b981;" />
-                  <span>🔊 Auto Voice Note Reply (EN/AR)</span>
-                </label>
+
+              <!-- Model Picker Dropdown + Deep Think Toggle -->
+              <div class="dropdown-picker-box" style="padding:8px 10px;">
+                <div class="dropdown-picker-label">
+                  <span>🔽 CHOOSE THINKING / AI MODEL (Dropdown Menu):</span>
+                  <label style="display:inline-flex;align-items:center;gap:5px;color:#ffd700;cursor:pointer;">
+                    <input type="checkbox" id="ai-deep-think-toggle" checked style="accent-color:#ffd700;width:15px;height:15px;" />
+                    <span>💭 Deep Think: Show Reasoning</span>
+                  </label>
+                </div>
+                <div class="dropdown-picker-controls">
+                  <select id="ai-chat-model-select" class="gold-dropdown-select" style="height:38px;font-size:0.78rem;">
+                    <optgroup label="🧠 THINKING &amp; REASONING MODELS (Shows Step-by-Step Thought Process)">
+                      <option value="groq|deepseek-r1-distill-llama-70b" selected>🧠 DeepSeek R1 Distill Llama 70B (Groq LPU · Visible Reasoning)</option>
+                      <option value="deepseek|deepseek-reasoner">🧠 DeepSeek R1 Reasoner (Official DeepSeek Reasoning)</option>
+                      <option value="deepseek|deepseek-v4-pro">🐋 DeepSeek-V4-Pro (1M Context · Agentic Reasoning)</option>
+                      <option value="mistral|magistral-medium-2509">🧠 Mistral Magistral Medium 2509 (Reasoning Pool)</option>
+                      <option value="nvidia|deepseek-ai/deepseek-r1">🟢 NVIDIA NIM: DeepSeek R1 (Full 671B Reasoning)</option>
+                    </optgroup>
+                    <optgroup label="🚀 FAST CHAT, VISION &amp; VOICE NOTE MODELS (Groq &amp; Mistral)">
+                      <option value="groq|llama-3.3-70b-versatile">🚀 Groq Llama 3.3 70B Versatile</option>
+                      <option value="groq|llama-3.1-8b-instant">🚀 Groq Llama 3.1 8B Instant (14.4K/Day Free)</option>
+                      <option value="deepseek|deepseek-flash">🐋 DeepSeek-V4.1-Flash (1M Context · Fast + Vision)</option>
+                      <option value="mistral|mistral-medium-2508">⚡ Mistral Medium 2508 (Pool 3 · 375K TPM)</option>
+                      <option value="mistral|devstral-2512">💻 Mistral Devstral 2512 (Pool 7 · 1M TPM Code/Sec)</option>
+                      <option value="mistral|pixtral-large-2411">👁️ Mistral Vision: Pixtral Large 2411 (Image Reader)</option>
+                      <option value="groq|meta-llama/llama-4-scout-17b-16e-instruct">👁️ Groq Vision: Llama-4 Scout 17B</option>
+                      <option value="groq|whisper-large-v3-turbo">🎙️ Groq Voice Note STT: Whisper Large v3 Turbo (EN/AR)</option>
+                      <option value="groq|playai-tts">🔊 Groq Spoken Reply: PlayAI TTS (English)</option>
+                      <option value="groq|playai-tts-arabic">🔊 Groq Spoken Reply: PlayAI TTS (Arabic العربية)</option>
+                    </optgroup>
+                    <optgroup label="☁️ OLLAMA CLOUD, OPENROUTER, GEMINI &amp; KEYLESS FREE AI">
+                      <option value="ollama|deepseek-v3.1:671b-cloud">☁️ Ollama Cloud: deepseek-v3.1:671b-cloud</option>
+                      <option value="openrouter|meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b-instruct:free</option>
+                      <option value="google|gemini-2.0-flash">✨ Google Gemini 2.0 Flash</option>
+                      <option value="keyless_free|openai">🔓 Keyless Free Cloud AI (No Key Needed)</option>
+                    </optgroup>
+                  </select>
+                  <label style="display:inline-flex;align-items:center;gap:4px;font-size:0.73rem;color:#34d399;white-space:nowrap;cursor:pointer;">
+                    <input type="checkbox" id="ai-auto-voice-note-toggle" style="accent-color:#10b981;" />
+                    <span>🔊 Voice Reply</span>
+                  </label>
+                </div>
               </div>
             </div>
+
             <div class="chat-messages" id="ai-chat-messages">
               <div class="chat-bubble assistant ai-markdown">
-                <p><strong>Welcome to the BaDR ArGuS Multi-Use AI Arsenal Chat!</strong></p>
-                <p>🎙️ <strong>Send &amp; Receive Voice Notes (English + العربية):</strong> Tap <strong>🎙️ Voice Note</strong> to record in English or Arabic (transcribed via Groq <code>whisper-large-v3-turbo</code> / <code>whisper-large-v3</code>, 2,000 free/day) and receive playable spoken AI voice note replies via <code>playai-tts</code> (EN) &amp; <code>playai-tts-arabic</code> (AR)! Or tap <strong>📷 Image/Audio</strong> to attach screenshots (Pixtral / Llama-4 Vision) or audio files.</p>
+                <details open class="ai-reasoning-box">
+                  <summary>💭 Model Reasoning / Thought Process (DeepThink Ready)</summary>
+                  <div class="ai-reasoning-content">1. DeepThink Reasoning mode is active by default on DeepSeek R1 70B.
+2. When you ask any question or analyze a scan report, I will first show my step-by-step reasoning here so you can see exactly how the conclusion was reached.
+3. Below the reasoning box, I will provide the clear, beginner-friendly answer and step-by-step fix instructions.</div>
+                </details>
+                <p><strong>Welcome to Section 4: BaDR ArGuS Thinking AI!</strong> Ask any question below or tap <strong>🧠 Deep-Think My Scan &amp; Fix</strong> to see the model's full reasoning and remediation plan.</p>
               </div>
             </div>
-            <!-- Attached Image / Audio Preview Strip for Main AI Chat -->
-            <div id="ai-chat-image-preview" style="display:none;padding:6px 14px;background:rgba(0,240,255,0.08);border-top:1px solid rgba(0,240,255,0.28);align-items:center;justify-content:space-between;gap:8px;">
-              <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:#7dd3fc;">
-                <img id="ai-chat-image-thumb" src="" alt="Preview" style="width:34px;height:34px;object-fit:cover;border-radius:6px;border:1px solid #00f0ff;" />
-                <span id="ai-chat-image-name">Attachment ready for Vision / OCR / Whisper Voice Note</span>
+
+            <div id="ai-chat-image-preview" style="display:none;padding:6px 14px;background:rgba(255,215,0,0.08);border-top:1px solid rgba(255,215,0,0.28);align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:0.76rem;color:#ffd700;">
+                <img id="ai-chat-image-thumb" src="" alt="Preview" style="width:32px;height:32px;object-fit:cover;border-radius:6px;border:1px solid #ffd700;" />
+                <span id="ai-chat-image-name">Attachment ready</span>
               </div>
-              <button class="swipe-arrow-btn" id="btn-clear-ai-image" style="padding:2px 8px;font-size:0.72rem;">✕ Remove</button>
+              <button type="button" class="chip-btn" id="btn-clear-ai-image">✕ Remove</button>
             </div>
             <input type="file" id="ai-chat-file-input" accept="image/*,audio/*" style="display:none;" />
-            <div class="chat-input-row" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:10px 14px;">
-              <button class="btn-secondary-glass" id="btn-attach-image-ai" title="Attach Screenshot/Image (Vision/OCR) or Voice Note Audio File (.ogg/.mp3/.wav/.m4a)" style="height:38px;padding:0 10px;">📷 Image/Audio</button>
-              <button class="btn-secondary-glass" id="btn-voice-mic-ai" title="Record &amp; Send Voice Note in English or Arabic (Groq Whisper Large v3 Turbo + PlayAI TTS Reply)" style="height:38px;padding:0 10px;">🎙️ Voice Note</button>
-              <button class="btn-secondary-glass" id="btn-speak-reply-ai" title="Generate &amp; Play Voice Note for Last Reply (playai-tts EN / playai-tts-arabic AR)" style="height:38px;padding:0 10px;">🔊 Speak Reply</button>
-              <input type="text" id="ai-chat-input" class="target-input" placeholder="Type in English or العربية, attach image/audio 📷, or tap 🎙️ Voice Note..." style="flex:1;min-width:180px;background:rgba(6,9,16,0.9);padding:10px 14px;border-radius:10px;border:1px solid rgba(0,240,255,0.32);" />
-              <button class="btn-primary-glow" id="btn-send-ai-chat"><span>➤</span><span>Send</span></button>
+
+            <div class="chat-input-row" style="flex-wrap:wrap;">
+              <button type="button" class="btn-secondary-glass" id="btn-attach-image-ai" style="height:38px;padding:0 10px;font-size:0.75rem;">📷 Image</button>
+              <button type="button" class="btn-secondary-glass" id="btn-voice-mic-ai" style="height:38px;padding:0 10px;font-size:0.75rem;">🎙️ Voice</button>
+              <button type="button" class="btn-secondary-glass" id="btn-speak-reply-ai" style="height:38px;padding:0 10px;font-size:0.75rem;">🔊 Speak</button>
+              <input type="text" id="ai-chat-input" class="target-input" placeholder="Ask anything (DeepThink shows reasoning step-by-step)..." style="flex:1;min-width:170px;background:rgba(4,8,20,0.9);padding:10px 14px;border-radius:10px;border:1px solid var(--border-glass);" />
+              <button type="button" class="btn-primary-glow" id="btn-send-ai-chat"><span>➤</span><span>Think &amp; Send</span></button>
             </div>
           </div>
         </div>
 
-        <!-- Interactive Command Shell inside Section 5 -->
+        <!-- Interactive Command Shell inside Section 4 -->
         <div class="glass-panel" style="padding:15px;">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
-            <div style="font-size:0.96rem;font-weight:800;color:#ffd700;">💻 Interactive ArGuS Command Shell</div>
+            <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:#ffd700;">💻 Interactive ArGuS Command Shell</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-              <button class="chip-btn cli-quick-btn" data-cmd="help">help</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="modules">modules</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="use 115">use 115</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="run">run</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="clear">clear</button>
+              <button type="button" class="chip-btn cli-quick-btn" data-cmd="help">help</button>
+              <button type="button" class="chip-btn cli-quick-btn" data-cmd="modules">modules</button>
+              <button type="button" class="chip-btn cli-quick-btn" data-cmd="use 115">use 115</button>
+              <button type="button" class="chip-btn cli-quick-btn" data-cmd="run">run</button>
+              <button type="button" class="chip-btn cli-quick-btn" data-cmd="clear">clear</button>
             </div>
           </div>
-          <div class="terminal-output" id="cli-terminal-screen">aragos Android BaDR version — 151 Scanners Ready
-Type 'help' for commands or 'run' to execute the active scanner.</div>
+          <div class="terminal-output" id="cli-terminal-screen" style="max-height:220px;">BaDR ArGuS scanner — 151 Modules Ready. Type 'help' or 'run'.</div>
           <div style="display:flex;gap:8px;margin-top:8px;">
-            <input type="text" id="cli-command-input" class="target-input" placeholder="Enter command (help, modules, use 14, set target github.com, run)..." style="background:rgba(6,9,16,0.9);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,215,0,0.26);" />
-            <button class="btn-primary-glow" id="btn-exec-cli">Execute</button>
+            <input type="text" id="cli-command-input" class="target-input" placeholder="Enter command (help, modules, use 14, set target github.com, run)..." style="background:rgba(4,8,20,0.9);padding:8px 12px;border-radius:10px;border:1px solid var(--border-glass);flex:1;" />
+            <button type="button" class="btn-primary-glow" id="btn-exec-cli">Execute</button>
           </div>
         </div>
       </section>
 
-      <!-- ==================== SECTION 6: ABOUT "aragos Android BaDR version" ==================== -->
-      <section class="view-pane" id="view-about">
-        <div class="glass-panel" style="padding:20px;display:flex;flex-direction:column;gap:14px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:1px solid rgba(255,215,0,0.24);padding-bottom:14px;">
-            <div style="display:flex;align-items:center;gap:12px;">
-              <div class="brand-orb" style="width:52px;height:52px;">
-                <svg viewBox="0 0 36 36" width="34" height="34" fill="none">
-                  <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="#ffd700" stroke-width="2.2" fill="rgba(255,215,0,0.18)"/>
-                  <circle cx="18" cy="18" r="7" stroke="#00f0ff" stroke-width="2"/>
-                  <circle cx="18" cy="18" r="3" fill="#ffd700"/>
-                </svg>
-              </div>
-              <div>
-                <h2 class="gold-app-title" style="font-size:1.5rem;">aragos Android BaDR version</h2>
-                <div style="font-size:0.88rem;color:#38bdf8;font-weight:700;">
-                  BaDR ArGuS scanner — Standalone Android APK &amp; Web Cybersecurity Suite
-                </div>
-              </div>
+      <!-- ==================== SECTION 5: SAVED REPORTS & BEGINNER FIX ARCHIVE ==================== -->
+      <section class="view-pane" id="view-reports">
+        <div class="glass-panel" style="padding:18px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+            <div>
+              <h2 class="gold-app-title" style="font-size:1.25rem;">📊 Section 5: Saved Scan Reports &amp; Multi-Format Export</h2>
+              <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:4px;">
+                Inspect any completed scan in the main Scanner Report view or export full dossiers in Markdown, JSON, CSV, or TXT.
+              </p>
             </div>
-            <a
-              href="https://github.com/kimokiki333-code/args-luna"
-              target="_blank"
-              rel="noopener"
-              class="btn-primary-glow"
-              style="text-decoration:none;"
-            >
-              ⭐ Open Official GitHub Repository ↗
+            <button type="button" class="btn-secondary-glass" id="btn-refresh-scans">↻ Refresh Vault</button>
+          </div>
+        </div>
+
+        <div id="reports-vault-list" style="display:flex;flex-direction:column;gap:12px;"></div>
+      </section>
+
+      <!-- ==================== SECTION 6: ABOUT BADR ARGUS ==================== -->
+      <section class="view-pane" id="view-about">
+        <div class="glass-panel" style="padding:18px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border-glass);padding-bottom:12px;">
+            <div>
+              <h2 class="gold-app-title" style="font-size:1.35rem;">🛡️ About BaDR ArGuS scanner</h2>
+              <div style="font-size:0.82rem;color:#ffd700;margin-top:2px;">151 Reconnaissance, Network, Web &amp; Threat Intelligence Suite</div>
+            </div>
+            <a href="https://github.com/kimokiki333-code/args-luna" target="_blank" rel="noopener" class="btn-primary-glow" style="text-decoration:none;">
+              ⭐ Official GitHub Repository ↗
             </a>
           </div>
-
-          <div style="padding:14px;border-radius:14px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.32);">
-            <h3 style="color:#ffd700;font-size:1.05rem;margin-bottom:6px;">🙏 Credits &amp; Attribution to the Original Creator</h3>
-            <p style="font-size:0.90rem;color:#f8fafc;">
-              This platform is proudly built upon the foundation of the original open-source <strong>Argos / ArGuS</strong> Python reconnaissance &amp; network auditing toolkit (originally created by <strong>Jason13 / the open-source Argus security community</strong>). We give full credit, gratitude, and respect to the original author who crafted the foundational scanner modules that inspired this project.
-            </p>
-          </div>
-
-          <div style="padding:14px;border-radius:14px;background:rgba(0,240,255,0.07);border:1px solid rgba(0,240,255,0.28);">
-            <h3 style="color:#38bdf8;font-size:1.05rem;margin-bottom:6px;">🚀 What We Engineered &amp; Added in <code>aragos Android BaDR version</code></h3>
-            <ul style="padding-left:18px;font-size:0.88rem;color:#e2e8f0;display:flex;flex-direction:column;gap:6px;">
-              <li><strong>Standalone Native Android APK &amp; Web Engine:</strong> Compiled into a direct-install, AOSP v1+v2 Merkle-signed Android package (<code>BaDR-ArGuS-Scanner.apk</code>) with a Kotlin WebView bridge that runs all <strong>151 scanners</strong> directly on your phone with 0 MB local model bloat.</li>
-              <li><strong>Startup Live Connection &amp; Self-IP WHOIS Detector:</strong> Automatically detects your active public IP, DNS resolver, WHOIS ISP/ASN, geographical coordinates (latitude/longitude), and checks whether your connection is flagged as Tor, Proxy, VPN, or under threat.</li>
-              <li><strong>Full 151 All-Scanners Omni-Scan:</strong> Added a unified 1-tap mode that runs all 151 scanners together across any Domain, IP address, DNS zone, or Email.</li>
-              <li><strong>3-Tier Traffic-Light Reports &amp; Beginner "How It Gets Fixed" Tutor:</strong> Classifies every result into 🟢 <strong>Clear (Safe)</strong>, 🟡 <strong>Medium (Caution)</strong>, or 🔴 <strong>Under Threat (Open Ports / Sockets / Errors)</strong> and explains in plain, beginner-friendly language what each issue means and how to fix it step by step.</li>
-              <li><strong>Multi-Key Cloud AI Vault + DeepSeek Harness (`@deepseek-ai/dsh`), Mistral 7-Pool &amp; Groq Free Router:</strong> Supports unlimited free API keys per provider with optional auto-model selection, Keyless Free Cloud AI, and a floating bottom-right General LLM &amp; Security Assistant.</li>
-              <li><strong>Android Swipe-Left / Swipe-Right Navigation &amp; 1st-Design Glassmorphism UI:</strong> Separated views with readable comic-handwriting body typography, clean display titles, and custom holographic SVG icons.</li>
-            </ul>
-          </div>
-
-          <div style="padding:14px;border-radius:14px;background:rgba(16,185,129,0.10);border:1px solid rgba(16,185,129,0.38);">
-            <h3 style="color:#34d399;font-size:1.05rem;margin-bottom:6px;">🎓 Educational &amp; Defensive Cybersecurity Purpose</h3>
-            <p style="font-size:0.88rem;color:#ecfdf5;">
-              <strong>aragos Android BaDR version</strong> is created strictly for <strong>cybersecurity education, self-auditing your own IP/network/domains, and authorized defensive security learning</strong>. It helps beginners and students understand how network ports, DNS records, TLS certificates, and web security headers work—and how to protect and fix their own systems against threats.
-            </p>
-          </div>
+          <p style="font-size:0.86rem;color:var(--text-primary);line-height:1.6;">
+            <strong>BaDR ArGuS scanner</strong> combines <strong>151 reconnaissance, network, web application, and security threat modules</strong> with a <strong>Thinking AI Analyst</strong> (showing step-by-step model reasoning) and a <strong>Cloud API Key Vault</strong> designed to use <strong>0 MB of local phone storage</strong>.
+          </p>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6;">
+            Built upon the open-source Argus security toolkit foundation with full attribution to the original module authors, engineered into a standalone Android &amp; Web suite for defensive cybersecurity education and authorized network auditing.
+          </p>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- ==================== FUTURISTIC HOLOGRAPHIC BOTTOM NAVIGATION BAR ==================== -->
-  <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Android Bottom Navigation">
-    <button class="mobile-nav-item active" data-view="dashboard">
-      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
-        <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.14)"/>
-        <circle cx="14" cy="14" r="5" stroke="#00f0ff" stroke-width="1.8"/>
-        <circle cx="14" cy="14" r="2" fill="#ffd700"/>
-      </svg>
-      <span>Scanner</span>
+  <!-- ==================== 5-TAB MOBILE BOTTOM NAVIGATION BAR (EXACT 1ST-VERSION DESIGN) ==================== -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Primary Mobile Navigation">
+    <button type="button" class="mobile-nav-item active" data-view="dashboard">
+      <span class="mobile-nav-icon">🛡️</span>
+      <span class="mobile-nav-label">Scanner</span>
     </button>
-
-    <button class="mobile-nav-item" data-view="modules">
-      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
-        <rect x="3" y="3" width="9" height="9" rx="2.5" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.12)"/>
-        <rect x="16" y="3" width="9" height="9" rx="2.5" stroke="#00f0ff" stroke-width="2"/>
-        <rect x="3" y="16" width="9" height="9" rx="2.5" stroke="#00f0ff" stroke-width="2"/>
-        <rect x="16" y="16" width="9" height="9" rx="2.5" stroke="#10b981" stroke-width="2"/>
-      </svg>
-      <span>151 Tools</span>
+    <button type="button" class="mobile-nav-item" data-view="modules">
+      <span class="mobile-nav-icon">⚡</span>
+      <span class="mobile-nav-label">151 Tools</span>
     </button>
-
-    <button class="mobile-nav-item" data-view="reports">
-      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
-        <path d="M5 23V5a2 2 0 012-2h10l6 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.1)"/>
-        <path d="M9 17l3.5-3.5 2.5 2.5 4.5-5" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>Reports</span>
+    <button type="button" class="mobile-nav-item" data-view="settings">
+      <span class="mobile-nav-icon">🔑</span>
+      <span class="mobile-nav-label">API Vault</span>
     </button>
-
-    <button class="mobile-nav-item" data-view="settings">
-      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
-        <circle cx="9.5" cy="17.5" r="5" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.14)"/>
-        <path d="M13.5 13.5L24 3m-4 4l4 4m-7-1l3 3" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <span>Key Vault</span>
+    <button type="button" class="mobile-nav-item" data-view="ai">
+      <span class="mobile-nav-icon">🧠</span>
+      <span class="mobile-nav-label">Cloud AI</span>
     </button>
-
-    <button class="mobile-nav-item" data-view="ai">
-      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="11" stroke="#00f0ff" stroke-width="1.8" stroke-dasharray="4 2"/>
-        <polygon points="14,5 22,14 14,23 6,14" stroke="#ffd700" stroke-width="1.8" fill="rgba(255,215,0,0.14)"/>
-        <circle cx="14" cy="14" r="2.5" fill="#10b981"/>
-      </svg>
-      <span>AI Tutor</span>
-    </button>
-
-    <button class="mobile-nav-item" data-view="about">
-      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
-        <path d="M14 2L4 7v7c0 6.5 4.2 12.4 10 14 5.8-1.6 10-7.5 10-14V7L14 2z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.12)"/>
-        <path d="M14 12v7m0-10.5h.01" stroke="#00f0ff" stroke-width="2.4" stroke-linecap="round"/>
-      </svg>
-      <span>About</span>
+    <button type="button" class="mobile-nav-item" data-view="reports">
+      <span class="mobile-nav-icon">📊</span>
+      <span class="mobile-nav-label">Reports</span>
     </button>
   </nav>
 
-  <!-- Toast Notification -->
-  <div id="aragos-toast" class="glass-panel-elevated" style="position:fixed;bottom:84px;right:16px;z-index:9999;display:none;max-width:360px;padding:12px 15px;"></div>
+  <!-- Toast Notification Container -->
+  <div id="aragos-toast" class="glass-panel-elevated" style="position:fixed;bottom:76px;right:16px;z-index:9999;display:none;max-width:350px;padding:12px 15px;"></div>
 
-  <!-- Standalone App Controller -->
+  <!-- Main Application Controller -->
   <script src="/static/js/app.js"></script>
 </body>
 </html>
