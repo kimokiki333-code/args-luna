@@ -10,7 +10,7 @@
   <title>BaDR ArGuS scanner — aragos Android BaDR version</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Patrick+Hand&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/css/aragos.css" />
 </head>
 <body>
@@ -132,7 +132,7 @@
           <button class="nav-btn" data-view="settings">
             <span class="nav-btn-left">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="15" r="4" stroke="#ffd700" stroke-width="1.8"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2" stroke="#00f0ff" stroke-width="1.8" stroke-linecap="round"/></svg>
-              <span>Key Vault &amp; AHM7</span>
+              <span>Cloud Key Vault</span>
             </span>
             <span class="nav-badge">+KEY</span>
           </button>
@@ -216,10 +216,10 @@
             ◀ Prev
           </button>
           <div class="swipe-dots" id="top-swipe-dots">
-            <button class="swipe-dot-pill active" data-view="dashboard">1. Scanner</button>
+            <button class="swipe-dot-pill active" data-view="dashboard">1. Overview &amp; Scanner</button>
             <button class="swipe-dot-pill" data-view="modules">2. 151 Tools</button>
             <button class="swipe-dot-pill" data-view="reports">3. Reports &amp; Fixes</button>
-            <button class="swipe-dot-pill" data-view="settings">4. Key Vault &amp; AHM7</button>
+            <button class="swipe-dot-pill" data-view="settings">4. Key Vault</button>
             <button class="swipe-dot-pill" data-view="ai">5. AI Tutor</button>
             <button class="swipe-dot-pill" data-view="about">6. About</button>
           </div>
@@ -229,8 +229,93 @@
         </div>
       </header>
 
-      <!-- ==================== SECTION 1: SCANNER HUB (NO ENDLESS SCROLL TRAP!) ==================== -->
+      <!-- ==================== SECTION 1: PROJECT OVERVIEW & SCANNER HUB ==================== -->
       <section class="view-pane active" id="view-dashboard">
+        <!-- 1ST PART: CONCISE PROJECT OVERVIEW, HOW IT RUNS, 3 CATEGORIES & ZERO-PAYWALL PRO SCANNERS -->
+        <div class="glass-panel" style="padding:16px;display:flex;flex-direction:column;gap:12px;border-color:rgba(0,240,255,0.38);">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+            <div>
+              <h2 class="gold-app-title" style="font-size:1.22rem;">
+                🛡️ What Is BaDR ArGuS (`aragos Android BaDR version`) &amp; How It Runs
+              </h2>
+              <div style="font-size:0.84rem;color:#7dd3fc;font-weight:700;margin-top:2px;">
+                151 Cybersecurity &amp; OSINT Scanners · 100% Unlocked Results · Zero Sign-Up Pop-Ups · 0 MB Local Phone RAM
+              </div>
+            </div>
+            <button class="btn-secondary-glass" id="btn-toggle-project-overview" style="height:32px;font-size:0.76rem;">
+              ▾ Hide / Show Overview
+            </button>
+          </div>
+
+          <div id="project-overview-body" style="display:flex;flex-direction:column;gap:12px;">
+            <!-- Why This Exists: No Sign-Up / Paywall Pop-Ups Hiding Your Scan Results -->
+            <div style="padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,rgba(0,240,255,0.12),rgba(139,92,246,0.14));border:1px solid rgba(0,240,255,0.38);font-size:0.88rem;color:#f8fafc;">
+              <strong style="color:#00f0ff;font-family:var(--font-display);">🚫 Why We Built This (Zero Paywall or Sign-Up Pop-Ups Hiding Results):</strong>
+              In many security websites and apps, you enter a domain or IP, wait for the scan to finish, and then <strong>a pop-up blocks or blurs your report demanding that you Sign Up, enter a credit card, or pay for a Pro subscription just to see the findings</strong>.
+              <br/>
+              <strong>BaDR ArGuS</strong> runs natively on your phone and web browser, executes all <strong>151 scanners</strong> concurrently, and gives you <strong>100% of the results, raw data, 3-Tier (Green / Yellow / Red) threat breakdown, and plain-English "How It Gets Fixed" steps immediately—with zero sign-up walls</strong>.
+            </div>
+
+            <!-- The 3 Main Categories (Concise Summary of the 151 Scanners) -->
+            <div class="overview-pillars-grid">
+              <div class="overview-pillar-card">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <strong style="color:#00f0ff;font-family:var(--font-display);font-size:0.92rem;">🌐 1. Network, IP &amp; DNS</strong>
+                  <span class="sev-badge sev-INFO">Modules #1–#52</span>
+                </div>
+                <p style="font-size:0.84rem;color:var(--text-secondary);">
+                  Scans live IPv4/IPv6 hosts, open TCP/UDP ports &amp; sockets, WHOIS/RDAP ownership, BGP/ASN routing, DNSSEC, Zone Transfer (`AXFR`), Reverse DNS, and SSH/SNMP banners.
+                </p>
+              </div>
+
+              <div class="overview-pillar-card" style="border-color:rgba(139,92,246,0.38);">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <strong style="color:#c4b5fd;font-family:var(--font-display);font-size:0.92rem;">🕸️ 2. Web, SSL/TLS &amp; APIs</strong>
+                  <span class="sev-badge sev-INFO">Modules #53–#101</span>
+                </div>
+                <p style="font-size:0.84rem;color:var(--text-secondary);">
+                  Audits SSL/TLS certificate chains &amp; cipher suites, hidden directories, CORS misconfigurations, GraphQL/Swagger API schemas, DOM XSS sinks, cookies, and CMS stacks.
+                </p>
+              </div>
+
+              <div class="overview-pillar-card" style="border-color:rgba(16,185,129,0.38);">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <strong style="color:#6ee7b7;font-family:var(--font-display);font-size:0.92rem;">🛡️ 3. Security &amp; Threat Intel</strong>
+                  <span class="sev-badge sev-OK">Modules #102–#151</span>
+                </div>
+                <p style="font-size:0.84rem;color:var(--text-secondary);">
+                  Detects Subdomain Takeovers, Breached Credentials &amp; Dark Web pastes, exposed <code>.env</code> / <code>.git</code> files, open S3/Cloud buckets, WAF rules, and Passive CVE vulnerabilities.
+                </p>
+              </div>
+            </div>
+
+            <!-- Spotlight on High-Value Scanners (Normally Locked Behind Subscriptions Elsewhere) -->
+            <div>
+              <div style="font-family:var(--font-display);font-size:0.84rem;font-weight:700;color:#fde047;margin-bottom:7px;">
+                💎 Key High-Value Scanners Included Free (Often Locked Behind Paid Subscriptions Elsewhere):
+              </div>
+              <div class="pro-scanner-spotlight-grid">
+                <div class="pro-spotlight-item">
+                  <strong style="color:#00f0ff;font-family:var(--font-display);font-size:0.84rem;">🔓 Open Ports, Sockets &amp; Banners (#9, #42, #44)</strong>
+                  <span style="font-size:0.80rem;color:var(--text-secondary);">Finds exposed router/server ports (21, 22, 80, 443, 3389, 8080) and explains how to close them.</span>
+                </div>
+                <div class="pro-spotlight-item">
+                  <strong style="color:#c4b5fd;font-family:var(--font-display);font-size:0.84rem;">🎯 Subdomain Takeover &amp; Shadowing (#117, #118, #142)</strong>
+                  <span style="font-size:0.80rem;color:var(--text-secondary);">Checks if forgotten subdomains point to unclaimed cloud hosts that attackers could hijack.</span>
+                </div>
+                <div class="pro-spotlight-item">
+                  <strong style="color:#fda4af;font-family:var(--font-display);font-size:0.84rem;">🕵️ Data Leaks, Breaches &amp; `.env`/`.git` (#104, #105, #121, #125)</strong>
+                  <span style="font-size:0.80rem;color:var(--text-secondary);">Checks for leaked credentials, dark web pastes, exposed <code>.env</code> secrets, and open S3/GCP buckets.</span>
+                </div>
+                <div class="pro-spotlight-item">
+                  <strong style="color:#6ee7b7;font-family:var(--font-display);font-size:0.84rem;">🛡️ Passive CVE Mapper, WAF &amp; SSL Labs (#106, #115, #140)</strong>
+                  <span style="font-size:0.80rem;color:var(--text-secondary);">Maps server versions to known CVEs, tests Firewall/WAF protection, and grades TLS security.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Live Detected Self-IP / WHOIS / DNS / Geo / Threat Strip -->
         <div class="self-ip-hud-card" id="home-self-ip-strip">
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -615,7 +700,7 @@
                   <option value="nvidia">🟢 NVIDIA NIM Free Dev (`deepseek-ai/deepseek-r1`)</option>
                   <option value="google">✨ Google Gemini (AI Studio Free)</option>
                   <option value="openai">🤖 OpenAI / Custom Compatible</option>
-                  <option value="keyless_free">🔓 Keyless Free AI + AHM7 (No Key Needed)</option>
+                  <option value="keyless_free">🔓 Keyless Free Cloud AI (No Key Needed)</option>
                 </select>
               </div>
 
@@ -696,7 +781,7 @@
               <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(16,185,129,0.25);">
                 <strong style="color:#34d399;">🚀 Groq 2026 Forever-Free Tier &amp; Keyless AI:</strong><br/>
                 • <strong>Groq Free API (`console.groq.com/keys`):</strong> Still 100% free with no credit card! Gives <strong>14,400 req/day &amp; 30 RPM</strong> on `llama-3.1-8b-instant` &amp; `openai/gpt-oss-20b`, and <strong>1,000 req/day</strong> on `llama-3.3-70b-versatile`.<br/>
-                • <strong>Zero-Key Mode:</strong> Even with 0 keys, our built-in Keyless Cloud AI + AHM7 FreeAPI works automatically!
+                • <strong>Zero-Key Mode:</strong> Even with 0 keys, our built-in Keyless Cloud AI Pool works automatically!
               </div>
               <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(56,189,248,0.32);">
                 <strong style="color:#38bdf8;">🐋 DeepSeek Harness (`@deepseek-ai/dsh` — Everything is a Plugin):</strong><br/>
@@ -708,42 +793,6 @@
 
           <!-- Pre-Wired Provider Cards -->
           <div class="vault-provider-grid" id="vault-providers-container"></div>
-        </div>
-
-        <!-- ==================== AHM7 FREEAPI (freeapi.pro / ahm7xmakki.com) 21 ZERO-KEY TOOLS ==================== -->
-        <div class="glass-panel" style="padding:16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
-            <div>
-              <h3 class="gold-app-title" style="font-size:1.22rem;">🛠️ AHM7 FreeAPI (`freeapi.pro` / `ahm7xmakki.com`) — All 21 Zero-Key Tools</h3>
-              <p style="font-size:0.80rem;color:var(--text-secondary);margin-top:2px;">
-                21 production REST APIs &amp; tools with <strong>Zero API Key, Zero Signup, and Frontend + Backend Integration</strong> (WebSnap Screenshot, WebZip Site Archiver, TempSter Disposable OSINT Email, SpeechSter 580-Voice TTS, VisionChat AI OCR, PixelSter Flux AI, and more!).
-              </p>
-            </div>
-            <a href="https://freeapi.pro/docs" target="_blank" rel="noopener" class="btn-secondary-glass" style="text-decoration:none;height:34px;font-size:0.78rem;">
-              📖 Open FreeAPI Docs ↗
-            </a>
-          </div>
-
-          <!-- Interactive AHM7 Tool Runner Bar -->
-          <div style="padding:12px;border-radius:13px;background:rgba(6,9,16,0.9);border:1px solid rgba(255,215,0,0.32);margin-bottom:12px;">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-              <select id="ahm7-tool-select" class="glass-select" style="flex:1;min-width:220px;"></select>
-              <input
-                type="text"
-                id="ahm7-param-input"
-                class="target-input"
-                value="https://github.com"
-                placeholder="Enter URL, text, or search query for selected AHM7 tool..."
-                style="flex:2;min-width:220px;padding:8px 12px;background:rgba(12,17,29,0.95);border:1px solid rgba(0,240,255,0.35);border-radius:10px;"
-              />
-              <button class="btn-primary-glow" id="btn-run-ahm7-tool" style="height:38px;">
-                ⚡ Run AHM7 Tool
-              </button>
-            </div>
-            <div id="ahm7-tool-result-box" style="margin-top:10px;display:none;padding:10px;border-radius:10px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.35);font-size:0.82rem;"></div>
-          </div>
-
-          <div id="ahm7-tools-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:10px;max-height:480px;overflow-y:auto;padding-right:4px;"></div>
         </div>
       </section>
 
@@ -851,8 +900,8 @@ Type 'help' for commands or 'run' to execute the active scanner.</div>
               <li><strong>Startup Live Connection &amp; Self-IP WHOIS Detector:</strong> Automatically detects your active public IP, DNS resolver, WHOIS ISP/ASN, geographical coordinates (latitude/longitude), and checks whether your connection is flagged as Tor, Proxy, VPN, or under threat.</li>
               <li><strong>Full 151 All-Scanners Omni-Scan:</strong> Added a unified 1-tap mode that runs all 151 scanners together across any Domain, IP address, DNS zone, or Email.</li>
               <li><strong>3-Tier Traffic-Light Reports &amp; Beginner "How It Gets Fixed" Tutor:</strong> Classifies every result into 🟢 <strong>Clear (Safe)</strong>, 🟡 <strong>Medium (Caution)</strong>, or 🔴 <strong>Under Threat (Open Ports / Sockets / Errors)</strong> and explains in plain, beginner-friendly language what each issue means and how to fix it step by step.</li>
-              <li><strong>Multi-Key Cloud AI Vault + Mistral 7-Pool &amp; Groq Free Router + AHM7 21 Free Tools:</strong> Supports unlimited free API keys per provider with optional auto-model selection, plus 21 zero-key tools from <strong>AHM7 FreeAPI (`freeapi.pro`)</strong>.</li>
-              <li><strong>Android Swipe-Left / Swipe-Right Navigation &amp; Futuristic Cyber-Glass UI:</strong> Separated views with readable comic-handwriting typography and custom holographic SVG icons.</li>
+              <li><strong>Multi-Key Cloud AI Vault + DeepSeek Harness (`@deepseek-ai/dsh`), Mistral 7-Pool &amp; Groq Free Router:</strong> Supports unlimited free API keys per provider with optional auto-model selection, Keyless Free Cloud AI, and a floating bottom-right General LLM &amp; Security Assistant.</li>
+              <li><strong>Android Swipe-Left / Swipe-Right Navigation &amp; 1st-Design Glassmorphism UI:</strong> Separated views with readable comic-handwriting body typography, clean display titles, and custom holographic SVG icons.</li>
             </ul>
           </div>
 
@@ -865,6 +914,93 @@ Type 'help' for commands or 'run' to execute the active scanner.</div>
         </div>
       </section>
     </main>
+  </div>
+
+  <!-- ==================== FLOATING BOTTOM-RIGHT REGULAR LLM & SECURITY ASSISTANT ==================== -->
+  <button class="floating-llm-fab" id="floating-llm-fab" title="Open Regular AI Assistant Chat (Free Cloud Models)">
+    <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+      <path d="M4 6a3 3 0 013-3h14a3 3 0 013 3v10a3 3 0 01-3 3H11l-5 4v-4H7a3 3 0 01-3-3V6z" stroke="#ffffff" stroke-width="2" fill="rgba(255,255,255,0.16)"/>
+      <circle cx="10" cy="11" r="1.5" fill="#00f0ff"/>
+      <circle cx="14" cy="11" r="1.5" fill="#ffffff"/>
+      <circle cx="18" cy="11" r="1.5" fill="#fde047"/>
+    </svg>
+    <span class="floating-llm-fab-label">AI CHAT</span>
+  </button>
+
+  <div class="floating-llm-drawer" id="floating-llm-drawer" aria-label="Floating AI Assistant Chat">
+    <div class="floating-llm-header">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="brand-orb" style="width:32px;height:32px;border-radius:10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#00f0ff" stroke-width="2"/>
+              <path d="M8 12h8M12 8v8" stroke="#fde047" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display);font-size:0.92rem;font-weight:700;color:#ffffff;">
+              🤖 BaDR Free LLM Assistant
+            </div>
+            <div style="font-size:0.72rem;color:#7dd3fc;">
+              Ask anything (General LLM, Coding, or Scan Help)
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <button class="swipe-arrow-btn" id="btn-clear-floating-llm" style="padding:3px 8px;font-size:0.70rem;" title="Clear Chat">🧹 Clear</button>
+          <button class="swipe-arrow-btn" id="btn-close-floating-llm" style="padding:3px 9px;font-size:0.74rem;" title="Minimize Chat">✕</button>
+        </div>
+      </div>
+
+      <!-- Free Model Selector inside Floating Chat -->
+      <div style="display:flex;align-items:center;gap:6px;">
+        <select id="floating-llm-model-select" class="glass-select" style="flex:1;height:32px;font-size:0.76rem;padding:0 8px;">
+          <option value="keyless_free|openai">🔓 Keyless Free AI: GPT-4o-Mini Cloud (No Key Needed!)</option>
+          <option value="keyless_free|mistral">🔓 Keyless Free AI: Mistral 24B Cloud (No Key Needed!)</option>
+          <option value="keyless_free|qwen-coder">🔓 Keyless Free AI: Qwen Coder 32B (No Key Needed!)</option>
+          <option value="ollama|deepseek-v3.1:671b-cloud">☁️ Ollama Cloud: deepseek-v3.1:671b-cloud</option>
+          <option value="deepseek|deepseek-flash">🐋 DeepSeek Harness: deepseek-flash (1M Context)</option>
+          <option value="mistral|mistral-medium-2508">⚡ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
+          <option value="mistral|devstral-2512">⚡ Mistral Pool 7: devstral-2512 (1M TPM)</option>
+          <option value="groq|llama-3.1-8b-instant">🚀 Groq Free: llama-3.1-8b-instant (14.4K/Day)</option>
+          <option value="groq|deepseek-r1-distill-llama-70b">🚀 Groq Free: deepseek-r1-distill-llama-70b</option>
+          <option value="nvidia|deepseek-ai/deepseek-r1">🟢 NVIDIA NIM: deepseek-ai/deepseek-r1</option>
+          <option value="openrouter|meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b-instruct:free</option>
+          <option value="google|gemini-2.0-flash">✨ Google Gemini: gemini-2.0-flash</option>
+        </select>
+        <label style="display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;color:#cbd5e1;white-space:nowrap;cursor:pointer;" title="Include active scan report context when answering">
+          <input type="checkbox" id="floating-llm-include-scan" checked style="accent-color:#00f0ff;" />
+          <span>+Scan Info</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="floating-llm-messages" id="floating-llm-messages">
+      <div class="chat-msg assistant">
+        <strong>Hi! I'm your BaDR Free AI Assistant 💬</strong><br/>
+        You can ask me <strong>anything</strong> just like a regular LLM—general questions, coding, networking, Android/Linux tips, or ask me to explain and fix anything in your current scan report!
+      </div>
+    </div>
+
+    <div class="floating-llm-footer">
+      <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;">
+        <button class="chip-btn floating-quick-chip" data-q="Explain my current scan report in simple words and tell me if anything needs fixing." style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">🛡️ Explain Scan</button>
+        <button class="chip-btn floating-quick-chip" data-q="How do I secure my home Wi-Fi router and phone against open port threats?" style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">🔒 Secure My Wi-Fi</button>
+        <button class="chip-btn floating-quick-chip" data-q="What can you help me with as a general AI assistant?" style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">💡 General Help</button>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <input
+          type="text"
+          id="floating-llm-input"
+          class="target-input"
+          placeholder="Ask anything (general question or security help)..."
+          style="background:rgba(11,18,36,0.95);padding:8px 11px;border-radius:10px;border:1px solid rgba(0,240,255,0.38);font-size:0.86rem;"
+        />
+        <button class="btn-primary-glow" id="btn-send-floating-llm" style="height:36px;padding:0 13px;font-size:0.82rem;">
+          ➤
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- ==================== FUTURISTIC HOLOGRAPHIC BOTTOM NAVIGATION BAR ==================== -->

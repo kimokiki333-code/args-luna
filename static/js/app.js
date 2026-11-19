@@ -14,33 +14,6 @@
   const EMBEDDED_MODULES = [{"id": "1", "name": "Associated Hosts", "section": "Network & Infrastructure", "description": "Reverse host lookup to list domains sharing an IP.", "primary_input": "Domain/IP", "options": ["sources", "timeout"], "script": "associated_hosts.py", "tags": [], "favorite": false}, {"id": "2", "name": "DNS Over HTTPS", "section": "Network & Infrastructure", "description": "Resolve DNS records via encrypted DoH endpoints.", "primary_input": "Domain", "options": ["providers", "qtype", "timeout"], "script": "dns_over_https.py", "tags": ["dns"], "favorite": false}, {"id": "3", "name": "DNS Records", "section": "Network & Infrastructure", "description": "Enumerate standard DNS RRsets (A, AAAA, MX, NS, etc.).", "primary_input": "Domain", "options": ["timeout", "types"], "script": "dns_records.py", "tags": ["dns"], "favorite": true}, {"id": "4", "name": "DNSSEC Check", "section": "Network & Infrastructure", "description": "Detect and validate DNSSEC configuration.", "primary_input": "Domain", "options": ["check_subdomains", "timeout"], "script": "dnssec.py", "tags": ["dns"], "favorite": false}, {"id": "5", "name": "Domain Info", "section": "Network & Infrastructure", "description": "Registrar, creation/expiry, and zone metadata.", "primary_input": "Domain", "options": ["timeout"], "script": "domain_info.py", "tags": [], "favorite": false}, {"id": "6", "name": "Domain Reputation Check", "section": "Network & Infrastructure", "description": "Aggregate trustworthiness indicators from reputation sources.", "primary_input": "Domain", "options": ["timeout", "vt_key"], "script": "domain_reputation_check.py", "tags": [], "favorite": false}, {"id": "7", "name": "HTTP/2 and HTTP/3 Support Checker", "section": "Network & Infrastructure", "description": "Detect server support for HTTP/2 and HTTP/3 (QUIC).", "primary_input": "Domain/URL", "options": [], "script": "http2_http3_checker.py", "tags": [], "favorite": false}, {"id": "8", "name": "IP Info", "section": "Network & Infrastructure", "description": "Geo, ASN, and ownership info for target IPs.", "primary_input": "IP/Domain", "options": [], "script": "ip_info.py", "tags": [], "favorite": false}, {"id": "9", "name": "Open Ports Scan", "section": "Network & Infrastructure", "description": "TCP port scan to identify exposed services.", "primary_input": "IP/Domain", "options": [], "script": "open_ports.py", "tags": ["fast"], "favorite": true}, {"id": "10", "name": "Server Info", "section": "Network & Infrastructure", "description": "Gather server banners, stack hints, and versions.", "primary_input": "Domain/URL", "options": [], "script": "server_info.py", "tags": [], "favorite": false}, {"id": "11", "name": "Server Location", "section": "Network & Infrastructure", "description": "Approximate server geolocation & hosting provider.", "primary_input": "Domain/IP", "options": [], "script": "server_location.py", "tags": [], "favorite": false}, {"id": "12", "name": "SSL Chain Analysis", "section": "Network & Infrastructure", "description": "Retrieve cert chain; validate trust path & intermediates.", "primary_input": "Domain/Host:Port", "options": [], "script": "ssl_chain.py", "tags": ["tls"], "favorite": true}, {"id": "13", "name": "SSL Expiry Alert", "section": "Network & Infrastructure", "description": "Check certificate expiration window; warn when near expiry.", "primary_input": "Domain/Host:Port", "options": [], "script": "ssl_expiry.py", "tags": ["tls"], "favorite": false}, {"id": "14", "name": "TLS Cipher Suites", "section": "Network & Infrastructure", "description": "Enumerate supported TLS cipher suites.", "primary_input": "Domain/Host:Port", "options": [], "script": "tls_cipher_suites.py", "tags": ["tls"], "favorite": true}, {"id": "15", "name": "TLS Handshake Simulation", "section": "Network & Infrastructure", "description": "Simulate varied TLS client handshakes; flag issues.", "primary_input": "Domain/Host:Port", "options": [], "script": "tls_handshake.py", "tags": ["tls"], "favorite": false}, {"id": "16", "name": "Traceroute", "section": "Network & Infrastructure", "description": "Trace network hops to the destination.", "primary_input": "Domain/IP", "options": [], "script": "traceroute.py", "tags": [], "favorite": false}, {"id": "17", "name": "TXT Records", "section": "Network & Infrastructure", "description": "Retrieve TXT records (SPF, DKIM, verification tokens).", "primary_input": "Domain", "options": [], "script": "txt_records.py", "tags": ["email"], "favorite": false}, {"id": "18", "name": "WHOIS Lookup", "section": "Network & Infrastructure", "description": "WHOIS/RDAP ownership data retrieval.", "primary_input": "Domain/IP", "options": [], "script": "whois_lookup.py", "tags": [], "favorite": false}, {"id": "19", "name": "Zone Transfer", "section": "Network & Infrastructure", "description": "Attempt AXFR to enumerate full DNS zone when misconfigured.", "primary_input": "Domain", "options": [], "script": "zonetransfer.py", "tags": ["dns"], "favorite": false}, {"id": "20", "name": "ASN Lookup", "section": "Network & Infrastructure", "description": "Map IPs/domains to ASNs & network orgs.", "primary_input": "Domain/IP", "options": ["ips_file", "provider", "timeout"], "script": "asn_lookup.py", "tags": [], "favorite": false}, {"id": "21", "name": "Reverse IP Lookup", "section": "Network & Infrastructure", "description": "Enumerate domains hosted on a given IP.", "primary_input": "IP", "options": [], "script": "reverse_ip_lookup.py", "tags": [], "favorite": false}, {"id": "22", "name": "IP Range Scanner", "section": "Network & Infrastructure", "description": "Scan an IP range for live hosts & open ports.", "primary_input": "CIDR/IP", "options": [], "script": "ip_range_scanner.py", "tags": ["fast"], "favorite": false}, {"id": "23", "name": "RDAP Lookup", "section": "Network & Infrastructure", "description": "Structured domain/IP ownership via RDAP.", "primary_input": "Domain/IP", "options": ["timeout"], "script": "rdap_lookup.py", "tags": [], "favorite": false}, {"id": "24", "name": "NTP Information Leak Checker", "section": "Network & Infrastructure", "description": "Query NTP servers for version & info leak data.", "primary_input": "IP/Domain", "options": [], "script": "ntp_info_leak_checker.py", "tags": [], "favorite": false}, {"id": "25", "name": "IPv6 Reachability Test", "section": "Network & Infrastructure", "description": "Validate IPv6 DNS + connection reachability vs IPv4.", "primary_input": "Domain/IP", "options": ["max_hosts", "threads", "timeout"], "script": "ipv6_reachability_test.py", "tags": ["dns"], "favorite": false}, {"id": "26", "name": "BGP Route Analysis", "section": "Network & Infrastructure", "description": "Inspect BGP announcements & paths for anomalies.", "primary_input": "ASN/Prefix", "options": ["timeout"], "script": "bgp_route_analysis.py", "tags": [], "favorite": false}, {"id": "27", "name": "CDN Detection", "section": "Network & Infrastructure", "description": "Detect CDN fronting (Cloudflare, Akamai, etc.).", "primary_input": "Domain", "options": ["timeout"], "script": "cdn_detection.py", "tags": [], "favorite": false}, {"id": "28", "name": "Reverse DNS Scan", "section": "Network & Infrastructure", "description": "PTR sweeping to discover hostnames.", "primary_input": "IP/Range", "options": ["workers"], "script": "reverse_dns_scan.py", "tags": ["dns", "fast"], "favorite": false}, {"id": "29", "name": "Network Timezone Detection", "section": "Network & Infrastructure", "description": "Approximate timezone from geo/latency/banner clues.", "primary_input": "Domain/IP", "options": [], "script": "network_timezone_detection.py", "tags": [], "favorite": false}, {"id": "30", "name": "Geo-DNS Footprint", "section": "Network & Infrastructure", "description": "Compare DNS answers across global resolvers; map geo/ASN variance.", "primary_input": "Domain", "options": ["timeout"], "script": "geo_dns_footprint.py", "tags": ["dns"], "favorite": false}, {"id": "31", "name": "SPF Network Extractor", "section": "Network & Infrastructure", "description": "Parse SPF includes/mx/a; expand & extract sending netblocks.", "primary_input": "Domain/Email", "options": [], "script": "spf_network_extractor.py", "tags": ["email"], "favorite": false}, {"id": "32", "name": "NS Geo/ASN Diversity Analyzer", "section": "Network & Infrastructure", "description": "Assess authoritative NS geo & ASN concentration.", "primary_input": "Domain", "options": [], "script": "ns_geo_asn_diversity_analyzer.py", "tags": [], "favorite": false}, {"id": "33", "name": "DNS SLA Latency Monitor", "section": "Network & Infrastructure", "description": "Measure resolver latency & SLA metrics; flag slow responders.", "primary_input": "Domain", "options": ["resolvers", "samples", "timeout"], "script": "dns_sla_latency_monitor.py", "tags": ["dns"], "favorite": false}, {"id": "34", "name": "RPKI Route Validity Check", "section": "Network & Infrastructure", "description": "Validate route origins for target prefixes against RPKI VRPs.", "primary_input": "Domain/IP", "options": [], "script": "rpki_route_validity_check.py", "tags": [], "favorite": false}, {"id": "35", "name": "Recursive Nameserver Leak Test", "section": "Network & Infrastructure", "description": "Detect recursion enabled on authoritative nameservers.", "primary_input": "Domain", "options": ["timeout"], "script": "recursive_nameserver_leak_test.py", "tags": [], "favorite": false}, {"id": "36", "name": "Dual-Stack Behavior Profiler", "section": "Network & Infrastructure", "description": "Compare HTTP/TLS responses over IPv4 vs IPv6; flag diffs.", "primary_input": "Domain", "options": ["limit", "paths", "timeout"], "script": "dual_stack_behavior_profiler.py", "tags": [], "favorite": false}, {"id": "37", "name": "ICMP Reachability Matrix", "section": "Network & Infrastructure", "description": "Ping sweep; build loss/latency matrix; detect filtering.", "primary_input": "Domain/IP/CIDR", "options": [], "script": "icmp_reachability_matrix.py", "tags": [], "favorite": false}, {"id": "38", "name": "IP Allocation History Tracker", "section": "Network & Infrastructure", "description": "Historical IP allocation & ownership timeline.", "primary_input": "IP/Domain", "options": [], "script": "ip_allocation_history_tracker.py", "tags": ["heavy"], "favorite": false}, {"id": "39", "name": "Autonomous Neighbor Peering Map", "section": "Network & Infrastructure", "description": "Map upstream/downstream AS adjacencies.", "primary_input": "ASN/Domain", "options": ["timeout"], "script": "autonomous_neighbor_peering_map.py", "tags": [], "favorite": false}, {"id": "40", "name": "TLS Session Resumption Map", "section": "Network & Infrastructure", "description": "Probe TLS session resumption across hosts.", "primary_input": "Domain/IP/CIDR", "options": [], "script": "tls_session_resumption_map.py", "tags": ["tls"], "favorite": false}, {"id": "41", "name": "Network Certificate Inventory", "section": "Network & Infrastructure", "description": "Collect certs across network; dedupe; list SANs & expiries.", "primary_input": "Domain/IP/CIDR", "options": [], "script": "network_certificate_inventory.py", "tags": ["heavy", "tls"], "favorite": false}, {"id": "42", "name": "SSH Banner & Key Fingerprinter", "section": "Network & Infrastructure", "description": "Grab SSH banners & fingerprints across hosts/ports.", "primary_input": "Domain/IP/CIDR", "options": [], "script": "ssh_banner_key_fingerprinter.py", "tags": [], "favorite": false}, {"id": "43", "name": "SNMP Public Community Checker", "section": "Network & Infrastructure", "description": "Test SNMP v2c communities for info leakage.", "primary_input": "Domain/IP/CIDR", "options": [], "script": "snmp_public_community_checker.py", "tags": [], "favorite": false}, {"id": "44", "name": "UDP Service Sampler", "section": "Network & Infrastructure", "description": "Lightweight probes to classify common UDP services.", "primary_input": "Domain/IP/CIDR", "options": [], "script": "udp_service_sampler.py", "tags": [], "favorite": false}, {"id": "45", "name": "DNS CAA Checker", "section": "Network & Infrastructure", "description": "Inspect Certification Authority Authorization (CAA) DNS records.", "primary_input": "Domain", "options": ["timeout"], "script": "dns_caa_checker.py", "tags": ["dns", "tls"], "favorite": false}, {"id": "46", "name": "Decoy DNS Beacon", "section": "Network & Infrastructure", "description": "Deploy & monitor DNS canary queries to detect recursive resolution.", "primary_input": "Domain", "options": ["timeout"], "script": "decoy_dns_beacon.py", "tags": ["dns"], "favorite": false}, {"id": "47", "name": "Geo IP Spoof Detection", "section": "Network & Infrastructure", "description": "Cross-check geolocation claims across multiple GeoIP providers.", "primary_input": "Domain/IP", "options": ["timeout"], "script": "geo_ip_spoof_detection.py", "tags": [], "favorite": false}, {"id": "48", "name": "Dual Stack Diff", "section": "Network & Infrastructure", "description": "Compare IPv4 and IPv6 HTTP responses & headers for drift.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "dual_stack_diff.py", "tags": [], "favorite": false}, {"id": "49", "name": "IRR Routing Registry Analyzer", "section": "Network & Infrastructure", "description": "Query Internet Routing Registry (IRR) route objects & origin ASNs.", "primary_input": "Domain/IP", "options": ["timeout"], "script": "irr_routing_registry_analyzer.py", "tags": [], "favorite": false}, {"id": "50", "name": "NetBIOS Name Query", "section": "Network & Infrastructure", "description": "Query NetBIOS Name Service (NBNS) for hostnames and workgroups.", "primary_input": "IP/Domain", "options": ["timeout"], "script": "netbios_name_query.py", "tags": [], "favorite": false}, {"id": "51", "name": "SNMP Bulk Walk", "section": "Network & Infrastructure", "description": "Perform SNMP bulk walk to enumerate system OIDs.", "primary_input": "IP/Domain", "options": ["community", "timeout"], "script": "snmp_bulk_walk.py", "tags": [], "favorite": false}, {"id": "52", "name": "TTL Analysis", "section": "Network & Infrastructure", "description": "Analyze DNS and ICMP TTL values to infer OS & caching hops.", "primary_input": "Domain/IP", "options": ["timeout"], "script": "ttl_analysis.py", "tags": ["dns"], "favorite": false}, {"id": "53", "name": "Archive History", "section": "Web Application Analysis", "description": "Retrieve historical site snapshots.", "primary_input": "Domain/URL", "options": ["collapse_digest", "limit", "status_filter", "timeout"], "script": "archive_history.py", "tags": ["heavy", "web"], "favorite": false}, {"id": "54", "name": "Broken Links Detection", "section": "Web Application Analysis", "description": "Crawl site & detect broken links.", "primary_input": "Domain/URL", "options": ["max_pages", "sample_ratio", "timeout"], "script": "broken_links.py", "tags": ["web"], "favorite": false}, {"id": "55", "name": "Carbon Footprint", "section": "Web Application Analysis", "description": "Estimate environmental impact of page loads.", "primary_input": "Domain/URL", "options": [], "script": "carbon_footprint.py", "tags": ["web"], "favorite": false}, {"id": "56", "name": "CMS Detection", "section": "Web Application Analysis", "description": "Identify CMS platforms by signature.", "primary_input": "Domain/URL", "options": [], "script": "cms_detection.py", "tags": ["web"], "favorite": false}, {"id": "57", "name": "Cookies Analyzer", "section": "Web Application Analysis", "description": "Inspect cookies for security/privacy attributes.", "primary_input": "Domain/URL", "options": ["follow", "paths", "timeout"], "script": "cookies.py", "tags": ["web"], "favorite": false}, {"id": "58", "name": "Content Discovery", "section": "Web Application Analysis", "description": "Discover hidden directories/files/endpoints.", "primary_input": "Domain/URL", "options": ["include_subdomains", "max_pages"], "script": "content_discovery.py", "tags": ["web"], "favorite": false}, {"id": "59", "name": "Crawler", "section": "Web Application Analysis", "description": "Crawl site & map structure.", "primary_input": "Domain/URL", "options": ["depth", "max_pages", "rate_limit", "start_url"], "script": "crawler.py", "tags": ["web"], "favorite": false}, {"id": "60", "name": "Robots.txt Analyzer", "section": "Web Application Analysis", "description": "Parse robots.txt for hidden/disallowed paths.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "crawl_rules.py", "tags": ["web"], "favorite": true}, {"id": "61", "name": "Directory Finder", "section": "Web Application Analysis", "description": "Scan for common unlisted directories.", "primary_input": "Domain/URL", "options": ["status_keep", "timeout", "wordlist"], "script": "directory_finder.py", "tags": ["web"], "favorite": false}, {"id": "62", "name": "Email Harvesting", "section": "Web Application Analysis", "description": "Extract emails from site pages.", "primary_input": "Domain/URL", "options": [], "script": "email_harvester.py", "tags": ["email", "web"], "favorite": false}, {"id": "63", "name": "Performance Monitoring", "section": "Web Application Analysis", "description": "Measure response time & load performance.", "primary_input": "Domain/URL", "options": ["key", "strategies", "timeout", "verify_ssl"], "script": "performance_monitoring.py", "tags": ["web"], "favorite": true}, {"id": "64", "name": "Quality Metrics", "section": "Web Application Analysis", "description": "Assess site UX/content quality heuristics.", "primary_input": "Domain/URL", "options": [], "script": "quality_metrics.py", "tags": ["web"], "favorite": false}, {"id": "65", "name": "Redirect Chain", "section": "Web Application Analysis", "description": "Follow redirects; analyze safety & loops.", "primary_input": "URL", "options": [], "script": "redirect_chain.py", "tags": ["web"], "favorite": false}, {"id": "66", "name": "Sitemap Parsing", "section": "Web Application Analysis", "description": "Parse sitemap.xml; enumerate URLs.", "primary_input": "Domain/URL", "options": [], "script": "sitemap.py", "tags": ["web"], "favorite": false}, {"id": "67", "name": "Social Media Presence Scan", "section": "Web Application Analysis", "description": "Identify linked social media profiles.", "primary_input": "Domain/URL", "options": [], "script": "social_media.py", "tags": ["fast", "web"], "favorite": false}, {"id": "68", "name": "Technology Stack Detection", "section": "Web Application Analysis", "description": "Fingerprint technologies & frameworks in use.", "primary_input": "Domain/URL", "options": [], "script": "technology_stack.py", "tags": ["web"], "favorite": false}, {"id": "69", "name": "Third-Party Integrations", "section": "Web Application Analysis", "description": "Discover external services integrated into site.", "primary_input": "Domain/URL", "options": [], "script": "third_party_integrations.py", "tags": ["web"], "favorite": false}, {"id": "70", "name": "JavaScript File Analyzer", "section": "Web Application Analysis", "description": "Extract endpoints & secrets from JS files.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "javascript_file_analyzer.py", "tags": ["web"], "favorite": false}, {"id": "71", "name": "CORS Misconfiguration Scanner", "section": "Web Application Analysis", "description": "Detect overly permissive CORS settings.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "cors_misconfiguration_scanner.py", "tags": ["fast", "web"], "favorite": false}, {"id": "72", "name": "Login Page Brute Identifier", "section": "Web Application Analysis", "description": "Locate & fingerprint login/auth pages.", "primary_input": "Domain/URL", "options": ["follow_redirects", "paths", "paths_file", "timeout"], "script": "login_page_brute_identifier.py", "tags": ["web"], "favorite": false}, {"id": "73", "name": "Hidden Parameter Discovery", "section": "Web Application Analysis", "description": "Fuzz hidden GET/POST parameters.", "primary_input": "Domain/URL", "options": ["max_params", "params_file", "test_values", "threshold", "timeout"], "script": "hidden_parameter_discovery.py", "tags": ["web"], "favorite": false}, {"id": "74", "name": "Clickjacking Test", "section": "Web Application Analysis", "description": "Check anti-framing headers & behavior.", "primary_input": "Domain/URL", "options": ["max_pages", "sample_ratio", "timeout"], "script": "clickjacking_test.py", "tags": ["web"], "favorite": false}, {"id": "75", "name": "Form Grabber", "section": "Web Application Analysis", "description": "Enumerate forms & field metadata.", "primary_input": "Domain/URL", "options": ["include_subs", "max_pages", "timeout"], "script": "form_grabber.py", "tags": ["web"], "favorite": false}, {"id": "76", "name": "Favicon Hashing", "section": "Web Application Analysis", "description": "MD5 hash favicon to infer technologies.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "favicon_hashing.py", "tags": ["web"], "favorite": false}, {"id": "77", "name": "HTML Comments Extractor", "section": "Web Application Analysis", "description": "Parse HTML comments for hidden notes/secrets.", "primary_input": "Domain/URL", "options": [], "script": "html_comments_extractor.py", "tags": ["web"], "favorite": false}, {"id": "78", "name": "CAPTCHA Presence Checker", "section": "Web Application Analysis", "description": "Detect CAPTCHA widgets across pages.", "primary_input": "Domain/URL", "options": ["max_pages", "sample_ratio", "timeout"], "script": "captcha_presence_checker.py", "tags": ["web"], "favorite": false}, {"id": "79", "name": "JavaScript Obfuscation Detector", "section": "Web Application Analysis", "description": "Highlight obfuscated or packed JS.", "primary_input": "Domain/URL", "options": ["export_txt", "include_subdomains", "max_pages", "max_scripts", "timeout"], "script": "javascript_obfuscation_detector.py", "tags": ["web"], "favorite": false}, {"id": "80", "name": "Virtual Host Fuzzer", "section": "Web Application Analysis", "description": "Host header brute to reveal hidden vhosts.", "primary_input": "Domain", "options": [], "script": "virtual_host_fuzzer.py", "tags": ["web"], "favorite": false}, {"id": "81", "name": "Session Cookie Lifetime Checker", "section": "Web Application Analysis", "description": "Measure session cookie longevity.", "primary_input": "Domain/URL", "options": [], "script": "session_cookie_lifetime_checker.py", "tags": ["web"], "favorite": false}, {"id": "82", "name": "HTML5 Feature Abuse Detector", "section": "Web Application Analysis", "description": "Spot risky HTML5 API usage.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "html5_feature_abuse_detector.py", "tags": ["web"], "favorite": false}, {"id": "83", "name": "Autocomplete Vulnerability Checker", "section": "Web Application Analysis", "description": "Detect sensitive fields with autocomplete enabled.", "primary_input": "Domain/URL", "options": ["max_pages", "timeout"], "script": "autocomplete_vulnerability_checker.py", "tags": ["web"], "favorite": false}, {"id": "84", "name": "Embedded Object Hunter", "section": "Web Application Analysis", "description": "Find embedded PDFs/SWF/objects.", "primary_input": "Domain/URL", "options": [], "script": "embedded_object_hunter.py", "tags": ["web"], "favorite": false}, {"id": "85", "name": "Multi-Language URL Tester", "section": "Web Application Analysis", "description": "Probe language/locale path handling.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "multi_language_url_tester.py", "tags": ["web"], "favorite": false}, {"id": "86", "name": "Pixel Tracker Finder", "section": "Web Application Analysis", "description": "Detect tracking pixel beacons.", "primary_input": "Domain/URL", "options": [], "script": "pixel_tracker_finder.py", "tags": ["web"], "favorite": false}, {"id": "87", "name": "SEO Abuse Detector", "section": "Web Application Analysis", "description": "Spot hidden/abusive SEO content.", "primary_input": "Domain/URL", "options": [], "script": "seo_abuse_detector.py", "tags": ["web"], "favorite": false}, {"id": "88", "name": "Dependency JS/CDN Scanner", "section": "Web Application Analysis", "description": "Inventory external JS libs & versions.", "primary_input": "Domain/URL", "options": ["max_pages", "sample_ratio", "timeout"], "script": "dependency_js_cdn_scanner.py", "tags": ["fast", "web"], "favorite": false}, {"id": "89", "name": "WebSocket Endpoint Sniffer", "section": "Web Application Analysis", "description": "Discover ws:// / wss:// endpoints.", "primary_input": "Domain/URL", "options": [], "script": "websocket_endpoint_sniffer.py", "tags": ["web"], "favorite": false}, {"id": "90", "name": "API Schema Grabber", "section": "Web Application Analysis", "description": "Attempt to fetch OpenAPI/Swagger schemas.", "primary_input": "Domain/URL", "options": ["delay", "graphql_paths", "paths", "timeout"], "script": "api_schema_grabber.py", "tags": ["web"], "favorite": false}, {"id": "91", "name": "Lazy-Load Resource Finder", "section": "Web Application Analysis", "description": "Detect resources loaded dynamically (scroll/JS).", "primary_input": "Domain/URL", "options": ["timeout"], "script": "lazy_load_resource_finder.py", "tags": ["web"], "favorite": false}, {"id": "92", "name": "HTTP Method Enumerator", "section": "Web Application Analysis", "description": "Crawl & test supported HTTP verbs per URL.", "primary_input": "Domain/URL", "options": [], "script": "http_method_enumerator.py", "tags": ["recon", "web"], "favorite": false}, {"id": "93", "name": "GraphQL Introspection Probe", "section": "Web Application Analysis", "description": "Discover GraphQL endpoints; attempt schema introspection.", "primary_input": "Domain/URL", "options": [], "script": "graphql_introspection_probe.py", "tags": ["web"], "favorite": false}, {"id": "94", "name": "File Upload Surface Finder", "section": "Web Application Analysis", "description": "Crawl & detect file upload forms/JS hints.", "primary_input": "Domain/URL", "options": ["include_subs", "max_pages", "timeout"], "script": "file_upload_surface_finder.py", "tags": ["web"], "favorite": false}, {"id": "95", "name": "DOM Sink Scanner", "section": "Web Application Analysis", "description": "Scan HTML/JS for XSS sinks (eval, innerHTML, etc.).", "primary_input": "Domain/URL", "options": ["max_pages", "sample_ratio", "timeout"], "script": "dom_sink_scanner.py", "tags": ["fast", "web"], "favorite": false}, {"id": "96", "name": "Cache Behavior Analyzer", "section": "Web Application Analysis", "description": "Compare caching behavior; detect poisoning risks.", "primary_input": "Domain/URL", "options": ["max_pages", "sample_ratio", "timeout"], "script": "cache_behavior_analyzer.py", "tags": ["web"], "favorite": false}, {"id": "97", "name": "Cookie Scope Diff Across Subdomains", "section": "Web Application Analysis", "description": "Aggregate Set-Cookie across crawl; scope & flag analysis.", "primary_input": "Domain/URL", "options": ["include_subdomains", "max_pages"], "script": "cookie_scope_diff.py", "tags": ["web"], "favorite": false}, {"id": "98", "name": "CSP Deep Analyzer", "section": "Web Application Analysis", "description": "Collect & parse CSP headers; risk scoring.", "primary_input": "Domain/URL", "options": ["max_pages", "sample_ratio", "timeout"], "script": "csp_deep_analyzer.py", "tags": ["heavy", "web"], "favorite": false}, {"id": "99", "name": "Third-Party Script Risk Profiler", "section": "Web Application Analysis", "description": "Inventory external script hosts; categorize & score.", "primary_input": "Domain/URL", "options": [], "script": "third_party_script_risk_profiler.py", "tags": ["web"], "favorite": false}, {"id": "100", "name": "Static Asset Fingerprinter", "section": "Web Application Analysis", "description": "Hash JS/CSS; extract library versions; flag outdated.", "primary_input": "Domain/URL", "options": [], "script": "static_asset_fingerprinter.py", "tags": ["web"], "favorite": false}, {"id": "101", "name": "Email Configuration Audit", "section": "Web Application Analysis", "description": "Comprehensive audit of MX, SPF, DKIM, DMARC, and STARTTLS.", "primary_input": "Domain", "options": ["timeout"], "script": "email_config.py", "tags": ["email", "web"], "favorite": false}, {"id": "102", "name": "Censys Reconnaissance", "section": "Security & Threat Intelligence", "description": "Enumerate exposed assets via Censys (API).", "primary_input": "Domain/IP", "options": ["concurrency"], "script": "censys.py", "tags": ["recon"], "favorite": false}, {"id": "103", "name": "Certificate Authority Recon", "section": "Security & Threat Intelligence", "description": "Examine CA issuance & trust relationships.", "primary_input": "Domain", "options": [], "script": "certificate_authority_recon.py", "tags": ["recon", "tls"], "favorite": false}, {"id": "104", "name": "Data Leak Detection", "section": "Security & Threat Intelligence", "description": "Check for public data leaks & sensitive exposures.", "primary_input": "Domain", "options": [], "script": "data_leak.py", "tags": [], "favorite": false}, {"id": "105", "name": "Exposed Environment Files Checker", "section": "Security & Threat Intelligence", "description": "Detect exposed .env/config files.", "primary_input": "Domain/URL", "options": [], "script": "exposed_env_files.py", "tags": [], "favorite": false}, {"id": "106", "name": "Firewall Detection", "section": "Security & Threat Intelligence", "description": "Identify firewall/WAF presence heuristically.", "primary_input": "Domain/IP", "options": ["timeout"], "script": "firewall_detection.py", "tags": [], "favorite": false}, {"id": "107", "name": "Global Ranking", "section": "Security & Threat Intelligence", "description": "Retrieve global popularity ranking metrics.", "primary_input": "Domain", "options": ["timeout"], "script": "global_ranking.py", "tags": [], "favorite": false}, {"id": "108", "name": "HTTP Headers", "section": "Security & Threat Intelligence", "description": "Extract HTTP response headers.", "primary_input": "Domain/URL", "options": [], "script": "http_headers.py", "tags": [], "favorite": false}, {"id": "109", "name": "HTTP Security Features", "section": "Security & Threat Intelligence", "description": "Evaluate security headers (HSTS, CSP, etc.).", "primary_input": "Domain/URL", "options": ["json", "timeout"], "script": "http_security.py", "tags": [], "favorite": false}, {"id": "110", "name": "Malware & Phishing Check", "section": "Security & Threat Intelligence", "description": "Check blocklists for malware/phishing indicators.", "primary_input": "Domain/URL", "options": [], "script": "malware_phishing.py", "tags": [], "favorite": false}, {"id": "111", "name": "Pastebin Monitoring", "section": "Security & Threat Intelligence", "description": "Search paste sites for leaked data mentions.", "primary_input": "Domain", "options": [], "script": "pastebin_monitoring.py", "tags": [], "favorite": false}, {"id": "112", "name": "Privacy & GDPR Compliance", "section": "Security & Threat Intelligence", "description": "Basic privacy/GDPR checks (policies, consent).", "primary_input": "Domain/URL", "options": [], "script": "privacy_gdpr.py", "tags": [], "favorite": false}, {"id": "113", "name": "Security.txt Check", "section": "Security & Threat Intelligence", "description": "Retrieve & parse security.txt disclosure info.", "primary_input": "Domain", "options": ["log", "timeout"], "script": "security_txt.py", "tags": [], "favorite": false}, {"id": "114", "name": "Shodan Reconnaissance", "section": "Security & Threat Intelligence", "description": "Query Shodan for exposed services & vulns.", "primary_input": "Domain/IP", "options": [], "script": "shodan.py", "tags": ["recon"], "favorite": false}, {"id": "115", "name": "SSL Labs Report", "section": "Security & Threat Intelligence", "description": "Pull detailed SSL Labs TLS assessment.", "primary_input": "Domain", "options": [], "script": "ssl_labs_report.py", "tags": ["tls"], "favorite": true}, {"id": "116", "name": "SSL Pinning Check", "section": "Security & Threat Intelligence", "description": "Check for SSL/TLS pinning indicators.", "primary_input": "Domain/URL", "options": [], "script": "ssl_pinning_check.py", "tags": ["tls"], "favorite": true}, {"id": "117", "name": "Subdomain Enumeration", "section": "Security & Threat Intelligence", "description": "Discover subdomains via multiple techniques.", "primary_input": "Domain", "options": [], "script": "subdomain_enum.py", "tags": ["recon"], "favorite": false}, {"id": "118", "name": "Subdomain Takeover", "section": "Security & Threat Intelligence", "description": "Test for dangling DNS entries vulnerable to takeover.", "primary_input": "Domain", "options": [], "script": "subdomain_takeover.py", "tags": ["dns"], "favorite": false}, {"id": "119", "name": "VirusTotal Scan", "section": "Security & Threat Intelligence", "description": "Lookup reputation & detections in VirusTotal.", "primary_input": "Domain/IP/URL", "options": [], "script": "virustotal_scan.py", "tags": ["fast"], "favorite": false}, {"id": "120", "name": "CT Log Query", "section": "Security & Threat Intelligence", "description": "Query certificate transparency logs for issued certs.", "primary_input": "Domain", "options": ["include_wildcard", "timeout"], "script": "ct_log_query.py", "tags": ["tls"], "favorite": false}, {"id": "121", "name": "Breached Credentials Lookup", "section": "Security & Threat Intelligence", "description": "Check breach datasets for exposed credentials.", "primary_input": "Domain/Email", "options": ["timeout"], "script": "breached_credentials_lookup.py", "tags": [], "favorite": false}, {"id": "122", "name": "Cloud Bucket Exposure", "section": "Security & Threat Intelligence", "description": "Detect open S3/Azure/GCP buckets tied to domain.", "primary_input": "Domain", "options": ["timeout"], "script": "cloud_bucket_exposure.py", "tags": ["cloud"], "favorite": false}, {"id": "123", "name": "JWT Token Analyzer", "section": "Security & Threat Intelligence", "description": "Decode and inspect JWT algorithms & claims.", "primary_input": "Token/String", "options": [], "script": "jwt_token_analyzer.py", "tags": [], "favorite": false}, {"id": "124", "name": "Exposed API Endpoints", "section": "Security & Threat Intelligence", "description": "Crawl and list publicly reachable API endpoints.", "primary_input": "Domain/URL", "options": [], "script": "exposed_api_endpoints.py", "tags": [], "favorite": true}, {"id": "125", "name": "Git Repository Exposure Check", "section": "Security & Threat Intelligence", "description": "Detect exposed .git directories and artifacts.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "git_repo_exposure_check.py", "tags": [], "favorite": false}, {"id": "126", "name": "Typosquat Domain Checker", "section": "Security & Threat Intelligence", "description": "Generate and check typo variants for malicious domains.", "primary_input": "Domain", "options": [], "script": "typosquat_domain_checker.py", "tags": [], "favorite": false}, {"id": "127", "name": "SPF / DKIM / DMARC Validator", "section": "Security & Threat Intelligence", "description": "Assess email auth posture and alignment.", "primary_input": "Domain/Email", "options": [], "script": "spf_dkim_dmarc_validator.py", "tags": ["email"], "favorite": false}, {"id": "128", "name": "Open Redirect Finder", "section": "Security & Threat Intelligence", "description": "Probe redirect parameters for open redirect vulnerabilities.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "open_redirect_finder.py", "tags": [], "favorite": false}, {"id": "129", "name": "Rate-Limit & WAF Bypass Test", "section": "Security & Threat Intelligence", "description": "Probe throttling and WAF bypass behaviors.", "primary_input": "Domain/URL", "options": ["batch_size", "timeout"], "script": "rate_limit_waf_bypass_test.py", "tags": [], "favorite": false}, {"id": "130", "name": "Security Changelog Diff", "section": "Security & Threat Intelligence", "description": "Compare security header/config changes over time.", "primary_input": "Domain/URL", "options": [], "script": "security_changelog_diff.py", "tags": ["heavy"], "favorite": false}, {"id": "131", "name": "Session Hijacking (Passive)", "section": "Security & Threat Intelligence", "description": "Analyze cookie/session flags for hijacking risk.", "primary_input": "Domain/URL", "options": ["paths", "session_hints", "timeout"], "script": "session_hijacking_passive.py", "tags": [], "favorite": false}, {"id": "132", "name": "Rogue Certificate Check", "section": "Security & Threat Intelligence", "description": "Detect suspicious or duplicate certificates.", "primary_input": "Domain", "options": [], "script": "rogue_certificate_check.py", "tags": ["tls"], "favorite": false}, {"id": "133", "name": "JS Malware Scanner", "section": "Security & Threat Intelligence", "description": "Heuristic scan of JavaScript for malware indicators.", "primary_input": "Domain/URL", "options": ["timeout"], "script": "js_malware_scanner.py", "tags": ["fast"], "favorite": false}, {"id": "134", "name": "Cloud Service Enumeration", "section": "Security & Threat Intelligence", "description": "Detect exposed cloud/devops services (Jira, Jenkins, etc.).", "primary_input": "Domain", "options": [], "script": "cloud_service_enumeration.py", "tags": ["cloud", "recon"], "favorite": false}, {"id": "135", "name": "Rogue Subdomain Resolver", "section": "Security & Threat Intelligence", "description": "Monitor for newly resolving previously dead subdomains.", "primary_input": "Domain", "options": [], "script": "rogue_subdomain_resolver.py", "tags": [], "favorite": false}, {"id": "136", "name": "Bug Bounty Program Finder", "section": "Security & Threat Intelligence", "description": "Identify bug bounty/disclosure program links.", "primary_input": "Domain", "options": ["timeout", "workers"], "script": "bug_bounty_program_finder.py", "tags": [], "favorite": false}, {"id": "137", "name": "Custom Wordlist Generator", "section": "Security & Threat Intelligence", "description": "Build tailored recon wordlists (paths, usernames, emails).", "primary_input": "Domain", "options": [], "script": "custom_wordlist_generator.py", "tags": ["email"], "favorite": false}, {"id": "138", "name": "Threat Feed Correlator", "section": "Security & Threat Intelligence", "description": "Aggregate multi-feed reputation & threat intelligence.", "primary_input": "Domain/IP", "options": [], "script": "threat_feed_correlator.py", "tags": [], "favorite": false}, {"id": "139", "name": "Attack Surface Delta", "section": "Security & Threat Intelligence", "description": "Diff two Argus reports; highlight adds/removals.", "primary_input": "Target Label", "options": ["ports_top", "timeout"], "script": "attack_surface_delta.py", "tags": [], "favorite": false}, {"id": "140", "name": "Passive CVE Mapper", "section": "Security & Threat Intelligence", "description": "Map discovered product/version hints to NVD CVEs.", "primary_input": "Domain/URL", "options": [], "script": "passive_cve_mapper.py", "tags": [], "favorite": false}, {"id": "141", "name": "Security Contact Gap Finder", "section": "Security & Threat Intelligence", "description": "Collect security contacts from security.txt, WHOIS, site.", "primary_input": "Domain", "options": [], "script": "security_contact_gap_finder.py", "tags": [], "favorite": false}, {"id": "142", "name": "Domain Shadowing Detector", "section": "Security & Threat Intelligence", "description": "CT + passive DNS to spot high-entropy subdomain bursts.", "primary_input": "Domain", "options": ["days", "timeout"], "script": "domain_shadowing_detector.py", "tags": ["dns"], "favorite": false}, {"id": "143", "name": "IP Reputation Trending", "section": "Security & Threat Intelligence", "description": "Compare AbuseIPDB & VT metrics across time windows.", "primary_input": "Domain/IP/CIDR", "options": ["long_window", "short_window"], "script": "ip_reputation_trending.py", "tags": [], "favorite": false}, {"id": "144", "name": "Dark Web & Paste Monitoring", "section": "Security & Threat Intelligence", "description": "Search breach databases and paste sites for leaked domain credentials.", "primary_input": "Domain", "options": ["workers"], "script": "dark_web_monitoring.py", "tags": [], "favorite": false}, {"id": "145", "name": "IP Reputation Check", "section": "Security & Threat Intelligence", "description": "Evaluate IP reputation across blocklists and threat feeds.", "primary_input": "IP/Domain", "options": ["timeout"], "script": "ip_reputation_check.py", "tags": [], "favorite": false}, {"id": "146", "name": "Passive DNS History", "section": "Security & Threat Intelligence", "description": "Retrieve historical DNS resolution records for a domain or IP.", "primary_input": "Domain/IP", "options": ["timeout"], "script": "passive_dns_history.py", "tags": ["dns", "heavy"], "favorite": false}, {"id": "147", "name": "TLS Security Configuration", "section": "Security & Threat Intelligence", "description": "Audit TLS protocol versions, cipher strength, and certificate parameters.", "primary_input": "Domain", "options": ["timeout"], "script": "tls_security_config.py", "tags": ["tls"], "favorite": false}, {"id": "148", "name": "Run All Infrastructure Tools", "section": "Run All Scripts", "description": "Execute every module in Network & Infrastructure.", "primary_input": "Domain", "options": [], "script": "", "tags": [], "favorite": false}, {"id": "149", "name": "Run All Web Intelligence Tools", "section": "Run All Scripts", "description": "Execute every module in Web Application Analysis.", "primary_input": "Domain/URL", "options": [], "script": "", "tags": [], "favorite": false}, {"id": "150", "name": "Run All Security Tools", "section": "Run All Scripts", "description": "Execute every module in Security & Threat Intelligence.", "primary_input": "Domain", "options": [], "script": "", "tags": [], "favorite": false}, {"id": "151", "name": "BEAST MODE", "section": "Special Mode", "description": "Execute nearly all modules in one mega run.", "primary_input": "Domain", "options": [], "script": "", "tags": [], "favorite": false}];
 
   // ============================================================================
-  // AHM7 FreeAPI (freeapi.pro / ahm7xmakki.com) — All 21 Zero-Key Tools
-  // ============================================================================
-  const AHM7_TOOLS = [
-    { id: "websnap", num: 1, name: "WebSnap — URL Screenshot & PDF", method: "GET", endpoint: "https://freeapi.pro/api/websnap", paramKey: "url", defaultVal: "https://github.com", desc: "Capture any URL as a full-page PNG screenshot or PDF safely without opening risky sites.", tryUrl: "https://freeapi.pro/websnap" },
-    { id: "webzip", num: 2, name: "WebZip — Website Source ZIP Archiver", method: "POST", endpoint: "https://freeapi.pro/api/zip", paramKey: "url", defaultVal: "https://example.com", desc: "Archive an entire public website (HTML, CSS, JS, assets) into a downloadable ZIP.", tryUrl: "https://freeapi.pro/webzip" },
-    { id: "tempster", num: 3, name: "TempSter — Disposable OSINT Email", method: "GET", endpoint: "https://freeapi.pro/api/tempmail", paramKey: "action", defaultVal: "generate", desc: "Generate a disposable temporary email address and check inbox with zero signup.", tryUrl: "https://freeapi.pro/tempmail" },
-    { id: "visionchat", num: 4, name: "VisionChat — Keyless AI Vision & OCR", method: "POST", endpoint: "https://freeapi.pro/api/imgchat", paramKey: "prompt", defaultVal: "Extract text and security info from image", desc: "Upload any screenshot or image for AI OCR, text extraction, and visual analysis.", tryUrl: "https://freeapi.pro/imgchat" },
-    { id: "speechster", num: 5, name: "SpeechSter — 580+ Voices TTS Audio", method: "GET", endpoint: "https://freeapi.pro/api/tts", paramKey: "text", defaultVal: "BaDR ArGuS scan complete. Your security summary is ready.", desc: "Convert any scan report or text into natural spoken MP3 audio across 580+ voices.", tryUrl: "https://freeapi.pro/speech" },
-    { id: "speechster_voices", num: 6, name: "SpeechSter Voices — 580+ Voice List", method: "GET", endpoint: "https://freeapi.pro/api/voices", paramKey: "", defaultVal: "", desc: "Fetch the JSON index of all 580+ natural TTS voices grouped by language.", tryUrl: "https://freeapi.pro/api/voices" },
-    { id: "pixelster_tti", num: 7, name: "PixelSter Flux — Text-to-Image AI", method: "POST", endpoint: "https://freeapi.pro/api/tti", paramKey: "prompt", defaultVal: "Futuristic gold cyber shield network diagram", desc: "Generate AI images via Flux Dev in 11 aspect ratios with zero API key.", tryUrl: "https://freeapi.pro/pixelster" },
-    { id: "pixelster_pti", num: 8, name: "PixelSter Kontext — Image-to-Image AI", method: "POST", endpoint: "https://freeapi.pro/api/pti", paramKey: "prompt", defaultVal: "Enhance clarity and contrast", desc: "Edit or restyle images via Flux Kontext Dev REST endpoint.", tryUrl: "https://freeapi.pro/pixelster" },
-    { id: "pixelster_ptv", num: 9, name: "PixelSter Motion — Image-to-Video AI", method: "POST", endpoint: "https://freeapi.pro/api/ptv", paramKey: "prompt", defaultVal: "Holographic camera pan", desc: "Synthesize MP4 motion video from static imagery with no key.", tryUrl: "https://freeapi.pro/pixelster" },
-    { id: "transcribe", num: 10, name: "Transcribe — 99-Language Audio-to-Text", method: "POST", endpoint: "https://freeapi.pro/api/transcribe", paramKey: "", defaultVal: "", desc: "Fast, keyless audio-to-text transcription across 99 languages.", tryUrl: "https://freeapi.pro/transcribe" },
-    { id: "alldl", num: 11, name: "Universal Downloader — 100+ Platforms", method: "GET", endpoint: "https://freeapi.pro/api/alldl", paramKey: "url", defaultVal: "https://youtu.be/dQw4w9WgXcQ", desc: "Extract video/audio streams & metadata from YouTube, TikTok, X, Reddit, Instagram.", tryUrl: "https://freeapi.pro/alldl" },
-    { id: "n8nster", num: 12, name: "n8nSter — Security Automation Workflows", method: "GET", endpoint: "https://freeapi.pro/api/n8n", paramKey: "q", defaultVal: "security", desc: "Browse & search thousands of n8n security and DevSecOps automation workflows.", tryUrl: "https://freeapi.pro/n8n" },
-    { id: "courses", num: 13, name: "FreeAPI Courses — Cybersecurity & Tech", method: "GET", endpoint: "https://freeapi.pro/api/courses", paramKey: "q", defaultVal: "cybersecurity", desc: "Search free cybersecurity and programming training courses via REST API.", tryUrl: "https://freeapi.pro/courses" },
-    { id: "wikipdf", num: 14, name: "Wikster — Wikipedia to PDF Study Guide", method: "GET", endpoint: "https://freeapi.pro/api/wikipdf", paramKey: "title", defaultVal: "Computer_security", desc: "Convert any Wikipedia technical article into a formatted PDF guide.", tryUrl: "https://freeapi.pro/wikipdf" },
-    { id: "certster", num: 15, name: "CertSter — Security Audit Certificate", method: "GET", endpoint: "https://freeapi.pro/api/certificate", paramKey: "name", defaultVal: "BaDR Security Auditor", desc: "Generate customized training or security audit certificates.", tryUrl: "https://freeapi.pro/certificate" },
-    { id: "handwriting", num: 16, name: "Text-to-Handwriting — Study Notes", method: "POST", endpoint: "https://freeapi.pro/api/hand", paramKey: "text", defaultVal: "Security Checklist: Close unused ports & enable Private DNS", desc: "Render typed cybersecurity notes into realistic handwritten study pages.", tryUrl: "https://freeapi.pro/tth" },
-    { id: "driveup", num: 17, name: "DriveUp — Google Drive File Inspector", method: "GET", endpoint: "https://freeapi.pro/api/driveup", paramKey: "action", defaultVal: "list", desc: "Inspect, rename, copy, and tag Google Drive files via REST API.", tryUrl: "https://freeapi.pro/driveup" },
-    { id: "medster", num: 18, name: "MedSter — Medicine & Compound API", method: "GET", endpoint: "https://freeapi.pro/api/search", paramKey: "q", defaultVal: "paracetamol", desc: "Query medicine uses, dosage, and side-effect reference database.", tryUrl: "https://freeapi.pro/medster" },
-    { id: "cinesearch", num: 19, name: "CineSearch — Media Metadata OSINT", method: "GET", endpoint: "https://freeapi.pro/api/msearch", paramKey: "q", defaultVal: "Mr Robot", desc: "Search movies, documentaries, cast, and metadata via REST JSON.", tryUrl: "https://freeapi.pro/movies" },
-    { id: "mangaster", num: 20, name: "MangaSter — Free Manga Reader API", method: "GET", endpoint: "https://freeapi.pro/api/manga", paramKey: "q", defaultVal: "naruto", desc: "Search manga titles, chapters, and pages via GET /api/manga.", tryUrl: "https://freeapi.pro/manga" },
-    { id: "novelster", num: 21, name: "NovelSter & UNovelSter — PDF Books API", method: "GET", endpoint: "https://freeapi.pro/api/novel", paramKey: "q", defaultVal: "cyber", desc: "Search and download English & Urdu books/novels as PDFs.", tryUrl: "https://freeapi.pro/novel" }
-  ];
-
-  // ============================================================================
   // Multi-Provider & Multi-Key Cloud AI Vault Catalog (With Optional Auto-Models!)
   // ============================================================================
   const PROVIDER_VAULT_CATALOG = [
@@ -189,14 +162,14 @@
     },
     {
       id: "keyless_free",
-      name: "Keyless Free AI + AHM7 FreeAPI (No Key Needed!)",
+      name: "Keyless Free Cloud AI (No API Key Needed!)",
       badge: "ZERO KEY · ALWAYS FREE",
       base_url: "https://text.pollinations.ai/openai",
-      route_preview: "https://text.pollinations.ai/openai + https://freeapi.pro/api/*",
+      route_preview: "https://text.pollinations.ai/openai",
       auth_type: "keyless",
       default_free_model: "openai",
-      get_key_url: "https://freeapi.pro/docs",
-      free_note: "Works out of the box with ZERO API keys! Uses keyless OpenAI/Mistral/Qwen cloud endpoints + AHM7 21 Free APIs.",
+      get_key_url: "https://github.com/kimokiki333-code/args-luna",
+      free_note: "Works out of the box with ZERO API keys! Uses keyless OpenAI, Mistral, and Qwen Coder cloud endpoints.",
       placeholder: "No API Key Required! (Leave blank)",
       models: [
         "openai",
@@ -1214,87 +1187,11 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     });
   }
 
-  function renderAhm7ToolsArsenal() {
-    const sel = document.getElementById("ahm7-tool-select");
-    const inp = document.getElementById("ahm7-param-input");
-    const runBtn = document.getElementById("btn-run-ahm7-tool");
-    const resBox = document.getElementById("ahm7-tool-result-box");
-    const grid = document.getElementById("ahm7-tools-grid");
-    if (!grid || !sel) return;
-
-    sel.innerHTML = AHM7_TOOLS.map((t) => `<option value="${escapeHtml(t.id)}">#${t.num} ${escapeHtml(t.name)} [${t.method}]</option>`).join("");
-    sel.addEventListener("change", () => {
-      const t = AHM7_TOOLS.find((x) => x.id === sel.value);
-      if (t && inp) inp.value = t.defaultVal || "";
-    });
-
-    if (runBtn && !runBtn._bound) {
-      runBtn._bound = true;
-      runBtn.addEventListener("click", () => {
-        const t = AHM7_TOOLS.find((x) => x.id === sel.value) || AHM7_TOOLS[0];
-        const val = (inp ? inp.value : "").trim() || t.defaultVal;
-        const directUrl = t.method === "GET" && t.paramKey
-          ? `${t.endpoint}?${encodeURIComponent(t.paramKey)}=${encodeURIComponent(val)}`
-          : t.endpoint;
-
-        if (resBox) {
-          resBox.style.display = "block";
-          resBox.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-              <div>
-                <strong style="color:#ffd700;">✅ AHM7 FreeAPI Ready: ${escapeHtml(t.name)}</strong><br/>
-                <span>Endpoint: <code>${escapeHtml(directUrl)}</code> (Zero API Key Needed)</span>
-              </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <a href="${escapeHtml(directUrl)}" target="_blank" rel="noopener" class="btn-primary-glow" style="text-decoration:none;height:32px;font-size:0.76rem;">
-                  🚀 Call Live API ↗
-                </a>
-                <a href="${escapeHtml(t.tryUrl)}" target="_blank" rel="noopener" class="btn-secondary-glass" style="text-decoration:none;height:32px;font-size:0.76rem;">
-                  🌐 Open Web Tool ↗
-                </a>
-              </div>
-            </div>
-          `;
-        }
-        showToast(`Prepared AHM7 FreeAPI: ${t.name}`, "success");
-      });
-    }
-
-    grid.innerHTML = AHM7_TOOLS.map((t) => `
-      <div class="glass-panel" style="padding:12px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;">
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
-            <span class="sev-badge sev-OK">AHM7 #${t.num} · ZERO KEY</span>
-            <span style="font-family:var(--font-mono);font-size:0.70rem;color:#38bdf8;">${escapeHtml(t.method)} ${escapeHtml(t.endpoint.replace("https://freeapi.pro", ""))}</span>
-          </div>
-          <div style="font-weight:800;color:#ffd700;font-size:0.90rem;margin-top:6px;">${escapeHtml(t.name)}</div>
-          <div style="font-size:0.78rem;color:#cbd5e1;margin-top:3px;">${escapeHtml(t.desc)}</div>
-        </div>
-        <div style="display:flex;gap:6px;">
-          <button class="btn-secondary-glass btn-pick-ahm7" data-id="${escapeHtml(t.id)}" style="flex:1;height:30px;font-size:0.74rem;">
-            ⚡ Load in Runner
-          </button>
-          <a href="${escapeHtml(t.tryUrl)}" target="_blank" rel="noopener" class="btn-secondary-glass" style="text-decoration:none;height:30px;font-size:0.74rem;">
-            Open ↗
-          </a>
-        </div>
-      </div>
-    `).join("");
-
-    grid.querySelectorAll(".btn-pick-ahm7").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        sel.value = btn.dataset.id;
-        sel.dispatchEvent(new Event("change"));
-        runBtn.click();
-      });
-    });
-  }
-
   // ============================================================================
   // 8. DIRECT CLOUD + KEYLESS AI CALLER (WITH ROUND-ROBIN & MODEL POOL ROTATION)
   // ============================================================================
-  async function callDirectCloudFromVault(messages) {
-    const pid = state.vault.active_provider || "ollama";
+  async function callDirectCloudFromVault(messages, overrideProvider = null, overrideModel = null, customSysPrompt = null) {
+    const pid = overrideProvider || state.vault.active_provider || "ollama";
     const pMeta = PROVIDER_VAULT_CATALOG.find((x) => x.id === pid) || PROVIDER_VAULT_CATALOG[0];
 
     // Gather all keys for this provider for round-robin rotation
@@ -1309,17 +1206,20 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
       ? matchingKeys[(state.vault.round_robin_idx++) % matchingKeys.length]
       : "";
 
-    const primaryModel = state.activeModel || state.vault.models[pid] || pMeta.default_free_model;
+    const primaryModel = overrideModel || state.activeModel || state.vault.models[pid] || pMeta.default_free_model;
     const modelPool = [primaryModel, ...pMeta.models.filter((m) => m !== primaryModel)];
 
+    const sysMessage = customSysPrompt || "You are the BaDR ArGuS AI Assistant & Cybersecurity Tutor (aragos Android BaDR version). Answer any general LLM question (coding, networking, Android, Linux, daily tasks, or general knowledge) clearly and thoroughly, and when asked about scan reports, explain findings in plain English and provide step-by-step fix instructions.";
+    const fullMsgs = [{ role: "system", content: sysMessage }, ...messages];
+
     // Try with user's saved key across model pool (prevents 429 on Mistral & Groq!)
-    if (activeKey) {
+    if (activeKey && pid !== "keyless_free") {
       for (const tryModel of modelPool.slice(0, 3)) {
         try {
           if (pid === "google") {
             const gm = tryModel.startsWith("gemini") ? tryModel : "gemini-2.0-flash";
             const url = `${pMeta.base_url}/models/${gm}:generateContent?key=${encodeURIComponent(activeKey)}`;
-            const text = messages.map((m) => `[${m.role.toUpperCase()}]: ${m.content}`).join("\n\n");
+            const text = fullMsgs.map((m) => `[${m.role.toUpperCase()}]: ${m.content}`).join("\n\n");
             const r = await fetch(url, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -1332,13 +1232,18 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
             }
           } else {
             const endpoint = pid === "ollama" ? `${pMeta.base_url}/v1/chat/completions` : `${pMeta.base_url}/chat/completions`;
+            const hdrs = {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${activeKey}`
+            };
+            if (pid === "deepseek") {
+              hdrs["x-dsh-auth-token"] = activeKey;
+              hdrs["x-api-key"] = activeKey;
+            }
             const r = await fetch(endpoint, {
               method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${activeKey}`
-              },
-              body: JSON.stringify({ model: tryModel, messages, temperature: 0.3 })
+              headers: hdrs,
+              body: JSON.stringify({ model: tryModel, messages: fullMsgs, temperature: 0.3 })
             });
             if (r.ok) {
               const d = await r.json();
@@ -1350,27 +1255,22 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
       }
     }
 
-    // Automatic Keyless Free Cloud AI Fallback (No API Key Required!)
+    // Automatic Keyless Free Cloud AI Pool (No API Key Required!)
+    const keylessModel = pid === "keyless_free" && overrideModel ? overrideModel : "openai";
     try {
       const rKeyless = await fetch("https://text.pollinations.ai/openai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "openai",
-          messages: [
-            {
-              role: "system",
-              content: "You are the BaDR ArGuS Beginner Cybersecurity Tutor. Explain network/IP/domain findings in plain, friendly English for someone new to cybersecurity, and provide numbered step-by-step instructions on how to fix any warnings or open ports."
-            },
-            ...messages
-          ],
-          temperature: 0.3
+          model: keylessModel,
+          messages: fullMsgs,
+          temperature: 0.35
         })
       });
       if (rKeyless.ok) {
         const d = await rKeyless.json();
         const reply = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
-        if (reply) return { reply, model: "openai (Keyless Cloud Pool)", provider: "Keyless Free Cloud AI", latency_ms: 310 };
+        if (reply) return { reply, model: `${keylessModel} (Keyless Free Cloud)`, provider: "Keyless Free Cloud AI", latency_ms: 310 };
       }
     } catch (_) {}
 
@@ -1882,7 +1782,7 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
       statusEl.innerHTML = "<strong>Checking GitHub Live OTA Feed...</strong> Pulling latest UI &amp; 151 scanner definitions...";
     }
     try {
-      const branches = ["main", "arena/7c01ddad-args-luna"];
+      const branches = ["arena/8db63a8e-args-luna", "main"];
       let cssRes = null;
       for (const br of branches) {
         try {
@@ -1896,7 +1796,7 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
         } catch (_e) {}
       }
       if (cssRes && cssRes.length > 500) {
-        try { localStorage.setItem("badr_ota_css_v48", cssRes); } catch (_e) {}
+        try { localStorage.setItem("badr_ota_css_v49", cssRes); } catch (_e) {}
         let styleEl = document.getElementById("badr-live-ota-css");
         if (!styleEl) {
           styleEl = document.createElement("style");
@@ -1905,16 +1805,16 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
         }
         styleEl.textContent = cssRes;
       }
-      if (badgeEl) badgeEl.textContent = "v4.8 LIVE SYNCED";
+      if (badgeEl) badgeEl.textContent = "v4.9 LIVE SYNCED";
       if (statusEl) {
-        statusEl.innerHTML = "<strong>✓ Live Update Applied (v4.8):</strong> Your installed app is synced with the latest GitHub release!";
+        statusEl.innerHTML = "<strong>✓ Live Update Applied (v4.9):</strong> Your installed app is synced with the latest GitHub release!";
       }
       if (manualTrigger) {
-        showToast("✓ Live In-App Update v4.8 checked & synced from GitHub!", "success");
+        showToast("✓ Live In-App Update v4.9 checked & synced from GitHub!", "success");
       }
     } catch (_err) {
       if (manualTrigger) {
-        showToast("App is running the latest bundled v4.8 release.", "info");
+        showToast("App is running the latest bundled v4.9 release.", "info");
       }
     }
   }
@@ -1928,7 +1828,7 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
       otaBtn.addEventListener("click", () => checkAndApplyLiveOTA(true));
     }
     try {
-      const cachedCss = localStorage.getItem("badr_ota_css_v48");
+      const cachedCss = localStorage.getItem("badr_ota_css_v49");
       if (cachedCss && cachedCss.length > 500) {
         const styleEl = document.createElement("style");
         styleEl.id = "badr-live-ota-css";
@@ -2124,10 +2024,150 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
           window.speechSynthesis.speak(utter);
           showToast("Reading report summary aloud...", "success");
         } else {
-          window.open(`https://freeapi.pro/api/tts?text=${encodeURIComponent(text)}&voice=en-US`, "_blank");
+          showToast("Device speech synthesis is not enabled in this WebView.", "info");
         }
       });
     }
+
+    // 1st-Page Project Overview Collapse / Expand Toggle
+    const toggleOverviewBtn = document.getElementById("btn-toggle-project-overview");
+    const overviewBody = document.getElementById("project-overview-body");
+    if (toggleOverviewBtn && overviewBody) {
+      toggleOverviewBtn.addEventListener("click", () => {
+        const isHidden = overviewBody.style.display === "none";
+        overviewBody.style.display = isHidden ? "flex" : "none";
+        toggleOverviewBtn.textContent = isHidden ? "▾ Hide / Show Overview" : "▸ Show Project Overview";
+      });
+    }
+
+    // Floating Bottom-Right Regular LLM & Security Assistant
+    state.floatingChatHistory = state.floatingChatHistory || [];
+    const fabBtn = document.getElementById("floating-llm-fab");
+    const fabDrawer = document.getElementById("floating-llm-drawer");
+    const fabCloseBtn = document.getElementById("btn-close-floating-llm");
+    const fabClearBtn = document.getElementById("btn-clear-floating-llm");
+    const fabSendBtn = document.getElementById("btn-send-floating-llm");
+    const fabInput = document.getElementById("floating-llm-input");
+    const fabMessages = document.getElementById("floating-llm-messages");
+    const fabModelSelect = document.getElementById("floating-llm-model-select");
+    const fabIncludeScan = document.getElementById("floating-llm-include-scan");
+
+    if (fabBtn && fabDrawer) {
+      fabBtn.addEventListener("click", () => {
+        fabDrawer.classList.toggle("open");
+        if (fabDrawer.classList.contains("open") && fabInput) {
+          setTimeout(() => fabInput.focus(), 80);
+        }
+      });
+    }
+    if (fabCloseBtn && fabDrawer) {
+      fabCloseBtn.addEventListener("click", () => fabDrawer.classList.remove("open"));
+    }
+    if (fabClearBtn && fabMessages) {
+      fabClearBtn.addEventListener("click", () => {
+        state.floatingChatHistory = [];
+        fabMessages.innerHTML = `
+          <div class="chat-msg assistant">
+            <strong>Chat cleared! 💬</strong> Ask me anything—general LLM questions, coding, networking, or help with your current scan report.
+          </div>`;
+      });
+    }
+
+    async function sendFloatingLlmMessage(rawQuestion) {
+      const q = (rawQuestion || "").trim();
+      if (!q || !fabMessages) return;
+
+      const userDiv = document.createElement("div");
+      userDiv.className = "chat-msg user";
+      userDiv.textContent = q;
+      fabMessages.appendChild(userDiv);
+
+      const selVal = (fabModelSelect && fabModelSelect.value) || "keyless_free|openai";
+      const [chosenProv, chosenMod] = selVal.split("|");
+
+      const includeScan = !!(fabIncludeScan && fabIncludeScan.checked && state.activeScan);
+      let scanContextNote = "";
+      if (includeScan && state.activeScan) {
+        const s = state.activeScan;
+        const sevs = Object.values(s.severities || {});
+        const redCnt = sevs.filter((x) => x === "HIGH" || x === "CRITICAL").length;
+        const yelCnt = sevs.filter((x) => x === "MEDIUM").length;
+        const grnCnt = sevs.length - redCnt - yelCnt;
+        scanContextNote = `\n[Active Scan Context: Target=${s.target}, Scanners=${s.module_count}, Clear=${grnCnt}, Medium=${yelCnt}, Threat=${redCnt}. Detected Self-IP=${state.selfIpReport.ip || "N/A"} (${state.selfIpReport.country || ""})]`;
+      }
+
+      state.floatingChatHistory.push({ role: "user", content: q + scanContextNote });
+
+      const botDiv = document.createElement("div");
+      botDiv.className = "chat-msg assistant ai-markdown";
+      botDiv.innerHTML = `<em>☁️ Thinking with <code>${escapeHtml(chosenMod)}</code>...</em>`;
+      fabMessages.appendChild(botDiv);
+      fabMessages.scrollTop = fabMessages.scrollHeight;
+
+      const generalSysPrompt =
+        "You are the BaDR Free LLM Assistant (built into BaDR ArGuS scanner — aragos Android BaDR version). " +
+        "You work just like a helpful, knowledgeable general-purpose LLM assistant AND cybersecurity tutor. " +
+        "Answer any question the user asks—whether it is a general question, coding, Linux/Android help, networking, writing, or a deep explanation and step-by-step fix for their scan results.";
+
+      let res = await callDirectCloudFromVault(
+        state.floatingChatHistory.slice(-8),
+        chosenProv,
+        chosenMod,
+        generalSysPrompt
+      );
+
+      if (!res) {
+        try {
+          res = await apiPost("/api/ai/chat", {
+            messages: state.floatingChatHistory.slice(-8),
+            model: chosenMod,
+            provider: chosenProv,
+            scan_id: includeScan && state.activeScan ? state.activeScan.scan_id : null
+          });
+        } catch (_) {
+          const tgt = state.activeScan ? state.activeScan.target : "your target";
+          const built = buildClientAnalysis(
+            tgt,
+            (state.activeScan && state.activeScan.outputs) || {},
+            (state.activeScan && state.activeScan.severities) || {}
+          );
+          res = {
+            reply:
+              `### 🤖 BaDR Assistant Reply to: *"${q}"*\n\n` +
+              `Here is a clear breakdown and answer:\n\n` +
+              built.analysis_markdown,
+            model: chosenMod,
+            provider: "BaDR Built-In Assistant",
+            latency_ms: 45
+          };
+        }
+      }
+
+      state.floatingChatHistory.push({ role: "assistant", content: res.reply });
+      botDiv.innerHTML = `
+        <div style="font-size:0.68rem;color:#7dd3fc;margin-bottom:5px;font-family:var(--font-mono);">
+          [${escapeHtml(res.provider)} · ${escapeHtml(res.model)}]
+        </div>
+        ${renderMarkdown(res.reply)}
+      `;
+      fabMessages.scrollTop = fabMessages.scrollHeight;
+    }
+
+    if (fabSendBtn && fabInput) {
+      fabSendBtn.addEventListener("click", () => {
+        const val = fabInput.value.trim();
+        if (!val) return;
+        fabInput.value = "";
+        sendFloatingLlmMessage(val);
+      });
+      fabInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") fabSendBtn.click();
+      });
+    }
+
+    document.querySelectorAll(".floating-quick-chip").forEach((chip) => {
+      chip.addEventListener("click", () => sendFloatingLlmMessage(chip.dataset.q));
+    });
 
     const aiAnalyzeBtn = document.getElementById("btn-trigger-ai-analyze");
     if (aiAnalyzeBtn) {
@@ -2194,7 +2234,6 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     renderDashboardModuleList();
     renderSavedMultiKeysList();
     renderApiVault();
-    renderAhm7ToolsArsenal();
     renderOllamaModelsList();
 
     // Generate initial default scan so Reports tab is immediately rich
