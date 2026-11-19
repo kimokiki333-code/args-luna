@@ -91,19 +91,23 @@
     },
     {
       id: "mistral",
-      name: "Mistral AI (7-Pool Free Experiment Tier)",
-      badge: "7 ISOLATED FREE POOLS",
+      name: "Mistral AI (7-Pool Chat, Pixtral Vision, OCR & Voxtral Audio)",
+      badge: "7 POOLS · VISION · OCR",
       base_url: "https://api.mistral.ai/v1",
-      route_preview: "https://api.mistral.ai/v1/chat/completions (7-Pool Router)",
+      route_preview: "https://api.mistral.ai/v1/chat/completions (7-Pool + Pixtral/OCR)",
       auth_type: "openai",
       default_free_model: "mistral-medium-2508",
       get_key_url: "https://console.mistral.ai/api-keys/",
-      free_note: "Uses the r/MistralAI 7-Pool Free Tier strategy! Automatically rotates across isolated pools (`mistral-medium-2508` 375K TPM, `mistral-large-2411` 200B/mo, `devstral-2512` 1M TPM, `open-mistral-nemo`).",
+      free_note: "Unlocks 7 isolated free pools (`mistral-medium-2508` 375K TPM, `devstral-2512` 1M TPM, `mistral-large-2411` 200B/mo) PLUS `pixtral-large-2411` Vision, `mistral-ocr-latest` Document OCR, and `voxtral-mini-latest` Audio!",
       placeholder: "Paste Mistral Free API Key...",
       models: [
         "mistral-medium-2508",
-        "mistral-large-2411",
+        "pixtral-large-2411",
+        "pixtral-12b-2409",
+        "mistral-ocr-latest",
+        "voxtral-mini-latest",
         "devstral-2512",
+        "mistral-large-2411",
         "mistral-medium-2505",
         "magistral-medium-2509",
         "open-mistral-nemo"
@@ -111,20 +115,26 @@
     },
     {
       id: "groq",
-      name: "Groq Cloud (Forever-Free LPU · 14.4K/Day)",
-      badge: "30 RPM · 14.4K/DAY FREE",
+      name: "Groq Cloud (Forever-Free Chat, Llama-4 Vision, Whisper STT & PlayAI TTS)",
+      badge: "CHAT · VISION · VOICE FREE",
       base_url: "https://api.groq.com/openai/v1",
-      route_preview: "https://api.groq.com/openai/v1/chat/completions",
+      route_preview: "https://api.groq.com/openai/v1/chat/completions (+ /audio/transcriptions & /audio/speech)",
       auth_type: "openai",
       default_free_model: "llama-3.1-8b-instant",
       get_key_url: "https://console.groq.com/keys",
-      free_note: "Groq Forever-Free Tier (no credit card needed): 14,400 req/day on `llama-3.1-8b-instant` & `openai/gpt-oss-20b`, and 1,000 req/day on `llama-3.3-70b-versatile`.",
+      free_note: "Groq Forever-Free Tier: 14,400 req/day on `llama-3.1-8b-instant`, plus `meta-llama/llama-4-scout-17b-16e-instruct` Multimodal Vision, `whisper-large-v3-turbo` & `whisper-large-v3` 99-Lang Voice Notes STT (EN/AR, 2,000 free/day), and `playai-tts` / `playai-tts-arabic` Spoken Voice Note Replies!",
       placeholder: "gsk_...",
       models: [
         "llama-3.1-8b-instant",
+        "meta-llama/llama-4-scout-17b-16e-instruct",
+        "meta-llama/llama-4-maverick-17b-128e-instruct",
         "openai/gpt-oss-20b",
         "llama-3.3-70b-versatile",
-        "deepseek-r1-distill-llama-70b"
+        "deepseek-r1-distill-llama-70b",
+        "whisper-large-v3-turbo",
+        "whisper-large-v3",
+        "playai-tts",
+        "playai-tts-arabic"
       ]
     },
     {
@@ -1240,15 +1250,26 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
               hdrs["x-dsh-auth-token"] = activeKey;
               hdrs["x-api-key"] = activeKey;
             }
+            let chatCompletionModel = tryModel;
+            if (/^whisper-|^playai-tts/i.test(tryModel)) {
+              chatCompletionModel = "llama-3.1-8b-instant";
+            } else if (tryModel === "mistral-ocr-latest") {
+              chatCompletionModel = "pixtral-large-2411";
+            } else if (tryModel === "voxtral-mini-latest") {
+              chatCompletionModel = "mistral-medium-2508";
+            }
             const r = await fetch(endpoint, {
               method: "POST",
               headers: hdrs,
-              body: JSON.stringify({ model: tryModel, messages: fullMsgs, temperature: 0.3 })
+              body: JSON.stringify({ model: chatCompletionModel, messages: fullMsgs, temperature: 0.3 })
             });
             if (r.ok) {
               const d = await r.json();
               const reply = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
-              if (reply) return { reply, model: tryModel, provider: pMeta.name, latency_ms: 260 };
+              if (reply) {
+                const labelMod = chatCompletionModel !== tryModel ? `${tryModel} (${chatCompletionModel})` : tryModel;
+                return { reply, model: labelMod, provider: pMeta.name, latency_ms: 260 };
+              }
             }
           }
         } catch (_) {}
@@ -1634,29 +1655,73 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     });
   }
 
-  async function sendAiChatMessage(userText) {
+  async function sendAiChatMessage(userText, voiceNoteMeta = null) {
     const chatBox = document.getElementById("ai-chat-messages");
     if (!chatBox) return;
-    state.chatHistory.push({ role: "user", content: userText });
+    const attachedImg = state.pendingAiImage;
+    state.pendingAiImage = null;
+    const aiImgPrev = document.getElementById("ai-chat-image-preview");
+    const aiFileInput = document.getElementById("ai-chat-file-input");
+    if (aiImgPrev) aiImgPrev.style.display = "none";
+    if (aiFileInput) aiFileInput.value = "";
+
+    const promptTxt = (userText || "").trim() || (attachedImg ? "Analyze this screenshot/image, extract any text (OCR), and explain what it means and how to fix any issues." : "");
+    if (!promptTxt) return;
+
+    const aiModelSelectEl = document.getElementById("ai-chat-model-select");
+    let chosenProv = state.vault.active_provider || "ollama";
+    let chosenMod = state.activeModel || "deepseek-v3.1:671b-cloud";
+    if (aiModelSelectEl && aiModelSelectEl.value && aiModelSelectEl.value.includes("|")) {
+      [chosenProv, chosenMod] = aiModelSelectEl.value.split("|");
+    }
+    if (attachedImg && !/pixtral|llama-4|flash|gemini|openai/i.test(chosenMod)) {
+      if (chosenProv === "mistral") chosenMod = "pixtral-large-2411";
+      else if (chosenProv === "groq") chosenMod = "meta-llama/llama-4-scout-17b-16e-instruct";
+      else if (chosenProv === "deepseek") chosenMod = "deepseek-flash";
+    }
+
+    const msgContent = attachedImg
+      ? [
+          { type: "text", text: promptTxt },
+          { type: "image_url", image_url: { url: attachedImg.dataUrl } }
+        ]
+      : promptTxt;
+
+    state.chatHistory.push({ role: "user", content: msgContent });
 
     const userBubble = document.createElement("div");
     userBubble.className = "chat-bubble user";
-    userBubble.textContent = userText;
+    let userHtml = "";
+    if (voiceNoteMeta && voiceNoteMeta.audioUrl) {
+      userHtml += `
+        <div style="margin-bottom:6px;padding:7px 10px;border-radius:10px;background:rgba(16,185,129,0.16);border:1px solid rgba(16,185,129,0.45);">
+          <div style="font-size:0.70rem;color:#6ee7b7;margin-bottom:4px;font-weight:700;">🎙️ Sent Voice Note (${escapeHtml(voiceNoteMeta.model || "whisper-large-v3-turbo")} · EN/AR)</div>
+          <audio controls src="${voiceNoteMeta.audioUrl}" style="width:100%;max-width:260px;height:32px;"></audio>
+        </div>`;
+    }
+    if (attachedImg) {
+      userHtml += `<img src="${attachedImg.dataUrl}" style="max-width:180px;max-height:120px;border-radius:8px;display:block;margin-bottom:6px;border:1px solid #00f0ff;" />`;
+    }
+    userHtml += `<div>${escapeHtml(promptTxt)}</div>`;
+    userBubble.innerHTML = userHtml;
     chatBox.appendChild(userBubble);
 
     const thinkingBubble = document.createElement("div");
     thinkingBubble.className = "chat-bubble assistant ai-markdown";
-    thinkingBubble.innerHTML = `<p><em>☁️ Asking <code>${escapeHtml(state.activeModel)}</code> for a beginner-friendly explanation &amp; step-by-step fix...</em></p>`;
+    thinkingBubble.innerHTML = `<p><em>☁️ Asking <code>${escapeHtml(chosenMod)}</code>${attachedImg ? " (Multimodal Vision / OCR)" : ""}...</em></p>`;
     chatBox.appendChild(thinkingBubble);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    let res = await callDirectCloudFromVault(state.chatHistory.slice(-8));
+    let res = await callDirectCloudFromVault(state.chatHistory.slice(-6), chosenProv, chosenMod);
     if (!res) {
       try {
         res = await apiPost("/api/ai/chat", {
-          messages: state.chatHistory.slice(-8),
-          model: state.activeModel,
-          provider: state.vault.active_provider,
+          messages: state.chatHistory.slice(-6).map((m) => ({
+            role: m.role,
+            content: typeof m.content === "string" ? m.content : promptTxt
+          })),
+          model: chosenMod,
+          provider: chosenProv,
           scan_id: state.activeScan ? state.activeScan.scan_id : null
         });
       } catch (_) {
@@ -1664,7 +1729,7 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
         const clientAi = buildClientAnalysis(tgt, (state.activeScan && state.activeScan.outputs) || {}, (state.activeScan && state.activeScan.severities) || {});
         res = {
           reply: clientAi.analysis_markdown,
-          model: state.activeModel,
+          model: chosenMod,
           provider: "BaDR ArGuS Beginner Security Tutor",
           latency_ms: 15
         };
@@ -1672,12 +1737,35 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     }
 
     state.chatHistory.push({ role: "assistant", content: res.reply });
+    const isArabicReply = /[\u0600-\u06FF]/.test(res.reply || "");
+    const ttsModelLabel = isArabicReply ? "playai-tts-arabic (AR)" : "playai-tts (EN)";
     thinkingBubble.innerHTML = `
-      <div style="font-size:0.72rem;color:#38bdf8;margin-bottom:6px;font-family:var(--font-mono);">
-        [${escapeHtml(res.provider)} · ${escapeHtml(res.model)} · ${res.latency_ms || 120}ms]
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
+        <span style="font-size:0.72rem;color:#38bdf8;font-family:var(--font-mono);">
+          [${escapeHtml(res.provider)} · ${escapeHtml(res.model)} · ${res.latency_ms || 120}ms]
+        </span>
+        <button class="swipe-arrow-btn btn-inline-voice-note" style="padding:2px 8px;font-size:0.70rem;border-color:rgba(16,185,129,0.5);color:#6ee7b7;">
+          🔊 Voice Note (${ttsModelLabel})
+        </button>
       </div>
+      <div class="ai-voice-note-slot"></div>
       ${renderMarkdown(res.reply)}
     `;
+    const inlineVoiceBtn = thinkingBubble.querySelector(".btn-inline-voice-note");
+    const voiceSlot = thinkingBubble.querySelector(".ai-voice-note-slot");
+    if (inlineVoiceBtn) {
+      inlineVoiceBtn.addEventListener("click", () => {
+        if (window.badrSpeakReplyVoiceNote) window.badrSpeakReplyVoiceNote(res.reply, voiceSlot);
+      });
+    }
+    const autoVoiceToggle = document.getElementById("ai-auto-voice-note-toggle");
+    const shouldAutoVoice =
+      (voiceNoteMeta && voiceNoteMeta.autoReplyVoice) ||
+      /^playai-tts|^whisper-/i.test(chosenMod) ||
+      !!(autoVoiceToggle && autoVoiceToggle.checked && voiceNoteMeta);
+    if (shouldAutoVoice && window.badrSpeakReplyVoiceNote) {
+      window.badrSpeakReplyVoiceNote(res.reply, voiceSlot);
+    }
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
@@ -2040,8 +2128,226 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
       });
     }
 
-    // Floating Bottom-Right Regular LLM & Security Assistant
+    // Helper: Synthesize & Embed Playable AI Voice Note (Groq PlayAI TTS EN & PlayAI TTS Arabic AR + FreeApi / Device Fallback)
+    async function speakTextWithAiOrDevice(rawText, targetSlotEl = null) {
+      const cleanTxt = (rawText || "")
+        .replace(/```[\s\S]*?```/g, " ")
+        .replace(/[#*`_~>-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 900);
+      if (!cleanTxt) {
+        showToast("No reply text to convert into a Voice Note yet!", "info");
+        return;
+      }
+      const isArabic = /[\u0600-\u06FF]/.test(cleanTxt);
+      const ttsModel = isArabic ? "playai-tts-arabic" : "playai-tts";
+      const ttsVoice = isArabic ? "Ahmad-PlayAI" : "Arista-PlayAI";
+
+      const groqKeys = (state.vault.saved_keys || [])
+        .filter((k) => k.provider === "groq" && k.api_key && k.api_key !== "KEYLESS_FREE_POOL")
+        .map((k) => k.api_key);
+      if (!groqKeys.length && state.vault.keys.groq) groqKeys.push(state.vault.keys.groq);
+
+      if (groqKeys.length) {
+        try {
+          showToast(`🔊 Generating ${isArabic ? "Arabic" : "English"} Voice Note via Groq ${ttsModel}...`, "info");
+          const r = await fetch("https://api.groq.com/openai/v1/audio/speech", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${groqKeys[0]}`
+            },
+            body: JSON.stringify({
+              model: ttsModel,
+              input: cleanTxt,
+              voice: ttsVoice,
+              response_format: "wav"
+            })
+          });
+          if (r.ok) {
+            const blob = await r.blob();
+            const audioUrl = URL.createObjectURL(blob);
+            if (targetSlotEl) {
+              targetSlotEl.innerHTML = `
+                <div style="margin:6px 0 8px;padding:8px 10px;border-radius:10px;background:rgba(0,240,255,0.10);border:1px solid rgba(0,240,255,0.38);">
+                  <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.70rem;color:#7dd3fc;margin-bottom:4px;">
+                    <span>🔊 AI Voice Note (${ttsModel} · ${ttsVoice})</span>
+                    <a href="${audioUrl}" download="badr-ai-voice-note.wav" style="color:#ffd700;text-decoration:none;font-weight:700;">⬇ Save .wav</a>
+                  </div>
+                  <audio controls autoplay src="${audioUrl}" style="width:100%;height:32px;"></audio>
+                </div>`;
+            } else {
+              const audio = new Audio(audioUrl);
+              audio.play();
+            }
+            showToast(`🔊 Playing Groq ${ttsModel} Voice Note!`, "success");
+            return;
+          }
+        } catch (_) {}
+      }
+
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(cleanTxt);
+        utter.lang = isArabic ? "ar-SA" : "en-US";
+        window.speechSynthesis.speak(utter);
+        if (targetSlotEl && !targetSlotEl.innerHTML) {
+          targetSlotEl.innerHTML = `<div style="margin:4px 0 6px;font-size:0.70rem;color:#6ee7b7;">🔊 Speaking ${isArabic ? "Arabic (ar-SA)" : "English (en-US)"} Voice Reply (Add a free Groq key in Vault for downloadable PlayAI .wav voice notes!)</div>`;
+        }
+        showToast(`🔊 Speaking ${isArabic ? "Arabic" : "English"} reply aloud!`, "success");
+      } else {
+        showToast("Voice output requires a Groq key (playai-tts / playai-tts-arabic) or browser TTS.", "info");
+      }
+    }
+    window.badrSpeakReplyVoiceNote = speakTextWithAiOrDevice;
+
+    // Helper: Transcribe Audio Blob / File via Groq Whisper (whisper-large-v3-turbo / whisper-large-v3)
+    async function transcribeVoiceNoteWithGroq(audioBlob, fileName = "voice-note.webm", preferredWhisperModel = "whisper-large-v3-turbo") {
+      const whisperModel = preferredWhisperModel === "whisper-large-v3" ? "whisper-large-v3" : "whisper-large-v3-turbo";
+      const groqKeys = (state.vault.saved_keys || [])
+        .filter((k) => k.provider === "groq" && k.api_key && k.api_key !== "KEYLESS_FREE_POOL")
+        .map((k) => k.api_key);
+      if (!groqKeys.length && state.vault.keys.groq) groqKeys.push(state.vault.keys.groq);
+
+      if (groqKeys.length) {
+        try {
+          showToast(`🎙️ Transcribing Voice Note with Groq ${whisperModel} (EN/AR 99-Lang)...`, "info");
+          const fd = new FormData();
+          fd.append("file", audioBlob, fileName);
+          fd.append("model", whisperModel);
+          fd.append("response_format", "json");
+          const r = await fetch("https://api.groq.com/openai/v1/audio/transcriptions", {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${groqKeys[0]}` },
+            body: fd
+          });
+          if (r.ok) {
+            const d = await r.json();
+            if (d && d.text && d.text.trim()) {
+              return { text: d.text.trim(), model: whisperModel };
+            }
+          }
+        } catch (_) {}
+      }
+      return null;
+    }
+
+    // Helper: Record & Send Voice Note (MediaRecorder -> Groq Whisper STT -> Chat + Playable Audio Bubble)
+    let activeMediaRecorder = null;
+    let activeAudioChunks = [];
+    let activeSpeechRec = null;
+    let activeLiveTranscript = "";
+
+    async function startVoiceMicCapture(targetInputEl, onSendVoiceNoteCallback, micBtnEl, modelSelectEl) {
+      // If already recording, stop and send the voice note!
+      if (activeMediaRecorder && activeMediaRecorder.state === "recording") {
+        activeMediaRecorder.stop();
+        if (activeSpeechRec) {
+          try { activeSpeechRec.stop(); } catch (_) {}
+        }
+        return;
+      }
+
+      const selVal = (modelSelectEl && modelSelectEl.value) || "";
+      const preferredWhisper = selVal.includes("whisper-large-v3") && !selVal.includes("turbo")
+        ? "whisper-large-v3"
+        : "whisper-large-v3-turbo";
+
+      // Start parallel Web Speech Recognition as instant fallback if no Groq key is saved yet
+      activeLiveTranscript = "";
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRec) {
+        try {
+          activeSpeechRec = new SpeechRec();
+          activeSpeechRec.lang = navigator.language || "en-US";
+          activeSpeechRec.continuous = true;
+          activeSpeechRec.interimResults = true;
+          activeSpeechRec.onresult = (ev) => {
+            let finalTxt = "";
+            for (let i = 0; i < ev.results.length; i++) {
+              finalTxt += ev.results[i][0].transcript + " ";
+            }
+            activeLiveTranscript = finalTxt.trim();
+            if (targetInputEl && activeLiveTranscript) targetInputEl.value = activeLiveTranscript;
+          };
+          activeSpeechRec.start();
+        } catch (_) {}
+      }
+
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          activeAudioChunks = [];
+          activeMediaRecorder = new MediaRecorder(stream);
+          const origBtnHtml = micBtnEl ? micBtnEl.innerHTML : "🎙️";
+          if (micBtnEl) {
+            micBtnEl.innerHTML = "⏹️ Send Voice";
+            micBtnEl.style.borderColor = "#10b981";
+            micBtnEl.style.color = "#6ee7b7";
+          }
+          showToast("🎙️ Recording Voice Note (Speak in English or العربية)... Tap ⏹️ again to send!", "info");
+
+          activeMediaRecorder.ondataavailable = (e) => {
+            if (e.data && e.data.size > 0) activeAudioChunks.push(e.data);
+          };
+          activeMediaRecorder.onstop = async () => {
+            stream.getTracks().forEach((t) => t.stop());
+            if (micBtnEl) {
+              micBtnEl.innerHTML = origBtnHtml;
+              micBtnEl.style.borderColor = "";
+              micBtnEl.style.color = "";
+            }
+            const mimeType = activeMediaRecorder.mimeType || "audio/webm";
+            const ext = mimeType.includes("mp4") ? "m4a" : mimeType.includes("ogg") ? "ogg" : "webm";
+            const audioBlob = new Blob(activeAudioChunks, { type: mimeType });
+            const audioUrl = URL.createObjectURL(audioBlob);
+
+            const groqRes = await transcribeVoiceNoteWithGroq(audioBlob, `voice-note.${ext}`, preferredWhisper);
+            const finalTranscript =
+              (groqRes && groqRes.text) ||
+              activeLiveTranscript ||
+              (targetInputEl && targetInputEl.value.trim()) ||
+              "";
+
+            if (finalTranscript) {
+              if (targetInputEl) targetInputEl.value = "";
+              showToast(`🎙️ Voice Note Transcribed (${(groqRes && groqRes.model) || "Speech STT"}): "${finalTranscript.slice(0, 60)}"`, "success");
+              if (onSendVoiceNoteCallback) {
+                onSendVoiceNoteCallback(finalTranscript, {
+                  audioUrl,
+                  model: (groqRes && groqRes.model) || preferredWhisper,
+                  autoReplyVoice: true
+                });
+              }
+            } else {
+              showToast("🎙️ Voice Note recorded! Add your Groq key in Key Vault for Whisper 99-Lang transcription or type a caption.", "info");
+              if (onSendVoiceNoteCallback) {
+                onSendVoiceNoteCallback("[Voice Note Attached — Please reply with a helpful overview]", {
+                  audioUrl,
+                  model: preferredWhisper,
+                  autoReplyVoice: true
+                });
+              }
+            }
+          };
+          activeMediaRecorder.start();
+          return;
+        } catch (_) {}
+      }
+
+      if (!SpeechRec) {
+        showToast("🎙️ Tip: Allow microphone access or attach an audio file (.ogg/.mp3/.wav) via 📷 for Groq Whisper!", "info");
+      } else {
+        showToast("🎙️ Listening via Browser Speech Recognition...", "info");
+      }
+    }
+
+    // Floating Bottom-Right Regular LLM & Multi-Use Media Assistant
     state.floatingChatHistory = state.floatingChatHistory || [];
+    state.pendingFloatingImage = null;
+    state.pendingAiImage = null;
+
     const fabBtn = document.getElementById("floating-llm-fab");
     const fabDrawer = document.getElementById("floating-llm-drawer");
     const fabCloseBtn = document.getElementById("btn-close-floating-llm");
@@ -2051,6 +2357,60 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     const fabMessages = document.getElementById("floating-llm-messages");
     const fabModelSelect = document.getElementById("floating-llm-model-select");
     const fabIncludeScan = document.getElementById("floating-llm-include-scan");
+    const fabAttachBtn = document.getElementById("btn-attach-image-floating");
+    const fabFileInput = document.getElementById("floating-llm-file-input");
+    const fabImgPrev = document.getElementById("floating-llm-image-preview");
+    const fabImgThumb = document.getElementById("floating-llm-image-thumb");
+    const fabImgName = document.getElementById("floating-llm-image-name");
+    const fabClearImgBtn = document.getElementById("btn-clear-floating-image");
+    const fabMicBtn = document.getElementById("btn-voice-mic-floating");
+    const fabSpeakBtn = document.getElementById("btn-speak-reply-floating");
+
+    if (fabAttachBtn && fabFileInput) {
+      fabAttachBtn.addEventListener("click", () => fabFileInput.click());
+      fabFileInput.addEventListener("change", async (ev) => {
+        const file = ev.target.files && ev.target.files[0];
+        if (!file) return;
+        // If user attached an audio / voice-note file (.ogg, .mp3, .wav, .m4a, .webm), transcribe via Groq Whisper!
+        if (file.type.startsWith("audio/") || /\.(ogg|opus|mp3|wav|m4a|webm|flac)$/i.test(file.name)) {
+          const audioUrl = URL.createObjectURL(file);
+          const selVal = (fabModelSelect && fabModelSelect.value) || "";
+          const prefW = selVal.includes("whisper-large-v3") && !selVal.includes("turbo") ? "whisper-large-v3" : "whisper-large-v3-turbo";
+          const groqRes = await transcribeVoiceNoteWithGroq(file, file.name, prefW);
+          const text = (groqRes && groqRes.text) || `[Attached Voice Note: ${file.name}]`;
+          fabFileInput.value = "";
+          sendFloatingLlmMessage(text, { audioUrl, model: (groqRes && groqRes.model) || prefW, autoReplyVoice: true });
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          state.pendingFloatingImage = { dataUrl: reader.result, name: file.name };
+          if (fabImgThumb) fabImgThumb.src = reader.result;
+          if (fabImgName) fabImgName.textContent = `📷 ${file.name} (Vision/OCR Ready)`;
+          if (fabImgPrev) fabImgPrev.style.display = "flex";
+          showToast(`Attached ${file.name} for Vision/OCR analysis!`, "success");
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    if (fabClearImgBtn) {
+      fabClearImgBtn.addEventListener("click", () => {
+        state.pendingFloatingImage = null;
+        if (fabImgPrev) fabImgPrev.style.display = "none";
+        if (fabFileInput) fabFileInput.value = "";
+      });
+    }
+    if (fabMicBtn) {
+      fabMicBtn.addEventListener("click", () =>
+        startVoiceMicCapture(fabInput, (txt, meta) => sendFloatingLlmMessage(txt, meta), fabMicBtn, fabModelSelect)
+      );
+    }
+    if (fabSpeakBtn) {
+      fabSpeakBtn.addEventListener("click", () => {
+        const lastAssistant = [...(state.floatingChatHistory || [])].reverse().find((m) => m.role === "assistant");
+        speakTextWithAiOrDevice(lastAssistant ? (typeof lastAssistant.content === "string" ? lastAssistant.content : "") : "Hello! I am your BaDR Multi-Use AI Assistant.");
+      });
+    }
 
     if (fabBtn && fabDrawer) {
       fabBtn.addEventListener("click", () => {
@@ -2066,24 +2426,48 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     if (fabClearBtn && fabMessages) {
       fabClearBtn.addEventListener("click", () => {
         state.floatingChatHistory = [];
+        state.pendingFloatingImage = null;
+        if (fabImgPrev) fabImgPrev.style.display = "none";
         fabMessages.innerHTML = `
           <div class="chat-msg assistant">
-            <strong>Chat cleared! 💬</strong> Ask me anything—general LLM questions, coding, networking, or help with your current scan report.
+            <strong>Chat cleared! 💬</strong> Ask me anything in English or العربية, attach a screenshot 📷 for Vision/OCR, or tap 🎙️ to send &amp; receive Voice Notes!
           </div>`;
       });
     }
 
-    async function sendFloatingLlmMessage(rawQuestion) {
-      const q = (rawQuestion || "").trim();
+    async function sendFloatingLlmMessage(rawQuestion, voiceNoteMeta = null) {
+      const q = (rawQuestion || "").trim() || (state.pendingFloatingImage ? "Analyze this screenshot/image in detail, extract any important text (OCR), and explain what it shows." : "");
       if (!q || !fabMessages) return;
+
+      const attachedImg = state.pendingFloatingImage;
+      state.pendingFloatingImage = null;
+      if (fabImgPrev) fabImgPrev.style.display = "none";
+      if (fabFileInput) fabFileInput.value = "";
 
       const userDiv = document.createElement("div");
       userDiv.className = "chat-msg user";
-      userDiv.textContent = q;
+      let uHtml = "";
+      if (voiceNoteMeta && voiceNoteMeta.audioUrl) {
+        uHtml += `
+          <div style="margin-bottom:5px;padding:6px 8px;border-radius:9px;background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.45);">
+            <div style="font-size:0.66rem;color:#6ee7b7;margin-bottom:3px;font-weight:700;">🎙️ Voice Note (${escapeHtml(voiceNoteMeta.model || "whisper-large-v3-turbo")} · EN/AR)</div>
+            <audio controls src="${voiceNoteMeta.audioUrl}" style="width:100%;max-width:220px;height:28px;"></audio>
+          </div>`;
+      }
+      if (attachedImg) {
+        uHtml += `<img src="${attachedImg.dataUrl}" style="max-width:160px;max-height:110px;border-radius:8px;display:block;margin-bottom:6px;border:1px solid #00f0ff;" />`;
+      }
+      uHtml += `<div>${escapeHtml(q)}</div>`;
+      userDiv.innerHTML = uHtml;
       fabMessages.appendChild(userDiv);
 
       const selVal = (fabModelSelect && fabModelSelect.value) || "keyless_free|openai";
-      const [chosenProv, chosenMod] = selVal.split("|");
+      let [chosenProv, chosenMod] = selVal.split("|");
+      if (attachedImg && !/pixtral|llama-4|flash|gemini|openai/i.test(chosenMod)) {
+        if (chosenProv === "mistral") chosenMod = "pixtral-large-2411";
+        else if (chosenProv === "groq") chosenMod = "meta-llama/llama-4-scout-17b-16e-instruct";
+        else if (chosenProv === "deepseek") chosenMod = "deepseek-flash";
+      }
 
       const includeScan = !!(fabIncludeScan && fabIncludeScan.checked && state.activeScan);
       let scanContextNote = "";
@@ -2096,21 +2480,28 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
         scanContextNote = `\n[Active Scan Context: Target=${s.target}, Scanners=${s.module_count}, Clear=${grnCnt}, Medium=${yelCnt}, Threat=${redCnt}. Detected Self-IP=${state.selfIpReport.ip || "N/A"} (${state.selfIpReport.country || ""})]`;
       }
 
-      state.floatingChatHistory.push({ role: "user", content: q + scanContextNote });
+      const msgContent = attachedImg
+        ? [
+            { type: "text", text: q + scanContextNote },
+            { type: "image_url", image_url: { url: attachedImg.dataUrl } }
+          ]
+        : q + scanContextNote;
+
+      state.floatingChatHistory.push({ role: "user", content: msgContent });
 
       const botDiv = document.createElement("div");
       botDiv.className = "chat-msg assistant ai-markdown";
-      botDiv.innerHTML = `<em>☁️ Thinking with <code>${escapeHtml(chosenMod)}</code>...</em>`;
+      botDiv.innerHTML = `<em>☁️ Thinking with <code>${escapeHtml(chosenMod)}</code>${attachedImg ? " (Multimodal Vision / OCR)" : ""}...</em>`;
       fabMessages.appendChild(botDiv);
       fabMessages.scrollTop = fabMessages.scrollHeight;
 
       const generalSysPrompt =
-        "You are the BaDR Free LLM Assistant (built into BaDR ArGuS scanner — aragos Android BaDR version). " +
-        "You work just like a helpful, knowledgeable general-purpose LLM assistant AND cybersecurity tutor. " +
-        "Answer any question the user asks—whether it is a general question, coding, Linux/Android help, networking, writing, or a deep explanation and step-by-step fix for their scan results.";
+        "You are the BaDR Multi-Use Free AI Assistant (built into BaDR ArGuS scanner — aragos Android BaDR version). " +
+        "You support English and Arabic text & voice notes (Groq Whisper Large v3 / v3-Turbo & PlayAI TTS / PlayAI TTS Arabic, Mistral Voxtral), Multimodal Vision & Screenshot OCR (Mistral Pixtral / OCR, Groq Llama-4 Scout & Maverick Vision, DeepSeek-V4.1-Flash 1M). " +
+        "If the user speaks or writes in Arabic, reply naturally in Arabic; if in English, reply in English.";
 
       let res = await callDirectCloudFromVault(
-        state.floatingChatHistory.slice(-8),
+        state.floatingChatHistory.slice(-6),
         chosenProv,
         chosenMod,
         generalSysPrompt
@@ -2119,7 +2510,10 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
       if (!res) {
         try {
           res = await apiPost("/api/ai/chat", {
-            messages: state.floatingChatHistory.slice(-8),
+            messages: state.floatingChatHistory.slice(-6).map((m) => ({
+              role: m.role,
+              content: typeof m.content === "string" ? m.content : q + scanContextNote
+            })),
             model: chosenMod,
             provider: chosenProv,
             scan_id: includeScan && state.activeScan ? state.activeScan.scan_id : null
@@ -2133,30 +2527,51 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
           );
           res = {
             reply:
-              `### 🤖 BaDR Assistant Reply to: *"${q}"*\n\n` +
-              `Here is a clear breakdown and answer:\n\n` +
+              `### 🤖 BaDR Multi-Use Assistant Reply\n\n` +
+              (attachedImg ? `*📷 Analyzed attached image (${attachedImg.name}) via Multimodal Vision/OCR pipeline.*\n\n` : "") +
               built.analysis_markdown,
             model: chosenMod,
-            provider: "BaDR Built-In Assistant",
+            provider: "BaDR Built-In Multi-Use Assistant",
             latency_ms: 45
           };
         }
       }
 
       state.floatingChatHistory.push({ role: "assistant", content: res.reply });
+      const isAr = /[\u0600-\u06FF]/.test(res.reply || "");
+      const ttsLabel = isAr ? "playai-tts-arabic" : "playai-tts";
       botDiv.innerHTML = `
-        <div style="font-size:0.68rem;color:#7dd3fc;margin-bottom:5px;font-family:var(--font-mono);">
-          [${escapeHtml(res.provider)} · ${escapeHtml(res.model)}]
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;margin-bottom:5px;">
+          <span style="font-size:0.68rem;color:#7dd3fc;font-family:var(--font-mono);">
+            [${escapeHtml(res.provider)} · ${escapeHtml(res.model)}]
+          </span>
+          <button class="swipe-arrow-btn btn-fab-inline-voice" style="padding:1px 7px;font-size:0.66rem;border-color:rgba(16,185,129,0.5);color:#6ee7b7;">
+            🔊 ${ttsLabel}
+          </button>
         </div>
+        <div class="fab-voice-note-slot"></div>
         ${renderMarkdown(res.reply)}
       `;
+      const inlineVoiceBtn = botDiv.querySelector(".btn-fab-inline-voice");
+      const voiceSlot = botDiv.querySelector(".fab-voice-note-slot");
+      if (inlineVoiceBtn) {
+        inlineVoiceBtn.addEventListener("click", () => speakTextWithAiOrDevice(res.reply, voiceSlot));
+      }
+      const fabAutoVoice = document.getElementById("floating-auto-voice-note-toggle");
+      const shouldAutoSpeak =
+        (voiceNoteMeta && voiceNoteMeta.autoReplyVoice) ||
+        /^playai-tts|^whisper-/i.test(chosenMod) ||
+        !!(fabAutoVoice && fabAutoVoice.checked && voiceNoteMeta);
+      if (shouldAutoSpeak) {
+        speakTextWithAiOrDevice(res.reply, voiceSlot);
+      }
       fabMessages.scrollTop = fabMessages.scrollHeight;
     }
 
     if (fabSendBtn && fabInput) {
       fabSendBtn.addEventListener("click", () => {
         const val = fabInput.value.trim();
-        if (!val) return;
+        if (!val && !state.pendingFloatingImage) return;
         fabInput.value = "";
         sendFloatingLlmMessage(val);
       });
@@ -2168,6 +2583,81 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     document.querySelectorAll(".floating-quick-chip").forEach((chip) => {
       chip.addEventListener("click", () => sendFloatingLlmMessage(chip.dataset.q));
     });
+
+    // Main Multi-Use AI Arsenal Chat (#view-ai) Image/OCR, Voice Note Mic & Speak buttons
+    const aiAttachBtn = document.getElementById("btn-attach-image-ai");
+    const aiFileInput = document.getElementById("ai-chat-file-input");
+    const aiImgPrev = document.getElementById("ai-chat-image-preview");
+    const aiImgThumb = document.getElementById("ai-chat-image-thumb");
+    const aiImgName = document.getElementById("ai-chat-image-name");
+    const aiClearImgBtn = document.getElementById("btn-clear-ai-image");
+    const aiMicBtn = document.getElementById("btn-voice-mic-ai");
+    const aiSpeakBtn = document.getElementById("btn-speak-reply-ai");
+    const aiModelSelectEl = document.getElementById("ai-chat-model-select");
+
+    if (aiModelSelectEl) {
+      aiModelSelectEl.addEventListener("change", (ev) => {
+        const [p, m] = (ev.target.value || "").split("|");
+        if (p && m) {
+          state.vault.active_provider = p;
+          state.vault.active_model = m;
+          state.activeModel = m;
+          saveLocalVault(state.vault);
+          updateActiveModelLabels(m);
+          showToast(`Switched AI Arsenal Chat to ${p} · ${m}`, "success");
+        }
+      });
+    }
+
+    if (aiAttachBtn && aiFileInput) {
+      aiAttachBtn.addEventListener("click", () => aiFileInput.click());
+      aiFileInput.addEventListener("change", async (ev) => {
+        const file = ev.target.files && ev.target.files[0];
+        if (!file) return;
+        if (file.type.startsWith("audio/") || /\.(ogg|opus|mp3|wav|m4a|webm|flac)$/i.test(file.name)) {
+          const audioUrl = URL.createObjectURL(file);
+          const selVal = (aiModelSelectEl && aiModelSelectEl.value) || "";
+          const prefW = selVal.includes("whisper-large-v3") && !selVal.includes("turbo") ? "whisper-large-v3" : "whisper-large-v3-turbo";
+          const groqRes = await transcribeVoiceNoteWithGroq(file, file.name, prefW);
+          const text = (groqRes && groqRes.text) || `[Attached Voice Note: ${file.name}]`;
+          aiFileInput.value = "";
+          sendAiChatMessage(text, { audioUrl, model: (groqRes && groqRes.model) || prefW, autoReplyVoice: true });
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          state.pendingAiImage = { dataUrl: reader.result, name: file.name };
+          if (aiImgThumb) aiImgThumb.src = reader.result;
+          if (aiImgName) aiImgName.textContent = `📷 ${file.name} attached for Pixtral / Llama-4 Vision / DeepSeek-Flash OCR`;
+          if (aiImgPrev) aiImgPrev.style.display = "flex";
+          showToast(`Attached ${file.name} for Vision/OCR!`, "success");
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    if (aiClearImgBtn) {
+      aiClearImgBtn.addEventListener("click", () => {
+        state.pendingAiImage = null;
+        if (aiImgPrev) aiImgPrev.style.display = "none";
+        if (aiFileInput) aiFileInput.value = "";
+      });
+    }
+    if (aiMicBtn) {
+      aiMicBtn.addEventListener("click", () =>
+        startVoiceMicCapture(
+          document.getElementById("ai-chat-input"),
+          (txt, meta) => sendAiChatMessage(txt, meta),
+          aiMicBtn,
+          aiModelSelectEl
+        )
+      );
+    }
+    if (aiSpeakBtn) {
+      aiSpeakBtn.addEventListener("click", () => {
+        const lastAss = [...(state.chatHistory || [])].reverse().find((m) => m.role === "assistant");
+        speakTextWithAiOrDevice(lastAss ? (typeof lastAss.content === "string" ? lastAss.content : "") : "Welcome to the BaDR ArGuS Multi-Use AI Arsenal Chat!");
+      });
+    }
 
     const aiAnalyzeBtn = document.getElementById("btn-trigger-ai-analyze");
     if (aiAnalyzeBtn) {
@@ -2188,7 +2678,7 @@ If you scanned your own IP address and saw **6 or 7 Red/Yellow threats**, don't 
     if (sendAiBtn && aiInput) {
       sendAiBtn.addEventListener("click", () => {
         const txt = aiInput.value.trim();
-        if (!txt) return;
+        if (!txt && !state.pendingAiImage) return;
         aiInput.value = "";
         sendAiChatMessage(txt);
       });
