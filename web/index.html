@@ -345,12 +345,25 @@
             </div>
             <select id="hud-model-select" class="glass-select" title="Active Cloud AI Model (Auto-Selects Free Pool)">
               <option value="deepseek-v3.1:671b-cloud">☁️ Ollama Free: deepseek-v3.1:671b-cloud</option>
-              <option value="mistral-medium-2508">☁️ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
-              <option value="mistral-large-2411">☁️ Mistral Pool 2: mistral-large-2411 (200B/mo)</option>
-              <option value="llama-3.1-8b-instant">☁️ Groq Free: llama-3.1-8b-instant (14.4K/day)</option>
-              <option value="meta-llama/llama-3.3-70b-instruct:free">☁️ OpenRouter: llama-3.3-70b:free</option>
-              <option value="gemini-2.0-flash">☁️ Gemini Free: gemini-2.0-flash</option>
-              <option value="openai">☁️ Keyless Free AI (No Key Needed)</option>
+              <option value="deepseek-flash">🐋 DeepSeek-V4.1-Flash (1M · Text + Vision)</option>
+              <option value="deepseek-v4-pro">🐋 DeepSeek-V4-Pro (1M · Agentic Security)</option>
+              <option value="mistral-medium-2508">⚡ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
+              <option value="pixtral-large-2411">👁️ Mistral Vision: pixtral-large-2411 (124B)</option>
+              <option value="pixtral-12b-2409">👁️ Mistral Vision: pixtral-12b-2409 (Fast)</option>
+              <option value="mistral-ocr-latest">📄 Mistral OCR: mistral-ocr-latest</option>
+              <option value="voxtral-mini-latest">🎙️ Mistral Audio: voxtral-mini-latest</option>
+              <option value="devstral-2512">💻 Mistral Pool 7: devstral-2512 (1M TPM)</option>
+              <option value="mistral-large-2411">⚡ Mistral Pool 2: mistral-large-2411 (200B/mo)</option>
+              <option value="llama-3.1-8b-instant">🚀 Groq Free: llama-3.1-8b-instant (14.4K/day)</option>
+              <option value="meta-llama/llama-4-scout-17b-16e-instruct">👁️ Groq Vision: Llama-4 Scout 17B</option>
+              <option value="meta-llama/llama-4-maverick-17b-128e-instruct">👁️ Groq Vision: Llama-4 Maverick 17B</option>
+              <option value="whisper-large-v3-turbo">🎙️ Groq Voice Note STT: whisper-large-v3-turbo (EN/AR)</option>
+              <option value="whisper-large-v3">🎙️ Groq Voice Note STT: whisper-large-v3 (Max Accuracy EN/AR)</option>
+              <option value="playai-tts">🔊 Groq Voice Note TTS: playai-tts (English)</option>
+              <option value="playai-tts-arabic">🔊 Groq Voice Note TTS: playai-tts-arabic (Arabic)</option>
+              <option value="meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b:free</option>
+              <option value="gemini-2.0-flash">✨ Gemini Free: gemini-2.0-flash</option>
+              <option value="openai">🔓 Keyless Free AI (No Key Needed)</option>
             </select>
           </div>
 
@@ -815,22 +828,79 @@
           </div>
 
           <div class="glass-panel" style="display:flex;flex-direction:column;">
-            <div style="padding:12px 15px;border-bottom:1px solid rgba(255,215,0,0.16);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-              <div style="font-size:1.02rem;font-weight:800;color:#ffd700;">🧠 Beginner Cybersecurity Tutor &amp; Threat Fixer</div>
-              <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="chip-btn ai-prompt-chip" data-prompt="Explain my latest scan report in very simple words for someone new to cybersecurity, and tell me step by step how to fix any Red or Yellow warnings.">Explain &amp; Fix for Beginner</button>
-                <button class="chip-btn ai-prompt-chip" data-prompt="I scanned my own IP address and saw 6-7 threats or open ports. What do they mean and how do I fix them on my router or phone?">Why Does My IP Show Threats?</button>
+            <div style="padding:12px 15px;border-bottom:1px solid rgba(255,215,0,0.16);display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                <div>
+                  <div style="font-size:1.02rem;font-weight:800;color:#ffd700;">🧠 Multi-Use AI Arsenal Chat (Chat · Vision · OCR · EN/AR Voice Notes)</div>
+                  <div style="font-size:0.74rem;color:#7dd3fc;">Send &amp; Receive Voice Notes (`whisper-large-v3-turbo` / `whisper-large-v3` + `playai-tts` / `playai-tts-arabic`) · Pixtral / Llama-4 Vision · DeepSeek Harness</div>
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <button class="chip-btn ai-prompt-chip" data-prompt="Explain my latest scan report in very simple words for someone new to cybersecurity, and tell me step by step how to fix any Red or Yellow warnings.">Explain &amp; Fix for Beginner</button>
+                  <button class="chip-btn ai-prompt-chip" data-prompt="I scanned my own IP address and saw 6-7 threats or open ports. What do they mean and how do I fix them on my router or phone?">Why Does My IP Show Threats?</button>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <select id="ai-chat-model-select" class="glass-select" style="flex:1;min-width:220px;height:34px;font-size:0.76rem;padding:0 10px;">
+                  <optgroup label="🚀 Groq Multi-Use (Chat, Llama-4 Vision, Whisper EN/AR Voice Notes &amp; PlayAI TTS)">
+                    <option value="groq|llama-3.1-8b-instant">🚀 Groq Fast Chat: llama-3.1-8b-instant (14.4K/Day Free)</option>
+                    <option value="groq|meta-llama/llama-4-scout-17b-16e-instruct">👁️ Groq Vision: Llama-4 Scout 17B (Image &amp; Screenshot Reader)</option>
+                    <option value="groq|meta-llama/llama-4-maverick-17b-128e-instruct">👁️ Groq Vision: Llama-4 Maverick 17B (128E Multimodal)</option>
+                    <option value="groq|deepseek-r1-distill-llama-70b">🧠 Groq Reasoning: DeepSeek R1 Distill 70B</option>
+                    <option value="groq|whisper-large-v3-turbo">🎙️ Groq Voice Note STT: Whisper Large v3 Turbo (99-Lang EN + AR · 2,000/Day)</option>
+                    <option value="groq|whisper-large-v3">🎙️ Groq Voice Note STT: Whisper Large v3 Full (Max Accuracy EN + AR)</option>
+                    <option value="groq|playai-tts">🔊 Groq Voice Note TTS: PlayAI Spoken English Replies</option>
+                    <option value="groq|playai-tts-arabic">🔊 Groq Voice Note TTS: PlayAI Spoken Arabic Replies (العربية)</option>
+                  </optgroup>
+                  <optgroup label="⚡ Mistral Multi-Use (7-Pool Chat, Pixtral Vision, OCR &amp; Voxtral Audio)">
+                    <option value="mistral|mistral-medium-2508">⚡ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
+                    <option value="mistral|pixtral-large-2411">👁️ Mistral Vision: Pixtral Large 2411 (124B Screenshot/UI Reader)</option>
+                    <option value="mistral|pixtral-12b-2409">👁️ Mistral Vision: Pixtral 12B (Fast Image Analyzer)</option>
+                    <option value="mistral|mistral-ocr-latest">📄 Mistral OCR: Document, PDF &amp; Table Extractor</option>
+                    <option value="mistral|voxtral-mini-latest">🎙️ Mistral Voxtral: Native Voice &amp; Audio Understanding</option>
+                    <option value="mistral|devstral-2512">💻 Mistral Pool 7: Devstral 2512 (1M TPM Code &amp; Security)</option>
+                    <option value="mistral|mistral-large-2411">⚡ Mistral Pool 2: mistral-large-2411 (200B/mo)</option>
+                  </optgroup>
+                  <optgroup label="🐋 DeepSeek Harness (@deepseek-ai/dsh · 1M Context &amp; Vision)">
+                    <option value="deepseek|deepseek-flash">🐋 DeepSeek-V4.1-Flash (1M Context · Text + Image Vision)</option>
+                    <option value="deepseek|deepseek-v4-pro">🐋 DeepSeek-V4-Pro (1M Context · Agentic Coding &amp; Security)</option>
+                    <option value="deepseek|deepseek-chat">🐋 DeepSeek V3.2 Chat</option>
+                    <option value="deepseek|deepseek-reasoner">🐋 DeepSeek R1 Reasoner</option>
+                  </optgroup>
+                  <optgroup label="🔓 Keyless Free AI, Ollama Cloud, NVIDIA NIM, OpenRouter &amp; Gemini">
+                    <option value="keyless_free|openai">🔓 Keyless Free AI: GPT-4o-Mini Cloud (No Key Needed)</option>
+                    <option value="ollama|deepseek-v3.1:671b-cloud">☁️ Ollama Cloud: deepseek-v3.1:671b-cloud</option>
+                    <option value="nvidia|deepseek-ai/deepseek-r1">🟢 NVIDIA NIM: deepseek-ai/deepseek-r1</option>
+                    <option value="openrouter|meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b-instruct:free</option>
+                    <option value="google|gemini-2.0-flash">✨ Google Gemini: gemini-2.0-flash (Multimodal)</option>
+                  </optgroup>
+                </select>
+                <label style="display:inline-flex;align-items:center;gap:5px;font-size:0.75rem;color:#6ee7b7;white-space:nowrap;cursor:pointer;" title="Automatically reply with a playable spoken Voice Note (English via playai-tts, Arabic via playai-tts-arabic)">
+                  <input type="checkbox" id="ai-auto-voice-note-toggle" checked style="accent-color:#10b981;" />
+                  <span>🔊 Auto Voice Note Reply (EN/AR)</span>
+                </label>
               </div>
             </div>
             <div class="chat-messages" id="ai-chat-messages">
               <div class="chat-bubble assistant ai-markdown">
-                <p><strong>Welcome to the BaDR ArGuS Beginner Cybersecurity Tutor!</strong></p>
-                <p>You don't need to be a security expert—ask me about any Red (Under Threat) or Yellow (Medium) result, open port, socket, or DNS warning, and I will explain what it means in plain everyday language and walk you through <strong>how it gets fixed step by step</strong>.</p>
+                <p><strong>Welcome to the BaDR ArGuS Multi-Use AI Arsenal Chat!</strong></p>
+                <p>🎙️ <strong>Send &amp; Receive Voice Notes (English + العربية):</strong> Tap <strong>🎙️ Voice Note</strong> to record in English or Arabic (transcribed via Groq <code>whisper-large-v3-turbo</code> / <code>whisper-large-v3</code>, 2,000 free/day) and receive playable spoken AI voice note replies via <code>playai-tts</code> (EN) &amp; <code>playai-tts-arabic</code> (AR)! Or tap <strong>📷 Image/Audio</strong> to attach screenshots (Pixtral / Llama-4 Vision) or audio files.</p>
               </div>
             </div>
-            <div class="chat-input-row">
-              <input type="text" id="ai-chat-input" class="target-input" placeholder="Ask in plain English: 'What does this threat mean and how do I fix it?'..." style="background:rgba(6,9,16,0.9);padding:10px 14px;border-radius:10px;border:1px solid rgba(255,215,0,0.26);" />
-              <button class="btn-primary-glow" id="btn-send-ai-chat"><span>➤</span><span>Ask Tutor</span></button>
+            <!-- Attached Image / Audio Preview Strip for Main AI Chat -->
+            <div id="ai-chat-image-preview" style="display:none;padding:6px 14px;background:rgba(0,240,255,0.08);border-top:1px solid rgba(0,240,255,0.28);align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:#7dd3fc;">
+                <img id="ai-chat-image-thumb" src="" alt="Preview" style="width:34px;height:34px;object-fit:cover;border-radius:6px;border:1px solid #00f0ff;" />
+                <span id="ai-chat-image-name">Attachment ready for Vision / OCR / Whisper Voice Note</span>
+              </div>
+              <button class="swipe-arrow-btn" id="btn-clear-ai-image" style="padding:2px 8px;font-size:0.72rem;">✕ Remove</button>
+            </div>
+            <input type="file" id="ai-chat-file-input" accept="image/*,audio/*" style="display:none;" />
+            <div class="chat-input-row" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:10px 14px;">
+              <button class="btn-secondary-glass" id="btn-attach-image-ai" title="Attach Screenshot/Image (Vision/OCR) or Voice Note Audio File (.ogg/.mp3/.wav/.m4a)" style="height:38px;padding:0 10px;">📷 Image/Audio</button>
+              <button class="btn-secondary-glass" id="btn-voice-mic-ai" title="Record &amp; Send Voice Note in English or Arabic (Groq Whisper Large v3 Turbo + PlayAI TTS Reply)" style="height:38px;padding:0 10px;">🎙️ Voice Note</button>
+              <button class="btn-secondary-glass" id="btn-speak-reply-ai" title="Generate &amp; Play Voice Note for Last Reply (playai-tts EN / playai-tts-arabic AR)" style="height:38px;padding:0 10px;">🔊 Speak Reply</button>
+              <input type="text" id="ai-chat-input" class="target-input" placeholder="Type in English or العربية, attach image/audio 📷, or tap 🎙️ Voice Note..." style="flex:1;min-width:180px;background:rgba(6,9,16,0.9);padding:10px 14px;border-radius:10px;border:1px solid rgba(0,240,255,0.32);" />
+              <button class="btn-primary-glow" id="btn-send-ai-chat"><span>➤</span><span>Send</span></button>
             </div>
           </div>
         </div>
@@ -952,51 +1022,92 @@ Type 'help' for commands or 'run' to execute the active scanner.</div>
         </div>
       </div>
 
-      <!-- Free Model Selector inside Floating Chat -->
+      <!-- Free Multi-Use & Media Model Selector inside Floating Chat -->
       <div style="display:flex;align-items:center;gap:6px;">
-        <select id="floating-llm-model-select" class="glass-select" style="flex:1;height:32px;font-size:0.76rem;padding:0 8px;">
-          <option value="keyless_free|openai">🔓 Keyless Free AI: GPT-4o-Mini Cloud (No Key Needed!)</option>
-          <option value="keyless_free|mistral">🔓 Keyless Free AI: Mistral 24B Cloud (No Key Needed!)</option>
-          <option value="keyless_free|qwen-coder">🔓 Keyless Free AI: Qwen Coder 32B (No Key Needed!)</option>
-          <option value="ollama|deepseek-v3.1:671b-cloud">☁️ Ollama Cloud: deepseek-v3.1:671b-cloud</option>
-          <option value="deepseek|deepseek-flash">🐋 DeepSeek Harness: deepseek-flash (1M Context)</option>
-          <option value="mistral|mistral-medium-2508">⚡ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
-          <option value="mistral|devstral-2512">⚡ Mistral Pool 7: devstral-2512 (1M TPM)</option>
-          <option value="groq|llama-3.1-8b-instant">🚀 Groq Free: llama-3.1-8b-instant (14.4K/Day)</option>
-          <option value="groq|deepseek-r1-distill-llama-70b">🚀 Groq Free: deepseek-r1-distill-llama-70b</option>
-          <option value="nvidia|deepseek-ai/deepseek-r1">🟢 NVIDIA NIM: deepseek-ai/deepseek-r1</option>
-          <option value="openrouter|meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b-instruct:free</option>
-          <option value="google|gemini-2.0-flash">✨ Google Gemini: gemini-2.0-flash</option>
+        <select id="floating-llm-model-select" class="glass-select" style="flex:1;height:32px;font-size:0.74rem;padding:0 8px;">
+          <optgroup label="🔓 Keyless Free Cloud AI (No Key Needed)">
+            <option value="keyless_free|openai">🔓 Keyless Free AI: GPT-4o-Mini Cloud</option>
+            <option value="keyless_free|mistral">🔓 Keyless Free AI: Mistral 24B Cloud</option>
+            <option value="keyless_free|qwen-coder">🔓 Keyless Free AI: Qwen Coder 32B</option>
+          </optgroup>
+          <optgroup label="🐋 DeepSeek Harness (@deepseek-ai/dsh · 1M Context &amp; Vision)">
+            <option value="deepseek|deepseek-flash">🐋 DeepSeek-V4.1-Flash (1M Context · Text + Image Vision)</option>
+            <option value="deepseek|deepseek-v4-pro">🐋 DeepSeek-V4-Pro (1M Context · Agentic Coding &amp; Security)</option>
+            <option value="deepseek|deepseek-chat">🐋 DeepSeek V3.2 Chat</option>
+            <option value="deepseek|deepseek-reasoner">🐋 DeepSeek R1 Reasoner</option>
+          </optgroup>
+          <optgroup label="🚀 Groq Multi-Use (Chat, Llama-4 Vision, Whisper EN/AR Voice Notes &amp; PlayAI TTS)">
+            <option value="groq|llama-3.1-8b-instant">🚀 Groq Fast Chat: llama-3.1-8b-instant (14.4K/Day Free)</option>
+            <option value="groq|meta-llama/llama-4-scout-17b-16e-instruct">👁️ Groq Vision: Llama-4 Scout 17B (Image &amp; Screenshot Reader)</option>
+            <option value="groq|meta-llama/llama-4-maverick-17b-128e-instruct">👁️ Groq Vision: Llama-4 Maverick 17B (Multimodal)</option>
+            <option value="groq|deepseek-r1-distill-llama-70b">🧠 Groq Reasoning: DeepSeek R1 Distill 70B</option>
+            <option value="groq|whisper-large-v3-turbo">🎙️ Groq Voice Note STT: Whisper Large v3 Turbo (EN + AR · 2,000/Day)</option>
+            <option value="groq|whisper-large-v3">🎙️ Groq Voice Note STT: Whisper Large v3 Full (Max Accuracy EN + AR)</option>
+            <option value="groq|playai-tts">🔊 Groq Voice Note TTS: PlayAI Spoken English Audio</option>
+            <option value="groq|playai-tts-arabic">🔊 Groq Voice Note TTS: PlayAI Spoken Arabic Audio (العربية)</option>
+          </optgroup>
+          <optgroup label="⚡ Mistral Multi-Use (7-Pool Chat, Pixtral Vision, OCR &amp; Voxtral Audio)">
+            <option value="mistral|mistral-medium-2508">⚡ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
+            <option value="mistral|pixtral-large-2411">👁️ Mistral Vision: Pixtral Large 2411 (124B Screenshot/UI Reader)</option>
+            <option value="mistral|pixtral-12b-2409">👁️ Mistral Vision: Pixtral 12B (Fast Image Analyzer)</option>
+            <option value="mistral|mistral-ocr-latest">📄 Mistral OCR: Document, PDF &amp; Table Extractor</option>
+            <option value="mistral|voxtral-mini-latest">🎙️ Mistral Voxtral: Native Voice &amp; Audio Understanding</option>
+            <option value="mistral|devstral-2512">💻 Mistral Pool 7: Devstral 2512 (1M TPM Code &amp; Security)</option>
+            <option value="mistral|mistral-large-2411">⚡ Mistral Pool 2: mistral-large-2411 (200B/mo)</option>
+          </optgroup>
+          <optgroup label="☁️ Ollama Cloud, NVIDIA NIM, OpenRouter &amp; Gemini">
+            <option value="ollama|deepseek-v3.1:671b-cloud">☁️ Ollama Cloud: deepseek-v3.1:671b-cloud</option>
+            <option value="nvidia|deepseek-ai/deepseek-r1">🟢 NVIDIA NIM: deepseek-ai/deepseek-r1</option>
+            <option value="openrouter|meta-llama/llama-3.3-70b-instruct:free">🌐 OpenRouter: llama-3.3-70b-instruct:free</option>
+            <option value="google|gemini-2.0-flash">✨ Google Gemini: gemini-2.0-flash (Multimodal)</option>
+          </optgroup>
         </select>
-        <label style="display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;color:#cbd5e1;white-space:nowrap;cursor:pointer;" title="Include active scan report context when answering">
+        <label style="display:inline-flex;align-items:center;gap:4px;font-size:0.70rem;color:#cbd5e1;white-space:nowrap;cursor:pointer;" title="Include active scan report context when answering">
           <input type="checkbox" id="floating-llm-include-scan" checked style="accent-color:#00f0ff;" />
-          <span>+Scan Info</span>
+          <span>+Scan</span>
+        </label>
+        <label style="display:inline-flex;align-items:center;gap:4px;font-size:0.70rem;color:#6ee7b7;white-space:nowrap;cursor:pointer;" title="Auto-reply with a playable spoken Voice Note (playai-tts EN / playai-tts-arabic AR)">
+          <input type="checkbox" id="floating-auto-voice-note-toggle" checked style="accent-color:#10b981;" />
+          <span>🔊Voice</span>
         </label>
       </div>
     </div>
 
     <div class="floating-llm-messages" id="floating-llm-messages">
       <div class="chat-msg assistant">
-        <strong>Hi! I'm your BaDR Free AI Assistant 💬</strong><br/>
-        You can ask me <strong>anything</strong> just like a regular LLM—general questions, coding, networking, Android/Linux tips, or ask me to explain and fix anything in your current scan report!
+        <strong>Hi! I'm your BaDR Multi-Use AI Assistant 💬</strong><br/>
+        🎙️ <strong>Send &amp; Receive Voice Notes (English + العربية):</strong> Tap <strong>🎙️</strong> to record a voice note (transcribed via Groq <code>whisper-large-v3-turbo</code> / <code>whisper-large-v3</code>) and receive a playable spoken voice note reply via <code>playai-tts</code> (EN) &amp; <code>playai-tts-arabic</code> (AR)! Tap <strong>📷</strong> to attach screenshots (Pixtral / Llama-4 Vision) or audio files.
       </div>
     </div>
+
+    <!-- Attached Image / Audio Preview inside Floating Chat -->
+    <div id="floating-llm-image-preview" style="display:none;padding:5px 12px;background:rgba(0,240,255,0.10);border-top:1px solid rgba(0,240,255,0.32);align-items:center;justify-content:space-between;gap:8px;">
+      <div style="display:flex;align-items:center;gap:7px;font-size:0.74rem;color:#7dd3fc;">
+        <img id="floating-llm-image-thumb" src="" alt="Preview" style="width:28px;height:28px;object-fit:cover;border-radius:5px;border:1px solid #00f0ff;" />
+        <span id="floating-llm-image-name">Image / Audio ready for Vision / Whisper</span>
+      </div>
+      <button class="swipe-arrow-btn" id="btn-clear-floating-image" style="padding:2px 7px;font-size:0.68rem;">✕</button>
+    </div>
+    <input type="file" id="floating-llm-file-input" accept="image/*,audio/*" style="display:none;" />
 
     <div class="floating-llm-footer">
       <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;">
         <button class="chip-btn floating-quick-chip" data-q="Explain my current scan report in simple words and tell me if anything needs fixing." style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">🛡️ Explain Scan</button>
-        <button class="chip-btn floating-quick-chip" data-q="How do I secure my home Wi-Fi router and phone against open port threats?" style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">🔒 Secure My Wi-Fi</button>
-        <button class="chip-btn floating-quick-chip" data-q="What can you help me with as a general AI assistant?" style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">💡 General Help</button>
+        <button class="chip-btn floating-quick-chip" data-q="How do I secure my home Wi-Fi router and phone against open port threats?" style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">🔒 Secure Wi-Fi</button>
+        <button class="chip-btn floating-quick-chip" data-q="What multi-use Vision, OCR, and Voice Note models from Groq, Mistral, and DeepSeek Harness are available here?" style="font-size:0.72rem;padding:3px 8px;white-space:nowrap;">👁️🎙️ Vision &amp; Voice Notes</button>
       </div>
-      <div style="display:flex;gap:6px;">
+      <div style="display:flex;gap:5px;align-items:center;">
+        <button class="btn-secondary-glass" id="btn-attach-image-floating" title="Attach Screenshot/Image (Pixtral / Llama-4 Vision) or Audio Voice Note (.ogg/.mp3/.wav)" style="height:36px;padding:0 9px;font-size:0.82rem;">📷</button>
+        <button class="btn-secondary-glass" id="btn-voice-mic-floating" title="Record &amp; Send Voice Note in English or Arabic (Groq Whisper Large v3 Turbo + PlayAI TTS Reply)" style="height:36px;padding:0 9px;font-size:0.82rem;">🎙️</button>
+        <button class="btn-secondary-glass" id="btn-speak-reply-floating" title="Generate &amp; Play Voice Note for Last Reply (playai-tts EN / playai-tts-arabic AR)" style="height:36px;padding:0 9px;font-size:0.82rem;">🔊</button>
         <input
           type="text"
           id="floating-llm-input"
           class="target-input"
-          placeholder="Ask anything (general question or security help)..."
-          style="background:rgba(11,18,36,0.95);padding:8px 11px;border-radius:10px;border:1px solid rgba(0,240,255,0.38);font-size:0.86rem;"
+          placeholder="Type (EN/AR), attach 📷, or tap 🎙️ Voice Note..."
+          style="background:rgba(11,18,36,0.95);padding:8px 10px;border-radius:10px;border:1px solid rgba(0,240,255,0.38);font-size:0.84rem;"
         />
-        <button class="btn-primary-glow" id="btn-send-floating-llm" style="height:36px;padding:0 13px;font-size:0.82rem;">
+        <button class="btn-primary-glow" id="btn-send-floating-llm" style="height:36px;padding:0 12px;font-size:0.82rem;">
           ➤
         </button>
       </div>

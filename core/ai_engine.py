@@ -484,26 +484,65 @@ PROVIDER_CATALOG: Dict[str, Dict[str, Any]] = {
                 "fits_4gb_ram": True,
                 "role": "Standard Pool 1 · Fast General Security Summary",
             },
+            {
+                "name": "pixtral-large-2411",
+                "provider": "mistral",
+                "family": "Pixtral Large 2411 (Multimodal Vision & Screenshot Reader)",
+                "params": "124B Vision · Cloud",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Multimodal Vision · Reads Screenshots, Router UIs, Diagrams & Photos",
+            },
+            {
+                "name": "pixtral-12b-2409",
+                "provider": "mistral",
+                "family": "Pixtral 12B Vision (Fast Image & UI Analyzer)",
+                "params": "12B Vision · Cloud",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Fast Vision Pool · Instant Image & Screenshot Analysis",
+            },
+            {
+                "name": "mistral-ocr-latest",
+                "provider": "mistral",
+                "family": "Mistral OCR (Document, PDF & Table Extractor)",
+                "params": "OCR Engine · Cloud",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Document & Image OCR · Extracts Clean Markdown & Tables",
+            },
+            {
+                "name": "voxtral-mini-latest",
+                "provider": "mistral",
+                "family": "Voxtral Mini (Native Voice & Audio Understanding)",
+                "params": "Audio + Text · Cloud",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Multimodal Audio · Understands Spoken Voice & Audio Input",
+            },
         ],
     },
     "groq": {
         "id": "groq",
-        "name": "Groq Cloud (Forever-Free LPU Tier · 14,400 RPD)",
-        "badge": "30 RPM · 14.4K/DAY FREE",
+        "name": "Groq Cloud (Forever-Free LPU · Chat, Vision, Whisper STT & PlayAI TTS)",
+        "badge": "CHAT · VISION · VOICE FREE",
         "base_url": "https://api.groq.com/openai/v1",
         "auth_type": "openai",
         "default_free_model": "llama-3.1-8b-instant",
         "pool_strategy": (
-            "Groq 2026 Free Tier Pool Rotation: "
-            "`llama-3.1-8b-instant` (30 RPM / 14,400 req/day / 500K TPD) -> "
-            "`openai/gpt-oss-20b` (30 RPM / 14,400 req/day) -> "
-            "`llama-3.3-70b-versatile` (30 RPM / 1,000 req/day) -> "
-            "`qwen/qwen3-32b` (30 RPM / 6K TPM)"
+            "Groq 2026 Multi-Use & Media Free Pool: "
+            "`llama-3.1-8b-instant` (14,400 RPD) -> "
+            "`meta-llama/llama-4-scout-17b-16e-instruct` (Multimodal Vision) -> "
+            "`whisper-large-v3-turbo` (99-Lang Voice STT) -> "
+            "`playai-tts` / `playai-tts-arabic` (Voice TTS)"
         ),
         "free_tier_note": (
-            "Groq DOES provide a Forever-Free API tier in 2026 (no credit card required at console.groq.com/keys)! "
-            "Smaller models (`llama-3.1-8b-instant`, `openai/gpt-oss-20b`) get 14,400 requests/day & 30 RPM; 70B models get 1,000 req/day. "
-            "Note: Multiple keys under the same Groq account share the org pool—add keys from separate accounts or let BaDR ArGuS auto-rotate models on 429!"
+            "One free Groq key (`gsk_...`) unlocks Fast LPU Chat (14,400 req/day), Llama 4 Multimodal Vision (screenshots/images), "
+            "Whisper Large v3 Turbo (99-language voice-to-text), and PlayAI English & Arabic Text-to-Speech!"
         ),
         "key_placeholder": "gsk_...",
         "get_key_url": "https://console.groq.com/keys",
@@ -517,6 +556,26 @@ PROVIDER_CATALOG: Dict[str, Dict[str, Any]] = {
                 "ram_required": "0 MB Phone RAM",
                 "fits_4gb_ram": True,
                 "role": "Auto-Default Free Model · 14,400 Requests/Day Quota",
+            },
+            {
+                "name": "meta-llama/llama-4-scout-17b-16e-instruct",
+                "provider": "groq",
+                "family": "Llama 4 Scout 17B Vision (Multimodal Image & Screenshot Reader)",
+                "params": "17Bx16E Vision · LPU",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Groq Multimodal Vision · Analyzes Screenshots, Photos & Error Screens",
+            },
+            {
+                "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "provider": "groq",
+                "family": "Llama 4 Maverick 17B Vision (128-Expert Multimodal)",
+                "params": "17Bx128E Vision · LPU",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Groq Frontier Vision · Deep Visual & Technical Reasoning",
             },
             {
                 "name": "openai/gpt-oss-20b",
@@ -547,6 +606,46 @@ PROVIDER_CATALOG: Dict[str, Dict[str, Any]] = {
                 "ram_required": "0 MB Phone RAM",
                 "fits_4gb_ram": True,
                 "role": "Groq Reasoning Pool · Step-by-Step Beginner Security Tutor",
+            },
+            {
+                "name": "whisper-large-v3-turbo",
+                "provider": "groq",
+                "family": "Whisper Large v3 Turbo (99-Lang Voice Notes STT · English & Arabic)",
+                "params": "2,000 RPD Free · 28.8K sec/day",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Groq Voice Note STT · Fast 99-Language Speech Transcription (English + Arabic)",
+            },
+            {
+                "name": "whisper-large-v3",
+                "provider": "groq",
+                "family": "Whisper Large v3 Full (Max Accuracy 99-Lang Voice Notes STT · EN & AR)",
+                "params": "2,000 RPD Free · 28.8K sec/day",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Groq Voice Note STT · Highest-Accuracy Multilingual & Arabic Dialect Transcription",
+            },
+            {
+                "name": "playai-tts",
+                "provider": "groq",
+                "family": "PlayAI TTS (English Voice Note Output)",
+                "params": "Voice Note TTS · EN",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Groq Voice Note Reply · Lifelike Spoken English Audio Replies",
+            },
+            {
+                "name": "playai-tts-arabic",
+                "provider": "groq",
+                "family": "PlayAI TTS Arabic (Arabic Voice Note Output)",
+                "params": "Voice Note TTS · AR",
+                "disk_size": "0 MB (Cloud)",
+                "ram_required": "0 MB Phone RAM",
+                "fits_4gb_ram": True,
+                "role": "Groq Arabic Voice Note Reply · Natural Spoken Arabic Audio Replies",
             },
         ],
     },
