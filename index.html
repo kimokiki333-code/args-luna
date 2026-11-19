@@ -2,600 +2,930 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ARAGOS — Neural Cyber Reconnaissance & OSINT Platform</title>
-  <link rel="stylesheet" href="static/css/aragos.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#06080e" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>BaDR ArGuS scanner — aragos Android BaDR version</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/aragos.css" />
 </head>
 <body>
-  <!-- Interactive Three.js 3D WebGL Background -->
-  <canvas id="aragos-webgl-canvas"></canvas>
-  <div class="ambient-aurora"></div>
-
-  <!-- Main Glassmorphism Application Shell -->
-  <div class="app-shell">
-    <!-- Left Glass Navigation Sidebar -->
-    <aside class="sidebar glass-panel">
-      <div>
-        <div class="brand-header">
-          <div class="brand-orb">A</div>
+  <!-- ==================== STARTUP SELF-IP / WHOIS / GEO / THREAT POP-UP MODAL ==================== -->
+  <div class="self-ip-modal-backdrop" id="self-ip-modal">
+    <div class="self-ip-modal-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(255,215,0,0.28);padding-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="brand-orb" style="width:40px;height:40px;">
+            <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+              <circle cx="16" cy="16" r="13" stroke="#ffd700" stroke-width="2" stroke-dasharray="5 3"/>
+              <circle cx="16" cy="16" r="7" stroke="#00f0ff" stroke-width="2"/>
+              <circle cx="16" cy="16" r="2.5" fill="#10b981"/>
+            </svg>
+          </div>
           <div>
-            <div class="brand-title">ARAGOS</div>
-            <div class="brand-subtitle">Neural Recon Suite v3.0</div>
+            <div class="gold-app-title" style="font-size:1.15rem;">Live Connection &amp; Self-IP WHOIS Report</div>
+            <div style="font-size:0.76rem;color:#38bdf8;font-weight:700;">Auto-Detected by aragos Android BaDR version</div>
           </div>
         </div>
-
-        <div class="nav-section-label">Operations</div>
-        <ul class="nav-list">
-          <li>
-            <button class="nav-btn active" data-view="dashboard">
-              <span class="nav-btn-left">
-                <span>⚡</span>
-                <span>Command Center</span>
-              </span>
-              <span class="nav-badge" id="nav-badge-scans">1</span>
-            </button>
-          </li>
-          <li>
-            <button class="nav-btn" data-view="modules">
-              <span class="nav-btn-left">
-                <span>🛰️</span>
-                <span>Module Arsenal</span>
-              </span>
-              <span class="nav-badge" id="nav-badge-modules">151</span>
-            </button>
-          </li>
-          <li>
-            <button class="nav-btn" data-view="ai">
-              <span class="nav-btn-left">
-                <span>🧠</span>
-                <span>Ollama AI Copilot</span>
-              </span>
-              <span class="nav-badge" id="nav-badge-ai">Local+Cloud</span>
-            </button>
-          </li>
-          <li>
-            <button class="nav-btn" data-view="cli">
-              <span class="nav-btn-left">
-                <span>💻</span>
-                <span>Web CLI Terminal</span>
-              </span>
-              <span class="nav-badge">aragos&gt;</span>
-            </button>
-          </li>
-          <li>
-            <button class="nav-btn" data-view="reports">
-              <span class="nav-btn-left">
-                <span>📊</span>
-                <span>Scan Vault &amp; Export</span>
-              </span>
-              <span class="nav-badge" id="nav-badge-reports">TXT/JSON</span>
-            </button>
-          </li>
-        </ul>
-
-        <div class="nav-section-label">Configuration</div>
-        <ul class="nav-list">
-          <li>
-            <button class="nav-btn" data-view="settings">
-              <span class="nav-btn-left">
-                <span>⚙️</span>
-                <span>Ollama &amp; API Keys</span>
-              </span>
-            </button>
-          </li>
-        </ul>
+        <button class="swipe-arrow-btn" id="btn-close-self-ip-modal" title="Close Pop-up">✕ Close</button>
       </div>
 
-      <!-- Bottom Ollama & 3D Engine Status Widget -->
-      <div class="sidebar-ai-box">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <span style="font-size:0.74rem;font-weight:700;letter-spacing:0.6px;color:#c4b5fd;text-transform:uppercase;">
-            Ollama Engine
-          </span>
-          <span class="status-dot" id="sidebar-ollama-dot"></span>
+      <!-- Threat Tier Banner inside Popup -->
+      <div id="self-ip-modal-status-banner" style="margin-top:12px;padding:11px 14px;border-radius:13px;background:rgba(16,185,129,0.15);border:1.5px solid #10b981;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div>
+          <div style="font-size:0.95rem;font-weight:800;color:#34d399;" id="modal-self-threat-title">🟢 CONNECTION STATUS: CLEAR / NORMAL</div>
+          <div style="font-size:0.80rem;color:#e2e8f0;margin-top:2px;" id="modal-self-threat-desc">
+            Detecting your live public IP address, DNS resolver, WHOIS network owner, and Tor/VPN/Proxy flags...
+          </div>
         </div>
-        <div id="sidebar-active-model" style="font-family:var(--font-mono);font-size:0.76rem;color:#fff;word-break:break-all;margin-bottom:6px;">
-          deepseek-v3.1:671b-cloud
+        <span class="sev-badge sev-OK" id="modal-self-threat-badge">CLEAR</span>
+      </div>
+
+      <!-- Telemetry Grid -->
+      <div class="self-ip-grid">
+        <div class="self-ip-cell">
+          <div class="self-ip-cell-label">Detected IP Address</div>
+          <div class="self-ip-cell-val" id="modal-self-ip" style="color:#ffd700;font-family:var(--font-mono);">Detecting...</div>
         </div>
-        <div id="sidebar-ollama-mode" style="font-size:0.72rem;color:var(--text-secondary);">
-          Local (11434) + Cloud Ready
+        <div class="self-ip-cell">
+          <div class="self-ip-cell-label">WHOIS ISP / ASN</div>
+          <div class="self-ip-cell-val" id="modal-self-isp">Resolving WHOIS...</div>
+        </div>
+        <div class="self-ip-cell">
+          <div class="self-ip-cell-label">DNS &amp; Reverse Host</div>
+          <div class="self-ip-cell-val" id="modal-self-dns">1.1.1.1 / Encrypted DoH</div>
+        </div>
+        <div class="self-ip-cell">
+          <div class="self-ip-cell-label">Geo Location</div>
+          <div class="self-ip-cell-val" id="modal-self-geo">Locating...</div>
+        </div>
+        <div class="self-ip-cell">
+          <div class="self-ip-cell-label">Coordinates (Lat / Lon)</div>
+          <div class="self-ip-cell-val" id="modal-self-coords" style="font-family:var(--font-mono);">-- , --</div>
+        </div>
+        <div class="self-ip-cell">
+          <div class="self-ip-cell-label">Tor / Proxy / VPN Check</div>
+          <div class="self-ip-cell-val" id="modal-self-anon" style="color:#34d399;">Tor: No · Proxy: No · VPN: No</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.28);font-size:0.80rem;color:#fde68a;" id="modal-self-beginner-note">
+        💡 <strong>Beginner Tip:</strong> Your public IP address is like the return address on an envelope that your internet provider assigns to your Wi-Fi or mobile connection so websites know where to send pages back.
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+        <button class="btn-secondary-glass" id="btn-scan-my-ip-now">
+          🔍 Scan My IP with All 151 Scanners
+        </button>
+        <button class="btn-primary-glow" id="btn-dismiss-self-ip-modal">
+          ✓ Continue to Scanner
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <!-- ==================== SIDEBAR NAVIGATION (DESKTOP) ==================== -->
+    <aside class="glass-panel sidebar">
+      <div>
+        <a href="https://github.com/kimokiki333-code/args-luna" target="_blank" rel="noopener" class="brand-header" style="text-decoration:none;">
+          <div class="brand-orb">
+            <svg viewBox="0 0 36 36" width="28" height="28" fill="none">
+              <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.12)"/>
+              <circle cx="18" cy="18" r="6" stroke="#00f0ff" stroke-width="2"/>
+              <circle cx="18" cy="18" r="2.5" fill="#ffd700"/>
+            </svg>
+          </div>
+          <div>
+            <div class="gold-app-title" style="font-size:1.14rem;">BaDR ArGuS scanner</div>
+            <div class="gold-subtitle-badge" style="margin-top:3px;">aragos Android BaDR version ↗</div>
+          </div>
+        </a>
+
+        <div class="nav-section-label">Swipe or Tap Sections</div>
+        <div class="nav-list">
+          <button class="nav-btn active" data-view="dashboard">
+            <span class="nav-btn-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polygon points="12,2 22,7 22,17 12,22 2,17 2,7" stroke="#ffd700" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#00f0ff" stroke-width="1.8"/><circle cx="12" cy="12" r="1.5" fill="#ffd700"/></svg>
+              <span>Scanner Hub</span>
+            </span>
+            <span class="nav-badge" id="kpi-total-modules">151</span>
+          </button>
+          <button class="nav-btn" data-view="modules">
+            <span class="nav-btn-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#ffd700" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="2" stroke="#00f0ff" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="2" stroke="#00f0ff" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.8"/></svg>
+              <span>151 Scanners</span>
+            </span>
+            <span class="nav-badge" id="nav-badge-modules">151</span>
+          </button>
+          <button class="nav-btn" data-view="reports">
+            <span class="nav-btn-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z" stroke="#ffd700" stroke-width="1.8"/><path d="M8 15l3-3 2 2 4-4" stroke="#10b981" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Reports &amp; Fixes</span>
+            </span>
+            <span class="nav-badge" id="nav-badge-scans">3-Tier</span>
+          </button>
+          <button class="nav-btn" data-view="settings">
+            <span class="nav-btn-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="15" r="4" stroke="#ffd700" stroke-width="1.8"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2" stroke="#00f0ff" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span>Key Vault &amp; AHM7</span>
+            </span>
+            <span class="nav-badge">+KEY</span>
+          </button>
+          <button class="nav-btn" data-view="ai">
+            <span class="nav-btn-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#00f0ff" stroke-width="1.8" stroke-dasharray="4 2"/><path d="M8 12h8M12 8v8" stroke="#ffd700" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span>AI Fix Tutor &amp; Shell</span>
+            </span>
+            <span class="nav-badge">FREE</span>
+          </button>
+          <button class="nav-btn" data-view="about">
+            <span class="nav-btn-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.5 3.4 10.7 8 12 4.6-1.3 8-6.5 8-12V6l-8-4z" stroke="#ffd700" stroke-width="1.8"/><path d="M12 11v5m0-8h.01" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>About Aragos BaDR</span>
+            </span>
+            <span class="nav-badge">INFO</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="glass-panel-elevated" style="padding:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:0.78rem;font-weight:800;color:#ffd700;">Cloud AI Engine</span>
+          <span class="sev-badge sev-OK">0 MB RAM</span>
+        </div>
+        <div style="font-size:0.76rem;color:var(--text-secondary);margin-top:5px;">
+          Model: <strong style="color:#fff;font-family:var(--font-mono);" id="sidebar-active-model">deepseek-v3.1:671b-cloud</strong>
+        </div>
+        <div style="font-size:0.72rem;color:#34d399;margin-top:3px;" id="sidebar-ollama-mode">
+          Multi-Key Pool + Keyless Free AI Ready
         </div>
       </div>
     </aside>
 
-    <!-- Top Glass HUD Bar -->
-    <header class="top-hud glass-panel">
-      <div class="target-bar-group">
-        <div class="target-input-wrapper">
-          <span class="target-prefix">TARGET //</span>
-          <input
-            type="text"
-            id="global-target-input"
-            class="target-input"
-            value="github.com"
-            placeholder="Enter domain, URL, IP, or CIDR (e.g. github.com)"
-          />
-        </div>
-        <div class="quick-target-chips">
-          <button class="chip-btn" data-target="github.com">github.com</button>
-          <button class="chip-btn" data-target="example.com">example.com</button>
-          <button class="chip-btn" data-target="cloudflare.com">cloudflare.com</button>
-        </div>
-      </div>
-
-      <div class="hud-controls">
-        <select id="hud-profile-select" class="glass-select" title="Scan Profile">
-          <option value="speed">⚡ Profile: SPEED</option>
-          <option value="deep">🔍 Profile: DEEP</option>
-          <option value="safe">🛡️ Profile: SAFE</option>
-        </select>
-
-        <select id="hud-model-select" class="glass-select" title="Active Ollama Local/Cloud Model (4GB RAM Optimized)">
-          <option value="deepseek-v3.1:671b-cloud">☁️ deepseek-v3.1:671b-cloud (0 MB Disk/RAM)</option>
-          <option value="qwen3-coder:480b-cloud">☁️ qwen3-coder:480b-cloud (0 MB Disk/RAM)</option>
-          <option value="gpt-oss:20b-cloud">☁️ gpt-oss:20b-cloud (0 MB Disk/RAM)</option>
-          <option value="qwen2.5-coder:1.5b">💻 qwen2.5-coder:1.5b (986 MB Disk · ~1.5GB RAM)</option>
-          <option value="llama3.2:1b">💻 llama3.2:1b (1.3 GB Disk · ~1.7GB RAM)</option>
-          <option value="gemma3:1b">💻 gemma3:1b (815 MB Disk · ~1.3GB RAM)</option>
-          <option value="qwen2.5:0.5b">💻 qwen2.5:0.5b (398 MB Disk · ~0.8GB RAM)</option>
-        </select>
-
-        <select id="hud-scene-select" class="glass-select" title="Three.js 3D Scene Mode">
-          <option value="globe">🌐 3D: Orbital Core</option>
-          <option value="neural">🕸️ 3D: Neural Matrix</option>
-          <option value="torus">🌀 3D: Quantum Torus</option>
-        </select>
-
-        <button class="btn-primary-glow" id="btn-quick-scan">
-          <span>▶</span>
-          <span>Run Recon</span>
-        </button>
-
-        <button class="btn-beast" id="btn-beast-mode" title="Execute Multi-Layer Infrastructure, Web & Security Sweep">
-          <span>🔥</span>
-          <span>BEAST MODE</span>
-        </button>
-
+    <!-- ==================== MAIN WORKSPACE ==================== -->
+    <main class="main-workspace" id="main-swipe-container">
+      <!-- ==================== VERY TOP TITLE LINKING TO GITHUB REPO ==================== -->
+      <header class="glass-panel top-hud-bar">
         <a
-          href="/api/deploy/download-zip"
-          class="btn-secondary-glass"
-          style="text-decoration:none;height:40px;border-color:rgba(16,185,129,0.5);color:#34d399;"
-          title="Download Complete Deployable ARAGOS v3.0 ZIP Package"
+          href="https://github.com/kimokiki333-code/args-luna"
+          target="_blank"
+          rel="noopener"
+          class="top-repo-ribbon"
+          id="top-github-repo-link"
+          title="Tap to open the official GitHub Repository: aragos Android BaDR version"
         >
-          <span>📦</span>
-          <span>Download ZIP</span>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="brand-orb" style="width:42px;height:42px;">
+              <svg viewBox="0 0 36 36" width="28" height="28" fill="none">
+                <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="#ffd700" stroke-width="2.2" fill="rgba(255,215,0,0.15)"/>
+                <circle cx="18" cy="18" r="7" stroke="#00f0ff" stroke-width="2"/>
+                <path d="M14 18l3 3 5-6" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h1 class="gold-app-title" style="font-size:1.35rem;line-height:1.15;">BaDR ArGuS scanner</h1>
+              <div style="font-size:0.80rem;color:#38bdf8;font-weight:700;margin-top:2px;">
+                ★ <strong>aragos Android BaDR version</strong> · Tap Title to Open Official GitHub Repo ↗
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+            <span class="gold-subtitle-badge">GitHub Repo ↗</span>
+          </div>
         </a>
-      </div>
-    </header>
 
-    <!-- Main Workspace Area -->
-    <main class="workspace-main">
-      <!-- ==================== VIEW 1: COMMAND CENTER ==================== -->
+        <!-- LIVE IN-APP OVER-THE-AIR (OTA) UPDATER STRIP (Replaces old OPPO F9 top download banner!) -->
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 12px;border-radius:11px;background:rgba(16,185,129,0.10);border:1px solid rgba(16,185,129,0.35);flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:#d1fae5;">
+            <span class="sev-badge sev-OK" id="ota-version-badge">v4.8 OTA READY</span>
+            <span id="ota-status-label"><strong>In-App Live Updater Active:</strong> Future UI &amp; scanner updates install automatically without reinstalling the APK!</span>
+          </div>
+          <button class="swipe-arrow-btn" id="btn-check-live-ota" style="height:28px;font-size:0.74rem;border-color:rgba(16,185,129,0.55);color:#6ee7b7;">
+            🔄 Check &amp; Apply Live Update
+          </button>
+        </div>
+
+        <!-- ANDROID LEFT / RIGHT SWIPE NAVIGATION BAR -->
+        <div class="swipe-pager-bar">
+          <button class="swipe-arrow-btn" id="btn-swipe-prev" title="Swipe Right / Previous Section">
+            ◀ Prev
+          </button>
+          <div class="swipe-dots" id="top-swipe-dots">
+            <button class="swipe-dot-pill active" data-view="dashboard">1. Scanner</button>
+            <button class="swipe-dot-pill" data-view="modules">2. 151 Tools</button>
+            <button class="swipe-dot-pill" data-view="reports">3. Reports &amp; Fixes</button>
+            <button class="swipe-dot-pill" data-view="settings">4. Key Vault &amp; AHM7</button>
+            <button class="swipe-dot-pill" data-view="ai">5. AI Tutor</button>
+            <button class="swipe-dot-pill" data-view="about">6. About</button>
+          </div>
+          <button class="swipe-arrow-btn" id="btn-swipe-next" title="Swipe Left / Next Section">
+            Next ▶
+          </button>
+        </div>
+      </header>
+
+      <!-- ==================== SECTION 1: SCANNER HUB (NO ENDLESS SCROLL TRAP!) ==================== -->
       <section class="view-pane active" id="view-dashboard">
-        <!-- KPI Cards -->
-        <div class="kpi-grid">
-          <div class="glass-panel kpi-card">
-            <div class="kpi-label">Reconnaissance Arsenal</div>
-            <div class="kpi-value">
-              <span id="kpi-total-modules">151</span>
-              <span class="sev-badge sev-OK">ONLINE</span>
-            </div>
-            <div class="kpi-sub">
-              <span>58 Infra · 47 Web · 42 Sec · 4 Suites</span>
-            </div>
-          </div>
-
-          <div class="glass-panel kpi-card">
-            <div class="kpi-label">Active Target &amp; Risk Posture</div>
-            <div class="kpi-value">
-              <span id="kpi-risk-score">28/100</span>
-              <span class="sev-badge sev-INFO" id="kpi-risk-level">LOW</span>
-            </div>
-            <div class="kpi-sub">
-              <span>Target: <strong id="kpi-active-target" style="color:var(--cyan);">github.com</strong></span>
+        <!-- Live Detected Self-IP / WHOIS / DNS / Geo / Threat Strip -->
+        <div class="self-ip-hud-card" id="home-self-ip-strip">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span class="sev-badge sev-OK" id="strip-self-status-badge">🟢 CLEAR</span>
+            <div style="font-size:0.86rem;">
+              <strong>Detected Connection IP:</strong>
+              <code id="strip-self-ip" style="color:#ffd700;font-weight:800;margin:0 4px;">Detecting...</code>
+              · <span id="strip-self-geo" style="color:#38bdf8;font-weight:700;">Locating Geo &amp; WHOIS...</span>
+              · <span id="strip-self-anon" style="color:#a7f3d0;">Tor/VPN/Proxy: Checking...</span>
             </div>
           </div>
-
-          <div class="glass-panel kpi-card">
-            <div class="kpi-label">Telemetry Severity Matrix</div>
-            <div class="kpi-value" style="font-size:1.35rem;gap:8px;">
-              <span class="sev-badge sev-OK" id="kpi-sev-ok">OK: 2</span>
-              <span class="sev-badge sev-WARN" id="kpi-sev-warn">WARN: 1</span>
-              <span class="sev-badge sev-ALERT" id="kpi-sev-alert">ALERT: 0</span>
-            </div>
-            <div class="kpi-sub" id="kpi-scan-meta">
-              <span>Last scan duration: 0.85s</span>
-            </div>
-          </div>
-
-          <div class="glass-panel kpi-card">
-            <div class="kpi-label">Ollama Local &amp; Cloud Engine</div>
-            <div class="kpi-value" style="font-size:1.15rem;">
-              <span id="kpi-ai-model" style="color:#c4b5fd;">deepseek-v3.1:671b-cloud</span>
-            </div>
-            <div class="kpi-sub">
-              <span class="status-dot" id="kpi-ai-dot"></span>
-              <span id="kpi-ai-provider">Ollama Hybrid Bridge Ready</span>
-            </div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;">
+            <button class="btn-secondary-glass" id="btn-open-self-ip-modal" style="height:32px;font-size:0.78rem;">
+              🛰️ View My IP &amp; WHOIS Popup
+            </button>
+            <button class="btn-secondary-glass" id="btn-use-my-ip-as-target" style="height:32px;font-size:0.78rem;">
+              🎯 Put My IP in Scanner
+            </button>
           </div>
         </div>
 
-        <!-- Split Command Center -->
-        <div class="command-split">
-          <!-- Left: Rapid Module Launcher -->
-          <div class="glass-panel" style="display:flex;flex-direction:column;">
-            <div class="panel-header">
-              <div class="panel-title">
-                <span>🛰️</span>
-                <span>Rapid Module Launcher</span>
-              </div>
-              <button class="btn-secondary-glass" id="btn-run-selected-batch">
-                <span>⚡ Run Selected (<span id="selected-mod-count">3</span>)</span>
-              </button>
+        <!-- Target Search & Category Card -->
+        <div class="glass-panel" style="padding:15px;display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <div style="font-size:1.0rem;font-weight:800;color:#ffd700;">
+              🎯 Target Search &amp; Multi-Category Recon
             </div>
+            <select id="hud-model-select" class="glass-select" title="Active Cloud AI Model (Auto-Selects Free Pool)">
+              <option value="deepseek-v3.1:671b-cloud">☁️ Ollama Free: deepseek-v3.1:671b-cloud</option>
+              <option value="mistral-medium-2508">☁️ Mistral Pool 3: mistral-medium-2508 (375K TPM)</option>
+              <option value="mistral-large-2411">☁️ Mistral Pool 2: mistral-large-2411 (200B/mo)</option>
+              <option value="llama-3.1-8b-instant">☁️ Groq Free: llama-3.1-8b-instant (14.4K/day)</option>
+              <option value="meta-llama/llama-3.3-70b-instruct:free">☁️ OpenRouter: llama-3.3-70b:free</option>
+              <option value="gemini-2.0-flash">☁️ Gemini Free: gemini-2.0-flash</option>
+              <option value="openai">☁️ Keyless Free AI (No Key Needed)</option>
+            </select>
+          </div>
 
-            <div class="sweep-bar">
-              <button class="sweep-btn" data-sweep="infra">🌐 Infra Sweep</button>
-              <button class="sweep-btn" data-sweep="web">🕸️ Web Intel</button>
-              <button class="sweep-btn" data-sweep="sec">🛡️ Sec Audit</button>
-              <button class="sweep-btn" data-sweep="fav">⭐ Favorites</button>
-            </div>
+          <!-- 6 Search Modes -->
+          <div class="osint-mode-bar" id="osint-mode-bar">
+            <button class="osint-mode-btn active" data-osintmode="domain">🌐 Domain / Website</button>
+            <button class="osint-mode-btn" data-osintmode="ip">📍 IP, Ports &amp; DNS</button>
+            <button class="osint-mode-btn" data-osintmode="username">👤 Username</button>
+            <button class="osint-mode-btn" data-osintmode="name">🪪 Person Name</button>
+            <button class="osint-mode-btn" data-osintmode="email">✉️ Email Breach</button>
+            <button class="osint-mode-btn" data-osintmode="extel">📅 Keyword + Date</button>
+          </div>
 
-            <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+          <!-- Extel Date-Range Picker Row -->
+          <div class="extel-date-row" id="extel-date-row">
+            <span style="font-size:0.78rem;color:#ffd700;font-weight:800;">📅 DATE FILTER:</span>
+            <label style="font-size:0.76rem;color:var(--text-secondary);">From:</label>
+            <input type="date" id="extel-date-from" class="extel-date-input" value="2026-09-01" />
+            <label style="font-size:0.76rem;color:var(--text-secondary);">To:</label>
+            <input type="date" id="extel-date-to" class="extel-date-input" value="2026-10-20" />
+            <button class="btn-primary-glow" id="btn-run-extel-search" style="height:34px;padding:0 12px;font-size:0.78rem;">
+              🔍 Search Posts by Date
+            </button>
+          </div>
+
+          <!-- Main Target Input & Scan Button -->
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div class="target-input-group">
+              <span class="target-prefix" id="target-input-prefix">TARGET //</span>
               <input
                 type="text"
-                id="dashboard-mod-search"
+                id="global-target-input"
                 class="target-input"
-                style="width:100%;padding:8px 12px;background:rgba(4,8,20,0.65);border:1px solid rgba(255,255,255,0.12);border-radius:9px;"
-                placeholder="Filter 151 modules (e.g. dns, ssl, headers, cors, cve)..."
+                value="github.com"
+                placeholder="Enter domain, IP address, email, username, or keyword..."
+                autocomplete="off"
               />
             </div>
+            <button class="btn-primary-glow" id="btn-quick-scan">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polygon points="6,4 20,12 6,20" fill="#05070c"/></svg>
+              <span id="btn-quick-scan-label">Run Selected Scan</span>
+            </button>
+          </div>
 
-            <div class="compact-module-list" id="dashboard-module-list">
-              <!-- Populated by app.js -->
+          <!-- HERO BUTTON: FULL 151 ALL-SCANNERS OMNI-SCAN -->
+          <button class="btn-omni-151" id="btn-beast-mode" title="Put this Domain, IP, or Email through ALL 151 Scanners at once!">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+              <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke="#ffd700" stroke-width="2.2" fill="rgba(255,215,0,0.2)"/>
+              <path d="M15 7L9 15h5l-1 6 6-8h-5l1-6z" fill="#00f0ff"/>
+            </svg>
+            <span>🚀 FULL SCAN: Run ALL 151 Scanners Together (Domain / IP / Email / DNS)</span>
+          </button>
+
+          <!-- Expanded Multi-Scanner Category Suites (No longer limited to 3 or 6 scanners!) -->
+          <div class="quick-sweep-grid">
+            <button class="sweep-btn" data-sweep="full151">
+              <span>⚡</span>
+              <div>
+                <div style="color:#ffd700;font-weight:800;">Full 151 All-Scanners</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);">All 151 Tools Together</div>
+              </div>
+            </button>
+            <button class="sweep-btn" data-sweep="infra">
+              <span>🌐</span>
+              <div>
+                <div style="color:#38bdf8;font-weight:800;">IP, Ports, Sockets &amp; DNS</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);">52 Network &amp; Infra Scanners</div>
+              </div>
+            </button>
+            <button class="sweep-btn" data-sweep="web">
+              <span>🕸️</span>
+              <div>
+                <div style="color:#34d399;font-weight:800;">Domain &amp; Web Deep Scan</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);">53 Web, SSL &amp; Header Scanners</div>
+              </div>
+            </button>
+            <button class="sweep-btn" data-sweep="sec">
+              <span>🛡️</span>
+              <div>
+                <div style="color:#f87171;font-weight:800;">Threat, CVE &amp; Breach Scan</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);">46 Security &amp; OSINT Scanners</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Quick Target Presets -->
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+              <span style="font-size:0.75rem;color:#fbbf24;font-weight:800;">QUICK TARGETS:</span>
+              <button class="chip-btn" data-target="github.com">github.com</button>
+              <button class="chip-btn" data-target="cloudflare.com">cloudflare.com</button>
+              <button class="chip-btn" data-target="8.8.8.8">8.8.8.8</button>
+              <button class="chip-btn" data-target="1.1.1.1">1.1.1.1</button>
+              <button class="chip-btn" data-target="example.com">example.com</button>
+            </div>
+            <div style="font-size:0.78rem;color:#fde68a;">
+              Target: <strong id="kpi-active-target" style="color:#ffd700;">github.com</strong> · AI: <strong id="kpi-ai-model" style="color:#34d399;">deepseek-v3.1:671b-cloud</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3-Tier Traffic-Light Overview Cards (Tap to Open Reports & How-To-Fix!) -->
+        <div class="glass-panel" style="padding:15px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+            <div>
+              <div style="font-size:1.0rem;font-weight:800;color:#ffd700;">🚦 3-Tier Scan Status Overview (Tap Any Box to View Report &amp; Fixes)</div>
+              <div style="font-size:0.78rem;color:var(--text-secondary);">
+                Green = Clear/Safe · Yellow = Medium Caution · Red = Under Threat (Open Ports, Sockets, or Missing Protections)
+              </div>
+            </div>
+            <button class="btn-secondary-glass" id="btn-jump-to-reports" style="height:34px;font-size:0.80rem;">
+              📊 Open Full Reports &amp; Fixes ▶
+            </button>
+          </div>
+
+          <div class="three-tier-summary-grid">
+            <div class="tier-box tier-green" data-goto-report="beginner">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-weight:800;color:#34d399;">🟢 CLEAR / NO PROBLEM</span>
+                <span class="sev-badge sev-OK">SAFE</span>
+              </div>
+              <div class="tier-count" style="color:#34d399;" id="home-tier-green-count">2</div>
+              <div style="font-size:0.78rem;color:#d1fae5;">Healthy configs, valid TLS/DNS, no active exposure</div>
+            </div>
+
+            <div class="tier-box tier-yellow" data-goto-report="beginner">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-weight:800;color:#fbbf24;">🟡 MEDIUM CAUTION</span>
+                <span class="sev-badge sev-WARN">MEDIUM</span>
+              </div>
+              <div class="tier-count" style="color:#fbbf24;" id="home-tier-yellow-count">1</div>
+              <div style="font-size:0.78rem;color:#fef3c7;">Minor warnings, soft SPF/headers, or public WHOIS info</div>
+            </div>
+
+            <div class="tier-box tier-red" data-goto-report="beginner">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-weight:800;color:#f87171;">🔴 UNDER THREAT</span>
+                <span class="sev-badge sev-ALERT">FIX NEEDED</span>
+              </div>
+              <div class="tier-count" style="color:#f87171;" id="home-tier-red-count">0</div>
+              <div style="font-size:0.78rem;color:#fee2e2;">Open ports, sockets, errors, or exposed services</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SVG Visual Telemetry Board -->
+        <div class="svg-telemetry-grid" id="svg-telemetry-board">
+          <div class="svg-gauge-card">
+            <div class="svg-gauge-title">3-Tier Scan Breakdown</div>
+            <div id="svg-radial-fractions-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:132px;"></div>
+            <div id="svg-radial-legend" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:0.74rem;margin-top:4px;"></div>
+          </div>
+
+          <div class="svg-gauge-card">
+            <div class="svg-gauge-title">Confidence Scale (<span id="banner-confidence-pct">89%</span>)</div>
+            <div id="svg-confidence-gauge-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:124px;"></div>
+            <div style="font-size:0.73rem;color:#fde68a;text-align:center;margin-top:4px;" id="svg-confidence-caption">
+              Probabilistic Indicator · Nothing is 100% Guaranteed
             </div>
           </div>
 
-          <!-- Right: Live Telemetry Console & AI Threat Analyst -->
-          <div class="glass-panel" style="display:flex;flex-direction:column;">
-            <div class="panel-header">
-              <div class="panel-title">
-                <span>📡</span>
-                <span id="output-panel-title">Live Reconnaissance Telemetry</span>
-              </div>
-              <div class="output-tabs">
-                <button class="tab-pill active" data-outtab="console">Terminal Output</button>
-                <button class="tab-pill" data-outtab="ai">🧠 AI Threat Analysis</button>
-                <button class="tab-pill" data-outtab="findings">Findings &amp; Runtimes</button>
-              </div>
-            </div>
-
-            <!-- Sub-toolbar for active scan -->
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid rgba(255,255,255,0.07);flex-wrap:wrap;gap:8px;">
-              <div id="module-output-pills" style="display:flex;gap:6px;flex-wrap:wrap;">
-                <!-- Module filter pills for current scan -->
-              </div>
-              <div style="display:flex;gap:8px;">
-                <button class="btn-secondary-glass" id="btn-trigger-ai-analyze">
-                  <span>🧠</span>
-                  <span>Re-Analyze with Ollama</span>
-                </button>
-                <button class="btn-secondary-glass" id="btn-export-current-md">
-                  <span>⬇ Export MD</span>
-                </button>
-                <button class="btn-secondary-glass" id="btn-export-current-json">
-                  <span>⬇ JSON</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Tab 1: Terminal Output -->
-            <div id="outtab-console" style="flex:1;display:flex;flex-direction:column;">
-              <pre class="terminal-window" id="main-terminal-output">Initializing ARAGOS v3.0 Telemetry Stream...</pre>
-            </div>
-
-            <!-- Tab 2: AI Threat Analysis -->
-            <div id="outtab-ai" style="display:none;padding:18px;overflow-y:auto;max-height:480px;">
-              <div id="dashboard-ai-analysis" class="ai-markdown">
-                Select a scan or click "Re-Analyze with Ollama" to generate neural threat intelligence.
-              </div>
-            </div>
-
-            <!-- Tab 3: Structured Findings & Runtimes -->
-            <div id="outtab-findings" style="display:none;padding:18px;overflow-y:auto;max-height:480px;">
-              <div id="dashboard-findings-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+          <div class="svg-gauge-card">
+            <div class="svg-gauge-title">Live ArGuS Signal Pulse</div>
+            <div id="svg-pulse-wave-holder" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:110px;"></div>
+            <div style="font-size:0.73rem;color:var(--text-secondary);text-align:center;margin-top:4px;" id="svg-pulse-caption">
+              Swipe Left ◀ or Right ▶ to Switch Sections
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== VIEW 2: MODULE ARSENAL (ALL 151) ==================== -->
+      <!-- ==================== SECTION 2: ALL 151 SCANNERS (DEDICATED SCROLL VIEW) ==================== -->
       <section class="view-pane" id="view-modules">
-        <div class="glass-panel arsenal-toolbar">
-          <div class="filter-pills" id="arsenal-section-pills">
-            <button class="filter-pill active" data-sec="all">All Modules (151)</button>
-            <button class="filter-pill" data-sec="Network & Infrastructure">🌐 Network &amp; Infra</button>
-            <button class="filter-pill" data-sec="Web Application Analysis">🕸️ Web Application</button>
-            <button class="filter-pill" data-sec="Security & Threat Intelligence">🛡️ Security &amp; Threat Intel</button>
-            <button class="filter-pill" data-sec="fav">⭐ Favorites</button>
+        <div class="glass-panel" style="padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+            <div>
+              <h2 class="gold-app-title" style="font-size:1.3rem;">⚡ All 151 Scanners &amp; Multi-Selector</h2>
+              <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:2px;">
+                Scroll freely through all 151 scanners here without blocking other sections. Tap checkboxes to pick scanners or run all 151 at once!
+              </p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn-secondary-glass" id="btn-select-all-151" style="height:36px;">
+                ✓ Select All 151
+              </button>
+              <button class="btn-secondary-glass" id="btn-clear-selected-151" style="height:36px;">
+                ✕ Clear Selection
+              </button>
+              <button class="btn-primary-glow" id="btn-run-selected-batch" style="height:36px;padding:0 14px;font-size:0.82rem;">
+                ▶ Run Selected (<span id="selected-mod-count">3</span>)
+              </button>
+            </div>
           </div>
 
-          <div style="display:flex;gap:10px;align-items:center;">
-            <select id="arsenal-tag-select" class="glass-select">
-              <option value="all">Tag: All Tags</option>
-              <option value="dns">#dns</option>
-              <option value="tls">#tls</option>
-              <option value="web">#web</option>
-              <option value="cloud">#cloud</option>
-              <option value="email">#email</option>
-              <option value="recon">#recon</option>
-              <option value="fast">#fast</option>
-              <option value="heavy">#heavy</option>
-            </select>
+          <!-- Section Filter Pills -->
+          <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;" id="arsenal-section-pills">
+            <button class="chip-btn filter-pill active" data-sec="all">All 151 Scanners</button>
+            <button class="chip-btn filter-pill" data-sec="Network & Infrastructure">🌐 IP, Ports &amp; Network (52)</button>
+            <button class="chip-btn filter-pill" data-sec="Web Application Analysis">🕸️ Domain &amp; Web App (53)</button>
+            <button class="chip-btn filter-pill" data-sec="Security & Threat Intelligence">🛡️ Security &amp; Threat (46)</button>
+            <button class="chip-btn filter-pill" data-sec="fav">⭐ Favorites</button>
+          </div>
+
+          <!-- Search & Tag Filter -->
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
             <input
               type="text"
-              id="arsenal-search-input"
+              id="dashboard-mod-search"
               class="target-input"
-              style="width:260px;height:40px;padding:0 12px;background:rgba(5,10,24,0.75);border:1px solid rgba(255,255,255,0.16);border-radius:10px;"
-              placeholder="Search module name, ID, script..."
+              placeholder="Search all 151 scanners by number (1–151), name, port, DNS, SSL, WHOIS..."
+              style="background:rgba(6,9,16,0.92);padding:9px 14px;border-radius:11px;border:1px solid rgba(255,215,0,0.32);flex:1;"
             />
+            <select id="arsenal-tag-select" class="glass-select">
+              <option value="all">All Capabilities</option>
+              <option value="dns">DNS &amp; Domain</option>
+              <option value="ssl">SSL / TLS Crypto</option>
+              <option value="http">HTTP / Web</option>
+              <option value="osint">OSINT &amp; Identity</option>
+              <option value="vuln">Vulnerability Audit</option>
+              <option value="cloud">Cloud &amp; CDN</option>
+            </select>
           </div>
-        </div>
 
-        <div class="modules-grid" id="arsenal-modules-grid">
-          <!-- Populated by app.js -->
+          <!-- Scrollable 151 Scanners Checklist -->
+          <div style="margin-top:12px;">
+            <div class="clear-scan-grid" id="dashboard-module-list"></div>
+          </div>
         </div>
       </section>
 
-      <!-- ==================== VIEW 3: OLLAMA AI COPILOT & MODEL HUB ==================== -->
-      <section class="view-pane" id="view-ai">
-        <div class="ai-hub-grid">
-          <!-- Left: Ollama Local & Cloud Model Manager -->
-          <div class="glass-panel" style="display:flex;flex-direction:column;">
-            <div class="panel-header">
-              <div class="panel-title">
-                <span>🦙</span>
-                <span>4GB-RAM Safe Models (0 Auto-Downloads)</span>
-              </div>
-              <div style="display:flex;gap:6px;">
-                <button class="btn-secondary-glass" id="btn-free-ollama-ram" title="Unload active local models from RAM">🧹 Free RAM</button>
-                <button class="btn-secondary-glass" id="btn-refresh-ollama">↻ Probe</button>
-              </div>
+      <!-- ==================== SECTION 3: REPORTS & BEGINNER "HOW TO FIX" CENTER ==================== -->
+      <section class="view-pane" id="view-reports">
+        <div class="glass-panel" style="padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
+            <div>
+              <h2 class="gold-app-title" style="font-size:1.3rem;" id="output-panel-title">📊 Multi-View Scan Reports &amp; Beginner Fix Guide</h2>
+              <p style="font-size:0.82rem;color:var(--text-secondary);">
+                Tap any report mode below or <strong>swipe left/right</strong> inside the report box to switch between Beginner Fix Guide, Normal Report, Full Report, AI Report, and Raw Output!
+              </p>
             </div>
-
-            <div style="padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;">
-              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;">
-                <span style="color:var(--text-secondary);">Ollama Bridge (<code style="color:var(--cyan);" id="ai-hub-local-url">Hybrid Local + Cloud</code>)</span>
-                <span class="sev-badge sev-OK" id="ai-hub-daemon-badge">Ready</span>
-              </div>
-
-              <label style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--text-secondary);cursor:pointer;">
-                <input type="checkbox" id="chk-browser-direct-ollama" checked />
-                <span>Auto-Synthesize with Aragos Neural Core when Daemon Offline</span>
-              </label>
-
-              <div style="display:flex;gap:8px;">
-                <input
-                  type="text"
-                  id="input-custom-ollama-model"
-                  class="target-input"
-                  style="flex:1;height:36px;padding:0 10px;background:rgba(4,8,20,0.7);border:1px solid rgba(255,255,255,0.14);border-radius:8px;font-size:0.78rem;"
-                  placeholder="Model tag (e.g. llama3.3 or glm-4.6:cloud)"
-                />
-                <button class="btn-secondary-glass" id="btn-pull-ollama-model" style="height:36px;">
-                  Use / Pull
-                </button>
-              </div>
-            </div>
-
-            <div style="padding:12px 14px;overflow-y:auto;max-height:430px;display:flex;flex-direction:column;gap:8px;" id="ollama-models-list">
-              <!-- Populated by app.js -->
-            </div>
-          </div>
-
-          <!-- Right: Interactive AI Security Analyst Chat -->
-          <div class="glass-panel" style="display:flex;flex-direction:column;">
-            <div class="panel-header">
-              <div class="panel-title">
-                <span>🧠</span>
-                <span>ARAGOS Neural Security Analyst</span>
-              </div>
-              <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="chip-btn ai-prompt-chip" data-prompt="Analyze the latest scan telemetry and list the top 3 security risks and fixes.">
-                  🔍 Analyze Latest Scan
-                </button>
-                <button class="chip-btn ai-prompt-chip" data-prompt="Generate hardened HTTP security headers (CSP, HSTS, Permissions-Policy) for the current target.">
-                  🛡️ Hardening Config
-                </button>
-                <button class="chip-btn ai-prompt-chip" data-prompt="How do I run both local and cloud models with Ollama in ARAGOS?">
-                  🦙 Ollama Cloud Guide
-                </button>
-              </div>
-            </div>
-
-            <div class="chat-messages" id="ai-chat-messages">
-              <div class="chat-bubble assistant ai-markdown">
-                <h4>⚡ ARAGOS Neural Recon Copilot Online</h4>
-                <p>Connected to your hybrid <strong>Ollama Local + Cloud</strong> architecture and all <strong>151 ARAGOS reconnaissance modules</strong>.</p>
-                <p>Select any local model (e.g. <code>llama3.3:latest</code>, <code>qwen2.5-coder:14b</code>) or Ollama Cloud model (e.g. <code>deepseek-v3.1:671b-cloud</code>, <code>qwen3-coder:480b-cloud</code>, <code>gpt-oss:120b-cloud</code>) on the left, or ask me to analyze your active target scan!</p>
-              </div>
-            </div>
-
-            <div class="chat-input-row">
-              <input
-                type="text"
-                id="ai-chat-input"
-                class="target-input"
-                style="flex:1;height:42px;padding:0 14px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.16);border-radius:10px;"
-                placeholder="Ask your Ollama model about scan findings, CVEs, remediation, or recon strategy..."
-              />
-              <button class="btn-primary-glow" id="btn-send-ai-chat">
-                <span>Send ➔</span>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="btn-secondary-glass" id="btn-read-report-aloud" style="height:34px;font-size:0.78rem;" title="Read Report Aloud via AHM7 SpeechSter / Browser TTS">
+                🔊 Read Aloud
+              </button>
+              <button class="btn-secondary-glass" id="btn-trigger-ai-analyze" style="height:34px;font-size:0.78rem;">
+                🧠 AI Explain &amp; Fix
+              </button>
+              <button class="btn-secondary-glass" id="btn-export-current-md" style="height:34px;font-size:0.78rem;">
+                ⬇ MD
+              </button>
+              <button class="btn-secondary-glass" id="btn-export-current-json" style="height:34px;font-size:0.78rem;">
+                ⬇ JSON
               </button>
             </div>
           </div>
+
+          <!-- 5 Report View Sub-Tabs (Buttons + Swipe Left/Right Support) -->
+          <div class="report-subtabs-bar" id="report-subtabs-bar">
+            <button class="report-subtab-btn active" data-outtab="beginner">
+              🛠️ 1. Beginner Summary &amp; How To Fix (3-Tier)
+            </button>
+            <button class="report-subtab-btn" data-outtab="findings">
+              📋 2. Normal Report (Visual Cards)
+            </button>
+            <button class="report-subtab-btn" data-outtab="full">
+              📚 3. Full Report &amp; History
+            </button>
+            <button class="report-subtab-btn" data-outtab="ai">
+              🧠 4. AI Deep Report
+            </button>
+            <button class="report-subtab-btn" data-outtab="console">
+              📟 5. Raw Report
+            </button>
+          </div>
+
+          <!-- Filter by Module Pill Strip -->
+          <div style="padding:10px 0;border-bottom:1px solid rgba(255,215,0,0.14);display:flex;gap:6px;flex-wrap:wrap;" id="module-output-pills"></div>
+
+          <!-- Swipeable Report Content Area -->
+          <div id="report-swipe-area" style="margin-top:12px;">
+            <!-- Sub-Tab 1: Beginner Plain-English Summary & Step-by-Step "How It Gets Fixed" (3-Tier Green/Yellow/Red) -->
+            <div id="outtab-beginner" style="display:flex;flex-direction:column;gap:12px;">
+              <div id="beginner-report-container"></div>
+            </div>
+
+            <!-- Sub-Tab 2: Normal Report (Visual Telemetry Cards) -->
+            <div id="outtab-findings" style="display:none;flex-direction:column;gap:12px;">
+              <div id="dashboard-findings-list" class="visual-telemetry-cards"></div>
+            </div>
+
+            <!-- Sub-Tab 3: Full Report & Saved Scan History -->
+            <div id="outtab-full" style="display:none;flex-direction:column;gap:12px;">
+              <div id="full-report-container" style="display:flex;flex-direction:column;gap:12px;"></div>
+              <div style="border-top:1px solid rgba(255,215,0,0.2);padding-top:12px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                  <strong style="color:#ffd700;">📁 Saved Scan Sessions Vault</strong>
+                  <button class="btn-secondary-glass" id="btn-refresh-scans" style="height:30px;font-size:0.75rem;">↻ Refresh</button>
+                </div>
+                <div id="reports-vault-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+              </div>
+            </div>
+
+            <!-- Sub-Tab 4: AI Deep Report -->
+            <div id="outtab-ai" style="display:none;flex-direction:column;gap:12px;">
+              <div class="ai-markdown" id="dashboard-ai-analysis"></div>
+            </div>
+
+            <!-- Sub-Tab 5: Raw Console Output -->
+            <div id="outtab-console" style="display:none;flex-direction:column;gap:12px;">
+              <div class="terminal-output" id="main-terminal-output"></div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- ==================== VIEW 4: INTERACTIVE WEB CLI SHELL ==================== -->
-      <section class="view-pane" id="view-cli">
-        <div class="glass-panel" style="display:flex;flex-direction:column;flex:1;">
-          <div class="panel-header">
-            <div class="panel-title">
-              <span>💻</span>
-              <span>ARAGOS Interactive Web Shell (<code>aragos&gt;</code>)</span>
+      <!-- ==================== SECTION 4: MULTI-KEY VAULT (+ ADD NEW KEY) & AHM7 21 FREE TOOLS ==================== -->
+      <section class="view-pane" id="view-settings">
+        <div class="glass-panel" style="padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+            <div>
+              <h2 class="gold-app-title" style="font-size:1.3rem;">🔑 Multi-Key Cloud AI Vault &amp; Free Pool Router</h2>
+              <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:3px;">
+                Add as many free API keys as you want (e.g., 4 OpenRouter, 4 Ollama, Mistral, Groq, Gemini, OpenAI)! Choose a provider below—the frontend &amp; backend route loads automatically, and <strong>Model is 100% Optional</strong> (auto-selects the best free model if left blank!).
+              </p>
             </div>
+            <span class="sev-badge sev-OK" id="vault-active-summary">Multi-Key Pool Active</span>
+          </div>
+
+          <!-- "+ ADD A NEW FREE API KEY" INTERACTIVE BUILDER -->
+          <div class="add-key-builder-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+              <div style="font-size:1.05rem;font-weight:800;color:#ffd700;">
+                ➕ Add a New Free API Key (Unlimited Keys per Provider)
+              </div>
+              <span class="sev-badge sev-INFO" id="builder-route-badge">Route Auto-Loaded</span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;">
+              <div>
+                <label style="font-size:0.78rem;color:#ffd700;font-weight:800;">1. Choose Provider (Auto-Loads Route)</label>
+                <select id="new-key-provider" class="glass-select" style="width:100%;margin-top:4px;height:40px;">
+                  <option value="ollama">☁️ Ollama Cloud (Free API Keys)</option>
+                  <option value="deepseek">🐋 DeepSeek Harness (`@deepseek-ai/dsh` · 1M Context Pool)</option>
+                  <option value="openrouter">🌐 OpenRouter (Free `:free` Models)</option>
+                  <option value="mistral">⚡ Mistral AI (7-Pool Free Tier)</option>
+                  <option value="groq">🚀 Groq Cloud (Forever-Free 14.4K/Day)</option>
+                  <option value="nvidia">🟢 NVIDIA NIM Free Dev (`deepseek-ai/deepseek-r1`)</option>
+                  <option value="google">✨ Google Gemini (AI Studio Free)</option>
+                  <option value="openai">🤖 OpenAI / Custom Compatible</option>
+                  <option value="keyless_free">🔓 Keyless Free AI + AHM7 (No Key Needed)</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="font-size:0.78rem;color:#ffd700;font-weight:800;">2. Paste Your Free API Key</label>
+                <input
+                  type="password"
+                  id="new-key-value"
+                  class="target-input"
+                  placeholder="Paste API key here..."
+                  style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(6,9,16,0.92);border:1px solid rgba(255,215,0,0.38);border-radius:10px;"
+                />
+              </div>
+
+              <div>
+                <label style="font-size:0.78rem;color:#34d399;font-weight:800;">3. Model (OPTIONAL — Leave Blank for Auto!)</label>
+                <input
+                  type="text"
+                  id="new-key-model"
+                  class="target-input"
+                  placeholder="Optional: Auto-loads best free model..."
+                  list="provider-free-models-datalist"
+                  style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(6,9,16,0.92);border:1px solid rgba(16,185,129,0.45);border-radius:10px;"
+                />
+                <datalist id="provider-free-models-datalist"></datalist>
+              </div>
+
+              <div>
+                <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:700;">4. Key Nickname (Optional)</label>
+                <input
+                  type="text"
+                  id="new-key-label"
+                  class="target-input"
+                  placeholder="e.g. My Ollama Key #2"
+                  style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(6,9,16,0.92);border:1px solid rgba(255,215,0,0.24);border-radius:10px;"
+                />
+              </div>
+            </div>
+
+            <!-- Auto-Loaded Frontend/Backend Route Preview Box -->
+            <div style="margin-top:10px;padding:9px 12px;border-radius:10px;background:rgba(6,9,16,0.88);border:1px solid rgba(0,240,255,0.28);font-size:0.78rem;color:#cbd5e1;" id="new-key-auto-route-info">
+              <strong>Auto-Wired Endpoint:</strong> <code>https://ollama.com/api/chat</code> · <strong>Auto Free Model:</strong> <code>deepseek-v3.1:671b-cloud</code> (Leave model blank if you don't know it!)
+            </div>
+
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+              <button class="btn-primary-glow" id="btn-add-new-vault-key">
+                ➕ Add Key to Active Pool
+              </button>
+              <a href="https://ollama.com/settings/keys" target="_blank" rel="noopener" id="new-key-get-link" class="btn-secondary-glass" style="text-decoration:none;">
+                🔗 Get Free Key for Selected Provider ↗
+              </a>
+            </div>
+          </div>
+
+          <!-- Saved Multi-Keys Pool List -->
+          <div style="margin-bottom:14px;">
+            <div style="font-size:0.95rem;font-weight:800;color:#ffd700;margin-bottom:8px;">
+              🗂️ Your Active Multi-Key Pool (<span id="saved-keys-count-badge">1</span> Keys Ready — Auto Round-Robin Rotation)
+            </div>
+            <div id="saved-multi-keys-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px;"></div>
+          </div>
+
+          <!-- Mistral 7-Pool & Groq 2026 Free Tier Intelligence Box -->
+          <div style="padding:14px;border-radius:14px;background:rgba(0,240,255,0.07);border:1px solid rgba(0,240,255,0.32);margin-bottom:14px;">
+            <div style="font-size:0.95rem;font-weight:800;color:#38bdf8;margin-bottom:6px;">
+              📊 Built-In Mistral 7-Pool &amp; Groq 2026 Free Quota Optimizer (No 429 Errors!)
+            </div>
+            <div style="font-size:0.80rem;color:#e2e8f0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;">
+              <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(255,215,0,0.2);">
+                <strong style="color:#ffd700;">⚡ Mistral Free Tier — 7 Separate Pools (r/MistralAI Analysis):</strong><br/>
+                Mistral shares rate limits by <em>pool</em>, not per model! Our router automatically cycles across isolated pools:<br/>
+                • <strong>Pool 3 (`mistral-medium-2508`):</strong> 375K tok/min, 25 RPM, NO monthly limit<br/>
+                • <strong>Pool 2 (`mistral-large-2411`):</strong> 600K tok/5-min, 60 RPM, 200B tok/month (isolated!)<br/>
+                • <strong>Pool 7 (`devstral-2512`):</strong> 1,000,000 tok/min, 50 RPM<br/>
+                • <strong>Pool 4 (`mistral-medium-2505`):</strong> 60K tok/min, 60 RPM<br/>
+                • <strong>Pool 1 (`open-mistral-nemo` / `mistral-small-2506`):</strong> 50K tok/min
+              </div>
+              <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(16,185,129,0.25);">
+                <strong style="color:#34d399;">🚀 Groq 2026 Forever-Free Tier &amp; Keyless AI:</strong><br/>
+                • <strong>Groq Free API (`console.groq.com/keys`):</strong> Still 100% free with no credit card! Gives <strong>14,400 req/day &amp; 30 RPM</strong> on `llama-3.1-8b-instant` &amp; `openai/gpt-oss-20b`, and <strong>1,000 req/day</strong> on `llama-3.3-70b-versatile`.<br/>
+                • <strong>Zero-Key Mode:</strong> Even with 0 keys, our built-in Keyless Cloud AI + AHM7 FreeAPI works automatically!
+              </div>
+              <div style="padding:9px;border-radius:10px;background:rgba(6,9,16,0.75);border:1px solid rgba(56,189,248,0.32);">
+                <strong style="color:#38bdf8;">🐋 DeepSeek Harness (`@deepseek-ai/dsh` — Everything is a Plugin):</strong><br/>
+                • Integrated from <a href="https://github.com/kimokiki333-code/deepseek-harness" target="_blank" rel="noopener" style="color:#ffd700;"><code>kimokiki333-code/deepseek-harness</code></a> (MIT Open Source)!<br/>
+                • Supports <strong>`deepseek-flash` (DeepSeek-V4.1-Flash · 1M Context)</strong> &amp; <strong>`deepseek-v4-pro` (1M Context)</strong> with both <code>DEEPSEEK_API_KEY</code> and DeepSeek Account Tokens (<code>x-dsh-auth-token</code>) + NVIDIA NIM Free Dev Routes!
+              </div>
+            </div>
+          </div>
+
+          <!-- Pre-Wired Provider Cards -->
+          <div class="vault-provider-grid" id="vault-providers-container"></div>
+        </div>
+
+        <!-- ==================== AHM7 FREEAPI (freeapi.pro / ahm7xmakki.com) 21 ZERO-KEY TOOLS ==================== -->
+        <div class="glass-panel" style="padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+            <div>
+              <h3 class="gold-app-title" style="font-size:1.22rem;">🛠️ AHM7 FreeAPI (`freeapi.pro` / `ahm7xmakki.com`) — All 21 Zero-Key Tools</h3>
+              <p style="font-size:0.80rem;color:var(--text-secondary);margin-top:2px;">
+                21 production REST APIs &amp; tools with <strong>Zero API Key, Zero Signup, and Frontend + Backend Integration</strong> (WebSnap Screenshot, WebZip Site Archiver, TempSter Disposable OSINT Email, SpeechSter 580-Voice TTS, VisionChat AI OCR, PixelSter Flux AI, and more!).
+              </p>
+            </div>
+            <a href="https://freeapi.pro/docs" target="_blank" rel="noopener" class="btn-secondary-glass" style="text-decoration:none;height:34px;font-size:0.78rem;">
+              📖 Open FreeAPI Docs ↗
+            </a>
+          </div>
+
+          <!-- Interactive AHM7 Tool Runner Bar -->
+          <div style="padding:12px;border-radius:13px;background:rgba(6,9,16,0.9);border:1px solid rgba(255,215,0,0.32);margin-bottom:12px;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+              <select id="ahm7-tool-select" class="glass-select" style="flex:1;min-width:220px;"></select>
+              <input
+                type="text"
+                id="ahm7-param-input"
+                class="target-input"
+                value="https://github.com"
+                placeholder="Enter URL, text, or search query for selected AHM7 tool..."
+                style="flex:2;min-width:220px;padding:8px 12px;background:rgba(12,17,29,0.95);border:1px solid rgba(0,240,255,0.35);border-radius:10px;"
+              />
+              <button class="btn-primary-glow" id="btn-run-ahm7-tool" style="height:38px;">
+                ⚡ Run AHM7 Tool
+              </button>
+            </div>
+            <div id="ahm7-tool-result-box" style="margin-top:10px;display:none;padding:10px;border-radius:10px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.35);font-size:0.82rem;"></div>
+          </div>
+
+          <div id="ahm7-tools-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:10px;max-height:480px;overflow-y:auto;padding-right:4px;"></div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 5: BEGINNER AI CYBERSECURITY TUTOR & SHELL ==================== -->
+      <section class="view-pane" id="view-ai">
+        <div class="ai-hub-grid">
+          <div class="glass-panel" style="padding:15px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <h3 style="font-size:1.0rem;font-weight:800;color:#ffd700;">☁️ Active Cloud AI Pool</h3>
+              <button class="btn-secondary-glass" id="btn-refresh-ollama" style="height:30px;padding:0 10px;font-size:0.74rem;">↻ Sync</button>
+            </div>
+            <div style="padding:9px 11px;border-radius:10px;background:rgba(255,215,0,0.10);border:1px solid rgba(255,215,0,0.28);font-size:0.78rem;color:#fde68a;">
+              💡 <strong>Beginner Tutor Mode:</strong> Explains every scan finding in plain English and gives step-by-step fix instructions.
+            </div>
+            <div id="ollama-models-list" style="display:flex;flex-direction:column;gap:8px;max-height:310px;overflow-y:auto;"></div>
+            <div style="margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,215,0,0.14);display:flex;gap:6px;">
+              <input type="text" id="input-custom-ollama-model" class="target-input" placeholder="Custom model (optional)..." style="background:rgba(6,9,16,0.9);padding:7px 10px;border-radius:8px;border:1px solid rgba(255,215,0,0.24);font-size:0.78rem;" />
+              <button class="btn-primary-glow" id="btn-pull-ollama-model" style="height:34px;padding:0 12px;font-size:0.76rem;">Set</button>
+            </div>
+          </div>
+
+          <div class="glass-panel" style="display:flex;flex-direction:column;">
+            <div style="padding:12px 15px;border-bottom:1px solid rgba(255,215,0,0.16);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+              <div style="font-size:1.02rem;font-weight:800;color:#ffd700;">🧠 Beginner Cybersecurity Tutor &amp; Threat Fixer</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button class="chip-btn ai-prompt-chip" data-prompt="Explain my latest scan report in very simple words for someone new to cybersecurity, and tell me step by step how to fix any Red or Yellow warnings.">Explain &amp; Fix for Beginner</button>
+                <button class="chip-btn ai-prompt-chip" data-prompt="I scanned my own IP address and saw 6-7 threats or open ports. What do they mean and how do I fix them on my router or phone?">Why Does My IP Show Threats?</button>
+              </div>
+            </div>
+            <div class="chat-messages" id="ai-chat-messages">
+              <div class="chat-bubble assistant ai-markdown">
+                <p><strong>Welcome to the BaDR ArGuS Beginner Cybersecurity Tutor!</strong></p>
+                <p>You don't need to be a security expert—ask me about any Red (Under Threat) or Yellow (Medium) result, open port, socket, or DNS warning, and I will explain what it means in plain everyday language and walk you through <strong>how it gets fixed step by step</strong>.</p>
+              </div>
+            </div>
+            <div class="chat-input-row">
+              <input type="text" id="ai-chat-input" class="target-input" placeholder="Ask in plain English: 'What does this threat mean and how do I fix it?'..." style="background:rgba(6,9,16,0.9);padding:10px 14px;border-radius:10px;border:1px solid rgba(255,215,0,0.26);" />
+              <button class="btn-primary-glow" id="btn-send-ai-chat"><span>➤</span><span>Ask Tutor</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Command Shell inside Section 5 -->
+        <div class="glass-panel" style="padding:15px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+            <div style="font-size:0.96rem;font-weight:800;color:#ffd700;">💻 Interactive ArGuS Command Shell</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
               <button class="chip-btn cli-quick-btn" data-cmd="help">help</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="banner">banner</button>
               <button class="chip-btn cli-quick-btn" data-cmd="modules">modules</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="opts">opts</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="show api_status">show api_status</button>
+              <button class="chip-btn cli-quick-btn" data-cmd="use 115">use 115</button>
               <button class="chip-btn cli-quick-btn" data-cmd="run">run</button>
-              <button class="chip-btn cli-quick-btn" data-cmd="viewout">viewout</button>
               <button class="chip-btn cli-quick-btn" data-cmd="clear">clear</button>
             </div>
           </div>
-
-          <pre class="terminal-window" id="cli-terminal-screen" style="max-height:460px;flex:1;">     █████╗ ██████╗  █████╗  ██████╗  ██████╗ ███████╗
-    ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔═══██╗██╔════╝
-    ███████║██████╔╝███████║██║  ███╗██║   ██║███████╗
-    ██╔══██║██╔══██╗██╔══██║██║   ██║██║   ██║╚════██║
-    ██║  ██║██║  ██║██║  ██║╚██████╔╝╚██████╔╝███████╗
-    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝
-  ARAGOS v3.0 — Interactive Web CLI Shell Ready. Type 'help' for commands.
-</pre>
-
-          <div class="chat-input-row">
-            <span style="font-family:var(--font-mono);color:var(--cyan);align-self:center;font-weight:700;">aragos&gt;</span>
-            <input
-              type="text"
-              id="cli-command-input"
-              class="target-input"
-              style="flex:1;height:42px;padding:0 14px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.16);border-radius:10px;"
-              placeholder="Type command (e.g. search ssl, use 12, set target github.com, run, ai summarize findings)..."
-            />
+          <div class="terminal-output" id="cli-terminal-screen">aragos Android BaDR version — 151 Scanners Ready
+Type 'help' for commands or 'run' to execute the active scanner.</div>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input type="text" id="cli-command-input" class="target-input" placeholder="Enter command (help, modules, use 14, set target github.com, run)..." style="background:rgba(6,9,16,0.9);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,215,0,0.26);" />
             <button class="btn-primary-glow" id="btn-exec-cli">Execute</button>
           </div>
         </div>
       </section>
 
-      <!-- ==================== VIEW 5: SCAN VAULT & REPORTS ==================== -->
-      <section class="view-pane" id="view-reports">
-        <div class="glass-panel" style="padding:20px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-            <div>
-              <h2 style="font-family:var(--font-display);font-size:1.2rem;">Scan History &amp; Report Vault</h2>
-              <p style="font-size:0.82rem;color:var(--text-secondary);">
-                Inspect completed reconnaissance sweeps and export reports in JSON, Markdown, CSV, or TXT.
-              </p>
+      <!-- ==================== SECTION 6: ABOUT "aragos Android BaDR version" ==================== -->
+      <section class="view-pane" id="view-about">
+        <div class="glass-panel" style="padding:20px;display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:1px solid rgba(255,215,0,0.24);padding-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="brand-orb" style="width:52px;height:52px;">
+                <svg viewBox="0 0 36 36" width="34" height="34" fill="none">
+                  <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="#ffd700" stroke-width="2.2" fill="rgba(255,215,0,0.18)"/>
+                  <circle cx="18" cy="18" r="7" stroke="#00f0ff" stroke-width="2"/>
+                  <circle cx="18" cy="18" r="3" fill="#ffd700"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="gold-app-title" style="font-size:1.5rem;">aragos Android BaDR version</h2>
+                <div style="font-size:0.88rem;color:#38bdf8;font-weight:700;">
+                  BaDR ArGuS scanner — Standalone Android APK &amp; Web Cybersecurity Suite
+                </div>
+              </div>
             </div>
-            <button class="btn-secondary-glass" id="btn-refresh-scans">↻ Refresh Vault</button>
+            <a
+              href="https://github.com/kimokiki333-code/args-luna"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary-glow"
+              style="text-decoration:none;"
+            >
+              ⭐ Open Official GitHub Repository ↗
+            </a>
           </div>
 
-          <div id="reports-vault-list" style="display:flex;flex-direction:column;gap:12px;">
-            <!-- Populated by app.js -->
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== VIEW 6: SETTINGS, OLLAMA & API KEYS ==================== -->
-      <section class="view-pane" id="view-settings">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;">
-          <!-- Ollama Local & Cloud Configuration -->
-          <div class="glass-panel" style="padding:22px;display:flex;flex-direction:column;gap:14px;">
-            <h3 style="font-family:var(--font-display);font-size:1.08rem;color:var(--cyan);">
-              🦙 Ollama Local &amp; Cloud Engine Configuration
-            </h3>
-            <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5;">
-              Configure your local Ollama daemon URL (for local models &amp; signed-in <code>-cloud</code> models) and optional direct Cloud API credentials.
+          <div style="padding:14px;border-radius:14px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.32);">
+            <h3 style="color:#ffd700;font-size:1.05rem;margin-bottom:6px;">🙏 Credits &amp; Attribution to the Original Creator</h3>
+            <p style="font-size:0.90rem;color:#f8fafc;">
+              This platform is proudly built upon the foundation of the original open-source <strong>Argos / ArGuS</strong> Python reconnaissance &amp; network auditing toolkit (originally created by <strong>Jason13 / the open-source Argus security community</strong>). We give full credit, gratitude, and respect to the original author who crafted the foundational scanner modules that inspired this project.
             </p>
-
-            <div>
-              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Execution Mode</label>
-              <select id="cfg-ai-mode" class="glass-select" style="width:100%;">
-                <option value="auto">Auto Hybrid (Local Daemon ➔ Cloud API ➔ Aragos Neural Core)</option>
-                <option value="ollama-local">Ollama Local Daemon Only</option>
-                <option value="ollama-cloud">Ollama Cloud Models</option>
-                <option value="openai-cloud">OpenAI-Compatible Cloud Endpoint</option>
-              </select>
-            </div>
-
-            <div>
-              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Ollama Local Daemon URL</label>
-              <input type="text" id="cfg-ollama-local-url" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" value="http://127.0.0.1:11434" />
-            </div>
-
-            <div>
-              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Ollama Cloud URL</label>
-              <input type="text" id="cfg-ollama-cloud-url" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" value="https://ollama.com" />
-            </div>
-
-            <div>
-              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">Ollama Cloud API Key (Optional for direct https://ollama.com/api)</label>
-              <input type="password" id="cfg-ollama-api-key" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" placeholder="Enter OLLAMA_API_KEY..." />
-            </div>
-
-            <div>
-              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">OpenAI-Compatible Cloud Base URL (OpenRouter / Groq / OpenAI)</label>
-              <input type="text" id="cfg-openai-base-url" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" value="https://api.openai.com/v1" />
-            </div>
-
-            <div>
-              <label style="font-size:0.76rem;color:var(--text-secondary);display:block;margin-bottom:5px;">OpenAI-Compatible Cloud API Key</label>
-              <input type="password" id="cfg-openai-api-key" class="target-input" style="width:100%;height:40px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:10px;" placeholder="sk-..." />
-            </div>
-
-            <button class="btn-primary-glow" id="btn-save-ai-config" style="align-self:flex-start;">
-              💾 Save Ollama &amp; AI Settings
-            </button>
           </div>
 
-          <!-- OSINT & Recon API Keys -->
-          <div class="glass-panel" style="padding:22px;display:flex;flex-direction:column;gap:12px;">
-            <h3 style="font-family:var(--font-display);font-size:1.08rem;color:var(--cyan);">
-              🔑 OSINT &amp; Threat Intelligence API Keys
-            </h3>
-            <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5;">
-              Configure external provider keys to unlock live VirusTotal, Shodan, Censys, SSL Labs, and HaveIBeenPwned enrichment.
+          <div style="padding:14px;border-radius:14px;background:rgba(0,240,255,0.07);border:1px solid rgba(0,240,255,0.28);">
+            <h3 style="color:#38bdf8;font-size:1.05rem;margin-bottom:6px;">🚀 What We Engineered &amp; Added in <code>aragos Android BaDR version</code></h3>
+            <ul style="padding-left:18px;font-size:0.88rem;color:#e2e8f0;display:flex;flex-direction:column;gap:6px;">
+              <li><strong>Standalone Native Android APK &amp; Web Engine:</strong> Compiled into a direct-install, AOSP v1+v2 Merkle-signed Android package (<code>BaDR-ArGuS-Scanner.apk</code>) with a Kotlin WebView bridge that runs all <strong>151 scanners</strong> directly on your phone with 0 MB local model bloat.</li>
+              <li><strong>Startup Live Connection &amp; Self-IP WHOIS Detector:</strong> Automatically detects your active public IP, DNS resolver, WHOIS ISP/ASN, geographical coordinates (latitude/longitude), and checks whether your connection is flagged as Tor, Proxy, VPN, or under threat.</li>
+              <li><strong>Full 151 All-Scanners Omni-Scan:</strong> Added a unified 1-tap mode that runs all 151 scanners together across any Domain, IP address, DNS zone, or Email.</li>
+              <li><strong>3-Tier Traffic-Light Reports &amp; Beginner "How It Gets Fixed" Tutor:</strong> Classifies every result into 🟢 <strong>Clear (Safe)</strong>, 🟡 <strong>Medium (Caution)</strong>, or 🔴 <strong>Under Threat (Open Ports / Sockets / Errors)</strong> and explains in plain, beginner-friendly language what each issue means and how to fix it step by step.</li>
+              <li><strong>Multi-Key Cloud AI Vault + Mistral 7-Pool &amp; Groq Free Router + AHM7 21 Free Tools:</strong> Supports unlimited free API keys per provider with optional auto-model selection, plus 21 zero-key tools from <strong>AHM7 FreeAPI (`freeapi.pro`)</strong>.</li>
+              <li><strong>Android Swipe-Left / Swipe-Right Navigation &amp; Futuristic Cyber-Glass UI:</strong> Separated views with readable comic-handwriting typography and custom holographic SVG icons.</li>
+            </ul>
+          </div>
+
+          <div style="padding:14px;border-radius:14px;background:rgba(16,185,129,0.10);border:1px solid rgba(16,185,129,0.38);">
+            <h3 style="color:#34d399;font-size:1.05rem;margin-bottom:6px;">🎓 Educational &amp; Defensive Cybersecurity Purpose</h3>
+            <p style="font-size:0.88rem;color:#ecfdf5;">
+              <strong>aragos Android BaDR version</strong> is created strictly for <strong>cybersecurity education, self-auditing your own IP/network/domains, and authorized defensive security learning</strong>. It helps beginners and students understand how network ports, DNS records, TLS certificates, and web security headers work—and how to protect and fix their own systems against threats.
             </p>
-
-            <div>
-              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">VIRUSTOTAL_API_KEY</label>
-              <input type="password" id="key-vt" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="VirusTotal API Key" />
-            </div>
-            <div>
-              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">SHODAN_API_KEY</label>
-              <input type="password" id="key-shodan" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="Shodan API Key" />
-            </div>
-            <div>
-              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">CENSYS_API_ID</label>
-              <input type="text" id="key-censys-id" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="Censys API ID" />
-            </div>
-            <div>
-              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">CENSYS_API_SECRET</label>
-              <input type="password" id="key-censys-secret" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="Censys API Secret" />
-            </div>
-            <div>
-              <label style="font-size:0.74rem;color:var(--text-secondary);display:block;margin-bottom:4px;">HIBP_API_KEY (Have I Been Pwned)</label>
-              <input type="password" id="key-hibp" class="target-input" style="width:100%;height:38px;padding:0 12px;background:rgba(4,8,20,0.75);border:1px solid rgba(255,255,255,0.15);border-radius:9px;" placeholder="HIBP API Key" />
-            </div>
-
-            <button class="btn-primary-glow" id="btn-save-osint-keys" style="align-self:flex-start;margin-top:4px;">
-              💾 Save OSINT API Keys
-            </button>
           </div>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- Toast Notification Container -->
-  <div id="aragos-toast" style="position:fixed;bottom:22px;right:22px;z-index:100;display:none;" class="glass-panel-elevated"></div>
+  <!-- ==================== FUTURISTIC HOLOGRAPHIC BOTTOM NAVIGATION BAR ==================== -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Android Bottom Navigation">
+    <button class="mobile-nav-item active" data-view="dashboard">
+      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
+        <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.14)"/>
+        <circle cx="14" cy="14" r="5" stroke="#00f0ff" stroke-width="1.8"/>
+        <circle cx="14" cy="14" r="2" fill="#ffd700"/>
+      </svg>
+      <span>Scanner</span>
+    </button>
 
-  <!-- Scripts: Bundled Three.js + 3D Scene + Application Logic -->
-  <script src="static/vendor/three.min.js"></script>
-  <script src="static/js/three-scene.js"></script>
-  <script src="static/js/app.js"></script>
+    <button class="mobile-nav-item" data-view="modules">
+      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
+        <rect x="3" y="3" width="9" height="9" rx="2.5" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.12)"/>
+        <rect x="16" y="3" width="9" height="9" rx="2.5" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="3" y="16" width="9" height="9" rx="2.5" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="16" y="16" width="9" height="9" rx="2.5" stroke="#10b981" stroke-width="2"/>
+      </svg>
+      <span>151 Tools</span>
+    </button>
+
+    <button class="mobile-nav-item" data-view="reports">
+      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
+        <path d="M5 23V5a2 2 0 012-2h10l6 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.1)"/>
+        <path d="M9 17l3.5-3.5 2.5 2.5 4.5-5" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Reports</span>
+    </button>
+
+    <button class="mobile-nav-item" data-view="settings">
+      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
+        <circle cx="9.5" cy="17.5" r="5" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.14)"/>
+        <path d="M13.5 13.5L24 3m-4 4l4 4m-7-1l3 3" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>Key Vault</span>
+    </button>
+
+    <button class="mobile-nav-item" data-view="ai">
+      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="11" stroke="#00f0ff" stroke-width="1.8" stroke-dasharray="4 2"/>
+        <polygon points="14,5 22,14 14,23 6,14" stroke="#ffd700" stroke-width="1.8" fill="rgba(255,215,0,0.14)"/>
+        <circle cx="14" cy="14" r="2.5" fill="#10b981"/>
+      </svg>
+      <span>AI Tutor</span>
+    </button>
+
+    <button class="mobile-nav-item" data-view="about">
+      <svg class="cyber-svg-icon" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2L4 7v7c0 6.5 4.2 12.4 10 14 5.8-1.6 10-7.5 10-14V7L14 2z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.12)"/>
+        <path d="M14 12v7m0-10.5h.01" stroke="#00f0ff" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span>About</span>
+    </button>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div id="aragos-toast" class="glass-panel-elevated" style="position:fixed;bottom:84px;right:16px;z-index:9999;display:none;max-width:360px;padding:12px 15px;"></div>
+
+  <!-- Standalone App Controller -->
+  <script src="/static/js/app.js"></script>
 </body>
 </html>

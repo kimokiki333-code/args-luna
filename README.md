@@ -1,309 +1,78 @@
-<h1 align="center">
-  ARAGOS v3.0 — Neural Cyber Reconnaissance & OSINT Platform
-</h1>
-<p align="center">
-   Full-Stack Glassmorphism Web Platform · Interactive Three.js 3D Cyber Cosmos · 151 Reconnaissance Modules · Hybrid Ollama Local & Cloud AI Analyst
-</p>
+# 🛡️ aragos Android BaDR version (`BaDR ArGuS scanner`)
 
-## 📦 Instant ZIP Downloads (On This Branch)
-
-- 🌐 **[Download `ARAGOS-VERCEL-WEB.zip` (199 KB — For Vercel / Netlify / Web Upload)](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/ARAGOS-VERCEL-WEB.zip)**
-  *(Contains only `index.html`, `vercel.json`, and `static/` in the root folder so Vercel deploys it as a pure website in 2 seconds with zero Python build errors!)*
-- 🖥️ **[Download `ARAGOS-FULL-SERVER.zip` (749 KB — Full Python Server + Ollama + 151 Modules)](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/ARAGOS-FULL-SERVER.zip)**
-  *(Contains `index.html`, `server.py`, `start-aragos.bat`, `start-aragos.sh`, and all 147 Python modules for running locally with your Ollama.)*
-- 📦 **[Download `aragos-v3.0-deploy-ready.zip`](https://github.com/kimokiki333-code/args-luna/raw/arena/af5bb7f7-args-luna/aragos-v3.0-deploy-ready.zip)**
+> **Standalone 151-Scanner Android 10 APK & Cloud OSINT Security Tutor**  
+> Built for **Android 10+ (including 4 GB RAM / 64 GB phones like the OPPO F9)** and modern web browsers — **Zero Local Phone RAM AI Overhead**.
 
 ---
 
-![screenshot](https://i.imgur.com/HIQWPPO.gif)
----
+## 📲 Direct Download — Standalone Android 10 APK (`v4.8`)
 
-## About ARAGOS
+Tap any link below on your **OPPO F9 (Android 10)** to download **`BaDR-ArGuS-Scanner.apk` (`78.5 KB`)** directly:
 
-**ARAGOS** (formerly Argus) is an all-in-one, Python-powered reconnaissance, OSINT, and threat analysis platform featuring a **Glassmorphism Web Interface**, an interactive **Three.js 3D WebGL Background**, **151 specialized reconnaissance modules**, and native integration with **Ollama Local & Cloud AI models**.
-
-### Key Highlights in v3.0
-- **Glassmorphism Web Command Center & Three.js 3D Engine**: Multi-layered frosted glass workspace over a real-time, state-reactive 3D WebGL scene (*Orbital Recon Core*, *Neural Mesh Matrix*, *Quantum Torus*).
-- **Hybrid Ollama Local & Cloud AI Integration**:
-  - **Local Ollama Daemon (`http://127.0.0.1:11434`)**: Run local models (`llama3.3:latest`, `qwen2.5-coder:14b`, `deepseek-r1:14b`, `mistral-nemo`, `gemma3:12b`, `phi4`).
-  - **Ollama Cloud Models (`-cloud` tags & `https://ollama.com`)**: Run frontier cloud models (`deepseek-v3.1:671b-cloud`, `qwen3-coder:480b-cloud`, `gpt-oss:120b-cloud`, `kimi-k2:1t-cloud`).
-  - **OpenAI-Compatible Cloud Endpoints & Built-in Aragos Neural Threat Core**: Zero-downtime threat synthesis, risk scoring (0–100), and remediation playbooks.
-- **151 Reconnaissance Modules**: All 147 individual scripts + 4 batch/Beast Mode suites across Network & Infrastructure, Web Application Analysis, and Security & Threat Intelligence.
-- **Interactive Web CLI Shell (`aragos>`) & Multi-Format Export**: Run CLI commands directly in the browser and export reports in `Markdown`, `JSON`, `CSV`, and `TXT`.
-
-### Launching the ARAGOS Web Server
-
-```bash
-pip install -r requirements.txt
-python3 server.py
-# Open http://localhost:8000
-```
-
-## ⚠️ WARNING: LEGAL DISCLAIMER
-
-This tool is intended for **educational and ethical use only**. The author is not liable for any illegal use or misuse of this tool. Users are solely responsible for their actions and must ensure they have explicit permission to scan the target systems.
+- 👉 **[📥 Direct 1-Click APK Download (`BaDR-ArGuS-Scanner.apk` — v4.8 Release)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/arena/7c01ddad-args-luna/BaDR-ArGuS-Scanner.apk)**
+- 👉 **[📥 Direct APK Download via GitHub Main Branch (`BaDR-ArGuS-Scanner.apk`)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/main/BaDR-ArGuS-Scanner.apk)**
+- 👉 **[📂 Open APK File Page on GitHub (Tap `Download raw file`)](https://github.com/kimokiki333-code/args-luna/blob/arena/7c01ddad-args-luna/BaDR-ArGuS-Scanner.apk)**
 
 ---
 
-## 👀 Screenshots
+## 🌟 About & Credits to Original Creator
 
-Take a look at Argus in action:
-Take a look at Argus in action:
-<p float="left" align="middle">
-  <img src="https://i.imgur.com/dAITama.png" width="49%">
-  <img src="https://i.imgur.com/8VtXyEW.png" width="49%">
-</p>
-<p float="left" align="middle">
-  <img src="https://i.imgur.com/rEIPl2h.png" width="49%">
-  <img src="https://i.imgur.com/TVmc8gf.png" width="49%">
-</p>
-<p float="left" align="middle">
-  <img src="https://i.imgur.com/1I6x3Gp.png" width="49%">
-  <img src="https://i.imgur.com/9EZqNvK.png" width="49%">
-</p>
-<p float="left" align="middle">
-  <img src="https://i.imgur.com/U4fdPSI.png" width="49%">
-  <img src="https://i.imgur.com/LnmykFJ.png" width="49%">
-</p>
+**Original Foundation Credit:**  
+We gratefully credit and thank the original creator and open-source contributors of the **Argos / ArGuS Python Reconnaissance & OSINT Framework**, who designed the modular 3-pillar scanner architecture:
+1. **Network & Infrastructure** (Modules `#1–#52`)
+2. **Web Application Analysis** (Modules `#53–#101`)
+3. **Security & Threat Intelligence** (Modules `#102–#147` + Suite Runners `#148–#151`)
 
 ---
 
-## ⚙️ Installation
+## 🚀 What Was Added in `aragos Android BaDR version`
 
-### Quick Start
+1. **📦 Standalone Installable Android APK (`BaDR-ArGuS-Scanner.apk`)**
+   - Packaged with an AOSP-compliant Android binary manifest (`AndroidManifest.xml`), compiled `resources.arsc`, native Dalvik bytecode (`classes.dex`), 4-byte `zipalign`, and dual **JAR v1 + APK Signature Scheme v2 Merkle signatures**.
+   - Installs and opens directly like a native Android app with all **151 scanners embedded inside the APK** (no local server setup required, and automatically hides the web APK download banner once installed on the phone).
 
-#### Option 1: No Installation (Run Directly)
-```bash
-git clone https://github.com/jasonxtn/argus.git
-cd argus
-pip install -r requirements.txt
-python -m argus
-```
+2. **🛰️ Startup Live Self-IP, WHOIS, DNS, Geo Coordinates & Tor/Proxy/VPN Popup**
+   - The moment you open the app, it automatically detects your live public IP address, runs a **WHOIS / ASN / ISP lookup**, checks your **DNS**, maps your **Geographic Coordinates (Latitude / Longitude, City, Country)**, checks whether your connection is a **Tor exit node, Open Proxy, or VPN**, and displays a **Startup 3-Tier Connection Status Popup**.
 
-#### Option 2: Using pip
-```bash
-pip install argus-recon
-argus
-```
+3. **🚦 3-Tier Traffic-Light Threat Classification & Beginner "How It Gets Fixed" Guide**
+   - Every scan result is grouped into 3 plain-English tiers:
+     - 🟢 **CLEAR / NO PROBLEM (Green):** Safe and properly configured.
+     - 🟡 **MEDIUM CAUTION (Yellow):** Minor configuration or privacy advisories.
+     - 🔴 **UNDER THREAT (Red):** Open network ports/sockets, gateway exposures, or missing security shields.
+   - Written for **complete beginners to cybersecurity**: explains in everyday words what an open port, socket, DNS record, or WHOIS flag means, why ISP shared gateways trigger port warnings on home/mobile IPs, and **numbered step-by-step instructions on how to fix every single warning**.
 
-#### Option 3: Full Installation
-```bash
-git clone https://github.com/jasonxtn/argus.git
-cd argus
-chmod +x install.sh && ./install.sh
-python -m argus
-```
+4. **👈👉 Native Android Swipe Left/Right Navigation & Futuristic Custom SVG Icons**
+   - Separated into **6 swipeable Android sections** (`Scanner`, `151 Tools`, `Reports`, `Key Vault`, `AI Tutor`, `About`) so you never get stuck scrolling through 151 modules.
+   - Inside **Reports**, swipe left/right or tap across **5 report modes**:
+     1. **🛡️ Beginner Summary & How To Fix**
+     2. **📊 Normal Report**
+     3. **📑 Full Report & History**
+     4. **🧠 AI Deep Report**
+     5. **💻 Raw Report**
+   - Styled with a **readable comic / handwriting font** (`Comic Neue`, `Patrick Hand`, `Comic Sans MS`) and **custom-designed futuristic SVG icons**.
 
-#### Option 4: Docker
-```bash
-git clone https://github.com/jasonxtn/argus.git
-cd argus
-docker build -t argus-recon:latest .
-docker run -it --rm -v $(pwd)/results:/app/results argus-recon:latest
-```
+5. **🚀 Full Scan (Run ALL 151 Scanners Together) + Expanded Preset Suites**
+   - One-tap **Full 151 Scanners Omni-Scan** for any Domain, IP address, Email, or Username.
+   - Selecting **IP & Ports** automatically selects all **52 Network, IP, Port, Socket & DNS scanners**; selecting **Domain / Web** selects all **53 Web & SSL scanners**; selecting **Email / Breach** selects all **46 Security & Threat Intelligence scanners**.
 
----
+6. **🔑 Multi-Key Cloud AI Vault (`+ Add New Free API Key`) + DeepSeek Harness (`@deepseek-ai/dsh`), Optional Auto-Model & Keyless AI**
+   - Add **multiple free API keys** per provider (e.g., multiple DeepSeek Harness tokens/keys, 4 OpenRouter keys, multiple Ollama Cloud keys, Mistral keys, Groq keys, NVIDIA NIM keys, Google Gemini keys, or OpenAI keys).
+   - **DeepSeek Harness (`@deepseek-ai/dsh` — `kimokiki333-code/deepseek-harness`) Built In:** Supports **DeepSeek-V4.1-Flash (`deepseek-flash` · 1M Context)**, **DeepSeek-V4-Pro (`deepseek-v4-pro` · 1M Context)**, `deepseek-chat`, and `deepseek-reasoner` using **both** `DEEPSEEK_API_KEY` (`Bearer`) and DeepSeek Harness Account Tokens (`x-dsh-auth-token`), plus NVIDIA NIM Free Developer Routes (`deepseek-ai/deepseek-r1`).
+   - **Model Selection is Optional:** Leave the model field blank and the app automatically selects the best free model and rotates across rate-limit pools:
+     - **Mistral 7-Pool Free Tier Router:** Rotates across isolated free quota pools (`mistral-medium-2508` 375K TPM, `mistral-large-2411` 200B/mo, `devstral-2512` 1M TPM, `open-mistral-nemo`).
+     - **Groq Forever-Free LPU Router:** Rotates across `llama-3.1-8b-instant` & `openai/gpt-oss-20b` (14,400 free requests/day) and `llama-3.3-70b-versatile`.
+     - **Keyless Free Cloud AI:** Works with **zero API keys** out of the box!
 
-## 📖 Usage
+7. **🔄 Live In-App Over-The-Air (OTA) Updater (`v4.8`)**
+   - Compiled with **Google's Official Android SDK Build-Tools (`aapt`, `javac`, `dx`, `zipalign`, and `apksigner` v1 + v2 + v3 schemes)** and a persistent release certificate (`2020–2050`).
+   - Includes a built-in **Live OTA Updater (`🔄 Check & Apply Live Update`)** in the top header that syncs future UI, styling, and scanner updates directly from GitHub inside the installed Android app without needing to reinstall the APK!
 
-### Getting Started
-
-1. **Launch Argus**:
-   ```bash
-   argus
-
-   # if running from folder: python -m argus
-   ```
-
-2. **Browse available modules**:
-   ```
-   argus> modules
-   ```
-
-3. **Select a module**:
-   ```
-   argus> use 1
-   ```
-
-4. **Set target and options**:
-   ```
-   argus> set target example.com
-   argus> set threads 10
-   ```
-
-5. **Run the module**:
-   ```
-   argus> run
-   ```
-
-### Commands Cheatsheet
-
-| Command | Category | Description | Example |
-|---------|----------|-------------|---------|
-| `modules` | Discovery | List all modules | `modules` |
-| `modules -d` | Discovery | List with details | `modules -d` |
-| `search` | Discovery | Search by keyword | `search ssl` |
-| `use` | Selection | Select module | `use 42` |
-| `helpmod` | Help | Module help | `helpmod 42` |
-| `set target` | Config | Set target | `set target example.com` |
-| `set` | Config | Set options | `set threads 20` |
-| `unset` | Config | Unset options | `unset target` |
-| `opts` | Config | Show options | `opts` |
-| `scope` | Config | Show config | `scope` |
-| `profile` | Config | Apply profile | `profile speed` |
-| `run` | Execute | Run selected | `run` |
-| `runall` | Execute | Run category | `runall infra` |
-| `runfav` | Execute | Run favorites | `runfav` |
-| `last` | Execute | Re-run last | `last` |
-| `fav` | Favorites | Manage favorites | `fav add 42` |
-| `show modules` | Info | Browse modules | `show modules` |
-| `show api_status` | Info | Check APIs | `show api_status` |
-| `show options` | Info | Show options | `show options` |
-| `show options_full` | Info | Detailed options | `show options_full` |
-| `info` | Info | Project info | `info` |
-| `recent` | Info | Recent modules | `recent` |
-| `viewout` | Output | View cached output | `viewout` |
-| `grepout` | Output | Search output | `grepout "192.168"` |
-| `clear` | Utility | Clear screen | `clear` |
-| `banner` | Utility | Show banner | `banner` |
-| `reset` | Utility | Reset config | `reset` |
-| `exit` | Utility | Exit Argus | `exit` |
-| `quit` | Utility | Exit Argus | `quit` |
-| `help` | Help | Show help | `help` |
-
-
-
-### 📋 **All Modules** *(135 total)*
-
-| Network & Infrastructure | Web Application Analysis | Security & Threat Intelligence |
-|--------------------------|---------------------------|--------------------------------|
-| 1. Associated Hosts | 53. Archive History | 103. Censys Reconnaissance |
-| 2. DNS Over HTTPS | 54. Broken Links Detection | 104. Certificate Authority Recon |
-| 3. DNS Records | 55. Carbon Footprint | 105. Data Leak Detection |
-| 4. DNSSEC Check | 56. CMS Detection | 106. Exposed Environment Files |
-| 5. Domain Info | 57. Cookies Analyzer | 107. Firewall Detection |
-| 6. Domain Reputation Check | 58. Content Discovery | 108. Global Ranking |
-| 7. HTTP/2 & HTTP/3 Support | 59. Crawler | 109. HTTP Headers |
-| 8. IP Info | 60. Robots.txt Analyzer | 110. HTTP Security Features |
-| 9. Open Ports Scan | 61. Directory Finder | 111. Malware & Phishing Check |
-| 10. Server Info | 62. Email Harvesting | 112. Pastebin Monitoring |
-| 11. Server Location | 63. Performance Monitoring | 113. Privacy & GDPR Compliance |
-| 12. SSL Chain Analysis | 64. Quality Metrics | 114. Security.txt Check |
-| 13. SSL Expiry Alert | 65. Redirect Chain | 115. Shodan Reconnaissance |
-| 14. TLS Cipher Suites | 66. Sitemap Parsing | 116. SSL Labs Report |
-| 15. TLS Handshake Simulation | 67. Social Media Presence | 117. SSL Pinning Check |
-| 16. Traceroute | 68. Technology Stack Detection | 118. Subdomain Enumeration |
-| 17. TXT Records | 69. Third-Party Integrations | 119. Subdomain Takeover |
-| 18. WHOIS Lookup | 70. JavaScript File Analyzer | 120. VirusTotal Scan |
-| 19. Zone Transfer | 71. CORS Misconfiguration Scanner | 121. CT Log Query |
-| 20. ASN Lookup | 72. Login Page Brute Identifier | 122. Breached Credentials Lookup |
-| 21. Reverse IP Lookup | 73. Hidden Parameter Discovery | 123. Cloud Bucket Exposure |
-| 22. IP Range Scanner | 74. Clickjacking Test | 124. JWT Token Analyzer |
-| 23. RDAP Lookup | 75. Form Grabber | 125. Exposed API Endpoints |
-| 24. NTP Information Leak | 76. Favicon Hashing | 126. Git Repository Exposure Check |
-| 25. IPv6 Reachability Test | 77. HTML Comments Extractor | 127. Typosquat Domain Checker |
-| 26. BGP Route Analysis | 78. CAPTCHA Presence Checker | 128. SPF / DKIM / DMARC Validator |
-| 27. CDN Detection | 79. JavaScript Obfuscation Detector | 129. Open Redirect Finder |
-| 28. Reverse DNS Scan | 80. Virtual Host Fuzzer | 130. Rate-Limit & WAF Bypass Test |
-| 29. Network Timezone Detection | 81. Session Cookie Lifetime Checker | 131. Security Changelog Diff |
-| 30. Geo-DNS Footprint | 82. HTML5 Feature Abuse Detector | 132. Session Hijacking (Passive) |
-| 31. SPF Network Extractor | 83. Autocomplete Vulnerability Checker | 133. Rogue Certificate Check |
-| 32. NS Geo/ASN Diversity | 84. Embedded Object Hunter | 134. JS Malware Scanner |
-| 33. DNS SLA Latency Monitor | 85. Multi-Language URL Tester | 135. Cloud Service Enumeration |
-| 34. RPKI Route Validity | 86. Pixel Tracker Finder | |
-| 35. Recursive Nameserver Leak | 87. SEO Abuse Detector | |
-| 36. Dual-Stack Behavior Profiler | 88. Dependency JS/CDN Scanner | |
-| 37. ICMP Reachability Matrix | 89. WebSocket Endpoint Sniffer | |
-| 38. IP Allocation History Tracker | 90. API Schema Grabber | |
-| 39. Autonomous Neighbor Peering Map | 91. Lazy-Load Resource Finder | |
-| 40. TLS Session Resumption Map | 92. HTTP Method Enumerator | |
-| 41. Network Certificate Inventory | 93. GraphQL Introspection Probe | |
-| 42. SSH Banner & Key Fingerprinter | 94. File Upload Surface Finder | |
-| 43. SNMP Public Community Checker | 95. DOM Sink Scanner | |
-| 44. SNMP Bulk Walk | 96. Cache Behavior Analyzer | |
-| 45. UDP Service Sampler | 97. Cookie Scope Diff Across Subdomains | |
-| 46. NetBIOS Name Query | 98. CSP Deep Analyzer | |
-| 47. TTL Analysis | 99. Third-Party Script Risk Profiler | |
-| 48. IRR Routing Registry Analyzer | 100. Static Asset Fingerprinter | |
-| 49. Dual Stack Diff | 101. Crawl Rules | |
-| 50. DNS CAA Checker | 102. Email Config | |
-| 51. Decoy DNS Beacon | | |
-| 52. Geo IP Spoof Detection | | |
+7. **🧰 AHM7 FreeAPI (`freeapi.pro` / `ahm7xmakki.com`) — 21 Zero-Key Tools Built In**
+   - Direct frontend & backend integration with all **21 keyless REST APIs** by Ahmad Makki (`freeapi.pro`):
+     `WebSnap` (`/api/websnap`), `WebZip` (`/api/zip`), `TempSter` (`/api/tempmail`), `VisionChat` (`/api/imgchat`), `SpeechSter` (`/api/tts` & `/api/voices`), `PixelSter Flux` (`/api/tti`, `/api/pti`, `/api/ptv`), `Transcribe` (`/api/transcribe`), `Universal Downloader` (`/api/alldl`), `n8nSter` (`/api/n8n`), `FreeAPI Courses` (`/api/courses`), `Wikster` (`/api/wikipdf`), `CertSter` (`/api/certificate`), `Text-to-Handwriting` (`/api/hand`), `DriveUp` (`/api/driveup`), `MedSter` (`/api/search`), `CineSearch` (`/api/msearch`), `MangaSter` (`/api/manga`), and `NovelSter` (`/api/novel`).
 
 ---
 
+## 🎓 Educational & Defensive Cybersecurity Purpose
 
-
-
-## 🛠️ Configuration
-
-### API Keys Setup
-
-Enhance functionality by configuring API keys in `config/settings.py` or as environment variables:
-
-```bash
-export VIRUSTOTAL_API_KEY="your_key_here"
-export SHODAN_API_KEY="your_key_here"
-export CENSYS_API_ID="your_id_here"
-export CENSYS_API_SECRET="your_secret_here"
-export GOOGLE_API_KEY="your_key_here"
-export HIBP_API_KEY="your_key_here"
-```
-
-**Check API status:**
-```bash
-argus> show api_status
-```
-
-### Configuration Options
-
-Edit `config/settings.py` to customize:
-- Default request timeouts and retry logic
-- Thread limits and concurrency settings
-- Export settings (TXT/CSV output)
-- Logging levels and destinations
-- User agent strings and headers
-
----
-
-
-## 🔄 Changelog
-
-### Version 2.0 (Current)
-**Major refactor: Complete CLI redesign and module expansion**
-
-- **New interactive CLI** - Full command-line interface with 25+ commands
-- **135 modules** - Expanded from 50 modules
-- **Better UI** - Professional formatting and progress tracking
-- **Multi-threading** - Improved performance with concurrent execution
-- **API integrations** - Shodan, VirusTotal, Censys, SSL Labs support
-- **Export capabilities** - TXT, CSV, JSON output formats
-- **Configuration system** - Profiles, settings, and API key management
-- **Module discovery** - Search, browse, and favorite modules
-- **Batch operations** - Run multiple modules simultaneously
-
-### Version 1.x (Legacy)
-**Original simple number-based interface**
-
-- Simple number input system (1-50)
-- Basic 50 reconnaissance modules
-- Console text output only
-- Fixed configuration settings
-
----
-
-**Note**: Version 2.0 introduces breaking changes. Users must learn new CLI commands instead of the previous number-based system.
-
----
-
-## ⭐️ Show Your Support
-
-If this tool has been helpful to you, please consider giving us a star on GitHub! Your support means a lot to us and helps others discover the project.
-
-### Issues & Bug Reports
-
-- Check existing issues before reporting
-- Provide detailed reproduction steps
-- Include system information and error logs
-
----
+`aragos Android BaDR version` is created strictly for **educational cybersecurity learning, defensive network self-auditing, and helping beginners understand and secure their own internet connections, routers, and domains**. Always scan only your own connection or targets you have permission to test.
