@@ -5,6 +5,16 @@
 
 ---
 
+## 📲 Direct Download — Standalone Android 10 APK (`v4.8`)
+
+Tap any link below on your **OPPO F9 (Android 10)** to download **`BaDR-ArGuS-Scanner.apk` (`78.5 KB`)** directly:
+
+- 👉 **[📥 Direct 1-Click APK Download (`BaDR-ArGuS-Scanner.apk` — v4.8 Release)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/arena/7c01ddad-args-luna/BaDR-ArGuS-Scanner.apk)**
+- 👉 **[📥 Direct APK Download via GitHub Main Branch (`BaDR-ArGuS-Scanner.apk`)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/main/BaDR-ArGuS-Scanner.apk)**
+- 👉 **[📂 Open APK File Page on GitHub (Tap `Download raw file`)](https://github.com/kimokiki333-code/args-luna/blob/arena/7c01ddad-args-luna/BaDR-ArGuS-Scanner.apk)**
+
+---
+
 ## 🌟 About & Credits to Original Creator
 
 **Original Foundation Credit:**  
