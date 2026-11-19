@@ -5,13 +5,13 @@
 
 ---
 
-## 📲 Direct Download — Standalone Android 10 APK (`v4.8`)
+## 📲 Direct Download — Standalone Android 10 APK (`v4.9`)
 
-Tap any link below on your **OPPO F9 (Android 10)** to download **`BaDR-ArGuS-Scanner.apk` (`78.5 KB`)** directly:
+Tap any link below on your **OPPO F9 (Android 10)** to download **`BaDR-ArGuS-Scanner.apk`** directly:
 
-- 👉 **[📥 Direct 1-Click APK Download (`BaDR-ArGuS-Scanner.apk` — v4.8 Release)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/arena/7c01ddad-args-luna/BaDR-ArGuS-Scanner.apk)**
+- 👉 **[📥 Direct 1-Click APK Download (`BaDR-ArGuS-Scanner.apk` — Latest v4.9 Release)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/arena/8db63a8e-args-luna/BaDR-ArGuS-Scanner.apk)**
 - 👉 **[📥 Direct APK Download via GitHub Main Branch (`BaDR-ArGuS-Scanner.apk`)](https://raw.githubusercontent.com/kimokiki333-code/args-luna/main/BaDR-ArGuS-Scanner.apk)**
-- 👉 **[📂 Open APK File Page on GitHub (Tap `Download raw file`)](https://github.com/kimokiki333-code/args-luna/blob/arena/7c01ddad-args-luna/BaDR-ArGuS-Scanner.apk)**
+- 👉 **[📂 Open APK File Page on GitHub (Tap `Download raw file`)](https://github.com/kimokiki333-code/args-luna/blob/arena/8db63a8e-args-luna/BaDR-ArGuS-Scanner.apk)**
 
 ---
 
@@ -63,13 +63,13 @@ We gratefully credit and thank the original creator and open-source contributors
      - **Groq Forever-Free LPU Router:** Rotates across `llama-3.1-8b-instant` & `openai/gpt-oss-20b` (14,400 free requests/day) and `llama-3.3-70b-versatile`.
      - **Keyless Free Cloud AI:** Works with **zero API keys** out of the box!
 
-7. **🔄 Live In-App Over-The-Air (OTA) Updater (`v4.8`)**
+7. **🔄 Live In-App Over-The-Air (OTA) Updater (`v4.9`)**
    - Compiled with **Google's Official Android SDK Build-Tools (`aapt`, `javac`, `dx`, `zipalign`, and `apksigner` v1 + v2 + v3 schemes)** and a persistent release certificate (`2020–2050`).
    - Includes a built-in **Live OTA Updater (`🔄 Check & Apply Live Update`)** in the top header that syncs future UI, styling, and scanner updates directly from GitHub inside the installed Android app without needing to reinstall the APK!
 
-7. **🧰 AHM7 FreeAPI (`freeapi.pro` / `ahm7xmakki.com`) — 21 Zero-Key Tools Built In**
-   - Direct frontend & backend integration with all **21 keyless REST APIs** by Ahmad Makki (`freeapi.pro`):
-     `WebSnap` (`/api/websnap`), `WebZip` (`/api/zip`), `TempSter` (`/api/tempmail`), `VisionChat` (`/api/imgchat`), `SpeechSter` (`/api/tts` & `/api/voices`), `PixelSter Flux` (`/api/tti`, `/api/pti`, `/api/ptv`), `Transcribe` (`/api/transcribe`), `Universal Downloader` (`/api/alldl`), `n8nSter` (`/api/n8n`), `FreeAPI Courses` (`/api/courses`), `Wikster` (`/api/wikipdf`), `CertSter` (`/api/certificate`), `Text-to-Handwriting` (`/api/hand`), `DriveUp` (`/api/driveup`), `MedSter` (`/api/search`), `CineSearch` (`/api/msearch`), `MangaSter` (`/api/manga`), and `NovelSter` (`/api/novel`).
+8. **💬 Floating Bottom-Right General LLM & Security Assistant + Zero-Paywall 1st-Page Overview**
+   - **Floating AI Chat Icon (`AI CHAT`)** in the bottom-right corner opens a full general-purpose LLM & cybersecurity assistant powered by any free cloud model (`Keyless Free AI`, `Ollama Cloud`, `DeepSeek Harness 1M`, `Mistral 7-Pool`, `Groq Forever-Free`, `NVIDIA NIM`, `OpenRouter :free`, `Google Gemini`).
+   - **1st-Page Zero-Paywall Overview:** Explains how all 151 scanners work across the 3 core categories and why **BaDR ArGuS** unlocks 100% of scan reports with zero sign-up walls or subscription pop-ups hiding your results.
 
 ---
 
