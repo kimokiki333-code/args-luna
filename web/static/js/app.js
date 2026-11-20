@@ -2645,6 +2645,72 @@
         showToast("Refreshed Saved Reports Vault", "success");
       });
     }
+
+    // Pure Black + Neon Green Custom Cyber Dropdown Picker Modal
+    const neonModal = document.getElementById("badr-neon-dropdown-modal");
+    const neonTitle = document.getElementById("badr-neon-modal-title");
+    const neonClose = document.getElementById("badr-neon-modal-close");
+    const neonSearch = document.getElementById("badr-neon-modal-search");
+    const neonList = document.getElementById("badr-neon-modal-list");
+    let activeSelectEl = null;
+
+    function renderNeonOptions(filterText) {
+      if (!activeSelectEl || !neonList) return;
+      const q = String(filterText || "").toLowerCase().trim();
+      const opts = Array.from(activeSelectEl.options || []);
+      const filtered = opts.filter((o) => !q || o.textContent.toLowerCase().includes(q) || String(o.value).toLowerCase().includes(q));
+      if (!filtered.length) {
+        neonList.innerHTML = `<div style="padding:12px;color:#39ff14;font-family:monospace;font-size:0.78rem">No matching options found.</div>`;
+        return;
+      }
+      neonList.innerHTML = filtered.map((o) => {
+        const isSel = o.value === activeSelectEl.value;
+        return `<button type="button" class="badr-neon-item ${isSel ? "active" : ""}" data-val="${escapeHtml(o.value)}">
+          <span style="flex:1;word-break:break-word">${escapeHtml(o.textContent)}</span>
+          <span style="color:#ffd700;font-weight:900">${isSel ? "✓ ACTIVE" : "▶"}</span>
+        </button>`;
+      }).join("");
+      neonList.querySelectorAll(".badr-neon-item").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const chosenVal = btn.dataset.val;
+          if (activeSelectEl) {
+            activeSelectEl.value = chosenVal;
+            activeSelectEl.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+          if (neonModal) neonModal.classList.remove("open");
+        });
+      });
+    }
+
+    if (neonModal && neonList) {
+      document.querySelectorAll("select.badr-select-picker").forEach((sel) => {
+        sel.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+          activeSelectEl = sel;
+          if (neonTitle) neonTitle.textContent = "⚡ " + (sel.getAttribute("aria-label") || sel.id || "SELECT OPTION");
+          if (neonSearch) neonSearch.value = "";
+          renderNeonOptions("");
+          neonModal.classList.add("open");
+        });
+        sel.addEventListener("click", (e) => {
+          e.preventDefault();
+          activeSelectEl = sel;
+          if (neonTitle) neonTitle.textContent = "⚡ " + (sel.getAttribute("aria-label") || sel.id || "SELECT OPTION");
+          if (neonSearch) neonSearch.value = "";
+          renderNeonOptions("");
+          neonModal.classList.add("open");
+        });
+      });
+      if (neonSearch) {
+        neonSearch.addEventListener("input", () => renderNeonOptions(neonSearch.value));
+      }
+      if (neonClose) {
+        neonClose.addEventListener("click", () => neonModal.classList.remove("open"));
+      }
+      neonModal.addEventListener("click", (e) => {
+        if (e.target === neonModal) neonModal.classList.remove("open");
+      });
+    }
   }
 
   async function initApp() {

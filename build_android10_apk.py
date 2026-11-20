@@ -82,6 +82,8 @@ def build_axml_manifest() -> bytes:
         ("label", 0x01010001),
         ("icon", 0x01010002),
         ("name", 0x01010003),
+        ("exported", 0x01010010),
+        ("configChanges", 0x0101001F),
         ("minSdkVersion", 0x0101020C),
         ("versionCode", 0x0101021B),
         ("versionName", 0x0101021C),
@@ -89,6 +91,7 @@ def build_axml_manifest() -> bytes:
         ("allowBackup", 0x01010280),
         ("hardwareAccelerated", 0x010102D3),
         ("usesCleartextTraffic", 0x010104EC),
+        ("forceDarkAllowed", 0x0101058C),
     ]
     attr_ResourceIds.sort(key=lambda x: x[1])
 
@@ -105,12 +108,12 @@ def build_axml_manifest() -> bytes:
         "action",
         "category",
         "package",
-        "io.badr.argus",
-        "4.6.0-oppo-f9",
+        "io.badr.argus.badr",
+        "5.4.0-oppo-f9",
         "android.permission.INTERNET",
         "android.permission.ACCESS_NETWORK_STATE",
         "BaDR ArGuS scanner",
-        "io.badr.argus.MainActivity",
+        "io.badr.argus.badr.MainActivity",
         "android.intent.action.MAIN",
         "android.intent.category.LAUNCHER",
     ]
@@ -174,13 +177,13 @@ def build_axml_manifest() -> bytes:
     xml_nodes = b"".join([
         start_ns(2),
         start_elem(2, "manifest", [
-            attr_int(NS_URI, "versionCode", 46),
-            attr_str(NS_URI, "versionName", "4.6.0-oppo-f9"),
-            attr_str(NO_NS, "package", "io.badr.argus"),
+            attr_int(NS_URI, "versionCode", 54),
+            attr_str(NS_URI, "versionName", "5.4.0-oppo-f9"),
+            attr_str(NO_NS, "package", "io.badr.argus.badr"),
         ]),
         start_elem(5, "uses-sdk", [
             attr_int(NS_URI, "minSdkVersion", 21),
-            attr_int(NS_URI, "targetSdkVersion", 28),
+            attr_int(NS_URI, "targetSdkVersion", 29),
         ]),
         end_elem(5, "uses-sdk"),
         start_elem(8, "uses-permission", [
@@ -192,16 +195,21 @@ def build_axml_manifest() -> bytes:
         ]),
         end_elem(9, "uses-permission"),
         start_elem(11, "application", [
-            attr_ref(NS_URI, "theme", 0x01030006),  # @android:style/Theme.NoTitleBar
+            attr_ref(NS_URI, "theme", 0x01030006),  # @android:style/Theme.NoTitleBar (Dark Theme!)
             attr_str(NS_URI, "label", "BaDR ArGuS scanner"),
             attr_ref(NS_URI, "icon", 0x7F010000),   # @drawable/icon
             attr_bool(NS_URI, "allowBackup", True),
             attr_bool(NS_URI, "hardwareAccelerated", True),
             attr_bool(NS_URI, "usesCleartextTraffic", True),
+            attr_bool(NS_URI, "forceDarkAllowed", False),
         ]),
         start_elem(16, "activity", [
+            attr_ref(NS_URI, "theme", 0x01030006),  # @android:style/Theme.NoTitleBar (Dark Theme!)
             attr_str(NS_URI, "label", "BaDR ArGuS scanner"),
-            attr_str(NS_URI, "name", "io.badr.argus.MainActivity"),
+            attr_str(NS_URI, "name", "io.badr.argus.badr.MainActivity"),
+            attr_bool(NS_URI, "exported", True),
+            attr_int(NS_URI, "configChanges", 0x000004A0),
+            attr_bool(NS_URI, "forceDarkAllowed", False),
         ]),
         start_elem(19, "intent-filter", []),
         start_elem(20, "action", [
@@ -901,11 +909,14 @@ def build_apk():
     if sdk_blobs_path.exists():
         import json
         sdk_blobs = json.loads(sdk_blobs_path.read_text(encoding="utf-8"))
-        manifest_axml = base64.b64decode(sdk_blobs["AndroidManifest.xml"])
+        manifest_axml = build_axml_manifest()
         resources_arsc = base64.b64decode(sdk_blobs["resources.arsc"])
-        classes_dex = base64.b64decode(sdk_blobs["classes.dex"])
+        raw_dex = bytearray(base64.b64decode(sdk_blobs["classes.dex"]).replace(b"\x0e\x08\x06\xff", b"\x00\x00\x00\xff"))
+        raw_dex[12:32] = hashlib.sha1(bytes(raw_dex[32:])).digest()
+        raw_dex[8:12] = struct.pack("<I", zlib.adler32(bytes(raw_dex[12:])) & 0xFFFFFFFF)
+        classes_dex = bytes(raw_dex)
         icon_png = base64.b64decode(sdk_blobs["res/drawable/icon.png"])
-        print("[+] Loaded Official Google Android SDK (aapt + javac + dx.jar) compiled blobs (`io.badr.argus.badr` v48)")
+        print("[+] Loaded Official Google Android SDK blobs + Dark Theme.NoTitleBar + Pure Black WebView (v5.4)")
     else:
         manifest_axml = build_axml_manifest()
         resources_arsc = build_resources_arsc()
